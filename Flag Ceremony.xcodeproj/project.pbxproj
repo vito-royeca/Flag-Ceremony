@@ -126,12 +126,13 @@
 		8C4E97271D88ED50005A685B /* Flag Ceremony */ = {
 			isa = PBXGroup;
 			children = (
+				8C4E975B1D891525005A685B /* Utilities */,
+				8C4E975A1D89151D005A685B /* Controller */,
+				8C4E97591D891518005A685B /* View */,
+				8C4E97581D891511005A685B /* Model */,
 				8C4E97561D890900005A685B /* data */,
 				8C4E97281D88ED50005A685B /* AppDelegate.swift */,
-				8C4E972A1D88ED50005A685B /* ViewController.swift */,
-				8C4E972C1D88ED50005A685B /* Main.storyboard */,
 				8C4E972F1D88ED50005A685B /* Assets.xcassets */,
-				8C4E97311D88ED50005A685B /* LaunchScreen.storyboard */,
 				8C4E97341D88ED50005A685B /* Info.plist */,
 			);
 			path = "Flag Ceremony";
@@ -153,6 +154,37 @@
 				8C4E974A1D88ED51005A685B /* Info.plist */,
 			);
 			path = "Flag CeremonyUITests";
+			sourceTree = "<group>";
+		};
+		8C4E97581D891511005A685B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8C4E97591D891518005A685B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C4E972C1D88ED50005A685B /* Main.storyboard */,
+				8C4E97311D88ED50005A685B /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8C4E975A1D89151D005A685B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8C4E972A1D88ED50005A685B /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8C4E975B1D891525005A685B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		EDDCDD2215FEB9321392805C /* Pods */ = {
