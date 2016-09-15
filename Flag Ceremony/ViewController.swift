@@ -161,9 +161,14 @@ class ViewController: UIViewController {
                             if let isoA2 = attrs["ISO_A2"] as? String {
                                 cc = isoA2.lowercaseString
                                 
-                            } else if let postal = attrs["POSTAL"] as? String {
-                                cc = postal.lowercaseString
                             }
+                            if cc == "-99" {
+                                if let postal = attrs["POSTAL"] as? String {
+                                    cc = postal.lowercaseString
+                                }
+                            }
+                            print("\(cc!)")
+                            
                             
                             if let cc = cc {
                                 if let flag = UIImage(contentsOfFile: bundle.pathForResource(cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
@@ -174,6 +179,8 @@ class ViewController: UIViewController {
                                     marker.size = flag.size
                                     
                                     flags.append(marker)
+                                } else {
+                                    print("not found: \(cc)")
                                 }
                             }
                         }

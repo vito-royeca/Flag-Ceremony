@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
+		8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
+		8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
+		8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
+		8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
+		8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
+		8C0296741D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
+		8C0296751D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
+		8C0296761D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
+		8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
+		8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
+		8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
 		8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97281D88ED50005A685B /* AppDelegate.swift */; };
 		8C4E972B1D88ED50005A685B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E972A1D88ED50005A685B /* ViewController.swift */; };
 		8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E972C1D88ED50005A685B /* Main.storyboard */; };
@@ -15,6 +27,12 @@
 		8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E973D1D88ED51005A685B /* Flag_CeremonyTests.swift */; };
 		8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */; };
 		8C4E97571D890900005A685B /* data in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E97561D890900005A685B /* data */; };
+		8C77A6511D8991100006345A /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A64F1D8991100006345A /* GCDBlackBox.swift */; };
+		8C77A6521D8991100006345A /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A64F1D8991100006345A /* GCDBlackBox.swift */; };
+		8C77A6531D8991100006345A /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A64F1D8991100006345A /* GCDBlackBox.swift */; };
+		8C77A6581D8996C20006345A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A6571D8996C20006345A /* NetworkManager.swift */; };
+		8C77A6591D8996C20006345A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A6571D8996C20006345A /* NetworkManager.swift */; };
+		8C77A65A1D8996C20006345A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77A6571D8996C20006345A /* NetworkManager.swift */; };
 		C0CCDEDE33B73B2FA7EBDA5D /* Pods_Flag_CeremonyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */; };
 		E5F34C9FC682CD3EE02A504A /* Pods_Flag_CeremonyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5148D537963A660A444EBED /* Pods_Flag_CeremonyUITests.framework */; };
 		F0B760F70B39745DFF111613 /* Pods_Flag_Ceremony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */; };
@@ -39,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag CeremonyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flag CeremonyTests/Pods-Flag CeremonyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
+		8C0296731D8A729900BE8C02 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissableViewController.swift; sourceTree = "<group>"; };
 		8C4E97251D88ED50005A685B /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4E97281D88ED50005A685B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C4E972A1D88ED50005A685B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +75,8 @@
 		8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag_CeremonyUITests.swift; sourceTree = "<group>"; };
 		8C4E974A1D88ED51005A685B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C4E97561D890900005A685B /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		8C77A64F1D8991100006345A /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		8C77A6571D8996C20006345A /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag Ceremony.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flag Ceremony/Pods-Flag Ceremony.release.xcconfig"; sourceTree = "<group>"; };
 		9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_Ceremony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_CeremonyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +199,11 @@
 		8C4E975A1D89151D005A685B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */,
+				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
+				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
 				8C4E972A1D88ED50005A685B /* ViewController.swift */,
+				8C0296731D8A729900BE8C02 /* DetailsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -183,6 +211,8 @@
 		8C4E975B1D891525005A685B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8C77A6571D8996C20006345A /* NetworkManager.swift */,
+				8C77A64F1D8991100006345A /* GCDBlackBox.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -479,7 +509,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C77A6581D8996C20006345A /* NetworkManager.swift in Sources */,
+				8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8C4E972B1D88ED50005A685B /* ViewController.swift in Sources */,
+				8C77A6511D8991100006345A /* GCDBlackBox.swift in Sources */,
+				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
+				8C0296741D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
+				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,7 +524,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C77A6591D8996C20006345A /* NetworkManager.swift in Sources */,
+				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
+				8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
+				8C77A6521D8991100006345A /* GCDBlackBox.swift in Sources */,
 				8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */,
+				8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
+				8C0296751D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +538,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C77A65A1D8996C20006345A /* NetworkManager.swift in Sources */,
+				8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
+				8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
+				8C77A6531D8991100006345A /* GCDBlackBox.swift in Sources */,
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
+				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
+				8C0296761D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

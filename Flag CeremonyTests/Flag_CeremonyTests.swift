@@ -33,4 +33,39 @@ class Flag_CeremonyTests: XCTestCase {
         }
     }
     
+    func testDownloadAnthems() {
+        /*
+        {"BD":
+            {
+                "Name": "Bangladesh",
+                "Capital":
+                {
+                    "DLST": "null",
+                    "TD": 6.0,
+                    "Flg": 2,
+                    "Name": "Dhaka",
+                    "GeoPt": [23.43, 90.24]
+                },
+                "GeoRectangle":
+                {
+                    "West": 88.0283279419,
+                    "East": 92.6736831665,
+                    "North": 26.6319484711,
+                    "South": 20.7433319092
+                },
+                "SeqID": 19,
+                "GeoPt": [24.0, 90.0],
+                "TelPref": "880",
+                "CountryCodes":
+                {
+                    "tld": "bd",
+                    "iso3": "BGD",
+                    "iso2": "BD",
+                    "fips": "BG",
+                    "isoN": 50
+                },
+                "CountryInfo": "http://www.geognos.com/geo/en/cc/bd.html"
+            }
+        }*/
+    }
 }
