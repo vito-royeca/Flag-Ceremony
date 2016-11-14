@@ -2,4 +2,4 @@
 
 An iOS app that displays flags and plays national anthems from various countries around the world.
 
-Now you can attend flag ceremonies from various contries around the world.
+Attending flag ceremonies from around the world is now just a tap away.
