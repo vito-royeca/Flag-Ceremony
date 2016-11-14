@@ -20,26 +20,19 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Appirater (2.0.5)
   - boost/graph-includes (1.51.0)
   - boost/math-includes (1.51.0)
-  - boost/numeric-includes (1.51.0)
   - boost/pointer_cast-includes (1.51.0)
-  - boost/preprocessor-includes (1.51.0)
   - boost/shared_ptr-includes (1.51.0)
   - boost/string_algorithms-includes (1.51.0)
   - clipper (6.1.3a)
-  - Crashlytics (3.8.1):
+  - Cosmos (7.0.0)
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - DATAFilter (0.11.2):
-    - DATAObjectIDs (~> 0.6.0)
-  - DATAObjectIDs (0.6.0)
-  - DATAStack (5.4.2)
-  - DateParser (0.1.0)
-  - eigen (3.2.5):
-    - boost/numeric-includes
-    - boost/preprocessor-includes
-  - Fabric (1.6.8)
+  - DATASource (6.1.1)
+  - DATAStack (6.1.2)
+  - eigen (3.2.10)
+  - Fabric (1.6.11)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -62,33 +55,19 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - NSDictionary-ANDYSafeValue (0.3.1)
-  - NSEntityDescription-SYNCPrimaryKey (1.2.4):
-    - NSString-HYPNetworking (~> 1.0.3)
-  - NSManagedObject-HYPPropertyMapper (4.0.1):
-    - DateParser (~> 0.1.0)
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.2.4)
-    - NSString-HYPNetworking (~> 1.0.3)
-  - NSString-HYPNetworking (1.0.3)
+  - Networking (2.3.1)
   - proj4 (4.8.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
-  - SimulatorStatusMagic (1.9)
+  - SimulatorStatusMagic (1.9.2)
   - SMCalloutView (2.1.5)
-  - Sync (1.13.3):
-    - DATAFilter (~> 0.11.2)
-    - DATAStack (~> 5.4.1)
-    - NSDictionary-ANDYSafeValue (~> 0.3.1)
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.2.4)
-    - NSManagedObject-HYPPropertyMapper (~> 4.0.1)
-    - TestCheck (~> 0.3.1)
-  - TestCheck (0.3.1)
+  - Sync (2.3.4):
+    - DATAStack (~> 6.1.2)
+    - SYNCPropertyMapper (~> 5.1.2)
+  - SYNCPropertyMapper (5.1.2)
   - tinyxml (2.1.0)
-  - TwitterCore (2.4.0):
+  - TwitterCore (2.5.0):
     - Fabric
-  - TwitterKit (2.4.0):
-    - TwitterCore (= 2.4.0)
+  - TwitterKit (2.5.0):
+    - TwitterCore (= 2.5.0)
   - WhirlyGlobe (2.4):
     - WhirlyGlobe/MaplyComponent (= 2.4)
   - WhirlyGlobe/aaplus (2.4)
@@ -125,15 +104,16 @@ PODS:
   - WhirlyGlobeResources (2.3)
 
 DEPENDENCIES:
-  - Appirater
+  - Cosmos
   - Crashlytics
+  - DATASource
   - Fabric
   - InAppSettingsKit
   - JJJUtils
   - MBProgressHUD
   - MMDrawerController
   - MMDrawerController+Storyboard
-  - SDWebImage
+  - Networking
   - SimulatorStatusMagic
   - Sync
   - TwitterCore
@@ -143,16 +123,14 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
-  Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
   clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
-  Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
-  DATAFilter: 1d339e27caf0a72d895a1ae664e044fff368a520
-  DATAObjectIDs: e3d50315134d21009f3b34983bcf44e74d8ab54a
-  DATAStack: 931ef9a21c6badd0ff5de494a5d49109ba7e8115
-  DateParser: 6609ccde5a21650e2f61cea718a2e5c6c34ce4e8
-  eigen: f44cbe83c3d11ff9efc2333914dc090b827f8176
-  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  DATASource: fa895931841523f62c1378cbc53ef2de87e5cf30
+  DATAStack: a45fc144e15193f1b22c26b507cc46655ce96a71
+  eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
   JJJUtils: 5abcb911388dc05e24cecdde9d4a3e18f1b1510e
@@ -160,22 +138,18 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
-  NSDictionary-ANDYSafeValue: 2d7adf339b6e302d71fec5f1d71ae00aacda993e
-  NSEntityDescription-SYNCPrimaryKey: 8f3024bddb098157b08710dc29a011e9948c5ed8
-  NSManagedObject-HYPPropertyMapper: 2b42481a261b467024f6b6096fbe0a307a5198e3
-  NSString-HYPNetworking: d4cc1047b85a02bdadd90c51b5d497e07d812efc
+  Networking: ccf5f074a956c194b233c1d379261dd51ae9bea9
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SimulatorStatusMagic: 4db65b11c095bbb3abd966a4ae8ee0f11789e8e0
+  SimulatorStatusMagic: f6cf062b0e5a2df6f000bb0f98d1ae6977c8dbc1
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481
-  Sync: a0ce1ad9b83c364300939cf509fea79ab808aacd
-  TestCheck: 9a9aad0a356703989f4f2b640b6ed95e53e2214f
+  Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
+  SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
-  TwitterCore: a139904c80805ad3dde9eef1100704f96f646d1d
-  TwitterKit: 1cf9742edf9d182c1518cfdd6aaac0dfe313b38b
+  TwitterCore: 95c46af93112768a7983bd370d66023553601d01
+  TwitterKit: dd8042698b0ff5bd3066fa919b3b2b50d8eed829
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: bfe2011676b66b3deca868aa97ccb6d546856eac
+PODFILE CHECKSUM: ecd0460fb3da97adc4f34f782b3ca364251d711f
 
-COCOAPODS: 1.1.0.rc.1
+COCOAPODS: 1.1.1

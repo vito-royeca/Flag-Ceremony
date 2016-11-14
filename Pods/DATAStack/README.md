@@ -1,8 +1,8 @@
-![DATAStack](https://raw.githubusercontent.com/3lvis/DATAStack/master/Images/datastack-logo.png)
+![DATAStack](https://raw.githubusercontent.com/SyncDB/DATAStack/master/Images/datastack-logo2.png)
 
 [![Version](https://img.shields.io/cocoapods/v/DATAStack.svg?style=flat)](https://cocoapods.org/pods/DATAStack)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/3lvis/DATAStack)
-![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/SyncDB/DATAStack)
+![Compatibility](https://img.shields.io/badge/compatible-swift%202.3%20and%203.0-orange.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20watchOS%20%7C%20tvOS%20-lightgrey.svg)
 [![License](https://img.shields.io/cocoapods/l/DATAStack.svg?style=flat)](https://cocoapods.org/pods/DATAStack)
 
@@ -86,7 +86,7 @@ Getting access to the NSManagedObjectContext attached to the main thread is as s
 self.dataStack.mainContext
 ```
 
-or 
+or
 
 ```swift
 self.dataStack.viewContext
@@ -172,7 +172,7 @@ DATAStack *dataStack = [[DATAStack alloc] initWithModelName:@"MyAppModel"
                                                   storeType:DATAStackStoreTypeInMemory];
 ```
 
-_(Hint: Maybe you haven't found the best way to use NSFetchedResultsController, well [here it is](https://github.com/3lvis/DATASource).)_
+_(Hint: Maybe you haven't found the best way to use NSFetchedResultsController, well [here it is](https://github.com/SyncDB/DATASource).)_
 
 ## Migrations
 
@@ -185,14 +185,14 @@ If `DATAStack` has troubles creating your persistent coordinator because a migra
 ```ruby
 use_frameworks!
 
-pod 'DATAStack'
+pod 'DATAStack', '~> 6'
 ```
 
 **DATAStack** is also available through [Carthage](https://github.com/Carthage/Carthage). To install
 it, simply add the following line to your Cartfile:
 
 ```ruby
-github '3lvis/DATAStack'
+github "SyncDB/DATAStack" ~> 6.0
 ```
 
 ## Be Awesome
@@ -203,7 +203,7 @@ Have a great day.
 
 ## Author
 
-Elvis Nuñez, [@3lvis](https://twitter.com/3lvis)
+SyncDB, [@Sync_DB](https://twitter.com/Sync_DB)
 
 ## License
 
