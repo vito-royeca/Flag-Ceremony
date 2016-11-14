@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayView: UIView!
     
     // MARK: Actions
-    @IBAction func segmentedAction(sender: UISegmentedControl) {
+    @IBAction func segmentedAction(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             showMap()
@@ -57,26 +57,26 @@ class ViewController: UIViewController {
         
         if globeView == nil {
             globeView = WhirlyGlobeViewController()
-            globeView!.clearColor = UIColor.blackColor()
+            globeView!.clearColor = UIColor.black
         }
         displayView.addSubview(globeView!.view)
         globeView!.view.frame = displayView.bounds
         
         // set up the data source
-        if let tileSource = MaplyMBTileSource(MBTiles: "geography-class_medres") {
+        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
             let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource)
-            layer.handleEdges = true
-            layer.coverPoles = true
-            layer.requireElev = false
-            layer.waitLoad = false
-            layer.drawPriority = 0
-            layer.singleLevelLoading = false
-            globeView!.addLayer(layer)
+            layer?.handleEdges = true
+            layer?.coverPoles = true
+            layer?.requireElev = false
+            layer?.waitLoad = false
+            layer?.drawPriority = 0
+            layer?.singleLevelLoading = false
+            globeView!.add(layer)
         }
         
         // start up over Madrid, center of the old-world
         globeView!.height = 0.8
-        globeView!.animateToPosition(MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
+        globeView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
     func showMap() {
@@ -86,47 +86,47 @@ class ViewController: UIViewController {
         
         if mapView == nil {
             mapView = MaplyViewController()
-            mapView!.clearColor = UIColor.whiteColor()
+            mapView!.clearColor = UIColor.white
         }
         displayView.addSubview(mapView!.view)
         mapView!.view.frame = displayView.bounds
         
         // set up the data source
-        if let tileSource = MaplyMBTileSource(MBTiles: "geography-class_medres") {
+        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
             let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource)
-            layer.handleEdges = false
-            layer.coverPoles = false
-            layer.requireElev = false
-            layer.waitLoad = false
-            layer.drawPriority = 0
-            layer.singleLevelLoading = false
-            mapView!.addLayer(layer)
+            layer?.handleEdges = false
+            layer?.coverPoles = false
+            layer?.requireElev = false
+            layer?.waitLoad = false
+            layer?.drawPriority = 0
+            layer?.singleLevelLoading = false
+            mapView!.add(layer)
         }
         
         // start up over Madrid, center of the old-world
         mapView!.height = 0.8
-        mapView!.animateToPosition(MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
+        mapView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
     func addCountries() {
         // handle this in another thread
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-        dispatch_async(queue) {
-            let bundle = NSBundle.mainBundle()
-            let allOutlines = bundle.pathsForResourcesOfType("geojson", inDirectory: "country_json_50m")
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+        queue.async {
+            let bundle = Bundle.main
+            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
             let vectorDict = [
-                kMaplyColor: UIColor.whiteColor(),
+                kMaplyColor: UIColor.white,
                 kMaplySelectable: true,
-                kMaplyVecWidth: 4.0]
+                kMaplyVecWidth: 4.0] as [String : Any]
             
             var flags = [MaplyScreenMarker]()
             
             for outline in allOutlines {
-                if let jsonData = NSData(contentsOfFile: outline),
-                    wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
+                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
+                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
                     // the admin tag from the country outline geojson has the country name ­ save
                     if let attrs = wgVecObj.attributes,
-                        vecName = attrs.objectForKey("ADMIN") as? NSObject {
+                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
                         wgVecObj.userObject = vecName
                     
                     
@@ -159,19 +159,19 @@ class ViewController: UIViewController {
                             var cc:String?
                             
                             if let isoA2 = attrs["ISO_A2"] as? String {
-                                cc = isoA2.lowercaseString
+                                cc = isoA2.lowercased()
                                 
                             }
                             if cc == "-99" {
                                 if let postal = attrs["POSTAL"] as? String {
-                                    cc = postal.lowercaseString
+                                    cc = postal.lowercased()
                                 }
                             }
                             print("\(cc!)")
                             
                             
                             if let cc = cc {
-                                if let flag = UIImage(contentsOfFile: bundle.pathForResource(cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
+                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
                                     
                                     let marker = MaplyScreenMarker()
                                     marker.image = flag

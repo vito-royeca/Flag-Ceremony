@@ -23,15 +23,15 @@ class GlobeViewController: UIViewController {
         addFlags()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailsFromGlobeAsPush" ||
             segue.identifier == "showDetailsFromGlobeAsModal" {
             
-            if let nav = segue.destinationViewController as? UINavigationController {
+            if let nav = segue.destination as? UINavigationController {
                 if let detailsVC = nav.childViewControllers.first {
                     detailsVC.navigationItem.title = sender as? String
                 }
@@ -52,55 +52,55 @@ class GlobeViewController: UIViewController {
 //        }
         
         globeView = WhirlyGlobeViewController()
-        globeView!.clearColor = UIColor.blackColor()
+        globeView!.clearColor = UIColor.black
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         addChildViewController(globeView!)
         globeView!.delegate = self
         
         // set up the data source
-        if let tileSource = MaplyMBTileSource(MBTiles: "geography-class_medres") {
+        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
             let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource)
-            layer.handleEdges = true
-            layer.coverPoles = true
-            layer.requireElev = false
-            layer.waitLoad = false
-            layer.drawPriority = 0
-            layer.singleLevelLoading = false
-            globeView!.addLayer(layer)
+            layer?.handleEdges = true
+            layer?.coverPoles = true
+            layer?.requireElev = false
+            layer?.waitLoad = false
+            layer?.drawPriority = 0
+            layer?.singleLevelLoading = false
+            globeView!.add(layer)
         }
         
         // start up over Madrid, center of the old-world
         globeView!.height = 0.8
-        globeView!.animateToPosition(MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
+        globeView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
     func addFlags() {
         // handle this in another thread
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-        dispatch_async(queue) {
-            let bundle = NSBundle.mainBundle()
-            let allOutlines = bundle.pathsForResourcesOfType("geojson", inDirectory: "country_json_50m")
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+        queue.async {
+            let bundle = Bundle.main
+            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
             var flags = [MaplyScreenMarker]()
             
             for outline in allOutlines {
-                if let jsonData = NSData(contentsOfFile: outline),
-                    wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
+                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
+                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
                     // the admin tag from the country outline geojson has the country name ­ save
                     if let attrs = wgVecObj.attributes,
-                        vecName = attrs.objectForKey("ADMIN") as? NSObject {
+                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
                         wgVecObj.userObject = vecName
                         
                         if vecName.description.characters.count > 0 {
                             var cc:String?
                             
                             if let isoA2 = attrs["ISO_A2"] as? String {
-                                cc = isoA2.lowercaseString
+                                cc = isoA2.lowercased()
                                 
                             }
                             
                             if let cc = cc {
-                                if let flag = UIImage(contentsOfFile: bundle.pathForResource(cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
+                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
                                     
                                     let marker = MaplyScreenMarker()
                                     marker.image = flag
@@ -124,7 +124,7 @@ class GlobeViewController: UIViewController {
 }
 
 extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
-    func globeViewController(viewC: WhirlyGlobeViewController!, didSelect selectedObj: NSObject!) {
+    func globeViewController(_ viewC: WhirlyGlobeViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenMarker {
             let title = selectedObject.userObject as? String
             
@@ -133,10 +133,10 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
 //            a.title = title
 //            viewC.addAnnotation(a, forPoint: selectedObject.loc, offset: CGPointZero)
             
-            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-                self.performSegueWithIdentifier("showDetailsGlobeMapAsPush", sender: title)
-            } else if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                self.performSegueWithIdentifier("showDetailsFromGlobeAsModal", sender: title)
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.performSegue(withIdentifier: "showDetailsGlobeMapAsPush", sender: title)
+            } else if UIDevice.current.userInterfaceIdiom == .pad {
+                self.performSegue(withIdentifier: "showDetailsFromGlobeAsModal", sender: title)
             }
         }
     }

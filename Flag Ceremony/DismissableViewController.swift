@@ -13,13 +13,13 @@ class DismissableViewController: UIViewController {
     // MARK: Outlets
     var backgroundTap: UITapGestureRecognizer?
     
-    func backgroundTapAction(sender: UITapGestureRecognizer) {
-        if sender.state == .Ended {
+    func backgroundTapAction(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
             let rootView = view.window
-            let location = sender.locationInView(nil)
-            let point = view.convertPoint(location, fromView: rootView)
-            if !view.pointInside(point, withEvent: nil) {
-                dismissViewControllerAnimated(true, completion: {
+            let location = sender.location(in: nil)
+            let point = view.convert(location, from: rootView)
+            if !view.point(inside: point, with: nil) {
+                dismiss(animated: true, completion: {
                     if let backgroundTap = self.backgroundTap {
                         rootView!.removeGestureRecognizer(backgroundTap)
                     }
@@ -40,11 +40,11 @@ class DismissableViewController: UIViewController {
         backgroundTap!.cancelsTouchesInView = false
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // add background tap gesture on iPads
-        if (UIDevice.currentDevice().userInterfaceIdiom == .Pad) {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
             if let rootView = view.window,
                 let backgroundTap = backgroundTap {
                 rootView.addGestureRecognizer(backgroundTap)
@@ -52,11 +52,11 @@ class DismissableViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
         // remove background tap gesture on iPads
-        if (UIDevice.currentDevice().userInterfaceIdiom == .Pad) {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
             if let rootView = view.window,
                 let backgroundTap = backgroundTap {
                 rootView.removeGestureRecognizer(backgroundTap)
@@ -72,7 +72,7 @@ class DismissableViewController: UIViewController {
 
 // MARK: UIGestureRecognizerDelegate
 extension DismissableViewController : UIGestureRecognizerDelegate {
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
