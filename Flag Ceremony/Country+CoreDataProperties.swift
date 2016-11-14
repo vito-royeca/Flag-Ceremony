@@ -22,7 +22,7 @@ extension Country {
     @NSManaged public var seqId: String?
     @NSManaged public var telPref: String?
     @NSManaged public var capital: Capital?
-    @NSManaged public var countryCode: CountryCode?
-    @NSManaged public var geoRectangle: GeoRectangle?
+    @NSManaged public var countryCodes: NSData?
+    @NSManaged public var geoRectangle: NSData?
 
 }

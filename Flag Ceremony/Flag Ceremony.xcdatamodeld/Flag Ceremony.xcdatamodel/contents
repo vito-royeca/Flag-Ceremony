@@ -29,6 +29,11 @@
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="capital" inverseEntity="Country" syncable="YES"/>
     </entity>
     <entity name="Country" representedClassName="Country" syncable="YES">
+        <attribute name="countryCodes" optional="YES" attributeType="Binary" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="CountryCodes"/>
+            </userInfo>
+        </attribute>
         <attribute name="countryInfo" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="hyper.remoteKey" value="CountryInfo"/>
@@ -37,6 +42,11 @@
         <attribute name="geoPt" optional="YES" attributeType="Binary" syncable="YES">
             <userInfo>
                 <entry key="hyper.remoteKey" value="GeoPt"/>
+            </userInfo>
+        </attribute>
+        <attribute name="geoRectangle" optional="YES" attributeType="Binary" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="GeoRectangle"/>
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,36 +61,17 @@
                 <entry key="hyper.remoteKey" value="TelPref"/>
             </userInfo>
         </attribute>
-        <relationship name="capital" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Capital" inverseName="country" inverseEntity="Capital" syncable="YES"/>
-        <relationship name="countryCode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CountryCode" inverseName="country" inverseEntity="CountryCode" syncable="YES"/>
-        <relationship name="geoRectangle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GeoRectangle" inverseName="country" inverseEntity="GeoRectangle" syncable="YES"/>
+        <relationship name="capital" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Capital" inverseName="country" inverseEntity="Capital" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="Capital"/>
+            </userInfo>
+        </relationship>
         <userInfo>
             <entry key="key" value="value"/>
         </userInfo>
     </entity>
-    <entity name="CountryCode" representedClassName="CountryCode" syncable="YES">
-        <attribute name="fips" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="iso2" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="iso3" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isoN" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="hyper.isPrimaryKey" value="true"/>
-            </userInfo>
-        </attribute>
-        <attribute name="tld" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="countryCode" inverseEntity="Country" syncable="YES"/>
-    </entity>
-    <entity name="GeoRectangle" representedClassName="GeoRectangle" syncable="YES">
-        <attribute name="east" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="north" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="south" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="west" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="geoRectangle" inverseEntity="Country" syncable="YES"/>
-    </entity>
     <elements>
         <element name="Capital" positionX="-54" positionY="27" width="128" height="135"/>
         <element name="Country" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="CountryCode" positionX="-18" positionY="81" width="128" height="135"/>
-        <element name="GeoRectangle" positionX="-36" positionY="63" width="128" height="120"/>
     </elements>
 </model>

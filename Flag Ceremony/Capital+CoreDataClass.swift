@@ -12,4 +12,11 @@ import CoreData
 @objc(Capital)
 public class Capital: NSManagedObject {
 
+    func getGeoPt() -> [Float]? {
+        if let geoPt = geoPt {
+            return NSKeyedUnarchiver.unarchiveObject(with: geoPt as Data) as? [Float]
+        }
+        return nil
+    }
+
 }

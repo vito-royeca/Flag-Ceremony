@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import DATAStack
+import DATASource
 import WhirlyGlobe
 
 class MapViewController: UIViewController {
-
     // MARK: Variables
     var mapView: MaplyViewController?
     
@@ -20,12 +21,18 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initMap()
-        addFlags()
+
+//        addFlags()
+        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
+            if let error = error {
+                print("error: \(error)")
+            }
+            self.addFlagsFromDB()
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,27 +54,24 @@ class MapViewController: UIViewController {
 
     // MARL: Custom methods
     func initMap() {
-//        if let mapView = mapView {
-//            mapView.view.removeFromSuperview()
-//        }
-        
         mapView = MaplyViewController()
         mapView!.clearColor = UIColor.white
+        mapView!.delegate = self
         view.addSubview(mapView!.view)
         mapView!.view.frame = view.bounds
         addChildViewController(mapView!)
-        mapView!.delegate = self
         
         // set up the data source
         if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
-            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource)
-            layer?.handleEdges = false
-            layer?.coverPoles = false
-            layer?.requireElev = false
-            layer?.waitLoad = false
-            layer?.drawPriority = 0
-            layer?.singleLevelLoading = false
-            mapView!.add(layer)
+            if let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource) {
+                layer.handleEdges = false
+                layer.coverPoles = false
+                layer.requireElev = false
+                layer.waitLoad = false
+                layer.drawPriority = 0
+                layer.singleLevelLoading = false
+                mapView!.add(layer)
+            }
         }
         
         // start up over Madrid, center of the old-world
@@ -121,19 +125,66 @@ class MapViewController: UIViewController {
             self.mapView!.addScreenMarkers(flags, desc: nil)
         }
     }
+    
+    func addFlagsFromDB() {
+        // handle this in another thread
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+        queue.async {
+            let bundle = Bundle.main
+            let dir = "data/flags/mini"
+            let imageType = "png"
+            var flags = [MaplyScreenMarker]()
+            
+            var countries:[Country]?
+            let newRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
+            newRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            
+            do {
+                try countries = API.sharedInstance.dataStack.mainContext.fetch(newRequest) as? [Country]
+                
+                for country in countries! {
+                    if let countryCodes = country.getCountryCodes(),
+                        let geoPt = country.getGeoPt() {
+                        var flagFound = false
+                        
+                        for (_,value) in countryCodes {
+                            if let value = value as? String {
+                                if let path = bundle.path(forResource: value.lowercased(), ofType: imageType, inDirectory: dir) {
+                                    
+                                    let image = UIImage(contentsOfFile: path)
+                                    let marker = MaplyScreenMarker()
+                                    marker.image = image
+//                                    Radians = Degrees * PI / 180
+//                                    Degrees = Radians * 180 / PI
+                                    marker.loc = MaplyCoordinate(x: (geoPt[1] * Float.pi)/180, y: (geoPt[0] * Float.pi)/180)
+                                    marker.size = image!.size
+                                    marker.userObject = country.name
+                                    flags.append(marker)
+                                    flagFound = true
+                                    break
+                                }
+                            }
+                        }
+                        
+                        if !flagFound {
+                            print("flag not found: \(country.name!)")
+                        }
+                    }
 
+                }
+            } catch {
+                print("error: \(error)")
+            }
+            
+            self.mapView!.addScreenMarkers(flags, desc: nil)
+        }
+    }
 }
 
 extension MapViewController : MaplyViewControllerDelegate {
     func maplyViewController(_ viewC: MaplyViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenMarker {
             let title = selectedObject.userObject as? String
-            
-//            viewC.clearAnnotations()
-//            let a = MaplyAnnotation()
-//            a.title = title
-//            a.subTitle = subtitle
-//            viewC.addAnnotation(a, forPoint: selectedObject.loc, offset: CGPointZero)
             
             if UIDevice.current.userInterfaceIdiom == .phone {
                 self.performSegue(withIdentifier: "showDetailsFromMapAsPush", sender: title)

@@ -27,18 +27,20 @@ class API: NSObject {
                 completion?(error)
             } else {
                 if let data = result.first {
-                    if let country = data["Results"] as? [String: [String: Any]] {
-
-                        self.dataStack.performInNewBackgroundContext { backgroundContext in
-                            var newData = [String : Any]()
-                            for (_,value) in country {
-                                for (key2,value2) in value {
-                                    newData[key2] = value2
-                                }
+                    if let countries = data["Results"] as? [String: [String: Any]] {
+                        var newData = [[String : Any]]()
+                        
+                        for (_,value) in countries {
+                            var country = [String : Any]()
+                            for (key2,value2) in value {
+                                country[key2] = value2
                             }
-
+                            newData.append(country)
+                        }
+                        
+                        self.dataStack.performInNewBackgroundContext { backgroundContext in
                             NotificationCenter.default.addObserver(self, selector: #selector(API.changeNotification(_:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: backgroundContext)
-                            Sync.changes([newData], inEntityNamed: "Country", predicate: nil, parent: nil, inContext: backgroundContext, dataStack: self.dataStack, completion: { error in
+                            Sync.changes(newData, inEntityNamed: "Country", predicate: nil, parent: nil, inContext: backgroundContext, dataStack: self.dataStack, completion: { error in
                                 NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
                                 completion?(error)
                             })
@@ -68,4 +70,6 @@ class API: NSObject {
         }
     }
 
+    // MARK: - Shared Instance
+    static let sharedInstance = API()
 }

@@ -35,9 +35,7 @@ class Flag_CeremonyTests: XCTestCase {
     }
     
     func testDownloadCountries() {
-        let api = API()
-        
-        api.fetchCountries(completion: {(error: NSError?) in
+        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
             if let error = error {
                 print("error: \(error)")
             }

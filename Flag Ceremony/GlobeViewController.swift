@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import DATAStack
+import DATASource
 import WhirlyGlobe
 
 class GlobeViewController: UIViewController {
@@ -20,7 +22,8 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
-        addFlags()
+//        addFlags()
+        addFlagsFromDB()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +56,12 @@ class GlobeViewController: UIViewController {
         
         globeView = WhirlyGlobeViewController()
         globeView!.clearColor = UIColor.black
+        globeView!.delegate = self
+//        globeView!.tilt = Float((3.14/2)-23.0)
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         addChildViewController(globeView!)
-        globeView!.delegate = self
+        
         
         // set up the data source
         if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
@@ -121,20 +126,74 @@ class GlobeViewController: UIViewController {
             self.globeView!.addScreenMarkers(flags, desc: nil)
         }
     }
+    
+    func addFlagsFromDB() {
+        // handle this in another thread
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+        queue.async {
+            let bundle = Bundle.main
+            let dir = "data/flags/mini"
+            let imageType = "png"
+            var flags = [MaplyScreenMarker]()
+            
+            var countries:[Country]?
+            let newRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
+            newRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            
+            do {
+                try countries = API.sharedInstance.dataStack.mainContext.fetch(newRequest) as? [Country]
+                
+                for country in countries! {
+                    if let countryCodes = country.getCountryCodes(),
+                        let geoPt = country.getGeoPt() {
+                        var flagFound = false
+                        
+                        for (_,value) in countryCodes {
+                            if let value = value as? String {
+                                if let path = bundle.path(forResource: value.lowercased(), ofType: imageType, inDirectory: dir) {
+                                    
+                                    let image = UIImage(contentsOfFile: path)
+                                    let marker = MaplyScreenMarker()
+                                    marker.image = image
+//                                    Radians = Degrees * PI / 180
+//                                    Degrees = Radians * 180 / PI
+                                    marker.loc = MaplyCoordinate(x: (geoPt[1] * Float.pi)/180, y: (geoPt[0] * Float.pi)/180)
+
+                                    marker.size = image!.size
+                                    marker.userObject = country.name
+                                    flags.append(marker)
+                                    flagFound = true
+                                    break
+                                }
+                            }
+                        }
+                        
+                        if !flagFound {
+                            print("flag not found: \(country.name!)")
+                        }
+                    }
+                    
+                }
+            } catch {
+                print("error: \(error)")
+            }
+            
+            self.globeView!.addScreenMarkers(flags, desc: nil)
+        }
+    }
 }
 
 extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
     func globeViewController(_ viewC: WhirlyGlobeViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenMarker {
             let title = selectedObject.userObject as? String
-            
 //            viewC.clearAnnotations()
 //            let a = MaplyAnnotation()
 //            a.title = title
 //            viewC.addAnnotation(a, forPoint: selectedObject.loc, offset: CGPointZero)
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsGlobeMapAsPush", sender: title)
+                self.performSegue(withIdentifier: "showDetailsFromGlobeAsPush", sender: title)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
                 self.performSegue(withIdentifier: "showDetailsFromGlobeAsModal", sender: title)
             }

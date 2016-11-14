@@ -50,18 +50,6 @@
 		8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
 		8CD36E8E1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
 		8CD36E8F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
-		8CD36E901DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E801DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift */; };
-		8CD36E911DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E801DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift */; };
-		8CD36E921DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E801DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift */; };
-		8CD36E931DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E811DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift */; };
-		8CD36E941DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E811DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift */; };
-		8CD36E951DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E811DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift */; };
-		8CD36E961DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E821DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift */; };
-		8CD36E971DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E821DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift */; };
-		8CD36E981DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E821DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift */; };
-		8CD36E991DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E831DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift */; };
-		8CD36E9A1DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E831DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift */; };
-		8CD36E9B1DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E831DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift */; };
 		C0CCDEDE33B73B2FA7EBDA5D /* Pods_Flag_CeremonyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */; };
 		E5F34C9FC682CD3EE02A504A /* Pods_Flag_CeremonyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5148D537963A660A444EBED /* Pods_Flag_CeremonyUITests.framework */; };
 		F0B760F70B39745DFF111613 /* Pods_Flag_Ceremony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */; };
@@ -111,10 +99,6 @@
 		8CD36E7D1DD9A9C600C13E2A /* Capital+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8CD36E7E1DD9A9C600C13E2A /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8CD36E801DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeoRectangle+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8CD36E811DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GeoRectangle+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8CD36E821DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CountryCode+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8CD36E831DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CountryCode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag Ceremony.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flag Ceremony/Pods-Flag Ceremony.release.xcconfig"; sourceTree = "<group>"; };
 		9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_Ceremony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_CeremonyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,10 +210,6 @@
 				8CD36E7D1DD9A9C600C13E2A /* Capital+CoreDataProperties.swift */,
 				8CD36E7E1DD9A9C600C13E2A /* Country+CoreDataClass.swift */,
 				8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */,
-				8CD36E801DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift */,
-				8CD36E811DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift */,
-				8CD36E821DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift */,
-				8CD36E831DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift */,
 				8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */,
 			);
 			name = Model;
@@ -355,15 +335,18 @@
 				TargetAttributes = {
 					8C4E97241D88ED50005A685B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 43CD66539H;
 						LastSwiftMigration = 0810;
 					};
 					8C4E97381D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 43CD66539H;
 						LastSwiftMigration = 0810;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
 					8C4E97431D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 43CD66539H;
 						LastSwiftMigration = 0810;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
@@ -579,17 +562,13 @@
 				8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8A1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
-				8CD36E931DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */,
 				8C0296741D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
-				8CD36E901DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */,
 				8CD36E841DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
 				8CBB26A71DD983D400660EB9 /* API.swift in Sources */,
 				8CD36E871DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
-				8CD36E961DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */,
 				8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
-				8CD36E991DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */,
 				8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,17 +582,13 @@
 				8CD36E8E1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8B1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */,
-				8CD36E941DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */,
 				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
-				8CD36E911DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */,
 				8CD36E851DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				8C0296751D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 				8CBB26A81DD983D400660EB9 /* API.swift in Sources */,
 				8CD36E881DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
-				8CD36E971DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */,
 				8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */,
-				8CD36E9A1DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */,
 				8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,17 +602,13 @@
 				8CD36E8F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8C1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
-				8CD36E951DD9A9C600C13E2A /* GeoRectangle+CoreDataProperties.swift in Sources */,
 				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
-				8CD36E921DD9A9C600C13E2A /* GeoRectangle+CoreDataClass.swift in Sources */,
 				8CD36E861DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				8C0296761D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 				8CBB26A91DD983D400660EB9 /* API.swift in Sources */,
 				8CD36E891DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
-				8CD36E981DD9A9C600C13E2A /* CountryCode+CoreDataClass.swift in Sources */,
 				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,
-				8CD36E9B1DD9A9C600C13E2A /* CountryCode+CoreDataProperties.swift in Sources */,
 				8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,6 +738,7 @@
 			baseConfigurationReference = C455875A4C4252BB458AD7FA /* Pods-Flag Ceremony.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag Ceremony/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
@@ -780,6 +752,7 @@
 			baseConfigurationReference = 90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag Ceremony/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
@@ -793,6 +766,7 @@
 			baseConfigurationReference = 7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
@@ -807,6 +781,7 @@
 			baseConfigurationReference = D779216E07AF4AA639CBFC53 /* Pods-Flag CeremonyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
@@ -820,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B16DD7DD6F86D87482AFA18A /* Pods-Flag CeremonyUITests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
@@ -833,6 +809,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E07FC3105D9115FB8D08231C /* Pods-Flag CeremonyUITests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
