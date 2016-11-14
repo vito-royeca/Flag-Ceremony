@@ -1,58 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YOM-zK-Z1G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YOM-zK-Z1G">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-mk-A19">
-                                <rect key="frame" x="20" y="20" width="560" height="29"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Globe"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentedAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="xpS-XJ-bBx"/>
-                                </connections>
-                            </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lV-dW-ALL">
-                                <rect key="frame" x="20" y="56" width="560" height="524"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="6lV-dW-ALL" secondAttribute="bottom" constant="20" symbolic="YES" id="Bpy-3z-e5m"/>
-                            <constraint firstItem="6lV-dW-ALL" firstAttribute="top" secondItem="i1G-mk-A19" secondAttribute="bottom" constant="8" symbolic="YES" id="RpW-UA-gE3"/>
-                            <constraint firstItem="i1G-mk-A19" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="U7t-FC-qYB"/>
-                            <constraint firstItem="i1G-mk-A19" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dR5-vF-LfI"/>
-                            <constraint firstItem="i1G-mk-A19" firstAttribute="trailing" secondItem="6lV-dW-ALL" secondAttribute="trailing" id="f4N-Yv-KJi"/>
-                            <constraint firstItem="i1G-mk-A19" firstAttribute="leading" secondItem="6lV-dW-ALL" secondAttribute="leading" id="op6-Z4-VYp"/>
-                            <constraint firstItem="i1G-mk-A19" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yYI-k4-nzo"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="displayView" destination="6lV-dW-ALL" id="hzR-xg-Xiw"/>
-                        <outlet property="segmentedControl" destination="i1G-mk-A19" id="c0f-Nr-ymj"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1700" y="461"/>
-        </scene>
         <!--Globe-->
         <scene sceneID="Zei-v3-eUS">
             <objects>
@@ -62,9 +18,9 @@
                         <viewControllerLayoutGuide type="bottom" id="zUw-hf-cI5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s5i-h8-0sn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Globe" id="T21-bq-RzN"/>
                     <connections>
@@ -85,9 +41,9 @@
                         <viewControllerLayoutGuide type="bottom" id="drs-V4-M19"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n3u-pp-gdp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="sCN-op-3NZ"/>
                     <connections>
@@ -108,9 +64,9 @@
                         <viewControllerLayoutGuide type="bottom" id="6cJ-nD-Mdt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hdY-qt-ieb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="CVE-Eg-bGL"/>
                 </viewController>
@@ -125,7 +81,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="n28-l3-KV4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="01M-8A-n3O" kind="relationship" relationship="viewControllers" id="tJk-Qr-INd"/>
@@ -198,6 +154,6 @@
         <image name="map" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nYX-au-ASw"/>
+        <segue reference="MOF-89-zSV"/>
     </inferredMetricsTieBreakers>
 </document>

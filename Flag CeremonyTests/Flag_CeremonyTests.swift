@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Networking
 @testable import Flag_Ceremony
 
 class Flag_CeremonyTests: XCTestCase {
@@ -31,6 +32,16 @@ class Flag_CeremonyTests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testDownloadCountries() {
+        let api = API()
+        
+        api.fetchCountries(completion: {(error: NSError?) in
+            if let error = error {
+                print("error: \(error)")
+            }
+        })
     }
     
     func testDownloadAnthems() {
