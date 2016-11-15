@@ -31,6 +31,16 @@ class API: NSObject {
                                 var country = [String : Any]()
                                 for (key2,value2) in value {
                                     country[key2] = value2
+                                    
+                                    if key2 == "GeoPt" {
+                                        // Radians = Degrees * PI / 180
+                                        // Degrees = Radians * 180 / PI
+                                        if let geoPt = value2 as? [Float] {
+                                            country["geoRadians"] = [(geoPt[1] * Float.pi)/180, (geoPt[0] * Float.pi)/180]
+                                        }
+                                        
+                                        // TODO: capital.geoRadians
+                                    }
                                 }
                                 newData.append(country)
                             }

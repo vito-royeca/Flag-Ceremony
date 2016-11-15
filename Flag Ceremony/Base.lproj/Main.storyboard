@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Globe-->
+        <!--Flag Ceremony-->
         <scene sceneID="Zei-v3-eUS">
             <objects>
                 <viewController id="v19-cJ-vPn" customClass="GlobeViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,17 +22,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Globe" id="T21-bq-RzN"/>
+                    <navigationItem key="navigationItem" title="Flag Ceremony" id="T21-bq-RzN"/>
                     <connections>
-                        <segue destination="ugf-nS-ZJZ" kind="presentation" identifier="showDetailsFromGlobeAsModal" modalPresentationStyle="formSheet" id="nYX-au-ASw"/>
-                        <segue destination="Jhy-QD-YbQ" kind="show" identifier="showDetailsFromGlobeAsPush" id="LRe-vj-do6"/>
+                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromGlobeAsModal" modalPresentationStyle="formSheet" id="4mM-aD-pb6"/>
+                        <segue destination="Z29-MB-lIF" kind="show" identifier="showDetailsFromGlobeAsPush" id="wT1-rb-8WH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLw-HP-IBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="461"/>
+            <point key="canvasLocation" x="900" y="1784"/>
         </scene>
-        <!--Map-->
+        <!--Flag Ceremony-->
         <scene sceneID="wF9-27-vUm">
             <objects>
                 <viewController id="efe-pB-qzf" customClass="MapViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
@@ -45,49 +45,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="sCN-op-3NZ"/>
+                    <navigationItem key="navigationItem" title="Flag Ceremony" id="sCN-op-3NZ"/>
                     <connections>
-                        <segue destination="ugf-nS-ZJZ" kind="presentation" identifier="showDetailsFromMapAsModal" modalPresentationStyle="formSheet" id="GEJ-X1-EzV"/>
-                        <segue destination="Jhy-QD-YbQ" kind="show" identifier="showDetailsFromMapAsPush" id="MdA-qg-Kc3"/>
+                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromMapAsModal" modalPresentationStyle="formSheet" id="ZdL-oJ-FYe"/>
+                        <segue destination="Z29-MB-lIF" kind="show" identifier="showDetailsFromMapAsPush" id="z0s-xr-ufW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qed-dW-Ifh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="-244"/>
+            <point key="canvasLocation" x="900" y="504"/>
         </scene>
         <!--Country View Controller-->
-        <scene sceneID="YLR-be-SW1">
+        <scene sceneID="Hwq-ob-zkw">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Jhy-QD-YbQ" customClass="CountryViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Z29-MB-lIF" customClass="CountryViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Afd-a2-Oaa"/>
-                        <viewControllerLayoutGuide type="bottom" id="6cJ-nD-Mdt"/>
+                        <viewControllerLayoutGuide type="top" id="nm0-7L-imx"/>
+                        <viewControllerLayoutGuide type="bottom" id="KlT-bV-QiF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hdY-qt-ieb">
+                    <view key="view" contentMode="scaleToFill" id="GC9-tx-jgW">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3OS-6q-7Vj">
-                                <rect key="frame" x="0.0" y="64" width="540" height="556"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="3OS-6q-7Vj" firstAttribute="bottom" secondItem="6cJ-nD-Mdt" secondAttribute="top" id="Kg4-bZ-NZg"/>
-                            <constraint firstItem="3OS-6q-7Vj" firstAttribute="top" secondItem="Afd-a2-Oaa" secondAttribute="bottom" id="Lid-Y3-SFD"/>
-                            <constraint firstAttribute="trailing" secondItem="3OS-6q-7Vj" secondAttribute="trailing" id="ewp-j6-sHr"/>
-                            <constraint firstItem="3OS-6q-7Vj" firstAttribute="leading" secondItem="hdY-qt-ieb" secondAttribute="leading" id="gy5-I2-R15"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="CVE-Eg-bGL"/>
-                    <connections>
-                        <outlet property="tableView" destination="3OS-6q-7Vj" id="vpT-MS-lYw"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="7Ou-xG-I3d"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bf9-7W-eDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKi-3g-mVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2557.8125" y="460.54687499999994"/>
+            <point key="canvasLocation" x="2748" y="1175"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KF7-J8-a2a">
+            <objects>
+                <navigationController id="i4I-GZ-Xl2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6VH-GH-DKW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Z29-MB-lIF" kind="relationship" relationship="rootViewController" id="pQw-Mb-HaT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YCH-eW-OG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1859" y="1175"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5zF-iW-rq3">
@@ -99,32 +100,50 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="01M-8A-n3O" kind="relationship" relationship="viewControllers" id="tJk-Qr-INd"/>
-                        <segue destination="9vS-55-Pu9" kind="relationship" relationship="viewControllers" id="Skr-kw-WWF"/>
-                        <segue destination="cyL-Zc-Jwq" kind="relationship" relationship="viewControllers" id="uO9-re-Hyf"/>
+                        <segue destination="Wqg-S6-mPY" kind="relationship" relationship="viewControllers" id="Sar-Sb-Tda"/>
+                        <segue destination="01M-8A-n3O" kind="relationship" relationship="viewControllers" id="mmG-0d-ap3"/>
+                        <segue destination="9vS-55-Pu9" kind="relationship" relationship="viewControllers" id="XHV-kg-7KB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HgW-DO-rDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871" y="461"/>
+            <point key="canvasLocation" x="-1351" y="504"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="KQn-5X-1tH">
+        <scene sceneID="lKW-Tn-wxC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ugf-nS-ZJZ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bGL-Wg-PGR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <navigationController id="Wqg-S6-mPY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="Qf0-Ym-Uaz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QGu-ik-vJB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Jhy-QD-YbQ" kind="relationship" relationship="rootViewController" id="pQY-66-6GJ"/>
+                        <segue destination="x9b-Wc-0S2" kind="relationship" relationship="rootViewController" id="hKM-yM-6Jh"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vvd-wu-raC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhv-3Z-FCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="461"/>
+            <point key="canvasLocation" x="-103" y="-801"/>
+        </scene>
+        <!--Flag Ceremony-->
+        <scene sceneID="SEP-Fu-x8L">
+            <objects>
+                <viewController id="x9b-Wc-0S2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k5k-hm-CWK"/>
+                        <viewControllerLayoutGuide type="bottom" id="aE0-UP-Bb5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ock-Ba-W4r">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Flag Ceremony" id="P2i-3t-xNY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O9S-8a-yV8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="927" y="-802"/>
         </scene>
         <!--Map-->
         <scene sceneID="ohB-Id-D0k">
@@ -143,7 +162,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eor-xg-TZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-52" y="-244"/>
+            <point key="canvasLocation" x="-103" y="504"/>
         </scene>
         <!--Globe-->
         <scene sceneID="d8h-ax-1zE">
@@ -162,62 +181,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K16-gO-WtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-52" y="461"/>
-        </scene>
-        <!--Root View Controller-->
-        <scene sceneID="v3h-B6-xe1">
-            <objects>
-                <tableViewController id="oxe-H6-Xcf" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zLw-JQ-m1r">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="E9Y-az-fil">
-                                <rect key="frame" x="0.0" y="28" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9Y-az-fil" id="bpJ-6S-jCD">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="oxe-H6-Xcf" id="Gvy-Kh-q6H"/>
-                            <outlet property="delegate" destination="oxe-H6-Xcf" id="0G3-K9-DRL"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="8J9-jp-ymA"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xND-2C-ZBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="761" y="1201"/>
-        </scene>
-        <!--Charts-->
-        <scene sceneID="g7C-ed-YA4">
-            <objects>
-                <navigationController id="cyL-Zc-Jwq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Charts" image="bar chart" id="Eth-Fn-JSw"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ejc-BW-jZa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="oxe-H6-Xcf" kind="relationship" relationship="rootViewController" id="llO-aq-FKV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Kw-8Q-Tai" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-52" y="1201"/>
+            <point key="canvasLocation" x="-103" y="1784"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bar chart" width="25" height="25"/>
         <image name="globe" width="25" height="25"/>
         <image name="map" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nYX-au-ASw"/>
-        <segue reference="pQY-66-6GJ"/>
+        <segue reference="pQw-Mb-HaT"/>
+        <segue reference="ZdL-oJ-FYe"/>
     </inferredMetricsTieBreakers>
 </document>

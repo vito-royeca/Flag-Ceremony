@@ -18,6 +18,7 @@ extension Country {
 
     @NSManaged public var countryInfo: String?
     @NSManaged public var geoPt: NSData?
+    @NSManaged public var geoRadians: NSData?
     @NSManaged public var name: String?
     @NSManaged public var seqId: String?
     @NSManaged public var telPref: String?

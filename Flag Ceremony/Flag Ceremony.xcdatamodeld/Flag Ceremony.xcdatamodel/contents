@@ -16,6 +16,7 @@
                 <entry key="hyper.remoteKey" value="GeoPt"/>
             </userInfo>
         </attribute>
+        <attribute name="geoRadians" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="hyper.isPrimaryKey" value="true"/>
@@ -44,6 +45,7 @@
                 <entry key="hyper.remoteKey" value="GeoPt"/>
             </userInfo>
         </attribute>
+        <attribute name="geoRadians" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="geoRectangle" optional="YES" attributeType="Binary" syncable="YES">
             <userInfo>
                 <entry key="hyper.remoteKey" value="GeoRectangle"/>
@@ -71,7 +73,7 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Capital" positionX="-54" positionY="27" width="128" height="135"/>
-        <element name="Country" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Capital" positionX="-54" positionY="27" width="128" height="150"/>
+        <element name="Country" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

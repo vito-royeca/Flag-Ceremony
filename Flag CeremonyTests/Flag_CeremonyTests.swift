@@ -36,63 +36,6 @@ class Flag_CeremonyTests: XCTestCase {
         }
     }
     
-    func testDownloadCountries() {
-        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
-            if let error = error {
-                print("error: \(error)")
-            } else {
-                var countries:[Country]?
-                let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
-                request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-                
-                do {
-                    try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
-                    
-                    for country in countries! {
-                        if let countryCodes = country.getCountryCodes() {
-                            
-                            for (_,value) in countryCodes {
-                                if let value = value as? String {
-                                    if let url = URL(string: "\(HymnsURL)/\(value).mp3") {
-                                        let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                                        let localPath = "\(docsPath)/\(value).mp3"
-                                        
-                                        if !FileManager.default.fileExists(atPath: localPath) && flagFound {
-                                            let existsHandler = { (fileExistsAtServer: Bool) -> Void in
-                                                if fileExistsAtServer {
-                                                    print ("downloading... \(country.name!)")
-                                                    let completionHandler = { (data: Data?, error: NSError?) -> Void in
-                                                        if let error = error {
-                                                            print("error: \(error)")
-                                                        } else {
-                                                            do {
-                                                                try data!.write(to: URL(fileURLWithPath: localPath))
-                                                                print("saved: \(localPath)")
-                                                            } catch {
-                                                                
-                                                            }
-                                                        }
-                                                    }
-                                                    NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
-                                                }
-                                            }
-                                            NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } catch {
-                    
-                }
-            }
-        })
-    }
-    
-    func downloadFile() {
-        
-    }
     
     func testDownloadAnthems() {
         /*

@@ -22,7 +22,6 @@ class MapViewController: UIViewController {
         // Do any additional setup after loading the view.
         initMap()
 
-//        addFlags()
         API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
             if let error = error {
                 print("error: \(error)")
@@ -89,12 +88,12 @@ class MapViewController: UIViewController {
     
     func addFlagsFromDB() {
         // handle this in another thread
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
-        queue.async {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             let bundle = Bundle.main
             let dir = "data/flags/mini"
             let imageType = "png"
             var flags = [MaplyScreenMarker]()
+            var labels = [MaplyScreenLabel]()
             
             var countries:[Country]?
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
@@ -105,9 +104,10 @@ class MapViewController: UIViewController {
                 
                 for country in countries! {
                     if let countryCodes = country.getCountryCodes(),
-                        let geoPt = country.getGeoPt() {
+                        let geoRadians = country.getGeoRadians() {
                         var flagFound = false
                         
+                        // add flags
                         for (_,value) in countryCodes {
                             if let value = value as? String {
                                 if let path = bundle.path(forResource: value.lowercased(), ofType: imageType, inDirectory: dir) {
@@ -115,10 +115,7 @@ class MapViewController: UIViewController {
                                     let image = UIImage(contentsOfFile: path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
-                                    // TODO: put in core data the radians
-//                                    Radians = Degrees * PI / 180
-//                                    Degrees = Radians * 180 / PI
-                                    marker.loc = MaplyCoordinate(x: (geoPt[1] * Float.pi)/180, y: (geoPt[0] * Float.pi)/180)
+                                    marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
                                     marker.size = image!.size
                                     marker.userObject = country
                                     flags.append(marker)
@@ -159,8 +156,13 @@ class MapViewController: UIViewController {
                             }
                         }
                         
+                        // add labels
                         if !flagFound {
-                            print("flag not found: \(country.name!)")
+                            let label = MaplyScreenLabel()
+                            label.text = country.name
+                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
+                            label.selectable = false
+                            labels.append(label)
                         }
                     }
 
@@ -170,6 +172,10 @@ class MapViewController: UIViewController {
             }
             
             self.mapView!.addScreenMarkers(flags, desc: nil)
+            self.mapView!.addScreenLabels(labels, desc: [
+                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
+                kMaplyColor: UIColor.black
+            ])
         }
     }
 }

@@ -22,8 +22,12 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
-//        addFlags()
-        addFlagsFromDB()
+        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
+            if let error = error {
+                print("error: \(error)")
+            }
+            self.addFlagsFromDB()
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,10 +54,6 @@ class GlobeViewController: UIViewController {
 
     // MARL: Custom methods
     func initGlobe() {
-//        if let globeView = globeView {
-//            globeView.view.removeFromSuperview()
-//        }
-        
         globeView = WhirlyGlobeViewController()
         globeView!.clearColor = UIColor.black
         globeView!.delegate = self
@@ -80,57 +80,56 @@ class GlobeViewController: UIViewController {
         globeView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
-    func addFlags() {
-        // handle this in another thread
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
-        queue.async {
-            let bundle = Bundle.main
-            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
-            var flags = [MaplyScreenMarker]()
-            
-            for outline in allOutlines {
-                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
-                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
-                    // the admin tag from the country outline geojson has the country name ­ save
-                    if let attrs = wgVecObj.attributes,
-                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
-                        wgVecObj.userObject = vecName
-                        
-                        if vecName.description.characters.count > 0 {
-                            var cc:String?
-                            
-                            if let isoA2 = attrs["ISO_A2"] as? String {
-                                cc = isoA2.lowercased()
-                                
-                            }
-                            
-                            if let cc = cc {
-                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
-                                    
-                                    let marker = MaplyScreenMarker()
-                                    marker.image = flag
-                                    marker.loc = wgVecObj.center()
-                                    marker.size = flag.size
-                                    marker.userObject = attrs["NAME"]
-                                    
-                                    flags.append(marker)
-                                } else {
-                                    print("not found: \(cc)")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            self.globeView!.addScreenMarkers(flags, desc: nil)
-        }
-    }
+//    func addFlags() {
+//        // handle this in another thread
+//        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+//        queue.async {
+//            let bundle = Bundle.main
+//            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
+//            var flags = [MaplyScreenMarker]()
+//            
+//            for outline in allOutlines {
+//                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
+//                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
+//                    // the admin tag from the country outline geojson has the country name ­ save
+//                    if let attrs = wgVecObj.attributes,
+//                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
+//                        wgVecObj.userObject = vecName
+//                        
+//                        if vecName.description.characters.count > 0 {
+//                            var cc:String?
+//                            
+//                            if let isoA2 = attrs["ISO_A2"] as? String {
+//                                cc = isoA2.lowercased()
+//                                
+//                            }
+//                            
+//                            if let cc = cc {
+//                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
+//                                    
+//                                    let marker = MaplyScreenMarker()
+//                                    marker.image = flag
+//                                    marker.loc = wgVecObj.center()
+//                                    marker.size = flag.size
+//                                    marker.userObject = attrs["NAME"]
+//                                    
+//                                    flags.append(marker)
+//                                } else {
+//                                    print("not found: \(cc)")
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            self.globeView!.addScreenMarkers(flags, desc: nil)
+//        }
+//    }
     
     func addFlagsFromDB() {
         // handle this in another thread
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
-        queue.async {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             let bundle = Bundle.main
             let dir = "data/flags/mini"
             let imageType = "png"
@@ -145,7 +144,7 @@ class GlobeViewController: UIViewController {
                 
                 for country in countries! {
                     if let countryCodes = country.getCountryCodes(),
-                        let geoPt = country.getGeoPt() {
+                        let geoRadians = country.getGeoRadians() {
                         var flagFound = false
                         
                         for (_,value) in countryCodes {
@@ -155,10 +154,7 @@ class GlobeViewController: UIViewController {
                                     let image = UIImage(contentsOfFile: path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
-//                                    Radians = Degrees * PI / 180
-//                                    Degrees = Radians * 180 / PI
-                                    marker.loc = MaplyCoordinate(x: (geoPt[1] * Float.pi)/180, y: (geoPt[0] * Float.pi)/180)
-
+                                    marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
                                     marker.size = image!.size
                                     marker.userObject = country.name
                                     flags.append(marker)
@@ -186,16 +182,12 @@ class GlobeViewController: UIViewController {
 extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
     func globeViewController(_ viewC: WhirlyGlobeViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenMarker {
-            let title = selectedObject.userObject as? String
-//            viewC.clearAnnotations()
-//            let a = MaplyAnnotation()
-//            a.title = title
-//            viewC.addAnnotation(a, forPoint: selectedObject.loc, offset: CGPointZero)
+            let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsFromGlobeAsPush", sender: title)
+                self.performSegue(withIdentifier: "showDetailsFromGlobeAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsFromGlobeAsModal", sender: title)
+                self.performSegue(withIdentifier: "showDetailsFromGlobeAsModal", sender: country)
             }
         }
     }

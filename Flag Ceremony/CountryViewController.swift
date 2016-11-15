@@ -23,6 +23,7 @@ class CountryViewController: DismissableViewController {
 
         // Do any additional setup after loading the view.
         navigationItem.title = country?.name
+        navigationController?.navigationItem.title = country?.name
     }
 
     override func didReceiveMemoryWarning() {

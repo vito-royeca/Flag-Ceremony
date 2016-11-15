@@ -33,4 +33,10 @@ public class Country: NSManagedObject {
         return nil
     }
     
+    func getGeoRadians() -> [Float]? {
+        if let geoRadians = geoRadians {
+            return NSKeyedUnarchiver.unarchiveObject(with: geoRadians as Data) as? [Float]
+        }
+        return nil
+    }
 }

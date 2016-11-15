@@ -19,6 +19,7 @@ extension Capital {
     @NSManaged public var dlst: String?
     @NSManaged public var flg: Double
     @NSManaged public var geoPt: NSData?
+    @NSManaged public var geoRadians: NSData?
     @NSManaged public var name: String?
     @NSManaged public var td: Double
     @NSManaged public var country: Country?
