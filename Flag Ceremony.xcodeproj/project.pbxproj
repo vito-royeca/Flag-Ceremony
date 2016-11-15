@@ -35,6 +35,12 @@
 		8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
 		8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
 		8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
+		8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
+		8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
+		8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
+		8CBBE75D1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */; };
+		8CBBE75E1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */; };
+		8CBBE75F1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */; };
 		8CC265791DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
 		8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
 		8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
@@ -94,6 +100,8 @@
 		8CBB26A61DD983D400660EB9 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CBB26AF1DD9883300660EB9 /* Flag Ceremony.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Flag Ceremony.xcdatamodel"; sourceTree = "<group>"; };
+		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
+		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
 		8CD36E7C1DD9A9C600C13E2A /* Capital+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8CD36E7D1DD9A9C600C13E2A /* Capital+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -218,8 +226,10 @@
 		8C4E97591D891518005A685B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C4E972C1D88ED50005A685B /* Main.storyboard */,
+				8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */,
+				8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */,
 				8C4E97311D88ED50005A685B /* LaunchScreen.storyboard */,
+				8C4E972C1D88ED50005A685B /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -379,6 +389,7 @@
 			files = (
 				8C4E97331D88ED50005A685B /* LaunchScreen.storyboard in Resources */,
 				8C4E97301D88ED50005A685B /* Assets.xcassets in Resources */,
+				8CBBE75D1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 				8C4E97571D890900005A685B /* data in Resources */,
 				8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */,
 			);
@@ -388,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CBBE75E1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CBBE75F1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
+				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8A1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
@@ -578,6 +592,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
+				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CD36E8E1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8B1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
@@ -598,6 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
+				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CD36E8F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8C1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,

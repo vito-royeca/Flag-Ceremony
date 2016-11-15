@@ -9,6 +9,7 @@
 import UIKit
 import DATAStack
 import DATASource
+import MBProgressHUD
 import WhirlyGlobe
 
 class MapViewController: UIViewController {
@@ -87,17 +88,16 @@ class MapViewController: UIViewController {
     }
     
     func addFlagsFromDB() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
         // handle this in another thread
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            let bundle = Bundle.main
-            let dir = "data/flags/mini"
-            let imageType = "png"
-            var flags = [MaplyScreenMarker]()
-            var labels = [MaplyScreenLabel]()
-            
-            var countries:[Country]?
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            
+            var flags = [MaplyScreenMarker]()
+            var labels = [MaplyScreenLabel]()
+            var countries:[Country]?
             
             do {
                 try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
@@ -109,10 +109,9 @@ class MapViewController: UIViewController {
                         
                         // add flags
                         for (_,value) in countryCodes {
-                            if let value = value as? String {
-                                if let path = bundle.path(forResource: value.lowercased(), ofType: imageType, inDirectory: dir) {
-                                    
-                                    let image = UIImage(contentsOfFile: path)
+                            if let _ = value as? String {
+                                if let url = country.getFlagURLForSize(size: .Mini) {
+                                    let image = UIImage(contentsOfFile: url.path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
                                     marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
@@ -176,6 +175,10 @@ class MapViewController: UIViewController {
                 kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
                 kMaplyColor: UIColor.black
             ])
+            
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
         }
     }
 }

@@ -10,3 +10,10 @@ import Foundation
 
 let CountriesURL = "http://www.geognos.com/api/en/countries"
 let HymnsURL     = "http://www.nationalanthems.info"
+
+enum FlagSize: String {
+    case Big  = "big",
+    Mini  = "mini",
+    Normal = "normal",
+    Ultra = "ultra"
+}

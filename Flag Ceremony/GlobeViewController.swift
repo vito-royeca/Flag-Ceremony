@@ -9,6 +9,7 @@
 import UIKit
 import DATAStack
 import DATASource
+import MBProgressHUD
 import WhirlyGlobe
 
 class GlobeViewController: UIViewController {
@@ -38,10 +39,18 @@ class GlobeViewController: UIViewController {
         if segue.identifier == "showDetailsFromGlobeAsPush" ||
             segue.identifier == "showDetailsFromGlobeAsModal" {
             
+            var countryVC:CountryViewController?
+            
             if let nav = segue.destination as? UINavigationController {
-                if let detailsVC = nav.childViewControllers.first {
-                    detailsVC.navigationItem.title = sender as? String
+                if let vc = nav.childViewControllers.first as? CountryViewController {
+                    countryVC = vc
                 }
+            }else  if let vc = segue.destination as? CountryViewController {
+                countryVC = vc
+            }
+            
+            if let countryVC = countryVC {
+                countryVC.country = sender as? Country
             }
         }
     }
@@ -128,16 +137,16 @@ class GlobeViewController: UIViewController {
 //    }
     
     func addFlagsFromDB() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
         // handle this in another thread
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            let bundle = Bundle.main
-            let dir = "data/flags/mini"
-            let imageType = "png"
-            var flags = [MaplyScreenMarker]()
-            
-            var countries:[Country]?
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            
+            var flags = [MaplyScreenMarker]()
+            var labels = [MaplyScreenLabel]()
+            var countries:[Country]?
             
             do {
                 try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
@@ -148,24 +157,30 @@ class GlobeViewController: UIViewController {
                         var flagFound = false
                         
                         for (_,value) in countryCodes {
-                            if let value = value as? String {
-                                if let path = bundle.path(forResource: value.lowercased(), ofType: imageType, inDirectory: dir) {
-                                    
-                                    let image = UIImage(contentsOfFile: path)
+                            if let _ = value as? String {
+                                if let url = country.getFlagURLForSize(size: .Mini) {
+                                    let image = UIImage(contentsOfFile: url.path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
                                     marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
                                     marker.size = image!.size
-                                    marker.userObject = country.name
+                                    marker.userObject = country
                                     flags.append(marker)
                                     flagFound = true
+                                }
+                                
+                                if flagFound {
                                     break
                                 }
                             }
                         }
                         
                         if !flagFound {
-                            print("flag not found: \(country.name!)")
+                            let label = MaplyScreenLabel()
+                            label.text = country.name
+                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
+                            label.selectable = false
+                            labels.append(label)
                         }
                     }
                     
@@ -175,6 +190,14 @@ class GlobeViewController: UIViewController {
             }
             
             self.globeView!.addScreenMarkers(flags, desc: nil)
+            self.globeView!.addScreenLabels(labels, desc: [
+                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
+                kMaplyColor: UIColor.black
+                ])
+            
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
         }
     }
 }

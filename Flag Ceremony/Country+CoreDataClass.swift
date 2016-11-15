@@ -39,4 +39,36 @@ public class Country: NSManagedObject {
         }
         return nil
     }
+    
+    func getFlagURLForSize(size: FlagSize) -> URL? {
+        if let countryCodes = getCountryCodes() {
+            for (_,value) in countryCodes {
+                if let value = value as? String {
+                    if let path = Bundle.main.path(forResource: value, ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
+                        if FileManager.default.fileExists(atPath: path) {
+                            return URL(fileURLWithPath: path)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    func getAudioURL() -> URL? {
+        if let countryCodes = getCountryCodes() {
+            for (_,value) in countryCodes {
+                if let value = value as? String {
+                    if let path = Bundle.main.path(forResource: value, ofType: "mp3", inDirectory: "data/sounds") {
+                        if FileManager.default.fileExists(atPath: path) {
+                            return URL(fileURLWithPath: path)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
 }
