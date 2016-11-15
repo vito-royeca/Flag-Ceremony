@@ -13,9 +13,6 @@
 		8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
-		8C0296741D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
-		8C0296751D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
-		8C0296761D8A729900BE8C02 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296731D8A729900BE8C02 /* DetailsViewController.swift */; };
 		8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
 		8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
 		8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
@@ -38,6 +35,9 @@
 		8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
 		8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
 		8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
+		8CC265791DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
+		8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
+		8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
 		8CD36E841DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7C1DD9A9C600C13E2A /* Capital+CoreDataClass.swift */; };
 		8CD36E851DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7C1DD9A9C600C13E2A /* Capital+CoreDataClass.swift */; };
 		8CD36E861DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7C1DD9A9C600C13E2A /* Capital+CoreDataClass.swift */; };
@@ -76,7 +76,6 @@
 		7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag CeremonyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flag CeremonyTests/Pods-Flag CeremonyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
-		8C0296731D8A729900BE8C02 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissableViewController.swift; sourceTree = "<group>"; };
 		8C4E97251D88ED50005A685B /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4E97281D88ED50005A685B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		8CBB26A61DD983D400660EB9 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CBB26AF1DD9883300660EB9 /* Flag Ceremony.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Flag Ceremony.xcdatamodel"; sourceTree = "<group>"; };
+		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
 		8CD36E7C1DD9A9C600C13E2A /* Capital+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8CD36E7D1DD9A9C600C13E2A /* Capital+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8CD36E7E1DD9A9C600C13E2A /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -227,10 +227,10 @@
 		8C4E975A1D89151D005A685B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
 				8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */,
 				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
 				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
-				8C0296731D8A729900BE8C02 /* DetailsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -562,7 +562,6 @@
 				8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
 				8CD36E8A1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
-				8C0296741D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 				8CD36E841DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
@@ -570,6 +569,7 @@
 				8CD36E871DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
 				8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */,
+				8CC265791DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,11 +585,11 @@
 				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CD36E851DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
-				8C0296751D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 				8CBB26A81DD983D400660EB9 /* API.swift in Sources */,
 				8CD36E881DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
 				8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
+				8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,11 +605,11 @@
 				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CD36E861DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
 				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
-				8C0296761D8A729900BE8C02 /* DetailsViewController.swift in Sources */,
 				8CBB26A91DD983D400660EB9 /* API.swift in Sources */,
 				8CD36E891DD9A9C600C13E2A /* Capital+CoreDataProperties.swift in Sources */,
 				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
+				8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

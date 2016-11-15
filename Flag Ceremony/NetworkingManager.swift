@@ -123,6 +123,44 @@ class NetworkingManager: NSObject {
         }
     }
     
+    func downloadFile(url: URL, completionHandler: @escaping (Data?, NSError?) -> Void) {
+        var baseString = ""
+        let path = url.path
+        var networker:Networking?
+        
+        if let scheme = url.scheme {
+            baseString = "\(scheme)://"
+        }
+        if let host = url.host {
+            baseString.append(host)
+        }
+        
+        if let n = networkers[baseString] as? Networking {
+            networker = n
+        } else {
+            let newN = Networking(baseURL: baseString, configurationType: .default)
+            networkers[baseString] = newN
+            networker = newN
+        }
+        
+        networker!.downloadData(for: path, completion: completionHandler)
+    }
+    
+    func fileExistsAt(url : URL, completion: @escaping (Bool) -> Void) {
+        let checkSession = Foundation.URLSession.shared
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        request.timeoutInterval = 1.0 // Adjust to your needs
+        
+        let task = checkSession.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if let httpResp: HTTPURLResponse = response as? HTTPURLResponse {
+                completion(httpResp.statusCode == 200)
+            }
+        })
+        
+        task.resume()
+    }
+    
     // MARK: - Shared Instance
     static let sharedInstance = NetworkingManager()
 }

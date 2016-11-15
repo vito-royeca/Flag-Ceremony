@@ -8,4 +8,5 @@
 
 import Foundation
 
-let CountriesAPIURL = "http://www.geognos.com/api/en/countries"
+let CountriesURL = "http://www.geognos.com/api/en/countries"
+let HymnsURL     = "http://www.nationalanthems.info"

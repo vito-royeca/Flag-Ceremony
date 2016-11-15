@@ -44,10 +44,18 @@ class MapViewController: UIViewController {
         if segue.identifier == "showDetailsFromMapAsPush" ||
             segue.identifier == "showDetailsFromMapAsModal" {
             
+            var countryVC:CountryViewController?
+            
             if let nav = segue.destination as? UINavigationController {
-                if let detailsVC = nav.childViewControllers.first {
-                    detailsVC.navigationItem.title = sender as? String
+                if let vc = nav.childViewControllers.first as? CountryViewController {
+                    countryVC = vc
                 }
+            }else  if let vc = segue.destination as? CountryViewController {
+                countryVC = vc
+            }
+            
+            if let countryVC = countryVC {
+                countryVC.country = sender as? Country
             }
         }
     }
@@ -79,53 +87,6 @@ class MapViewController: UIViewController {
         mapView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
-    func addFlags() {
-        // handle this in another thread
-        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
-        queue.async {
-            let bundle = Bundle.main
-            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
-            var flags = [MaplyScreenMarker]()
-            
-            for outline in allOutlines {
-                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
-                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
-                    // the admin tag from the country outline geojson has the country name ­ save
-                    if let attrs = wgVecObj.attributes,
-                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
-                        wgVecObj.userObject = vecName
-                        
-                        if vecName.description.characters.count > 0 {
-                            var cc:String?
-                            
-                            if let isoA2 = attrs["ISO_A2"] as? String {
-                                cc = isoA2.lowercased()
-                                
-                            }
-                            
-                            if let cc = cc {
-                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
-                                    
-                                    let marker = MaplyScreenMarker()
-                                    marker.image = flag
-                                    marker.loc = wgVecObj.center()
-                                    marker.size = flag.size
-                                    marker.userObject = attrs["NAME"]
-                                    
-                                    flags.append(marker)
-                                } else {
-                                    print("not found: \(cc)")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            self.mapView!.addScreenMarkers(flags, desc: nil)
-        }
-    }
-    
     func addFlagsFromDB() {
         // handle this in another thread
         let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
@@ -136,11 +97,11 @@ class MapViewController: UIViewController {
             var flags = [MaplyScreenMarker]()
             
             var countries:[Country]?
-            let newRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
-            newRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
+            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             
             do {
-                try countries = API.sharedInstance.dataStack.mainContext.fetch(newRequest) as? [Country]
+                try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
                 
                 for country in countries! {
                     if let countryCodes = country.getCountryCodes(),
@@ -154,13 +115,45 @@ class MapViewController: UIViewController {
                                     let image = UIImage(contentsOfFile: path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
+                                    // TODO: put in core data the radians
 //                                    Radians = Degrees * PI / 180
 //                                    Degrees = Radians * 180 / PI
                                     marker.loc = MaplyCoordinate(x: (geoPt[1] * Float.pi)/180, y: (geoPt[0] * Float.pi)/180)
                                     marker.size = image!.size
-                                    marker.userObject = country.name
+                                    marker.userObject = country
                                     flags.append(marker)
                                     flagFound = true
+                                }
+                                
+                                // download the hymns...
+//                                if let url = URL(string: "\(HymnsURL)/\(value).mp3") {
+//                                    let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+//                                    let localPath = "\(docsPath)/\(value).mp3"
+//                                    
+//                                    if !FileManager.default.fileExists(atPath: localPath) && flagFound {
+//                                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
+//                                            if fileExistsAtServer {
+//                                                print ("downloading... \(country.name!)")
+//                                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
+//                                                    if let error = error {
+//                                                        print("error: \(error)")
+//                                                    } else {
+//                                                        do {
+//                                                            try data!.write(to: URL(fileURLWithPath: localPath))
+//                                                            print("saved: \(localPath)")
+//                                                        } catch {
+//                                                            
+//                                                        }
+//                                                    }
+//                                                }
+//                                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
+//                                            }
+//                                        }
+//                                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
+//                                    }
+//                                }
+                                
+                                if flagFound {
                                     break
                                 }
                             }
@@ -184,12 +177,12 @@ class MapViewController: UIViewController {
 extension MapViewController : MaplyViewControllerDelegate {
     func maplyViewController(_ viewC: MaplyViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenMarker {
-            let title = selectedObject.userObject as? String
+            let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsFromMapAsPush", sender: title)
+                self.performSegue(withIdentifier: "showDetailsFromMapAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsFromMapAsModal", sender: title)
+                self.performSegue(withIdentifier: "showDetailsFromMapAsModal", sender: country)
             }
         }
     }

@@ -137,11 +137,11 @@ class GlobeViewController: UIViewController {
             var flags = [MaplyScreenMarker]()
             
             var countries:[Country]?
-            let newRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
-            newRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
+            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             
             do {
-                try countries = API.sharedInstance.dataStack.mainContext.fetch(newRequest) as? [Country]
+                try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
                 
                 for country in countries! {
                     if let countryCodes = country.getCountryCodes(),
