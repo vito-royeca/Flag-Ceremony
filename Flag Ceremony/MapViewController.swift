@@ -96,7 +96,7 @@ class MapViewController: UIViewController {
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             
             var flags = [MaplyScreenMarker]()
-            var labels = [MaplyScreenLabel]()
+//            var labels = [MaplyScreenLabel]()
             var countries:[Country]?
             
             do {
@@ -110,7 +110,9 @@ class MapViewController: UIViewController {
                         // add flags
                         for (_,value) in countryCodes {
                             if let _ = value as? String {
-                                if let url = country.getFlagURLForSize(size: .Mini) {
+                                if let url = country.getFlagURLForSize(size: .Mini),
+                                    let _ = country.getAudioURL() {
+                                    
                                     let image = UIImage(contentsOfFile: url.path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
@@ -156,13 +158,13 @@ class MapViewController: UIViewController {
                         }
                         
                         // add labels
-                        if !flagFound {
-                            let label = MaplyScreenLabel()
-                            label.text = country.name
-                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
-                            label.selectable = false
-                            labels.append(label)
-                        }
+//                        if !flagFound {
+//                            let label = MaplyScreenLabel()
+//                            label.text = country.name
+//                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
+//                            label.selectable = false
+//                            labels.append(label)
+//                        }
                     }
 
                 }
@@ -171,10 +173,10 @@ class MapViewController: UIViewController {
             }
             
             self.mapView!.addScreenMarkers(flags, desc: nil)
-            self.mapView!.addScreenLabels(labels, desc: [
-                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
-                kMaplyColor: UIColor.black
-            ])
+//            self.mapView!.addScreenLabels(labels, desc: [
+//                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
+//                kMaplyColor: UIColor.black
+//            ])
             
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)

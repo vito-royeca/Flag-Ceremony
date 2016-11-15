@@ -89,53 +89,6 @@ class GlobeViewController: UIViewController {
         globeView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
-//    func addFlags() {
-//        // handle this in another thread
-//        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
-//        queue.async {
-//            let bundle = Bundle.main
-//            let allOutlines = bundle.paths(forResourcesOfType: "geojson", inDirectory: "country_json_50m")
-//            var flags = [MaplyScreenMarker]()
-//            
-//            for outline in allOutlines {
-//                if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: outline)),
-//                    let wgVecObj = MaplyVectorObject(fromGeoJSON: jsonData) {
-//                    // the admin tag from the country outline geojson has the country name ­ save
-//                    if let attrs = wgVecObj.attributes,
-//                        let vecName = attrs.object(forKey: "ADMIN") as? NSObject {
-//                        wgVecObj.userObject = vecName
-//                        
-//                        if vecName.description.characters.count > 0 {
-//                            var cc:String?
-//                            
-//                            if let isoA2 = attrs["ISO_A2"] as? String {
-//                                cc = isoA2.lowercased()
-//                                
-//                            }
-//                            
-//                            if let cc = cc {
-//                                if let flag = UIImage(contentsOfFile: bundle.path(forResource: cc, ofType: "png", inDirectory: "data/flags/mini") ?? "") {
-//                                    
-//                                    let marker = MaplyScreenMarker()
-//                                    marker.image = flag
-//                                    marker.loc = wgVecObj.center()
-//                                    marker.size = flag.size
-//                                    marker.userObject = attrs["NAME"]
-//                                    
-//                                    flags.append(marker)
-//                                } else {
-//                                    print("not found: \(cc)")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            self.globeView!.addScreenMarkers(flags, desc: nil)
-//        }
-//    }
-    
     func addFlagsFromDB() {
         MBProgressHUD.showAdded(to: view, animated: true)
         
@@ -145,7 +98,6 @@ class GlobeViewController: UIViewController {
             request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             
             var flags = [MaplyScreenMarker]()
-            var labels = [MaplyScreenLabel]()
             var countries:[Country]?
             
             do {
@@ -158,7 +110,8 @@ class GlobeViewController: UIViewController {
                         
                         for (_,value) in countryCodes {
                             if let _ = value as? String {
-                                if let url = country.getFlagURLForSize(size: .Mini) {
+                                if let url = country.getFlagURLForSize(size: .Mini),
+                                    let _ = country.getAudioURL() {
                                     let image = UIImage(contentsOfFile: url.path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
@@ -174,14 +127,6 @@ class GlobeViewController: UIViewController {
                                 }
                             }
                         }
-                        
-                        if !flagFound {
-                            let label = MaplyScreenLabel()
-                            label.text = country.name
-                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
-                            label.selectable = false
-                            labels.append(label)
-                        }
                     }
                     
                 }
@@ -190,10 +135,6 @@ class GlobeViewController: UIViewController {
             }
             
             self.globeView!.addScreenMarkers(flags, desc: nil)
-            self.globeView!.addScreenLabels(labels, desc: [
-                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
-                kMaplyColor: UIColor.black
-                ])
             
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
