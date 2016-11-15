@@ -1,14 +1,14 @@
 //
-//  DetailsViewController.swift
+//  CountryViewController.swift
 //  Flag Ceremony
 //
-//  Created by Jovit Royeca on 15/09/2016.
+//  Created by Jovit Royeca on 15/11/2016.
 //  Copyright © 2016 Jovit Royeca. All rights reserved.
 //
 
 import UIKit
 
-class DetailsViewController: DismissableViewController {
+class CountryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class DetailsViewController: DismissableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
