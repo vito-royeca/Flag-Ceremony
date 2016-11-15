@@ -31,7 +31,6 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     // MARK: Outlets
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var startLabel: UILabel!
@@ -49,7 +48,18 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     
     @IBAction func progressAction(_ sender: UISlider) {
+        update()
+    }
+    
+    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
+        let pointTapped: CGPoint = sender.location(in: self)
         
+        let positionOfSlider: CGPoint = progressSlider.frame.origin
+        let widthOfSlider: CGFloat = progressSlider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(progressSlider.maximumValue) / widthOfSlider)
+        progressSlider.setValue(Float(newValue), animated: true)
+        
+        update()
     }
     
     // MARK: Overrides
@@ -92,6 +102,16 @@ class AudioPlayerTableViewCell: UITableViewCell {
         }
     }
     
+    func update() {
+        if let player = player {
+            pause()
+            let position = progressSlider.value
+            let currentTime = TimeInterval(position) * duration
+            player.currentTime = currentTime
+            play()
+        }
+    }
+    
     func resetUI() {
         DispatchQueue.main.async {
             self.progressSlider.value = 0.0
@@ -110,6 +130,10 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     func setupTracker() {
+        if let tracker = tracker {
+            tracker.invalidate()
+        }
+        
         tracker = CADisplayLink(target: self, selector: #selector(AudioPlayerTableViewCell.trackAudio))
         tracker!.frameInterval = 1
         tracker!.add(to: RunLoop.current, forMode: .commonModes)
@@ -117,7 +141,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     func trackAudio() {
         currentTime = player!.currentTime
-        duration = player!.duration
+//        duration = player!.duration
         
         let normalizedTime = Float(currentTime / duration)
         let startText = stringFromTimeInterval(currentTime)
@@ -139,13 +163,12 @@ class AudioPlayerTableViewCell: UITableViewCell {
                 currentTime = player!.currentTime
                 duration = player!.duration
                 resetUI()
-                errorLabel.isHidden = true
+                playButton.isEnabled = true
+                progressSlider.isEnabled = true
             } else {
                 stop()
-                playButton.isHidden = true
-                startLabel.isHidden = true
-                progressSlider.isHidden = true
-                endLabel.isHidden = true
+                playButton.isEnabled = false
+                progressSlider.isEnabled = false
             }
         } catch {
             print("\(error)")

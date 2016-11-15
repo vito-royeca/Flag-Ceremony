@@ -29,7 +29,24 @@ class CountryViewController: DismissableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
+            cell.url = country!.getAudioURL()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
+            cell.pause()
+            cell.play()
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = nil
         }
