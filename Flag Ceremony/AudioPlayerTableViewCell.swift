@@ -69,14 +69,17 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     // MARK: Custom methods
     func pause() {
-        player!.pause()
+        if let player = player {
+            player.pause()
+        }
         playButton.setImage(UIImage(named: "play"), for: .normal)
     }
     
     func play() {
-        setupTracker()
-        
-        player!.play()
+        if let player = player {
+            setupTracker()
+            player.play()
+        }
         playButton.setImage(UIImage(named: "pause"), for: .normal)
     }
     

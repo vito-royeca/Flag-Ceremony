@@ -33,9 +33,28 @@ PODS:
   - DATAStack (6.1.2)
   - eigen (3.2.10)
   - Fabric (1.6.11)
+  - Firebase/Core (3.9.0):
+    - FirebaseAnalytics (= 3.5.1)
+    - FirebaseCore (= 3.4.4)
+  - FirebaseAnalytics (3.5.1):
+    - FirebaseCore (~> 3.4)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.4.4):
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.8)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - GoogleInterchangeUtilities (1.2.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleSymbolUtilities (1.1.2)
+  - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/NSData+zlib (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
   - InAppSettingsKit (2.8)
   - JJJUtils (0.3.2):
     - JJJUtils/OSX (= 0.3.2)
@@ -64,10 +83,10 @@ PODS:
     - SYNCPropertyMapper (~> 5.1.2)
   - SYNCPropertyMapper (5.1.2)
   - tinyxml (2.1.0)
-  - TwitterCore (2.5.0):
+  - TwitterCore (2.6.0):
     - Fabric
-  - TwitterKit (2.5.0):
-    - TwitterCore (= 2.5.0)
+  - TwitterKit (2.6.0):
+    - TwitterCore (= 2.6.0)
   - WhirlyGlobe (2.4):
     - WhirlyGlobe/MaplyComponent (= 2.4)
   - WhirlyGlobe/aaplus (2.4)
@@ -108,6 +127,7 @@ DEPENDENCIES:
   - Crashlytics
   - DATASource
   - Fabric
+  - Firebase/Core
   - InAppSettingsKit
   - JJJUtils
   - MBProgressHUD
@@ -131,7 +151,14 @@ SPEC CHECKSUMS:
   DATAStack: a45fc144e15193f1b22c26b507cc46655ce96a71
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
+  FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
+  FirebaseCore: d0ed25f27b6f9158eccc439f1be6f92e81207e28
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
+  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
   JJJUtils: 5abcb911388dc05e24cecdde9d4a3e18f1b1510e
   libjson: 1a065ca64704a5d1b51c3754268998942d57ac6f
@@ -145,11 +172,11 @@ SPEC CHECKSUMS:
   Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
   SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
-  TwitterCore: 95c46af93112768a7983bd370d66023553601d01
-  TwitterKit: dd8042698b0ff5bd3066fa919b3b2b50d8eed829
+  TwitterCore: 150e8d2538b867bdde9ef9b61c6b755c2523c25e
+  TwitterKit: 3d72f0b25f2cc281f996e976928d2defe28702cb
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: ecd0460fb3da97adc4f34f782b3ca364251d711f
+PODFILE CHECKSUM: 53b5e760c7f4d50eaa2867ae67529252089480d6
 
 COCOAPODS: 1.1.1

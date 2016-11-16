@@ -59,6 +59,9 @@
 		8CEFB6431DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
 		8CEFB6441DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
 		8CEFB6451DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
+		8CEFB6471DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
+		8CEFB6481DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
+		8CEFB6491DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
 		C0CCDEDE33B73B2FA7EBDA5D /* Pods_Flag_CeremonyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */; };
 		E5F34C9FC682CD3EE02A504A /* Pods_Flag_CeremonyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5148D537963A660A444EBED /* Pods_Flag_CeremonyUITests.framework */; };
 		F0B760F70B39745DFF111613 /* Pods_Flag_Ceremony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */; };
@@ -111,6 +114,7 @@
 		8CD36E7E1DD9A9C600C13E2A /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
+		8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag Ceremony.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flag Ceremony/Pods-Flag Ceremony.release.xcconfig"; sourceTree = "<group>"; };
 		9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_Ceremony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_CeremonyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +194,7 @@
 				8C4E975A1D89151D005A685B /* Controller */,
 				8C4E97561D890900005A685B /* data */,
 				8C4E97341D88ED50005A685B /* Info.plist */,
+				8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */,
 				8C4E97581D891511005A685B /* Model */,
 				8C4E975B1D891525005A685B /* Utilities */,
 				8C4E97591D891518005A685B /* View */,
@@ -397,6 +402,7 @@
 				8CBBE75D1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 				8C4E97571D890900005A685B /* data in Resources */,
 				8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */,
+				8CEFB6471DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBBE75E1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
+				8CEFB6481DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBBE75F1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
+				8CEFB6491DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
