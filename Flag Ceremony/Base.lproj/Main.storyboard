@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Flag Ceremony-->
+        <!--Globe View Controller-->
         <scene sceneID="Zei-v3-eUS">
             <objects>
                 <viewController id="v19-cJ-vPn" customClass="GlobeViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,11 +18,29 @@
                         <viewControllerLayoutGuide type="bottom" id="zUw-hf-cI5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s5i-h8-0sn">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Flag Ceremony" id="T21-bq-RzN"/>
+                    <navigationItem key="navigationItem" id="T21-bq-RzN">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="UaB-lB-GQR">
+                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-S3-gL4">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="hSc-S3-gL4" firstAttribute="top" secondItem="UaB-lB-GQR" secondAttribute="top" id="FkJ-Mx-xfa"/>
+                                <constraint firstAttribute="bottom" secondItem="hSc-S3-gL4" secondAttribute="bottom" id="HvK-u8-ghL"/>
+                                <constraint firstAttribute="trailing" secondItem="hSc-S3-gL4" secondAttribute="trailing" id="Kbb-VI-EKy"/>
+                                <constraint firstItem="hSc-S3-gL4" firstAttribute="leading" secondItem="UaB-lB-GQR" secondAttribute="leading" id="NXZ-uh-ALl"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromGlobeAsModal" modalPresentationStyle="formSheet" id="4mM-aD-pb6"/>
                         <segue destination="Z29-MB-lIF" kind="show" identifier="showDetailsFromGlobeAsPush" id="wT1-rb-8WH"/>
@@ -32,7 +50,7 @@
             </objects>
             <point key="canvasLocation" x="900" y="1784"/>
         </scene>
-        <!--Flag Ceremony-->
+        <!--Map View Controller-->
         <scene sceneID="wF9-27-vUm">
             <objects>
                 <viewController id="efe-pB-qzf" customClass="MapViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,11 +59,29 @@
                         <viewControllerLayoutGuide type="bottom" id="drs-V4-M19"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n3u-pp-gdp">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Flag Ceremony" id="sCN-op-3NZ"/>
+                    <navigationItem key="navigationItem" id="sCN-op-3NZ">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="dvk-2w-0WC">
+                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-4c-zsz">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="NvE-4c-zsz" secondAttribute="bottom" id="1DH-Rr-IuK"/>
+                                <constraint firstAttribute="trailing" secondItem="NvE-4c-zsz" secondAttribute="trailing" id="8Gs-o5-Vwi"/>
+                                <constraint firstItem="NvE-4c-zsz" firstAttribute="top" secondItem="dvk-2w-0WC" secondAttribute="top" id="AVp-AH-tc3"/>
+                                <constraint firstItem="NvE-4c-zsz" firstAttribute="leading" secondItem="dvk-2w-0WC" secondAttribute="leading" id="tJT-6V-iRL"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromMapAsModal" modalPresentationStyle="formSheet" id="ZdL-oJ-FYe"/>
                         <segue destination="Z29-MB-lIF" kind="show" identifier="showDetailsFromMapAsPush" id="z0s-xr-ufW"/>
@@ -64,42 +100,42 @@
                         <viewControllerLayoutGuide type="bottom" id="KlT-bV-QiF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GC9-tx-jgW">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zKu-Gy-y4d">
-                                <rect key="frame" x="0.0" y="64" width="768" height="911"/>
+                                <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AudioPlayerCell" id="cTs-fc-LH8" customClass="AudioPlayerTableViewCell" customModule="Flag_Ceremony" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cTs-fc-LH8" id="P0C-CJ-fSb">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TitleCell" id="pfr-ZQ-QRd">
-                                        <rect key="frame" x="0.0" y="72" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pfr-ZQ-QRd" id="A9g-Uv-QLC">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LyricsCell" id="pBs-ci-x8W">
-                                        <rect key="frame" x="0.0" y="116" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pBs-ci-x8W" id="dQK-fT-vC2">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="91L-GT-PAS" userLabel="Cell">
-                                        <rect key="frame" x="0.0" y="160" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="160" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="91L-GT-PAS" id="gvA-C8-8HM">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -147,7 +183,7 @@
         <scene sceneID="5zF-iW-rq3">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YOM-zK-Z1G" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="n28-l3-KV4">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="n28-l3-KV4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -167,51 +203,71 @@
             <objects>
                 <navigationController id="Wqg-S6-mPY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="featured" id="Qf0-Ym-Uaz"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QGu-ik-vJB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="QGu-ik-vJB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="x9b-Wc-0S2" kind="relationship" relationship="rootViewController" id="hKM-yM-6Jh"/>
+                        <segue destination="EF8-Xi-Sd7" kind="relationship" relationship="rootViewController" id="Kzv-dn-ONm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mhv-3Z-FCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-103" y="-801"/>
         </scene>
-        <!--Flag Ceremony-->
-        <scene sceneID="SEP-Fu-x8L">
+        <!--Featured View Controller-->
+        <scene sceneID="YHe-4a-WfX">
             <objects>
-                <viewController id="x9b-Wc-0S2" customClass="FeaturedViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EF8-Xi-Sd7" customClass="FeaturedViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="k5k-hm-CWK"/>
-                        <viewControllerLayoutGuide type="bottom" id="aE0-UP-Bb5"/>
+                        <viewControllerLayoutGuide type="top" id="A5C-8l-CGx"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Gh-Rx-3fF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ock-Ba-W4r">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <view key="view" contentMode="scaleToFill" id="S4N-VQ-gVw">
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TCL-fJ-mW2">
-                                <rect key="frame" x="0.0" y="64" width="768" height="911"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="scS-PW-OXa">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="leading" secondItem="ock-Ba-W4r" secondAttribute="leading" id="Snd-qe-iA5"/>
-                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="bottom" secondItem="aE0-UP-Bb5" secondAttribute="top" id="aue-if-Mc9"/>
-                            <constraint firstAttribute="trailing" secondItem="TCL-fJ-mW2" secondAttribute="trailing" id="ed5-Y1-W7c"/>
-                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="top" secondItem="k5k-hm-CWK" secondAttribute="bottom" id="xRK-Ce-ktz"/>
+                            <constraint firstItem="scS-PW-OXa" firstAttribute="bottom" secondItem="5Gh-Rx-3fF" secondAttribute="top" id="5O0-8g-bZj"/>
+                            <constraint firstItem="scS-PW-OXa" firstAttribute="top" secondItem="A5C-8l-CGx" secondAttribute="bottom" id="TIJ-kK-ob7"/>
+                            <constraint firstAttribute="trailing" secondItem="scS-PW-OXa" secondAttribute="trailing" id="fOs-L1-mM9"/>
+                            <constraint firstItem="scS-PW-OXa" firstAttribute="leading" secondItem="S4N-VQ-gVw" secondAttribute="leading" id="oqz-Ym-YJ4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Flag Ceremony" id="P2i-3t-xNY"/>
+                    <navigationItem key="navigationItem" id="CTz-fD-HFX">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="dEb-rw-jVX">
+                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="0S8-n0-fDB">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="0S8-n0-fDB" firstAttribute="leading" secondItem="dEb-rw-jVX" secondAttribute="leading" id="0ka-qB-mD1"/>
+                                <constraint firstAttribute="bottom" secondItem="0S8-n0-fDB" secondAttribute="bottom" id="ca7-8B-DEm"/>
+                                <constraint firstItem="0S8-n0-fDB" firstAttribute="top" secondItem="dEb-rw-jVX" secondAttribute="top" id="cnj-nB-NpI"/>
+                                <constraint firstAttribute="trailing" secondItem="0S8-n0-fDB" secondAttribute="trailing" id="z1t-ye-am3"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="TCL-fJ-mW2" id="7yt-Ib-jqp"/>
+                        <outlet property="tableView" destination="scS-PW-OXa" id="9IP-cX-30N"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O9S-8a-yV8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8O-Ne-NaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926.5625" y="-802.1484375"/>
+            <point key="canvasLocation" x="823.4375" y="-802.1484375"/>
         </scene>
         <!--Map-->
         <scene sceneID="ohB-Id-D0k">
@@ -219,9 +275,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="01M-8A-n3O" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="E5W-ev-oVV"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KDK-NG-rYw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="KDK-NG-rYw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -238,9 +296,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9vS-55-Pu9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Globe" image="globe" id="wOe-oH-lsJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2w1-1k-f5E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="2w1-1k-f5E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -255,9 +315,10 @@
     <resources>
         <image name="globe" width="25" height="25"/>
         <image name="map" width="25" height="25"/>
+        <image name="title bar" width="307" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="z0s-xr-ufW"/>
-        <segue reference="ZdL-oJ-FYe"/>
+        <segue reference="4mM-aD-pb6"/>
+        <segue reference="pQw-Mb-HaT"/>
     </inferredMetricsTieBreakers>
 </document>
