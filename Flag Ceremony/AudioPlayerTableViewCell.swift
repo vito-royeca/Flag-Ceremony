@@ -26,8 +26,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     var player:AVAudioPlayer?
     var tracker:CADisplayLink?
-    var currentTime:TimeInterval = 0.0
-    var duration:TimeInterval = 0.0
+    var progressTap: UITapGestureRecognizer?
     
     // MARK: Outlets
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -51,21 +50,15 @@ class AudioPlayerTableViewCell: UITableViewCell {
         update()
     }
     
-    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
-        let pointTapped: CGPoint = sender.location(in: self)
-        
-        let positionOfSlider: CGPoint = progressSlider.frame.origin
-        let widthOfSlider: CGFloat = progressSlider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(progressSlider.maximumValue) / widthOfSlider)
-        progressSlider.setValue(Float(newValue), animated: true)
-        
-        update()
-    }
-    
     // MARK: Overrides
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        progressTap = UITapGestureRecognizer(target: self, action: #selector(AudioPlayerTableViewCell.progressTapAction(_:)))
+        progressTap!.delegate = self
+        progressTap!.numberOfTouchesRequired = 1
+        progressTap!.cancelsTouchesInView = false
+//        progressSlider.addGestureRecognizer(progressTap!)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -106,6 +99,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         if let player = player {
             pause()
             let position = progressSlider.value
+            let duration = player.duration
             let currentTime = TimeInterval(position) * duration
             player.currentTime = currentTime
             play()
@@ -116,7 +110,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             self.progressSlider.value = 0.0
             self.startLabel.text = self.stringFromTimeInterval(0.0)
-            self.endLabel.text = self.stringFromTimeInterval(self.duration)
+            self.endLabel.text = self.stringFromTimeInterval(self.player!.duration)
             self.playButton.setImage(UIImage(named: "play"), for: .normal)
         }
     }
@@ -140,9 +134,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     func trackAudio() {
-        currentTime = player!.currentTime
-//        duration = player!.duration
-        
+        let currentTime = player!.currentTime
+        let duration = player!.duration
         let normalizedTime = Float(currentTime / duration)
         let startText = stringFromTimeInterval(currentTime)
         let endText = stringFromTimeInterval(duration-currentTime)
@@ -154,14 +147,22 @@ class AudioPlayerTableViewCell: UITableViewCell {
         }
     }
     
+    func progressTapAction(_ sender: UITapGestureRecognizer) {
+        let pointTapped: CGPoint = sender.location(in: self)
+        let positionOfSlider: CGPoint = progressSlider.frame.origin
+        let widthOfSlider: CGFloat = progressSlider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(progressSlider.maximumValue) / widthOfSlider)
+        
+        progressSlider.setValue(Float(newValue), animated: true)
+        update()
+    }
+    
     // MARK: Private methods
     private func initPlayer() {
         do {
             if let url = url {
                 try player = AVAudioPlayer(contentsOf: url)
                 player!.delegate = self
-                currentTime = player!.currentTime
-                duration = player!.duration
                 resetUI()
                 playButton.isEnabled = true
                 progressSlider.isEnabled = true

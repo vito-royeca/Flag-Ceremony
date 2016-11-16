@@ -182,7 +182,7 @@
         <!--Flag Ceremony-->
         <scene sceneID="SEP-Fu-x8L">
             <objects>
-                <viewController id="x9b-Wc-0S2" sceneMemberID="viewController">
+                <viewController id="x9b-Wc-0S2" customClass="FeaturedViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k5k-hm-CWK"/>
                         <viewControllerLayoutGuide type="bottom" id="aE0-UP-Bb5"/>
@@ -190,13 +190,28 @@
                     <view key="view" contentMode="scaleToFill" id="ock-Ba-W4r">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TCL-fJ-mW2">
+                                <rect key="frame" x="0.0" y="64" width="768" height="911"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="leading" secondItem="ock-Ba-W4r" secondAttribute="leading" id="Snd-qe-iA5"/>
+                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="bottom" secondItem="aE0-UP-Bb5" secondAttribute="top" id="aue-if-Mc9"/>
+                            <constraint firstAttribute="trailing" secondItem="TCL-fJ-mW2" secondAttribute="trailing" id="ed5-Y1-W7c"/>
+                            <constraint firstItem="TCL-fJ-mW2" firstAttribute="top" secondItem="k5k-hm-CWK" secondAttribute="bottom" id="xRK-Ce-ktz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Flag Ceremony" id="P2i-3t-xNY"/>
+                    <connections>
+                        <outlet property="tableView" destination="TCL-fJ-mW2" id="7yt-Ib-jqp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9S-8a-yV8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927" y="-802"/>
+            <point key="canvasLocation" x="926.5625" y="-802.1484375"/>
         </scene>
         <!--Map-->
         <scene sceneID="ohB-Id-D0k">

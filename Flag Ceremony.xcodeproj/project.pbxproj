@@ -56,6 +56,9 @@
 		8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
 		8CD36E8E1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
 		8CD36E8F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */; };
+		8CEFB6431DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
+		8CEFB6441DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
+		8CEFB6451DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
 		C0CCDEDE33B73B2FA7EBDA5D /* Pods_Flag_CeremonyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */; };
 		E5F34C9FC682CD3EE02A504A /* Pods_Flag_CeremonyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5148D537963A660A444EBED /* Pods_Flag_CeremonyUITests.framework */; };
 		F0B760F70B39745DFF111613 /* Pods_Flag_Ceremony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */; };
@@ -107,6 +110,7 @@
 		8CD36E7D1DD9A9C600C13E2A /* Capital+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capital+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8CD36E7E1DD9A9C600C13E2A /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8CD36E7F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag Ceremony.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flag Ceremony/Pods-Flag Ceremony.release.xcconfig"; sourceTree = "<group>"; };
 		9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_Ceremony.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flag_CeremonyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +243,7 @@
 			children = (
 				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
 				8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */,
+				8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */,
 				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
 				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
 			);
@@ -574,6 +579,7 @@
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				8CD36E8D1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
+				8CEFB6431DDBF57100F34B4D /* FeaturedViewController.swift in Sources */,
 				8CD36E8A1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				8CD36E841DD9A9C600C13E2A /* Capital+CoreDataClass.swift in Sources */,
@@ -595,6 +601,7 @@
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CD36E8E1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
+				8CEFB6441DDBF57100F34B4D /* FeaturedViewController.swift in Sources */,
 				8CD36E8B1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */,
 				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
@@ -616,6 +623,7 @@
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CD36E8F1DD9A9C600C13E2A /* Country+CoreDataProperties.swift in Sources */,
+				8CEFB6451DDBF57100F34B4D /* FeaturedViewController.swift in Sources */,
 				8CD36E8C1DD9A9C600C13E2A /* Country+CoreDataClass.swift in Sources */,
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
 				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,

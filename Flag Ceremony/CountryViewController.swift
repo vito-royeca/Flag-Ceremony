@@ -93,16 +93,17 @@ extension CountryViewController : UITableViewDelegate {
         
         switch indexPath.row {
         case 0:
-            switch UIApplication.shared.statusBarOrientation {
-            case .portrait,
-                 .portraitUpsideDown:
-                height = tableView.frame.size.height / 3
-            case .landscapeLeft,
-                 .landscapeRight:
-                height = tableView.frame.size.height
-            default:
-                height = tableView.frame.size.height / 3
-            }
+            height = tableView.frame.size.height / 3
+//            switch UIApplication.shared.statusBarOrientation {
+//            case .portrait,
+//                 .portraitUpsideDown:
+//                height = tableView.frame.size.height / 3
+//            case .landscapeLeft,
+//                 .landscapeRight:
+//                height = tableView.frame.size.height
+//            default:
+//                height = tableView.frame.size.height / 3
+//            }
         default:
             height =  UITableViewAutomaticDimension
         }

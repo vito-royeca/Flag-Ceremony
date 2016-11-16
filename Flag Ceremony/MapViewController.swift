@@ -109,7 +109,7 @@ class MapViewController: UIViewController {
                         
                         // add flags
                         for (_,value) in countryCodes {
-                            if let _ = value as? String {
+                            if let value = value as? String {
                                 if let url = country.getFlagURLForSize(size: .Mini),
                                     let _ = country.getAudioURL() {
                                     
@@ -124,32 +124,32 @@ class MapViewController: UIViewController {
                                 }
                                 
                                 // download the hymns...
-//                                if let url = URL(string: "\(HymnsURL)/\(value).mp3") {
-//                                    let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-//                                    let localPath = "\(docsPath)/\(value).mp3"
-//                                    
-//                                    if !FileManager.default.fileExists(atPath: localPath) && flagFound {
-//                                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
-//                                            if fileExistsAtServer {
-//                                                print ("downloading... \(country.name!)")
-//                                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
-//                                                    if let error = error {
-//                                                        print("error: \(error)")
-//                                                    } else {
-//                                                        do {
-//                                                            try data!.write(to: URL(fileURLWithPath: localPath))
-//                                                            print("saved: \(localPath)")
-//                                                        } catch {
-//                                                            
-//                                                        }
-//                                                    }
-//                                                }
-//                                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
-//                                            }
-//                                        }
-//                                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
-//                                    }
-//                                }
+                                if let url = URL(string: "\(HymnsURL)/\(value.lowercased()).mp3") {
+                                    let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                                    let localPath = "\(docsPath)/\(value.lowercased()).mp3"
+                                    
+                                    if !FileManager.default.fileExists(atPath: localPath) && flagFound {
+                                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
+                                            if fileExistsAtServer {
+                                                print ("downloading... \(country.name!)")
+                                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
+                                                    if let error = error {
+                                                        print("error: \(error)")
+                                                    } else {
+                                                        do {
+                                                            try data!.write(to: URL(fileURLWithPath: localPath))
+                                                            print("saved: \(localPath)")
+                                                        } catch {
+                                                            
+                                                        }
+                                                    }
+                                                }
+                                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
+                                            }
+                                        }
+                                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
+                                    }
+                                }
                                 
                                 if flagFound {
                                     break
@@ -158,13 +158,14 @@ class MapViewController: UIViewController {
                         }
                         
                         // add labels
-//                        if !flagFound {
+                        if !flagFound {
 //                            let label = MaplyScreenLabel()
 //                            label.text = country.name
 //                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
 //                            label.selectable = false
 //                            labels.append(label)
-//                        }
+                            print("flag not found: \(country.name!)")
+                        }
                     }
 
                 }

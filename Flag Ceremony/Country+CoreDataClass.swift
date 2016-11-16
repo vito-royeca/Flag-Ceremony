@@ -44,7 +44,7 @@ public class Country: NSManagedObject {
         if let countryCodes = getCountryCodes() {
             for (_,value) in countryCodes {
                 if let value = value as? String {
-                    if let path = Bundle.main.path(forResource: value, ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
+                    if let path = Bundle.main.path(forResource: value.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
                         if FileManager.default.fileExists(atPath: path) {
                             return URL(fileURLWithPath: path)
                         }
@@ -60,7 +60,7 @@ public class Country: NSManagedObject {
         if let countryCodes = getCountryCodes() {
             for (_,value) in countryCodes {
                 if let value = value as? String {
-                    if let path = Bundle.main.path(forResource: value, ofType: "mp3", inDirectory: "data/sounds") {
+                    if let path = Bundle.main.path(forResource: value.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {
                         if FileManager.default.fileExists(atPath: path) {
                             return URL(fileURLWithPath: path)
                         }
