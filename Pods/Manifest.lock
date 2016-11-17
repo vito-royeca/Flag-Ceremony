@@ -36,6 +36,9 @@ PODS:
   - Firebase/Core (3.9.0):
     - FirebaseAnalytics (= 3.5.1)
     - FirebaseCore (= 3.4.4)
+  - Firebase/Database (3.9.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 3.1.0)
   - FirebaseAnalytics (3.5.1):
     - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
@@ -45,6 +48,8 @@ PODS:
   - FirebaseCore (3.4.4):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (3.1.0):
+    - FirebaseAnalytics (~> 3.4)
   - FirebaseInstanceID (1.0.8)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -128,6 +133,7 @@ DEPENDENCIES:
   - DATASource
   - Fabric
   - Firebase/Core
+  - Firebase/Database
   - InAppSettingsKit
   - JJJUtils
   - MBProgressHUD
@@ -154,6 +160,7 @@ SPEC CHECKSUMS:
   Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
   FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
   FirebaseCore: d0ed25f27b6f9158eccc439f1be6f92e81207e28
+  FirebaseDatabase: 3ebb2edb6007c3f0f87b248f3fa212bde56a1468
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
@@ -177,6 +184,6 @@ SPEC CHECKSUMS:
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 53b5e760c7f4d50eaa2867ae67529252089480d6
+PODFILE CHECKSUM: 36b574c584d0637acce1b92abb97a4ae1cd14780
 
 COCOAPODS: 1.1.1
