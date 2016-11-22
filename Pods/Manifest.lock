@@ -33,23 +33,23 @@ PODS:
   - DATAStack (6.1.2)
   - eigen (3.2.10)
   - Fabric (1.6.11)
-  - Firebase/Core (3.9.0):
-    - FirebaseAnalytics (= 3.5.1)
-    - FirebaseCore (= 3.4.4)
-  - Firebase/Database (3.9.0):
+  - Firebase/Core (3.10.0):
+    - FirebaseAnalytics (= 3.6.0)
+    - FirebaseCore (= 3.4.5)
+  - Firebase/Database (3.10.0):
     - Firebase/Core
-    - FirebaseDatabase (= 3.1.0)
-  - FirebaseAnalytics (3.5.1):
+    - FirebaseDatabase (= 3.1.1)
+  - FirebaseAnalytics (3.6.0):
     - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.4.4):
+  - FirebaseCore (3.4.5):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseDatabase (3.1.0):
-    - FirebaseAnalytics (~> 3.4)
+  - FirebaseDatabase (3.1.1):
+    - FirebaseAnalytics (~> 3.5)
   - FirebaseInstanceID (1.0.8)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -88,10 +88,10 @@ PODS:
     - SYNCPropertyMapper (~> 5.1.2)
   - SYNCPropertyMapper (5.1.2)
   - tinyxml (2.1.0)
-  - TwitterCore (2.6.0):
+  - TwitterCore (2.6.1):
     - Fabric
-  - TwitterKit (2.6.0):
-    - TwitterCore (= 2.6.0)
+  - TwitterKit (2.6.1):
+    - TwitterCore (= 2.6.1)
   - WhirlyGlobe (2.4):
     - WhirlyGlobe/MaplyComponent (= 2.4)
   - WhirlyGlobe/aaplus (2.4)
@@ -157,10 +157,10 @@ SPEC CHECKSUMS:
   DATAStack: a45fc144e15193f1b22c26b507cc46655ce96a71
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
-  FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
-  FirebaseCore: d0ed25f27b6f9158eccc439f1be6f92e81207e28
-  FirebaseDatabase: 3ebb2edb6007c3f0f87b248f3fa212bde56a1468
+  Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
+  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
+  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
+  FirebaseDatabase: 6de92187481ff0e8e124064f21742e95ee883b02
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
@@ -179,8 +179,8 @@ SPEC CHECKSUMS:
   Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
   SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
-  TwitterCore: 150e8d2538b867bdde9ef9b61c6b755c2523c25e
-  TwitterKit: 3d72f0b25f2cc281f996e976928d2defe28702cb
+  TwitterCore: a8aea8bdaf2abd6572c8f264707a4ea4dc2d0eab
+  TwitterKit: d38c08d31dfd4ba604f95deca6cf8e174b5cbd96
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
