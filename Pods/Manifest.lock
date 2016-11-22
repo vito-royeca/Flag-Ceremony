@@ -29,8 +29,6 @@ PODS:
   - Cosmos (7.0.0)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - DATASource (6.1.1)
-  - DATAStack (6.1.2)
   - eigen (3.2.10)
   - Fabric (1.6.11)
   - Firebase/Auth (3.10.0):
@@ -98,10 +96,6 @@ PODS:
   - proj4 (4.8.0)
   - SimulatorStatusMagic (1.9.2)
   - SMCalloutView (2.1.5)
-  - Sync (2.3.4):
-    - DATAStack (~> 6.1.2)
-    - SYNCPropertyMapper (~> 5.1.2)
-  - SYNCPropertyMapper (5.1.2)
   - tinyxml (2.1.0)
   - TwitterCore (2.6.1):
     - Fabric
@@ -145,7 +139,6 @@ PODS:
 DEPENDENCIES:
   - Cosmos
   - Crashlytics
-  - DATASource
   - Fabric
   - Firebase/Auth
   - Firebase/Core
@@ -157,7 +150,6 @@ DEPENDENCIES:
   - MMDrawerController+Storyboard
   - Networking
   - SimulatorStatusMagic
-  - Sync
   - TwitterCore
   - TwitterKit
   - WhirlyGlobe
@@ -169,8 +161,6 @@ SPEC CHECKSUMS:
   clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
   Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
-  DATASource: fa895931841523f62c1378cbc53ef2de87e5cf30
-  DATAStack: a45fc144e15193f1b22c26b507cc46655ce96a71
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
@@ -194,14 +184,12 @@ SPEC CHECKSUMS:
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
   SimulatorStatusMagic: f6cf062b0e5a2df6f000bb0f98d1ae6977c8dbc1
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481
-  Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
-  SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
   TwitterCore: a8aea8bdaf2abd6572c8f264707a4ea4dc2d0eab
   TwitterKit: d38c08d31dfd4ba604f95deca6cf8e174b5cbd96
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 02504250c39ed9dec26a7b47b9d55d608aa38b42
+PODFILE CHECKSUM: 8062119f3a451bc773548461eb9e46ce63f37595
 
 COCOAPODS: 1.1.1

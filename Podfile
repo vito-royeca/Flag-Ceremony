@@ -7,7 +7,6 @@ use_frameworks!
 target "Flag Ceremony" do
     pod 'Cosmos'
     pod 'Crashlytics'
-    pod 'DATASource'
     pod 'Fabric'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
@@ -19,7 +18,6 @@ target "Flag Ceremony" do
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'Sync'
     pod 'TwitterKit'
     pod 'TwitterCore'
     pod 'WhirlyGlobe'
@@ -28,7 +26,6 @@ target "Flag Ceremony" do
 target "Flag CeremonyTests" do
     pod 'Cosmos'
     pod 'Crashlytics'
-    pod 'DATASource'
     pod 'Fabric'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
@@ -40,7 +37,6 @@ target "Flag CeremonyTests" do
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'Sync'
     pod 'TwitterKit'
     pod 'TwitterCore'
     pod 'WhirlyGlobe'
@@ -50,7 +46,6 @@ end
 target "Flag CeremonyUITests" do
     pod 'Cosmos'
     pod 'Crashlytics'
-    pod 'DATASource'
     pod 'Fabric'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
@@ -62,7 +57,6 @@ target "Flag CeremonyUITests" do
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
-    pod 'Sync'
     pod 'TwitterKit'
     pod 'TwitterCore'
     pod 'WhirlyGlobe'
