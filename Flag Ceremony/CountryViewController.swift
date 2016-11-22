@@ -141,7 +141,9 @@ extension CountryViewController : UITableViewDataSource {
             if let audioPlayerCell = tableView.dequeueReusableCell(withIdentifier: "AudioPlayerCell") as? AudioPlayerTableViewCell {
                 
                 if let url = country!.getFlagURLForSize(size: .Normal) {
-                    audioPlayerCell.backgroundImage.image = UIImage(contentsOfFile: url.path)
+                    if let image = UIImage(contentsOfFile: url.path) {
+                        audioPlayerCell.backgroundImage.image = imageWithBorder(fromImage: image)
+                    }
                 }
                 audioPlayerCell.url = country!.getAudioURL()
                 
@@ -152,6 +154,22 @@ extension CountryViewController : UITableViewDataSource {
         }
         
         return cell!
+    }
+    
+    func imageWithBorder(fromImage source: UIImage) -> UIImage? {
+        let size = source.size
+        UIGraphicsBeginImageContext(size)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        source.draw(in: rect, blendMode: .normal, alpha: 1.0)
+    
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setStrokeColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            context.stroke(rect)
+            let newImg =  UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImg
+        }
+        return nil
     }
 }
 
