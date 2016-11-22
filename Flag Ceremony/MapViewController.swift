@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import DATAStack
-import DATASource
+import Firebase
 import MBProgressHUD
 import WhirlyGlobe
 
@@ -22,13 +21,7 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initMap()
-
-        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
-            if let error = error {
-                print("error: \(error)")
-            }
-            self.addFlagsFromDB()
-        })
+        addFlagsFromDB()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,100 +81,45 @@ class MapViewController: UIViewController {
     }
     
     func addFlagsFromDB() {
-        MBProgressHUD.showAdded(to: view, animated: true)
+        let ref = FIRDatabase.database().reference()
         
-        // handle this in another thread
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        MBProgressHUD.showAdded(to: view, animated: true)
+        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            var flags = [MaplyScreenMarker]()
-//            var labels = [MaplyScreenLabel]()
-            var countries:[Country]?
-            
-            do {
-                try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                let countries = snapshot.value as? [String: [String: Any]] ?? [:]
+                var flags = [MaplyScreenMarker]()
                 
-                for country in countries! {
-                    if let countryCodes = country.getCountryCodes(),
-                        let geoRadians = country.getGeoRadians() {
-                        var flagFound = false
+                for (key,value) in countries {
+                    let country = Country.init(key: key, dict: value)
+                    
+                    // add flags only if there is an audio
+                    if let url = country.getFlagURLForSize(size: .Mini),
+                        let _ = country.getAudioURL() {
+                        let image = UIImage(contentsOfFile: url.path)
+                        let marker = MaplyScreenMarker()
+                        let radians = country.getGeoRadians()
                         
-                        // add flags
-                        for (_,value) in countryCodes {
-                            if let value = value as? String {
-                                if let url = country.getFlagURLForSize(size: .Mini)/*,
-                                    let _ = country.getAudioURL()*/ {
-                                    
-                                    let image = UIImage(contentsOfFile: url.path)
-                                    let marker = MaplyScreenMarker()
-                                    marker.image = image
-                                    marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
-                                    marker.size = image!.size
-                                    marker.userObject = country
-                                    flags.append(marker)
-                                    flagFound = true
-                                }
-                                
-                                // download the hymns...
-//                                if let url = URL(string: "\(HymnsURL)/\(value.lowercased()).mp3") {
-//                                    let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-//                                    let localPath = "\(docsPath)/\(value.lowercased()).mp3"
-//                                    
-//                                    if !FileManager.default.fileExists(atPath: localPath) && flagFound {
-//                                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
-//                                            if fileExistsAtServer {
-//                                                print ("downloading... \(country.name!)")
-//                                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
-//                                                    if let error = error {
-//                                                        print("error: \(error)")
-//                                                    } else {
-//                                                        do {
-//                                                            try data!.write(to: URL(fileURLWithPath: localPath))
-//                                                            print("saved: \(localPath)")
-//                                                        } catch {
-//                                                            
-//                                                        }
-//                                                    }
-//                                                }
-//                                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
-//                                            }
-//                                        }
-//                                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
-//                                    }
-//                                }
-                                
-                                if flagFound {
-                                    break
-                                }
-                            }
-                        }
-                        
-                        // add labels
-                        if !flagFound {
-//                            let label = MaplyScreenLabel()
-//                            label.text = country.name
-//                            label.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
-//                            label.selectable = false
-//                            labels.append(label)
-                            print("flag not found: \(country.name!)")
-                        }
+                        marker.image = image
+                        marker.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                        marker.size = image!.size
+                        marker.userObject = country
+                        flags.append(marker)
+                    } else {
+                        print("flag not found: \(country.name!)")
                     }
-
                 }
-            } catch {
-                print("error: \(error)")
+                
+                self.mapView!.addScreenMarkers(flags, desc: nil)
             }
-            
-            self.mapView!.addScreenMarkers(flags, desc: nil)
-//            self.mapView!.addScreenLabels(labels, desc: [
-//                kMaplyFont: UIFont.boldSystemFont(ofSize: 12),
-//                kMaplyColor: UIColor.black
-//            ])
             
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
 }

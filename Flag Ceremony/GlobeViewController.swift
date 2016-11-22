@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import DATAStack
-import DATASource
 import MBProgressHUD
 import WhirlyGlobe
 
@@ -23,12 +21,6 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
-        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
-            if let error = error {
-                print("error: \(error)")
-            }
-            self.addFlagsFromDB()
-        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +82,7 @@ class GlobeViewController: UIViewController {
     }
     
     func addFlagsFromDB() {
-        MBProgressHUD.showAdded(to: view, animated: true)
+        /*MBProgressHUD.showAdded(to: view, animated: true)
         
         // handle this in another thread
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
@@ -104,18 +96,18 @@ class GlobeViewController: UIViewController {
                 try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
                 
                 for country in countries! {
-                    if let countryCodes = country.getCountryCodes(),
-                        let geoRadians = country.getGeoRadians() {
+//                    if let countryCodes = country.getCountryCodes(),
+//                        let geoRadians = country.getGeoRadians() {
                         var flagFound = false
                         
-                        for (_,value) in countryCodes {
+                        for (_,value) in country.countryCodes {
                             if let _ = value as? String {
                                 if let url = country.getFlagURLForSize(size: .Mini),
                                     let _ = country.getAudioURL() {
                                     let image = UIImage(contentsOfFile: url.path)
                                     let marker = MaplyScreenMarker()
                                     marker.image = image
-                                    marker.loc = MaplyCoordinate(x: geoRadians[0], y: geoRadians[1])
+                                    marker.loc = MaplyCoordinate(x: country.geoRadians[0], y: country.geoRadians[1])
                                     marker.size = image!.size
                                     marker.userObject = country
                                     flags.append(marker)
@@ -127,8 +119,7 @@ class GlobeViewController: UIViewController {
                                 }
                             }
                         }
-                    }
-                    
+//                    }
                 }
             } catch {
                 print("error: \(error)")
@@ -139,7 +130,7 @@ class GlobeViewController: UIViewController {
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
-        }
+        }*/
     }
 }
 

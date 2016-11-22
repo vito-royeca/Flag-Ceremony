@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CountryViewController: DismissableViewController {
 
@@ -31,6 +32,10 @@ class CountryViewController: DismissableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kPlayFinished), object: nil)
+        
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = country!.getAudioURL()
         }
@@ -41,11 +46,15 @@ class CountryViewController: DismissableViewController {
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
             cell.pause()
             cell.play()
+            
+            incrementCountryViews()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = nil
@@ -55,6 +64,66 @@ class CountryViewController: DismissableViewController {
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 //        tableView.reloadData()
 //    }
+    
+    // MARK: Custom methods
+    func playListener(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let url = userInfo[kAudioURL] as? URL,
+                let country = country {
+                
+                if url == country.getAudioURL() {
+                    incrementCountryPlays()
+                }
+            }
+        }
+    }
+    
+    func incrementCountryViews() {
+        let ref = FIRDatabase.database().reference().child("countries").child(country!.key)
+        
+        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            if var post = currentData.value as? [String : Any] {
+                
+                var views = post[Country.Keys.Views] as? Int ?? 0
+                views += 1
+                post[Country.Keys.Views] = views
+                
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func incrementCountryPlays() {
+        let ref = FIRDatabase.database().reference().child("countries").child(country!.key)
+        
+        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            if var post = currentData.value as? [String : Any] {
+                
+                var plays = post[Country.Keys.Plays] as? Int ?? 0
+                plays += 1
+                post[Country.Keys.Plays] = plays
+                
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 }
 
 // MARK: UITableViewDataSource

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import Networking
 
 class FeaturedViewController: UIViewController {
 
@@ -20,13 +22,6 @@ class FeaturedViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        API.sharedInstance.fetchCountries(completion: {(error: NSError?) in
-            if let error = error {
-                print("error: \(error)")
-            }
-            
-        })
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import Firebase
+import Networking
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // init services
         Fabric.with([Crashlytics.self/*, Twitter.self*/])
         FIRApp.configure()
+//        insertCountries()
         
         return true
     }
@@ -50,5 +52,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func insertCountries() {
+        let ref = FIRDatabase.database().reference()
+        
+        let baseURL = CountriesURL
+        let path = "/info/all.json"
+        let method:HTTPMethod = .Get
+        let headers:[String: String]? = nil
+        let paramType:Networking.ParameterType = .json
+        let params = "?x=100" as AnyObject
+        let completionHandler = { (result: [[String : Any]], error: NSError?) -> Void in
+            if let error = error {
+                print("error: \(error)")
+            } else {
+                if let data = result.first {
+                    if let countries = data["Results"] as? [String: [String: Any]] {
+                        for (key,value) in countries {
+                            let country = ref.child("countries").child(key)
+                            for (key2,value2) in value {
+                                country.child(key2).setValue(value2)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
+    }
+    
+    func downloadHymns() {
+//        if let url = URL(string: "\(HymnsURL)/\(value.lowercased()).mp3") {
+//            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+//            let localPath = "\(docsPath)/\(value.lowercased()).mp3"
+//
+//            if !FileManager.default.fileExists(atPath: localPath) && flagFound {
+//                let existsHandler = { (fileExistsAtServer: Bool) -> Void in
+//                    if fileExistsAtServer {
+//                        print ("downloading... \(country.name!)")
+//                        let completionHandler = { (data: Data?, error: NSError?) -> Void in
+//                            if let error = error {
+//                                print("error: \(error)")
+//                            } else {
+//                                do {
+//                                    try data!.write(to: URL(fileURLWithPath: localPath))
+//                                    print("saved: \(localPath)")
+//                                } catch {
+//
+//                                }
+//                            }
+//                        }
+//                        NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
+//                    }
+//                }
+//                NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
+//            }
+//        }
+    }
 }
 

@@ -1,9 +1,9 @@
 //
 //  NetworkingManager.swift
-//  Netzkino
+//  Flag Ceremony
 //
 //  Created by Jovit Royeca on 01/11/2016.
-//  Copyright © 2016 simpleTechs. All rights reserved.
+//  Copyright © 2016 Jovit Royeca. All rights reserved.
 //
 
 import UIKit

@@ -9,6 +9,9 @@
 import UIKit
 import AVFoundation
 
+let kPlayFinished = "kPlayFinished"
+let kAudioURL     = "kAudioURL"
+
 class AudioPlayerTableViewCell: UITableViewCell {
 
     // MARK: Variables
@@ -185,5 +188,8 @@ extension AudioPlayerTableViewCell : AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         stop()
+        
+        let userInfo = [kAudioURL: url]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kPlayFinished), object: nil, userInfo: userInfo)
     }
 }
