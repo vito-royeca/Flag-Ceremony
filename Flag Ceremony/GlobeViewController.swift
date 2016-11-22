@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import MBProgressHUD
 import WhirlyGlobe
 
@@ -21,6 +22,7 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
+        addFlagsFromDB()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,55 +84,46 @@ class GlobeViewController: UIViewController {
     }
     
     func addFlagsFromDB() {
-        /*MBProgressHUD.showAdded(to: view, animated: true)
+        let ref = FIRDatabase.database().reference()
         
-        // handle this in another thread
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Country")
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        MBProgressHUD.showAdded(to: view, animated: true)
+        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            var flags = [MaplyScreenMarker]()
-            var countries:[Country]?
-            
-            do {
-                try countries = API.sharedInstance.dataStack.mainContext.fetch(request) as? [Country]
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                let countries = snapshot.value as? [String: [String: Any]] ?? [:]
+                var flags = [MaplyScreenMarker]()
                 
-                for country in countries! {
-//                    if let countryCodes = country.getCountryCodes(),
-//                        let geoRadians = country.getGeoRadians() {
-                        var flagFound = false
+                for (key,value) in countries {
+                    let country = Country.init(key: key, dict: value)
+                    
+                    // add flags only if there is an audio
+                    if let url = country.getFlagURLForSize(size: .Mini),
+                        let _ = country.getAudioURL() {
+                        let image = UIImage(contentsOfFile: url.path)
+                        let marker = MaplyScreenMarker()
+                        let radians = country.getGeoRadians()
                         
-                        for (_,value) in country.countryCodes {
-                            if let _ = value as? String {
-                                if let url = country.getFlagURLForSize(size: .Mini),
-                                    let _ = country.getAudioURL() {
-                                    let image = UIImage(contentsOfFile: url.path)
-                                    let marker = MaplyScreenMarker()
-                                    marker.image = image
-                                    marker.loc = MaplyCoordinate(x: country.geoRadians[0], y: country.geoRadians[1])
-                                    marker.size = image!.size
-                                    marker.userObject = country
-                                    flags.append(marker)
-                                    flagFound = true
-                                }
-                                
-                                if flagFound {
-                                    break
-                                }
-                            }
-                        }
-//                    }
+                        marker.image = image
+                        marker.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                        marker.size = image!.size
+                        marker.userObject = country
+                        flags.append(marker)
+                    } else {
+                        print("flag not found: \(country.name!)")
+                    }
                 }
-            } catch {
-                print("error: \(error)")
+                
+                self.globeView!.addScreenMarkers(flags, desc: nil)
             }
-            
-            self.globeView!.addScreenMarkers(flags, desc: nil)
             
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
-        }*/
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
 }
 

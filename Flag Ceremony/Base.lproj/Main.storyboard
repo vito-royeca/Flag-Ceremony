@@ -25,7 +25,7 @@
                     <navigationItem key="navigationItem" id="T21-bq-RzN">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="UaB-lB-GQR">
-                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <rect key="frame" x="230.5" y="5.5" width="307" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-S3-gL4">
@@ -40,6 +40,7 @@
                                 <constraint firstItem="hSc-S3-gL4" firstAttribute="leading" secondItem="UaB-lB-GQR" secondAttribute="leading" id="NXZ-uh-ALl"/>
                             </constraints>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ATA-1m-iHq"/>
                     </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromGlobeAsModal" modalPresentationStyle="formSheet" id="4mM-aD-pb6"/>
@@ -66,7 +67,7 @@
                     <navigationItem key="navigationItem" id="sCN-op-3NZ">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="dvk-2w-0WC">
-                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <rect key="frame" x="230.5" y="5.5" width="307" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-4c-zsz">
@@ -81,6 +82,7 @@
                                 <constraint firstItem="NvE-4c-zsz" firstAttribute="leading" secondItem="dvk-2w-0WC" secondAttribute="leading" id="tJT-6V-iRL"/>
                             </constraints>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="1Mr-X1-9iQ"/>
                     </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsFromMapAsModal" modalPresentationStyle="formSheet" id="ZdL-oJ-FYe"/>
@@ -100,11 +102,11 @@
                         <viewControllerLayoutGuide type="bottom" id="KlT-bV-QiF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GC9-tx-jgW">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zKu-Gy-y4d">
-                                <rect key="frame" x="0.0" y="64" width="540" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AudioPlayerCell" id="cTs-fc-LH8" customClass="AudioPlayerTableViewCell" customModule="Flag_Ceremony" customModuleProvider="target">
@@ -203,7 +205,7 @@
             <objects>
                 <navigationController id="Wqg-S6-mPY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="featured" id="Qf0-Ym-Uaz"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="QGu-ik-vJB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QGu-ik-vJB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,7 +247,7 @@
                     <navigationItem key="navigationItem" id="CTz-fD-HFX">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="dEb-rw-jVX">
-                            <rect key="frame" x="231" y="6" width="307" height="33"/>
+                            <rect key="frame" x="230.5" y="5.5" width="307" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="0S8-n0-fDB">
@@ -260,6 +262,7 @@
                                 <constraint firstAttribute="trailing" secondItem="0S8-n0-fDB" secondAttribute="trailing" id="z1t-ye-am3"/>
                             </constraints>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="SXK-Mg-N6d"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="scS-PW-OXa" id="9IP-cX-30N"/>
@@ -275,7 +278,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="01M-8A-n3O" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="E5W-ev-oVV"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="KDK-NG-rYw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="KDK-NG-rYw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -296,7 +299,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9vS-55-Pu9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Globe" image="globe" id="wOe-oH-lsJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="2w1-1k-f5E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2w1-1k-f5E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -318,7 +321,7 @@
         <image name="title bar" width="307" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4mM-aD-pb6"/>
-        <segue reference="pQw-Mb-HaT"/>
+        <segue reference="z0s-xr-ufW"/>
+        <segue reference="ZdL-oJ-FYe"/>
     </inferredMetricsTieBreakers>
 </document>

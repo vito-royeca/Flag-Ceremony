@@ -149,7 +149,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             self.progressSlider.value = normalizedTime
             self.startLabel.text = startText
-            self.endLabel.text = endText
+            self.endLabel.text = "-\(endText)"
         }
     }
     
