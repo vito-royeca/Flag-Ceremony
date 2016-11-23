@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initMap()
-        addFlagsFromDB()
+        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +80,7 @@ class MapViewController: UIViewController {
         mapView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
-    func addFlagsFromDB() {
+    func addFlags() {
         let ref = FIRDatabase.database().reference()
         
         MBProgressHUD.showAdded(to: view, animated: true)

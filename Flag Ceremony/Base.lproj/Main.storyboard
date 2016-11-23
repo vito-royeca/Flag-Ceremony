@@ -96,12 +96,12 @@
         <!--Country-->
         <scene sceneID="Hwq-ob-zkw">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Z29-MB-lIF" customClass="CountryViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Z29-MB-lIF" customClass="CountryViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nm0-7L-imx"/>
                         <viewControllerLayoutGuide type="bottom" id="KlT-bV-QiF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GC9-tx-jgW">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="GC9-tx-jgW">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

@@ -35,6 +35,7 @@ struct Country {
         static let CountryInfo       = "CountryInfo"
         static let Views             = "Views"
         static let Plays             = "Plays"
+        static let HasAnthemFile     = "HasAnthemFile"
     }
 
     // MARK: Properties
@@ -51,6 +52,7 @@ struct Country {
     let countryInfo: String?
     let views: Int?
     let plays: Int?
+    let hasAnthemFile: Bool?
     
     // MARK: Initialization
     init(key: String, dict: [String: Any]) {
@@ -67,6 +69,7 @@ struct Country {
         self.countryInfo = dict[Keys.CountryInfo] as? String
         self.plays = dict[Keys.Plays] as? Int
         self.views = dict[Keys.Views] as? Int
+        self.hasAnthemFile = dict[Keys.HasAnthemFile] as? Bool
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -84,6 +87,7 @@ struct Country {
         self.countryInfo = value[Keys.CountryInfo] as? String
         self.plays = value[Keys.Plays] as? Int
         self.views = value[Keys.Views] as? Int
+        self.hasAnthemFile = value[Keys.HasAnthemFile] as? Bool
     }
     
     // MARK: Custom methods
@@ -99,6 +103,7 @@ struct Country {
 //            Keys.CountryInfo: countryInfo
 //            Keys.Plays: plays
 //            Keys.Views: views
+//            Keys.HasAnthemFile: hasAnthemFile    
 //        ]
 //    }
     

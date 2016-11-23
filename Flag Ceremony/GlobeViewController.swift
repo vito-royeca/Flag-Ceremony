@@ -22,7 +22,7 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
-        addFlagsFromDB()
+        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {

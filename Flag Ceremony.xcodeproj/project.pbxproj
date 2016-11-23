@@ -49,6 +49,9 @@
 		8CC265791DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
 		8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
 		8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */; };
+		8CE8E77C1DE524D5009097FF /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8E77B1DE524D5009097FF /* Scraper.swift */; };
+		8CE8E77D1DE524D5009097FF /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8E77B1DE524D5009097FF /* Scraper.swift */; };
+		8CE8E77E1DE524D5009097FF /* Scraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE8E77B1DE524D5009097FF /* Scraper.swift */; };
 		8CEFB6431DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
 		8CEFB6441DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
 		8CEFB6451DDBF57100F34B4D /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */; };
@@ -105,6 +108,7 @@
 		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
+		8CE8E77B1DE524D5009097FF /* Scraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scraper.swift; sourceTree = "<group>"; };
 		8CEFB6421DDBF57100F34B4D /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CEFB64A1DDC73E700F34B4D /* Flag Ceremony.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Flag Ceremony.entitlements"; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */,
+				8CE8E77B1DE524D5009097FF /* Scraper.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CE8E77C1DE524D5009097FF /* Scraper.swift in Sources */,
 				8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C2370371DDD533B00F30712 /* Capital.swift in Sources */,
@@ -601,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CE8E77D1DE524D5009097FF /* Scraper.swift in Sources */,
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C2370381DDD533B00F30712 /* Capital.swift in Sources */,
@@ -622,6 +629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
+				8CE8E77E1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8C2370391DDD533B00F30712 /* Capital.swift in Sources */,
 				8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,

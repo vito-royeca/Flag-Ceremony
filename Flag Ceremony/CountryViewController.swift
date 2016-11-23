@@ -61,9 +61,9 @@ class CountryViewController: DismissableViewController {
         }
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        tableView.reloadData()
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        tableView.reloadData()
+    }
     
     // MARK: Custom methods
     func playListener(_ notification: Notification) {
