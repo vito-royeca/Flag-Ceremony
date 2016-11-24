@@ -392,7 +392,7 @@
         "lyricsWriter": ["Emilio Prud'Homme"],
         "musicWriter": ["José Rufino Reyes y Siancas"]
     },
-	"East Timor": {
+	"TL": {
         "wiki": "/wiki/P%C3%A1tria",
         "nativeTitle": "Pátria",
         "title": "Fatherland",
@@ -507,7 +507,7 @@
 	"DE": {
         "wiki": "/wiki/Deutschlandlied",
         "nativeTitle": "Lied der Deutschen",
-        "title": "Song of the Germans – the Third stanza",
+        "title": "Song of the Germans",
         "dateAdopted": ["1922"],
         "lyricsWriter": ["August Heinrich Hoffmann von Fallersleben"],
         "musicWriter": ["Joseph Haydn"]
@@ -1296,7 +1296,7 @@
         "lyricsWriter": ["Enoch Sontonga", "C. J. Langenhoven"],
         "musicWriter": ["Enoch Sontonga", "Marthinus Lourens de Villiers"]
     },
-	"South Sudan": {
+	"SS": {
         "wiki": "/wiki/South_Sudan_Oyee!",
         "nativeTitle": "South Sudan Oyee!",
         "title": "South Sudan Oyee!",
@@ -1513,7 +1513,7 @@
         "lyricsWriter": ["François Vincent Ayssav"],
         "musicWriter": ["François Vincent Ayssav"]
     },
-	"Vatican city": {
+	"VA": {
         "wiki": "/wiki/Pontifical_Anthem",
         "nativeTitle": "Marche Pontificale",
         "title": "Pontifical Anthem and March",

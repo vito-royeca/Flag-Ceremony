@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Firebase
 
 class CountryViewController: DismissableViewController {
 
     // MARK: Variables
     var country:Country?
+    var anthem:Anthem?
     
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +28,11 @@ class CountryViewController: DismissableViewController {
         
         tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        FirebaseManager.sharedInstance.findAnthem(country!.key, completion: { (anthem) in
+            self.anthem = anthem
+            self.tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -36,18 +41,18 @@ class CountryViewController: DismissableViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kPlayFinished), object: nil)
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = country!.getAudioURL()
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
             cell.pause()
             cell.play()
             
-            incrementCountryViews()
+            FirebaseManager.sharedInstance.incrementCountryViews(country!.key)
         }
     }
     
@@ -56,7 +61,7 @@ class CountryViewController: DismissableViewController {
 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerTableViewCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = nil
         }
     }
@@ -70,66 +75,19 @@ class CountryViewController: DismissableViewController {
         if let userInfo = notification.userInfo {
             if let url = userInfo[kAudioURL] as? URL,
                 let country = country {
-                
                 if url == country.getAudioURL() {
-                    incrementCountryPlays()
+                    FirebaseManager.sharedInstance.incrementCountryPlays(country.key)
                 }
             }
         }
     }
     
-    func incrementCountryViews() {
-        let ref = FIRDatabase.database().reference().child("countries").child(country!.key)
-        
-        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
-            if var post = currentData.value as? [String : Any] {
-                
-                var views = post[Country.Keys.Views] as? Int ?? 0
-                views += 1
-                post[Country.Keys.Views] = views
-                
-                // Set value and report transaction success
-                currentData.value = post
-                
-                return FIRTransactionResult.success(withValue: currentData)
-            }
-            return FIRTransactionResult.success(withValue: currentData)
-        }) { (error, committed, snapshot) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func incrementCountryPlays() {
-        let ref = FIRDatabase.database().reference().child("countries").child(country!.key)
-        
-        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
-            if var post = currentData.value as? [String : Any] {
-                
-                var plays = post[Country.Keys.Plays] as? Int ?? 0
-                plays += 1
-                post[Country.Keys.Plays] = plays
-                
-                // Set value and report transaction success
-                currentData.value = post
-                
-                return FIRTransactionResult.success(withValue: currentData)
-            }
-            return FIRTransactionResult.success(withValue: currentData)
-        }) { (error, committed, snapshot) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-
 }
 
 // MARK: UITableViewDataSource
 extension CountryViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     
@@ -138,17 +96,32 @@ extension CountryViewController : UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            if let audioPlayerCell = tableView.dequeueReusableCell(withIdentifier: "AudioPlayerCell") as? AudioPlayerTableViewCell {
-                
-                if let url = country!.getFlagURLForSize(size: .Normal) {
-                    if let image = UIImage(contentsOfFile: url.path) {
-                        audioPlayerCell.backgroundImage.image = imageWithBorder(fromImage: image)
-                    }
+            cell = tableView.dequeueReusableCell(withIdentifier: "FlagCell")
+            if let url = country!.getFlagURLForSize(size: .Normal) {
+                if let image = UIImage(contentsOfFile: url.path),
+                    let imageView = cell?.viewWithTag(1) as? UIImageView {
+                    imageView.image = imageWithBorder(fromImage: image)
                 }
+            }
+        case 1:
+            if let audioPlayerCell = tableView.dequeueReusableCell(withIdentifier: "AudioPlayerCell") as? AudioPlayerTableViewCell {
                 audioPlayerCell.url = country!.getAudioURL()
-                
                 cell = audioPlayerCell
             }
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell")
+            cell?.textLabel?.text = nil
+            cell?.detailTextLabel?.text = nil
+            
+            if let anthem = anthem {
+                cell?.textLabel?.text = anthem.nativeTitle
+                
+                // show subtitle if nativeTitle is not equal to title
+                if anthem.nativeTitle != anthem.title {
+                    cell?.detailTextLabel?.text = anthem.title
+                }
+            }
+            
         default:
             cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }

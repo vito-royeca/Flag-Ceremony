@@ -83,7 +83,7 @@ class GlobeViewController: UIViewController {
         globeView!.animate(toPosition: MaplyCoordinateMakeWithDegrees(-3.6704803, 40.5023056), time: 1.0)
     }
     
-    func addFlagsFromDB() {
+    func addFlags() {
         let ref = FIRDatabase.database().reference()
         
         MBProgressHUD.showAdded(to: view, animated: true)

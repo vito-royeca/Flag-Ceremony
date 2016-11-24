@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // init services
         Fabric.with([Crashlytics.self/*, Twitter.self*/])
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         
-        Scraper.sharedInstance.insertAnthems()
+//        Scraper.sharedInstance.insertAnthems()
         return true
     }
 

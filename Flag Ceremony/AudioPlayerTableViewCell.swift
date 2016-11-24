@@ -32,11 +32,12 @@ class AudioPlayerTableViewCell: UITableViewCell {
     var progressTap: UITapGestureRecognizer?
     
     // MARK: Outlets
-    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
+    @IBOutlet weak var noAudioLabel: UILabel!
+    
     
     // MARK: Actions
     
@@ -163,6 +164,14 @@ class AudioPlayerTableViewCell: UITableViewCell {
         update()
     }
     
+    func toggleUI(_ hidden: Bool) {
+        playButton.isHidden = hidden
+        startLabel.isHidden = hidden
+        progressSlider.isHidden = hidden
+        endLabel.isHidden = hidden
+        noAudioLabel.isHidden = !hidden
+    }
+    
     // MARK: Private methods
     private func initPlayer() {
         do {
@@ -170,12 +179,10 @@ class AudioPlayerTableViewCell: UITableViewCell {
                 try player = AVAudioPlayer(contentsOf: url)
                 player!.delegate = self
                 resetUI()
-                playButton.isEnabled = true
-                progressSlider.isEnabled = true
+                toggleUI(false)
             } else {
                 stop()
-                playButton.isEnabled = false
-                progressSlider.isEnabled = false
+                toggleUI(true)
             }
         } catch {
             print("\(error)")
