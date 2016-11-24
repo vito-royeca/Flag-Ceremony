@@ -73,6 +73,7 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
+  - hpple (0.2.0)
   - InAppSettingsKit (2.8)
   - JJJUtils (0.3.2):
     - JJJUtils/OSX (= 0.3.2)
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - hpple
   - InAppSettingsKit
   - JJJUtils
   - MBProgressHUD
@@ -174,6 +176,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
   InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
   JJJUtils: 5abcb911388dc05e24cecdde9d4a3e18f1b1510e
   libjson: 1a065ca64704a5d1b51c3754268998942d57ac6f
@@ -190,6 +193,6 @@ SPEC CHECKSUMS:
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 8062119f3a451bc773548461eb9e46ce63f37595
+PODFILE CHECKSUM: 2dbaf778b9af8a4b34d9d069cc01c7408ba75460
 
 COCOAPODS: 1.1.1
