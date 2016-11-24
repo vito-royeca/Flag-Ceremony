@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import hpple
 import Networking
 
 class Scraper : NSObject {
@@ -41,25 +42,19 @@ class Scraper : NSObject {
     }
     
     func insertAnthems() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "json", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
                 
-                if let data = NSData(contentsOf: URL(fileURLWithPath: path)) {
-                    do {
-                        let dictionary = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments) as? NSDictionary
-                        
-                        for (key,value) in dictionary! {
-                            if let key2 = key as? String,
-                                let value2 = value as? [String: Any] {
-                                
-                                let anthem = self.ref.child("anthems").child(key2)
-                                for (key3,value3) in value2 {
-                                    anthem.child(key3).setValue(value3)
-                                }
+                if let dictionary = NSDictionary(contentsOfFile: path) {
+                    for (key,value) in dictionary {
+                        if let key2 = key as? String,
+                            let value2 = value as? [String: Any] {
+                            
+                            let anthem = self.ref.child("anthems").child(key2)
+                            for (key3,value3) in value2 {
+                                anthem.child(key3).setValue(value3)
                             }
                         }
-                    } catch let error {
-                        print("Error!! \(error.localizedDescription)")
                     }
                 }
             }
@@ -105,7 +100,6 @@ class Scraper : NSObject {
                     } else {
                         self.updateCountry(key: key, hasAnthemFile: true)
                     }
-                    
                 }
             }
             
@@ -132,6 +126,141 @@ class Scraper : NSObject {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getLyrics() {
+        if let path = Bundle.main.path(forResource: "anthems", ofType: "json", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                
+                if let data = NSData(contentsOf: URL(fileURLWithPath: path)) {
+                    do {
+                        let dictionary = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments) as? NSDictionary
+                        let newDict = NSMutableDictionary()
+                        
+                        for (key,value) in dictionary! {
+                            let cc = key as! String
+                            
+                            if let value2 = value as? [String: Any] {
+                                print("\(key)")
+                                
+                                var anthemDict = [String: Any]()
+                                
+                                // copy
+                                for (key3,value3) in value2 {
+                                    anthemDict[key3] = value3
+                                }
+                                
+                                // add lyrics and info
+                                if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
+                                    if let doc = readUrl(url: url) {
+                                        anthemDict["lyrics"] = parseAnthemLyrics(doc: doc)
+                                        anthemDict["info"] = parseAnthemInfo(doc: doc)
+                                    }
+                                }
+                                
+                                newDict.setObject(anthemDict, forKey: key as! NSCopying)
+                            }
+                        }
+                        
+                        // write to disk
+                        let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                        let localPath = "\(docsPath)/anthems.dict"
+                        let localUrl = URL(fileURLWithPath: localPath)
+                        if FileManager.default.fileExists(atPath: localPath) {
+                            try FileManager.default.removeItem(at: localUrl)
+                        }
+                        newDict.write(to: localUrl, atomically: true)
+                        
+                    } catch let error {
+                        print("Error!! \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func readUrl(url: URL) -> TFHpple? {
+        do {
+            let data = try Data(contentsOf: url)
+            return TFHpple(htmlData: data)
+            
+        } catch let error {
+            print("error: \(error)")
+        }
+        
+        return nil
+    }
+    
+    func parseAnthemLyrics(doc: TFHpple) -> [[String: Any]] {
+        var array = [[String: Any]]()
+        
+        
+        var keys = [String]()
+        var values = [String]()
+        
+        if let elements = doc.search(withXPathQuery: "//div[@class='collapseomatic ']") as? [TFHppleElement] {
+            for element in elements {
+                keys.append(parseElement(element: element))
+            }
+        }
+        
+        if let elements = doc.search(withXPathQuery: "//div[@class='collapseomatic_content ']") as? [TFHppleElement] {
+            for element in elements {
+                values.append(parseElement(element: element))
+            }
+        }
+        
+        if keys.count > 0 {
+            for i in 0...keys.count-1 {
+                var lyrics = [String: Any]()
+                lyrics["name"] = keys[i]
+                lyrics["text"] = values[i]
+                array.append(lyrics)
+            }
+        }
+        
+        return array
+    }
+    
+    func parseAnthemInfo(doc: TFHpple) -> String? {
+        var info:String?
+        
+        if let elements = doc.search(withXPathQuery: "//div[@class='entry fix']") as? [TFHppleElement] {
+            info = ""
+            
+            for element in elements {
+                info! += parseElement(element: element)
+            }
+        }
+        
+        return info
+    }
+
+    
+    func parseElement(element: TFHppleElement) -> String {
+        var text = ""
+        
+//        if element.tagName == "br" ||
+//            element.tagName == "b" {
+//            // do nothing
+//        } else {
+//            if let content = element.content {
+//                text += content
+//            }
+//        }
+
+        if let content = element.content {
+            text += content
+        }
+        
+        if element.hasChildren() {
+            for child in element.children {
+                let c = child as! TFHppleElement
+                text += parseElement(element: c)
+            }
+        }
+        
+        return text
     }
     
     // MARK: - Shared Instance

@@ -1,5 +1,5 @@
 //
-//  FeaturedViewController.swift
+//  ChartsViewController.swift
 //  Flag Ceremony
 //
 //  Created by Jovit Royeca on 16/11/2016.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import Networking
 
-class FeaturedViewController: UIViewController {
+class ChartsViewController: UIViewController {
 
     // MARK: Variables
     var topViewedCountries:[Country]?
@@ -51,7 +51,7 @@ class FeaturedViewController: UIViewController {
 }
 
 // MARK: UITableViewDataSource
-extension FeaturedViewController : UITableViewDataSource {
+extension ChartsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -78,14 +78,12 @@ extension FeaturedViewController : UITableViewDataSource {
         case 0:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewedCell") as? SliderTableViewCell {
                 sliderCell.countries = topViewedCountries
-                sliderCell.collectionView.reloadData()
                 sliderCell.countType = .Views
                 cell = sliderCell
             }
         case 1:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayedCell") as? SliderTableViewCell {
                 sliderCell.countries = topPlayedCountries
-                sliderCell.collectionView.reloadData()
                 sliderCell.countType = .Plays
                 cell = sliderCell
             }
@@ -98,7 +96,7 @@ extension FeaturedViewController : UITableViewDataSource {
 }
 
 // MARK: UITableViewDelegate
-extension FeaturedViewController : UITableViewDelegate {
+extension ChartsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.size.height / 3
     }

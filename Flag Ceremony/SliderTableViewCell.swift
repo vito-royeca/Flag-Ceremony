@@ -128,9 +128,9 @@ extension SliderTableViewCell : UICollectionViewDataSource {
             let countries = countries {
             let country = countries[row]
             sliderCell.imageView.image = nil
-            sliderCell.nameLabel.text = nil
+            sliderCell.nameLabel.text = ""
             sliderCell.countIcon.image = nil
-            sliderCell.countLabel.text = nil
+            sliderCell.countLabel.text = ""
             
             if let url = country.getFlagURLForSize(size: .Normal) {
                 if let image = UIImage(contentsOfFile: url.path) {

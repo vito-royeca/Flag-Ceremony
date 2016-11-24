@@ -97,7 +97,9 @@ extension CountryViewController : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "FlagCell")
-            if let url = country!.getFlagURLForSize(size: .Normal) {
+            let flagSize:FlagSize = UIDevice.current.userInterfaceIdiom == .phone ? .Normal : .Big
+            
+            if let url = country!.getFlagURLForSize(size: flagSize) {
                 if let image = UIImage(contentsOfFile: url.path),
                     let imageView = cell?.viewWithTag(1) as? UIImageView {
                     imageView.image = imageWithBorder(fromImage: image)
@@ -110,8 +112,8 @@ extension CountryViewController : UITableViewDataSource {
             }
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell")
-            cell?.textLabel?.text = nil
-            cell?.detailTextLabel?.text = nil
+            cell?.textLabel?.text = ""
+            cell?.detailTextLabel?.text = ""
             
             if let anthem = anthem {
                 cell?.textLabel?.text = anthem.nativeTitle
