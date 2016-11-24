@@ -20,6 +20,7 @@ struct Anthem {
         static let Lyrics       = "lyrics"
         static let LyricsName   = "name"
         static let LyricsText   = "text"
+        static let Info   = "info"
     }
     
     // MARK: Properties
@@ -33,6 +34,7 @@ struct Anthem {
     let lyricsWriter: [String]?
     let musicWriter: [String]?
     let lyrics: [[String: Any]]?
+    let info: String?
     
     // MARK: Initialization
     init(key: String, dict: [String: Any]) {
@@ -46,6 +48,7 @@ struct Anthem {
         self.lyricsWriter = dict[Keys.LyricsWriter] as? [String]
         self.musicWriter = dict[Keys.MusicWriter] as? [String]
         self.lyrics = dict[Keys.Lyrics] as? [[String: Any]]
+        self.info = dict[Keys.Info] as? String
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -60,5 +63,6 @@ struct Anthem {
         self.lyricsWriter = value[Keys.LyricsWriter] as? [String]
         self.musicWriter = value[Keys.MusicWriter] as? [String]
         self.lyrics = value[Keys.Lyrics] as? [[String: Any]]
+        self.info = value[Keys.Info] as? String
     }
 }

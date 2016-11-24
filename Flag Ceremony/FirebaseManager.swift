@@ -59,32 +59,32 @@ class FirebaseManager : NSObject {
     }
 
     func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
-        if anthemsDict == nil {
-            if let path = Bundle.main.path(forResource: "anthems", ofType: "json", inDirectory: "data") {
-                if FileManager.default.fileExists(atPath: path) {
-                    anthemsDict = NSDictionary(contentsOfFile: path)
-                }
-            }
-        }
-        
-        if let anthemsDict = anthemsDict {
-            var a:Anthem?
-            
-            if let anthem = anthemsDict[key] as? [String: Any] {
-                a = Anthem(key: key, dict: anthem)
-            }
-            
-            completion(a)
-        }
-//        let anthem = FIRDatabase.database().reference().child("anthems").child(key)
-//        anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+//        if anthemsDict == nil {
+//            if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
+//                if FileManager.default.fileExists(atPath: path) {
+//                    anthemsDict = NSDictionary(contentsOfFile: path)
+//                }
+//            }
+//        }
+//        
+//        if let anthemsDict = anthemsDict {
 //            var a:Anthem?
 //            
-//            if let _ = snapshot.value as? [String: Any] {
-//                 a = Anthem(snapshot: snapshot)
+//            if let anthem = anthemsDict[key] as? [String: Any] {
+//                a = Anthem(key: key, dict: anthem)
 //            }
+//            
 //            completion(a)
-//        })
+//        }
+        let anthem = FIRDatabase.database().reference().child("anthems").child(key)
+        anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+            var a:Anthem?
+            
+            if let _ = snapshot.value as? [String: Any] {
+                 a = Anthem(snapshot: snapshot)
+            }
+            completion(a)
+        })
     }
     
     func fetchTopViewed(completion: @escaping ([Country]) -> Void) {
