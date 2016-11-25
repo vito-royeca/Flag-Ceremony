@@ -41,22 +41,22 @@ class Scraper : NSObject {
         NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
     }
     
-    func insertAnthems() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
-            if FileManager.default.fileExists(atPath: path) {
+    func updateCountry(key: String, hasAnthemFile: Bool) {
+        let countryRef = ref.child("countries").child(key)
+        
+        countryRef.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            if var post = currentData.value as? [String : Any] {
+                post[Country.Keys.HasAnthemFile] = NSNumber(value: hasAnthemFile)
                 
-                if let dictionary = NSDictionary(contentsOfFile: path) {
-                    for (key,value) in dictionary {
-                        if let key2 = key as? String,
-                            let value2 = value as? [String: Any] {
-                            
-                            let anthem = self.ref.child("anthems").child(key2)
-                            for (key3,value3) in value2 {
-                                anthem.child(key3).setValue(value3)
-                            }
-                        }
-                    }
-                }
+                // Set value and report transaction success
+                currentData.value = post
+                
+                return FIRTransactionResult.success(withValue: currentData)
+            }
+            return FIRTransactionResult.success(withValue: currentData)
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
             }
         }
     }
@@ -108,26 +108,6 @@ class Scraper : NSObject {
         }
     }
     
-    func updateCountry(key: String, hasAnthemFile: Bool) {
-        let countryRef = ref.child("countries").child(key)
-        
-        countryRef.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
-            if var post = currentData.value as? [String : Any] {
-                post[Country.Keys.HasAnthemFile] = NSNumber(value: hasAnthemFile)
-                
-                // Set value and report transaction success
-                currentData.value = post
-                
-                return FIRTransactionResult.success(withValue: currentData)
-            }
-            return FIRTransactionResult.success(withValue: currentData)
-        }) { (error, committed, snapshot) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
     func getLyrics() {
         if let path = Bundle.main.path(forResource: "anthems", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
@@ -141,7 +121,7 @@ class Scraper : NSObject {
                             let cc = key as! String
                             
                             if let value2 = value as? [String: Any] {
-                                print("\(key)")
+                                print("lyrics... \(key)")
                                 
                                 var anthemDict = [String: Any]()
                                 
@@ -173,6 +153,26 @@ class Scraper : NSObject {
                         
                     } catch let error {
                         print("Error!! \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func insertAnthems() {
+        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                
+                if let dictionary = NSDictionary(contentsOfFile: path) {
+                    for (key,value) in dictionary {
+                        if let key2 = key as? String,
+                            let value2 = value as? [String: Any] {
+                            
+                            let anthem = self.ref.child("anthems").child(key2)
+                            for (key3,value3) in value2 {
+                                anthem.child(key3).setValue(value3)
+                            }
+                        }
                     }
                 }
             }
@@ -231,6 +231,9 @@ class Scraper : NSObject {
             for element in elements {
                 info! += parseElement(element: element)
             }
+            
+            info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
+            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
         }
         
         return info
@@ -240,15 +243,6 @@ class Scraper : NSObject {
     func parseElement(element: TFHppleElement) -> String {
         var text = ""
         
-//        if element.tagName == "br" ||
-//            element.tagName == "b" {
-//            // do nothing
-//        } else {
-//            if let content = element.content {
-//                text += content
-//            }
-//        }
-
         if let content = element.content {
             text += content
         }
