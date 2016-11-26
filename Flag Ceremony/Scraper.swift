@@ -16,7 +16,7 @@ class Scraper : NSObject {
     
     func insertCountries() {
         let baseURL = CountriesURL
-        let path = "/info/all.json"
+        let path = "/api/en/countries/info/all.json"
         let method:HTTPMethod = .Get
         let headers:[String: String]? = nil
         let paramType:Networking.ParameterType = .json
@@ -41,6 +41,25 @@ class Scraper : NSObject {
         NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
     }
     
+    func insertAnthems() {
+        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                if let dictionary = NSDictionary(contentsOfFile: path) {
+                    for (key,value) in dictionary {
+                        if let key2 = key as? String,
+                            let value2 = value as? [String: Any] {
+                            
+                            let anthem = self.ref.child("anthems").child(key2)
+                            for (key3,value3) in value2 {
+                                anthem.child(key3).setValue(value3)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     func updateCountry(key: String, hasAnthemFile: Bool) {
         let countryRef = ref.child("countries").child(key)
         
@@ -61,7 +80,7 @@ class Scraper : NSObject {
         }
     }
     
-    func downloadAnthems() {
+    func downloadAnthemFiles() {
         ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
             let countries = snapshot.value as? [String: [String: Any]] ?? [:]
             
@@ -109,40 +128,37 @@ class Scraper : NSObject {
     }
     
     func getLyrics() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "json", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
-                
-                if let data = NSData(contentsOf: URL(fileURLWithPath: path)) {
-                    do {
-                        let dictionary = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments) as? NSDictionary
-                        let newDict = NSMutableDictionary()
+                if let dictionary = NSDictionary(contentsOfFile: path) {
+                    let newDict = NSMutableDictionary()
+                    
+                    for (key,value) in dictionary {
+                        let cc = key as! String
                         
-                        for (key,value) in dictionary! {
-                            let cc = key as! String
+                        if let value2 = value as? [String: Any] {
+                            var anthemDict = [String: Any]()
                             
-                            if let value2 = value as? [String: Any] {
-                                print("lyrics... \(key)")
-                                
-                                var anthemDict = [String: Any]()
-                                
-                                // copy
-                                for (key3,value3) in value2 {
-                                    anthemDict[key3] = value3
-                                }
-                                
-                                // add lyrics and info
-                                if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
-                                    if let doc = readUrl(url: url) {
-                                        anthemDict["lyrics"] = parseAnthemLyrics(doc: doc)
-                                        anthemDict["info"] = parseAnthemInfo(doc: doc)
-                                    }
-                                }
-                                
-                                newDict.setObject(anthemDict, forKey: key as! NSCopying)
+                            print("lyrics... \(key)")
+                            // copy
+                            for (key3,value3) in value2 {
+                                anthemDict[key3] = value3
                             }
+                            
+                            // add lyrics and info
+                            if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
+                                if let doc = readUrl(url: url) {
+                                    anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
+                                    anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                }
+                            }
+                            
+                            newDict.setObject(anthemDict, forKey: key as! NSCopying)
                         }
-                        
-                        // write to disk
+                    }
+                    
+                    // write to disk
+                    do {
                         let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
                         let localPath = "\(docsPath)/anthems.dict"
                         let localUrl = URL(fileURLWithPath: localPath)
@@ -150,30 +166,79 @@ class Scraper : NSObject {
                             try FileManager.default.removeItem(at: localUrl)
                         }
                         newDict.write(to: localUrl, atomically: true)
-                        
                     } catch let error {
-                        print("Error!! \(error.localizedDescription)")
+                        print("error: \(error)")
                     }
                 }
             }
         }
     }
     
-    func insertAnthems() {
+    func getFlagInfo() {
         if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
-                
                 if let dictionary = NSDictionary(contentsOfFile: path) {
-                    for (key,value) in dictionary {
-                        if let key2 = key as? String,
-                            let value2 = value as? [String: Any] {
+                    let newDict = NSMutableDictionary()
+                    var countryDict:[String: [String: Any]]?
+                    
+                    let country = FIRDatabase.database().reference().child("countries")
+                    country.observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let snapshotValue = snapshot.value as? [String: [String: Any]] {
+                            countryDict = snapshotValue
                             
-                            let anthem = self.ref.child("anthems").child(key2)
-                            for (key3,value3) in value2 {
-                                anthem.child(key3).setValue(value3)
+                            for (key,value) in dictionary {
+                                if let value2 = value as? [String: Any] {
+                                    var anthemDict = [String: Any]()
+                                    
+                                    // copy
+                                    for (key3,value3) in value2 {
+                                        anthemDict[key3] = value3
+                                    }
+                                    
+                                    if let countryValues = countryDict![key as! String] {
+                                        if let name = countryValues[Country.Keys.Name] as? String {
+                                            // transform the name
+                                            var lastPaths = [name.lowercased()]
+                                            if name.contains(" ") {
+                                                let newLastPath = name.lowercased().replacingOccurrences(of: " ", with: "-")
+                                                lastPaths = [newLastPath,  "the-\(newLastPath)"]
+                                            }
+                                            
+                                            // add flag info
+                                            for lp in lastPaths {
+                                                if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
+                                                    if let doc = self.readUrl(url: url) {
+                                                        print("flag info... \(key)")
+                                                        anthemDict[Anthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
+                                                        break
+                                                    } else {
+                                                        print("invalid url: \(url)")
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                    newDict.setObject(anthemDict, forKey: key as! NSCopying)
+                                }
                             }
+                            
+                            // write to disk
+                            do {
+                                let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                                let localPath = "\(docsPath)/anthems.dict"
+                                let localUrl = URL(fileURLWithPath: localPath)
+                                if FileManager.default.fileExists(atPath: localPath) {
+                                    try FileManager.default.removeItem(at: localUrl)
+                                }
+                                newDict.write(to: localUrl, atomically: true)
+                            } catch let error {
+                                print("error: \(error)")
+                            }
+                            
+                            
                         }
-                    }
+                    })
                 }
             }
         }
@@ -213,8 +278,8 @@ class Scraper : NSObject {
         if keys.count > 0 {
             for i in 0...keys.count-1 {
                 var lyrics = [String: Any]()
-                lyrics["name"] = keys[i]
-                lyrics["text"] = values[i]
+                lyrics[Anthem.Keys.LyricsName] = keys[i]
+                lyrics[Anthem.Keys.LyricsText] = values[i]
                 array.append(lyrics)
             }
         }
@@ -239,6 +304,23 @@ class Scraper : NSObject {
         return info
     }
 
+    func parseFlagInfo(doc: TFHpple) -> String? {
+        var info:String?
+        
+        if let elements = doc.search(withXPathQuery: "//div[@id='flag-content']") as? [TFHppleElement] {
+            info = ""
+            
+            for element in elements {
+                info! += parseElement(element: element)
+            }
+            
+            info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
+            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
+        }
+        
+        info = info?.replacingOccurrences(of: "(adsbygoogle = window.adsbygoogle || []).push({});\n\n\n\n\t", with: "")
+        return info
+    }
     
     func parseElement(element: TFHppleElement) -> String {
         var text = ""

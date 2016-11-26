@@ -42,6 +42,15 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>flagpedia.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>nationalanthems.info</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>

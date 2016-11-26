@@ -8,9 +8,10 @@
 
 import Foundation
 
-let CountriesURL = "http://www.geognos.com/api/en/countries"
+let CountriesURL = "http://www.geognos.com"
 let HymnsURL     = "http://www.nationalanthems.info"
 let WikipediaURL = "https://en.wikipedia.org"
+let FlagpediaURL = "http://flagpedia.net"
 
 enum FlagSize: String {
     case Big  = "big",

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum CountryViewRows: Int {
+    case lyrics, anthem, flag, country
+}
+
 class CountryViewController: DismissableViewController {
 
     // MARK: Variables
@@ -111,14 +115,16 @@ extension CountryViewController : UITableViewDataSource {
      
         if let anthem = anthem {
             switch selectedDataSegment {
-            case 0:
-            if let lyrics = anthem.lyrics {
-                sections += lyrics.count
-            }
-            case 1:
-                return 2
-            case 2:
-                sections += 3
+            case CountryViewRows.lyrics.rawValue :
+                if let lyrics = anthem.lyrics {
+                    sections += lyrics.count
+                }
+            case CountryViewRows.anthem.rawValue:
+                sections += 4
+            case CountryViewRows.flag.rawValue:
+                sections += 1
+            case CountryViewRows.country.rawValue:
+                sections += 8
             default:
                 ()
             }
@@ -133,19 +139,40 @@ extension CountryViewController : UITableViewDataSource {
         default:
             if let anthem = anthem {
                 switch selectedDataSegment {
-                case 0:
+                case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[section-1]
                         return lyricsDict[Anthem.Keys.LyricsName] as! String?
                     }
-                case 2:
-                    switch section + 3 {
-                    case 4:
-                        return "Date Adopted"
+                case CountryViewRows.anthem.rawValue:
+                    switch section + 4 {
                     case 5:
-                        return "Composer"
+                        return "Date Adopted"
                     case 6:
+                        return "Composer"
+                    case 7:
                         return "Lyricist"
+                    default:
+                        return nil
+                    }
+                case CountryViewRows.country.rawValue:
+                    switch section + 8 {
+                    case 9:
+                        return "Capital"
+                    case 10:
+                        return "Telephone Code Prefix"
+                    case 11:
+                        return "Top Level Domain code"
+                    case 12:
+                        return "ISO 3166-1-alpha-2 character code"
+                    case 13:
+                        return "ISO 3 character code"
+                    case 14:
+                        return "ISO Numeric code"
+                    case 15:
+                        return "FIPS code"
+                    case 16:
+                        return "Further Info"
                     default:
                         return nil
                     }
@@ -200,37 +227,79 @@ extension CountryViewController : UITableViewDataSource {
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: "DynamicCell")
             
-            if let anthem = anthem,
+            if let country = country,
+                let anthem = anthem,
                 let label = cell?.viewWithTag(1) as? UILabel {
 
+                label.text = ""
+                
                 switch selectedDataSegment {
-                case 0:
+                case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[indexPath.section-1]
                         label.text = lyricsDict[Anthem.Keys.LyricsText] as! String?
                     }
-                case 1:
-                    label.text = anthem.info
-                case 2:
-                    switch indexPath.section + 3 {
-                    case 4:
+                case CountryViewRows.anthem.rawValue:
+                    switch indexPath.section {
+                    case 1:
                         if let dateAdopted = anthem.dateAdopted {
                             label.text = dateAdopted.joined(separator: ", ")
-                        } else {
-                            label.text = ""
                         }
-                    case 5:
+                    case 2:
                         if let musicWriter = anthem.musicWriter {
                             label.text = musicWriter.joined(separator: ", ")
-                        } else {
-                            label.text = ""
                         }
-                    case 6:
+                    case 3:
                         if let lyricsWriter = anthem.lyricsWriter {
                             label.text = lyricsWriter.joined(separator: ", ")
-                        } else {
-                            label.text = ""
                         }
+                    case 4:
+                        label.text = anthem.info
+                    default:
+                        ()
+                    }
+                case CountryViewRows.flag.rawValue:
+                    label.text = anthem.flagInfo
+                case CountryViewRows.country.rawValue:
+                    switch indexPath.section {
+                    case 1:
+                        if let capital = country.capital {
+                            label.text = capital[Country.Keys.CapitalName] as! String?
+                        }
+                    case 2:
+                        label.text = country.telPref
+                    case 3:
+                        if let countryCodes = country.countryCodes {
+                            if let tld = countryCodes[Country.Keys.CountryCodesTld] {
+                                label.text = "\(tld)"
+                            }
+                        }
+                    case 4:
+                        if let countryCodes = country.countryCodes {
+                            if let iso2 = countryCodes[Country.Keys.CountryCodesIso2] {
+                                label.text = "\(iso2)"
+                            }
+                        }
+                    case 5:
+                        if let countryCodes = country.countryCodes {
+                            if let iso3 = countryCodes[Country.Keys.CountryCodesIso3] {
+                                label.text = "\(iso3)"
+                            }
+                        }
+                    case 6:
+                        if let countryCodes = country.countryCodes {
+                            if let ison = countryCodes[Country.Keys.CountryCodesIsoN] {
+                                label.text = "\(ison)"
+                            }
+                        }
+                    case 7:
+                        if let countryCodes = country.countryCodes {
+                            if let fips = countryCodes[Country.Keys.CountryCodesFips] {
+                                label.text = "\(fips)"
+                            }
+                        }
+                    case 8:
+                        label.text = country.countryInfo
                     default:
                         ()
                     }
