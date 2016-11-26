@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,22 +30,22 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL3-g7-vZ9">
                         <rect key="frame" x="33" y="13" width="40" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="lQa-TH-bw1"/>
+                            <constraint firstAttribute="width" constant="40" id="WDi-xv-Y5R"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5ep-cv-Tu1">
-                        <rect key="frame" x="79" y="8" width="185" height="31"/>
+                        <rect key="frame" x="79" y="8" width="180" height="31"/>
                         <connections>
                             <action selector="progressAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="ksq-Uc-YLa"/>
                         </connections>
                     </slider>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auN-th-0I3">
-                        <rect key="frame" x="272" y="13" width="40" height="21"/>
+                        <rect key="frame" x="267" y="13" width="45" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="LtG-Ev-vG2"/>
+                            <constraint firstAttribute="width" constant="45" id="2nD-Dk-O0o"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
@@ -59,20 +59,20 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="07T-Po-EiT" firstAttribute="bottom" secondItem="auN-th-0I3" secondAttribute="bottom" id="0rK-yl-QdI"/>
-                    <constraint firstItem="iDf-o6-D4m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1dJ-jE-Owh"/>
-                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="centerY" secondItem="5ep-cv-Tu1" secondAttribute="centerY" id="1eP-LB-Wfh"/>
-                    <constraint firstItem="07T-Po-EiT" firstAttribute="top" secondItem="auN-th-0I3" secondAttribute="top" id="42T-b4-Lmu"/>
-                    <constraint firstItem="07T-Po-EiT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Hs1-Hl-Q5g"/>
-                    <constraint firstItem="5ep-cv-Tu1" firstAttribute="leading" secondItem="sL3-g7-vZ9" secondAttribute="trailing" constant="8" symbolic="YES" id="IAC-oS-RS3"/>
-                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="leading" secondItem="iDf-o6-D4m" secondAttribute="trailing" constant="8" symbolic="YES" id="Lfn-bp-bah"/>
-                    <constraint firstItem="auN-th-0I3" firstAttribute="leading" secondItem="5ep-cv-Tu1" secondAttribute="trailing" constant="10" id="TXb-Bl-fwY"/>
-                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="firstBaseline" secondItem="auN-th-0I3" secondAttribute="firstBaseline" id="cdL-ky-DPn"/>
-                    <constraint firstItem="auN-th-0I3" firstAttribute="trailing" secondItem="07T-Po-EiT" secondAttribute="trailing" id="fIX-jC-hpS"/>
-                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="baseline" secondItem="auN-th-0I3" secondAttribute="baseline" id="t2A-Rs-LlL"/>
-                    <constraint firstItem="5ep-cv-Tu1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ttR-Tu-eCn"/>
-                    <constraint firstItem="iDf-o6-D4m" firstAttribute="centerY" secondItem="sL3-g7-vZ9" secondAttribute="centerY" id="vj1-B7-hiq"/>
-                    <constraint firstItem="auN-th-0I3" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="wsd-rd-m9I"/>
+                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="leading" secondItem="iDf-o6-D4m" secondAttribute="trailing" constant="8" symbolic="YES" id="1rp-Lg-jCE"/>
+                    <constraint firstItem="07T-Po-EiT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="AnW-gt-eNC"/>
+                    <constraint firstItem="5ep-cv-Tu1" firstAttribute="leading" secondItem="sL3-g7-vZ9" secondAttribute="trailing" constant="8" symbolic="YES" id="BvI-f9-2lf"/>
+                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="firstBaseline" secondItem="auN-th-0I3" secondAttribute="firstBaseline" id="EU6-ep-xqc"/>
+                    <constraint firstItem="iDf-o6-D4m" firstAttribute="centerY" secondItem="sL3-g7-vZ9" secondAttribute="centerY" id="FeP-79-Ijk"/>
+                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="baseline" secondItem="auN-th-0I3" secondAttribute="baseline" id="O4p-oy-mh2"/>
+                    <constraint firstItem="07T-Po-EiT" firstAttribute="bottom" secondItem="sL3-g7-vZ9" secondAttribute="bottom" id="PPD-Pg-VMh"/>
+                    <constraint firstItem="07T-Po-EiT" firstAttribute="trailing" secondItem="auN-th-0I3" secondAttribute="trailing" id="T9B-Wp-ZGD"/>
+                    <constraint firstItem="auN-th-0I3" firstAttribute="leading" secondItem="5ep-cv-Tu1" secondAttribute="trailing" constant="10" id="Udb-he-pzg"/>
+                    <constraint firstItem="5ep-cv-Tu1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Xdm-LD-6g1"/>
+                    <constraint firstItem="auN-th-0I3" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="i4B-M8-DnP"/>
+                    <constraint firstItem="07T-Po-EiT" firstAttribute="top" secondItem="auN-th-0I3" secondAttribute="top" id="nAG-1X-jE0"/>
+                    <constraint firstItem="sL3-g7-vZ9" firstAttribute="centerY" secondItem="5ep-cv-Tu1" secondAttribute="centerY" id="t1H-iR-XIl"/>
+                    <constraint firstItem="iDf-o6-D4m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xgK-xU-mDv"/>
                 </constraints>
             </tableViewCellContentView>
             <gestureRecognizers/>

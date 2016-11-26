@@ -13,6 +13,7 @@ class DismissableViewController: UIViewController {
     // MARK: Outlets
     var backgroundTap: UITapGestureRecognizer?
     
+    // TO DO: hit or miss :(
     func backgroundTapAction(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let rootView = view.window
