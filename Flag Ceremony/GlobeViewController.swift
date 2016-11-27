@@ -49,8 +49,8 @@ class GlobeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailsFromGlobeAsPush" ||
-            segue.identifier == "showDetailsFromGlobeAsModal" {
+        if segue.identifier == "showDetailsAsPush" ||
+            segue.identifier == "showDetailsAsModal" {
             
             var countryVC:CountryViewController?
             
@@ -169,9 +169,9 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
             let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsFromGlobeAsPush", sender: country)
+                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsFromGlobeAsModal", sender: country)
+                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
             }
         }
     }

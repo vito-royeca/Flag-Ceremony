@@ -46,8 +46,8 @@ class MapViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailsFromMapAsPush" ||
-            segue.identifier == "showDetailsFromMapAsModal" {
+        if segue.identifier == "showDetailsAsPush" ||
+            segue.identifier == "showDetailsAsModal" {
             
             var countryVC:CountryViewController?
             
@@ -203,9 +203,9 @@ extension MapViewController : MaplyViewControllerDelegate {
             let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsFromMapAsPush", sender: country)
+                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsFromMapAsModal", sender: country)
+                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
             }
         }
     }

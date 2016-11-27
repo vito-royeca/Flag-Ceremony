@@ -1815,6 +1815,55 @@ Chorus
 		<key>wiki</key>
 		<string>/wiki/L%27Aube_Nouvelle</string>
 	</dict>
+	<key>BM</key>
+	<dict>
+		<key>info</key>
+		<string>As a British colony, the official national anthem is that of the United Kingdom, a local territorial anthem also exists, and is entitled “Hail to Bermuda.” 
+
+Special thanks to: John Gibbons for some of this information, Alexander Lavery for the lyrics, Philip Ion for a correction to the lyrics and Lorant Oswald for the sheet music and music file.</string>
+		<key>lyrics</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>English lyrics</string>
+				<key>text</key>
+				<string>
+1. Hail to Bermuda
+My island in the sun
+Sing out in glory
+To the nation we’ve become
+We’ve grown from heart to heart
+And strength to strength
+This privilege is mine
+To sing long live Bermuda
+Because this island’s mine
+
+2. Hail to Bermuda
+My homeland dear to me
+This is my own land
+Built on strength and unity
+We’ve grown from heart to heart
+And strength to strength
+For loyalty is prime
+And sing long live Bermuda
+Because this island’s mine!
+
+</string>
+			</dict>
+		</array>
+        <key>lyricsWriter</key>
+        <array>
+            <string>Bette Johns</string>
+        </array>
+        <key>musicWriter</key>
+        <array>
+            <string>Bette Johns</string>
+        </array>
+        <key>nativeTitle</key>
+        <string>Hail to Bermuda</string>
+        <key>title</key>
+        <string>Hail to Bermuda</string>
+	</dict>
 	<key>BN</key>
 	<dict>
 		<key>dateAdopted</key>
@@ -6529,6 +6578,96 @@ And under God march on for evermore!
 		<key>wiki</key>
 		<string>/wiki/God_Bless_Our_Homeland_Ghana</string>
 	</dict>
+	<key>GL</key>
+	<dict>
+        <key>dateAdopted</key>
+        <array>
+            <string>1957</string>
+        </array>
+		<key>info</key>
+		<string>Part of the Kingdom of Denmark, Greenland has a local anthem adopted in 1916 well before autonomy. Since 1979, when home rule was granted, the government has also recognized the anthem used by the local Kalaallit people, “Nuna asiilasooq” (The Land of Great Length) as a secondary anthem.
+
+Special thanks to: Kunuunnguaq Fleischer for some of this information and Klaus Caussmacher for the lyrics and sheet music.</string>
+		<key>lyrics</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Kalaallisut lyrics</string>
+				<key>text</key>
+				<string>
+1. Nunarput, utoqqarsuanngoravit 
+niaqqut ulissimavoqq qiinik. 
+Qitornatit kissumiaannarpatit 
+tunillugit sineriavit piinik. 
+
+2. Akullequtaastut merletutut 
+ilinni perotugut tamaani 
+kalaallinik imminik taajumavugut 
+niaqquit ataqqinartup saani. 
+
+3. Atortillugillu tamaasa pisit 
+ingerlaniarusuleqaagut, 
+nutarterlugillu noqitsigisatit siumut, 
+siumut piumaqaagut. 
+
+4. Inersimalersut ingerlanerat 
+tungaalitsiterusuleqaarput, 
+oqaatsit “aviisit” qanoq kingunerat 
+atussasoq erinigileqaarput. 
+
+5. Taqilluni naami atunngiveqaaq, 
+kalaallit siumut makigitsi. 
+Inuttut inuuneq pigiuminaqaaq, 
+saperasi isumaqaleritsi.
+
+</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>English translation</string>
+				<key>text</key>
+				<string>
+1. Our country, who’s become so old 
+your head all covered with white hair. 
+Always held us, your children, 
+in your bosom providing the riches of your coasts. 
+
+2. As middle children in the family 
+we blossomed here Greenland, 
+we want to call ourselves before your proud 
+and honourable head. 
+
+3. With a burning desire to develop 
+what you have to give, renewing, 
+Removing your obstacles our desire 
+to move is forward, forward. 
+
+4. The way of matured societies 
+is our zealous goal to attain; 
+the effect of speech and letters 
+we long to behold. 
+
+5. Humbleness is not the course 
+Greenland wake up and be proud! 
+A dignified life is our goal; 
+couragously take a stand. 
+
+</string>
+			</dict>
+		</array>
+        <key>lyricsWriter</key>
+        <array>
+            <string>Henrik Lund</string>
+        </array>
+        <key>musicWriter</key>
+        <array>
+            <string>Jonathan Petersen</string>
+        </array>
+        <key>nativeTitle</key>
+        <string>Nunarput utoqqarsuanngoravit</string>
+        <key>title</key>
+        <string>Our Country, Who’s Become So Old</string>
+	</dict>
 	<key>GM</key>
 	<dict>
 		<key>dateAdopted</key>
@@ -6726,28 +6865,27 @@ And we preserve and we preserve our national independence.
 		<key>wiki</key>
 		<string>/wiki/Caminemos_pisando_las_sendas_de_nuestra_inmensa_felicidad</string>
 	</dict>
-    
-    <key>GR</key>
-    <dict>
-        <key>dateAdopted</key>
-        <array>
-            <string>1865</string>
-        </array>
-        <key>flagInfo</key>
-        <string>The Greek flag originated during the uprising against the Turks in 1821, when a blue flag with a white cross was raised in order to oppose the Ottoman crescent. The flag in its present form was adopted in 1822. The cross was moved to the top left part of the flag and white and blue stripes were added. Nine striped should probably remind nine syllables of a revolutionary slogan "Eleftheria i Thanatos" ("Freedom or Death"). Blue symbolizes the sea, whose beauty inspired the idea of revolt. White stands for purity of revolutionists´ intentions and cross refers to the respect to the Orthodox Church, which helped to maintain national identity in times of occupation. The shade of blue was changed many times, yet the flag can be called "Galanolefci" (blue and white in translation).</string>
-        <key>info</key>
-        <string>The Greek Anthem is based on the “Hymn to the Freedom”, a large 158 verse poem written by Dionysios Solomos, a distinguished poet from Zakynthos Island. It was inspired by the Greek Revolution of 1821 against the Ottoman Empire. During 1828 Nikolaos Mantzaros composed the music for Solomos’ hymn, one version for the entire poem, and one for just the first two stanzas. Although King Othon (Otto) decorated both of them for their work (1845 and 1849), he did not replace the Royal Anthem of that time with the Solomos/Mantzaros hymn. The royal anthem then in use was a musical derivative from the German one, with a text glorifying Othon and his dynasty. After the overthrow of the dynasty, the new King George I and the Greek establishment decided to look for a clearly Greek work, both with respect to the poetry and the music. The “Hymn to the Freedom” was readily there – extremely popular since the Revolution times, often recited or sung during patriotic meetings and celebrations, and the “Hymn to Freedom” (with Mantzaro’s version for the first two stanzas only) became the national anthem.
+	<key>GR</key>
+	<dict>
+		<key>dateAdopted</key>
+		<array>
+			<string>1865</string>
+		</array>
+		<key>flagInfo</key>
+		<string>The Greek flag originated during the uprising against the Turks in 1821, when a blue flag with a white cross was raised in order to oppose the Ottoman crescent. The flag in its present form was adopted in 1822. The cross was moved to the top left part of the flag and white and blue stripes were added. Nine striped should probably remind nine syllables of a revolutionary slogan "Eleftheria i Thanatos" ("Freedom or Death"). Blue symbolizes the sea, whose beauty inspired the idea of revolt. White stands for purity of revolutionists´ intentions and cross refers to the respect to the Orthodox Church, which helped to maintain national identity in times of occupation. The shade of blue was changed many times, yet the flag can be called "Galanolefci" (blue and white in translation).</string>
+		<key>info</key>
+		<string>The Greek Anthem is based on the “Hymn to the Freedom”, a large 158 verse poem written by Dionysios Solomos, a distinguished poet from Zakynthos Island. It was inspired by the Greek Revolution of 1821 against the Ottoman Empire. During 1828 Nikolaos Mantzaros composed the music for Solomos’ hymn, one version for the entire poem, and one for just the first two stanzas. Although King Othon (Otto) decorated both of them for their work (1845 and 1849), he did not replace the Royal Anthem of that time with the Solomos/Mantzaros hymn. The royal anthem then in use was a musical derivative from the German one, with a text glorifying Othon and his dynasty. After the overthrow of the dynasty, the new King George I and the Greek establishment decided to look for a clearly Greek work, both with respect to the poetry and the music. The “Hymn to the Freedom” was readily there – extremely popular since the Revolution times, often recited or sung during patriotic meetings and celebrations, and the “Hymn to Freedom” (with Mantzaro’s version for the first two stanzas only) became the national anthem.
             
             The Greek anthem is also used in Cyprus, which has a substantial Greek community.
             
             Special thanks to: Theo Stylianides for the sheet music.</string>
-        <key>lyrics</key>
-        <array>
-            <dict>
-                <key>name</key>
-                <string>Greek lyrics (Greek script)</string>
-                <key>text</key>
-                <string>
+		<key>lyrics</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Greek lyrics (Greek script)</string>
+				<key>text</key>
+				<string>
                     Σε γνωρίζω από την κόψη
                     του σπαθιού την τρομερή,
                     σε γνωρίζω από την όψη
@@ -6763,12 +6901,12 @@ And we preserve and we preserve our national independence.
                     χαίρε, ω χαίρε, Ελευθεριά!
                     
                 </string>
-            </dict>
-            <dict>
-                <key>name</key>
-                <string>Greek lyrics (Romanization)</string>
-                <key>text</key>
-                <string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Greek lyrics (Romanization)</string>
+				<key>text</key>
+				<string>
                     Se gnorizo apo tin kopsi
                     tou spathiou tin tromeri,
                     se gnorízo apo tin opsi,
@@ -6784,12 +6922,12 @@ And we preserve and we preserve our national independence.
                     chere, o chere, Eleftheria!
                     
                 </string>
-            </dict>
-            <dict>
-                <key>name</key>
-                <string>English versification</string>
-                <key>text</key>
-                <string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>English versification</string>
+				<key>text</key>
+				<string>
                     I shall always recognise you
                     By the dreadful sword you hold,
                     As the earth, with searching vision,
@@ -6805,32 +6943,23 @@ And we preserve and we preserve our national independence.
                     Let us hail you, oh Liberty!
                     
                 </string>
-            </dict>
-        </array>
-        <key>lyricsWriter</key>
-        <array>
-            <string>Dionýsios Solomós</string>
-        </array>
-        <key>musicWriter</key>
-        <array>
-            <string>Nikolaos Mantzaros</string>
-        </array>
-        <key>nativeTitle</key>
-        <string>Ýmnos eis tīn Eleutherían</string>
-        <key>title</key>
-        <string>Hymn to Liberty</string>
-        <key>wiki</key>
-        <string>/wiki/Hymn_to_Liberty</string>
-    </dict>
-    
-    <key>GL</key>
-    <dict>
+			</dict>
+		</array>
+		<key>lyricsWriter</key>
+		<array>
+			<string>Dionýsios Solomós</string>
+		</array>
+		<key>musicWriter</key>
+		<array>
+			<string>Nikolaos Mantzaros</string>
+		</array>
+		<key>nativeTitle</key>
+		<string>Ýmnos eis tīn Eleutherían</string>
+		<key>title</key>
+		<string>Hymn to Liberty</string>
+		<key>wiki</key>
+		<string>/wiki/Hymn_to_Liberty</string>
 	</dict>
-    
-    <key>BM</key>
-    <dict>
-    </dict>
-    
 	<key>GT</key>
 	<dict>
 		<key>dateAdopted</key>

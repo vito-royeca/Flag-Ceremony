@@ -15,12 +15,6 @@ import Networking
     func didSelectItem(_ item: Any)
 }
 
-enum CountType: String {
-    case Views  = "Views",
-    Plays  = "Plays"
-}
-
-
 class SliderTableViewCell: UITableViewCell {
 
     // MARK: Variables
@@ -36,7 +30,6 @@ class SliderTableViewCell: UITableViewCell {
     }
     var delegate:SliderTableViewCellDelegate?
     var slideshowTimer:Timer?
-    var countType:CountType = .Views
     
     // MARK: Outlets
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -128,33 +121,22 @@ extension SliderTableViewCell : UICollectionViewDataSource {
             let countries = countries {
             let country = countries[row]
             sliderCell.imageView.image = nil
-            sliderCell.nameLabel.text = ""
-            sliderCell.countIcon.image = nil
-            sliderCell.countLabel.text = ""
+            sliderCell.viewsLabel.text = ""
+            sliderCell.playsLabel.text = ""
             
             if let url = country.getFlagURLForSize(size: .Normal) {
                 if let image = UIImage(contentsOfFile: url.path) {
                     sliderCell.imageView.image = imageWithBorder(fromImage: image)
                 }
-                sliderCell.nameLabel.text = country.name
+            }
+
+            if let views = country.views {
+                sliderCell.viewsLabel.text = "\(views)"
+            }
+            if let plays = country.plays {
+                sliderCell.playsLabel.text = "\(plays)"
             }
             
-            switch countType {
-            case .Views:
-                sliderCell.countIcon.image = UIImage(named: "view-filled")
-                if let views = country.views {
-                    sliderCell.countLabel.text = "\(views)"
-                } else {
-                    sliderCell.countLabel.text = "0"
-                }
-            case .Plays:
-                sliderCell.countIcon.image = UIImage(named: "play-filled")
-                if let plays = country.plays {
-                    sliderCell.countLabel.text = "\(plays)"
-                } else {
-                    sliderCell.countLabel.text = "0"
-                }
-            }
             cell = sliderCell
         }
         

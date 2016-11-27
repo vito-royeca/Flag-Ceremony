@@ -59,6 +59,7 @@ class FirebaseManager : NSObject {
     }
 
     func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
+        // find anthem from local dict
 //        if anthemsDict == nil {
 //            if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
 //                if FileManager.default.fileExists(atPath: path) {
@@ -88,9 +89,9 @@ class FirebaseManager : NSObject {
     }
     
     func fetchTopViewed(completion: @escaping ([Country]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("countries").queryOrdered(byChild: "views").queryLimited(toFirst: 10)
-        
-        ref.observe(.value, with: { snapshot in
+        let ref = FIRDatabase.database().reference().child("countries")
+        let query = ref.queryOrdered(byChild: Country.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
+        query.observe(.value, with: { snapshot in
             var countries = [Country]()
             
             for child in snapshot.children {
@@ -98,14 +99,14 @@ class FirebaseManager : NSObject {
                     countries.append(Country(snapshot: c))
                 }
             }
-            completion(countries)
+            completion(countries.reversed())
         })
     }
     
     func fetchTopPlayed(completion: @escaping ([Country]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("countries").queryStarting(atValue: 1, childKey: "plays").queryOrderedByValue().queryLimited(toLast: 10)
-        
-        ref.observe(.value, with: { snapshot in
+        let ref = FIRDatabase.database().reference().child("countries")
+        let query = ref.queryOrdered(byChild: Country.Keys.Plays).queryStarting(atValue: 1).queryLimited(toLast: 20)
+        query.observe(.value, with: { snapshot in
             var countries = [Country]()
             
             for child in snapshot.children {
@@ -113,7 +114,7 @@ class FirebaseManager : NSObject {
                     countries.append(Country(snapshot: c))
                 }
             }
-            completion(countries)
+            completion(countries.reversed())
         })
     }
     

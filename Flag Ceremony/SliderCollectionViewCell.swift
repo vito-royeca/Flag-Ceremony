@@ -14,8 +14,8 @@ class SliderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var countIcon: UIImageView!
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var viewsLabel: UILabel!
+    @IBOutlet weak var playsLabel: UILabel!
     
     // MARK: Overrides
     override func awakeFromNib() {

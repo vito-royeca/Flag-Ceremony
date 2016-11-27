@@ -44,9 +44,24 @@ class ChartsViewController: UIViewController {
         })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailsAsPush" ||
+            segue.identifier == "showDetailsAsModal" {
+            
+            var countryVC:CountryViewController?
+            
+            if let nav = segue.destination as? UINavigationController {
+                if let vc = nav.childViewControllers.first as? CountryViewController {
+                    countryVC = vc
+                }
+            }else  if let vc = segue.destination as? CountryViewController {
+                countryVC = vc
+            }
+            
+            if let countryVC = countryVC {
+                countryVC.country = sender as? Country
+            }
+        }
     }
 }
 
@@ -60,17 +75,6 @@ extension ChartsViewController : UITableViewDataSource {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Top viewed"
-        case 1:
-            return "Top Played"
-        default:
-            return nil
-        }
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell?
         
@@ -78,19 +82,21 @@ extension ChartsViewController : UITableViewDataSource {
         case 0:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewedCell") as? SliderTableViewCell {
                 sliderCell.countries = topViewedCountries
-                sliderCell.countType = .Views
+                sliderCell.delegate = self
                 cell = sliderCell
+                
             }
         case 1:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayedCell") as? SliderTableViewCell {
                 sliderCell.countries = topPlayedCountries
-                sliderCell.countType = .Plays
+                sliderCell.delegate = self
                 cell = sliderCell
             }
         default:
             ()
         }
         
+        cell!.selectionStyle = .none
         return cell!
     }
 }
@@ -100,4 +106,45 @@ extension ChartsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.size.height / 3
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var header:UIView?
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") {
+            header = cell
+            
+            if let iconView = cell.viewWithTag(1) as? UIImageView,
+                let label = cell.viewWithTag(2) as? UILabel {
+                
+                switch section {
+                case 0:
+                    iconView.image = UIImage(named: "view-filled")
+                    label.text = "Top Viewed"
+                case 1:
+                    iconView.image = UIImage(named: "play-filled")
+                    label.text = "Top Played"
+                default:
+                    ()
+                }
+            }
+        }
+        
+        return header!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(24)
+    }
 }
+
+extension ChartsViewController : SliderTableViewCellDelegate {
+    func didSelectItem(_ item: Any) {
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.performSegue(withIdentifier: "showDetailsAsPush", sender: item)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            self.performSegue(withIdentifier: "showDetailsAsModal", sender: item)
+        }
+    }
+}
+

@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
         
-        Scraper.sharedInstance.getLyrics()
+//        Scraper.sharedInstance.getLyrics()
+        Scraper.sharedInstance.insertAnthems()
         return true
     }
 

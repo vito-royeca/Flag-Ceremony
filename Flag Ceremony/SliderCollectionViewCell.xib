@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,58 +18,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="120" height="110"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GRc-of-2j9">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRc-of-2j9">
                         <rect key="frame" x="0.0" y="0.0" width="120" height="67"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPT-yU-mvq">
-                        <rect key="frame" x="0.0" y="67" width="120" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="view-filled" translatesAutoresizingMaskIntoConstraints="NO" id="gs1-UR-GCY">
+                        <rect key="frame" x="0.0" y="67" width="39" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llZ-uD-ES2">
+                        <rect key="frame" x="39" y="67" width="81" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view-filled" translatesAutoresizingMaskIntoConstraints="NO" id="gXk-8f-mYU">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="play-filled" translatesAutoresizingMaskIntoConstraints="NO" id="gXk-8f-mYU">
                         <rect key="frame" x="0.0" y="88" width="39" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="39" id="6H2-8i-uDM"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2B-cR-akt">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2B-cR-akt">
                         <rect key="frame" x="39" y="88" width="81" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Pss-ft-gXz"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
-            <constraints>
-                <constraint firstItem="gXk-8f-mYU" firstAttribute="top" secondItem="b2B-cR-akt" secondAttribute="top" id="034-sK-D4m"/>
-                <constraint firstItem="gXk-8f-mYU" firstAttribute="centerY" secondItem="b2B-cR-akt" secondAttribute="centerY" id="0eg-JS-uqb"/>
-                <constraint firstItem="MPT-yU-mvq" firstAttribute="top" secondItem="GRc-of-2j9" secondAttribute="bottom" id="2Oj-cW-20r"/>
-                <constraint firstItem="MPT-yU-mvq" firstAttribute="trailing" secondItem="b2B-cR-akt" secondAttribute="trailing" id="464-Jx-jIn"/>
-                <constraint firstItem="GRc-of-2j9" firstAttribute="trailing" secondItem="MPT-yU-mvq" secondAttribute="trailing" id="6g9-Lt-EWe"/>
-                <constraint firstAttribute="trailing" secondItem="GRc-of-2j9" secondAttribute="trailing" id="FaZ-0R-tMD"/>
-                <constraint firstItem="b2B-cR-akt" firstAttribute="leading" secondItem="gXk-8f-mYU" secondAttribute="trailing" id="N9R-Th-VrW"/>
-                <constraint firstItem="GRc-of-2j9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NPo-Yu-tw2"/>
-                <constraint firstItem="gXk-8f-mYU" firstAttribute="top" secondItem="MPT-yU-mvq" secondAttribute="bottom" id="OC1-SN-Dc6"/>
-                <constraint firstItem="MPT-yU-mvq" firstAttribute="leading" secondItem="gXk-8f-mYU" secondAttribute="leading" id="POh-z9-bY2"/>
-                <constraint firstItem="GRc-of-2j9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="b04-x5-s32"/>
-                <constraint firstItem="GRc-of-2j9" firstAttribute="leading" secondItem="MPT-yU-mvq" secondAttribute="leading" id="g1W-kj-6Sg"/>
-                <constraint firstAttribute="bottom" secondItem="gXk-8f-mYU" secondAttribute="bottom" id="s1z-pP-kcf"/>
-            </constraints>
             <size key="customSize" width="120" height="88"/>
             <connections>
-                <outlet property="countIcon" destination="gXk-8f-mYU" id="2iO-d8-ygl"/>
-                <outlet property="countLabel" destination="b2B-cR-akt" id="LqQ-D5-wvV"/>
                 <outlet property="imageView" destination="GRc-of-2j9" id="uTu-me-Y6I"/>
-                <outlet property="nameLabel" destination="MPT-yU-mvq" id="muz-5k-tzN"/>
+                <outlet property="playsLabel" destination="b2B-cR-akt" id="lmv-aF-Ntb"/>
+                <outlet property="viewsLabel" destination="llZ-uD-ES2" id="wdt-iZ-PJm"/>
             </connections>
             <point key="canvasLocation" x="69" y="159"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="play-filled" width="25" height="25"/>
         <image name="view-filled" width="25" height="25"/>
     </resources>
 </document>

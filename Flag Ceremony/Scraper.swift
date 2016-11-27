@@ -146,10 +146,13 @@ class Scraper : NSObject {
                             }
                             
                             // add lyrics and info
-                            if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
-                                if let doc = readUrl(url: url) {
-                                    anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
-                                    anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                            if anthemDict[Anthem.Keys.Lyrics] == nil ||
+                                anthemDict[Anthem.Keys.Info] == nil {
+                                if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
+                                    if let doc = readUrl(url: url) {
+                                        anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
+                                        anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                    }
                                 }
                             }
                             
@@ -195,24 +198,26 @@ class Scraper : NSObject {
                                         anthemDict[key3] = value3
                                     }
                                     
-                                    if let countryValues = countryDict![key as! String] {
-                                        if let name = countryValues[Country.Keys.Name] as? String {
-                                            // transform the name
-                                            var lastPaths = [name.lowercased()]
-                                            if name.contains(" ") {
-                                                let newLastPath = name.lowercased().replacingOccurrences(of: " ", with: "-")
-                                                lastPaths = [newLastPath,  "the-\(newLastPath)"]
-                                            }
-                                            
-                                            // add flag info
-                                            for lp in lastPaths {
-                                                if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
-                                                    if let doc = self.readUrl(url: url) {
-                                                        print("flag info... \(key)")
-                                                        anthemDict[Anthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
-                                                        break
-                                                    } else {
-                                                        print("invalid url: \(url)")
+                                    if anthemDict[Anthem.Keys.FlagInfo] == nil {
+                                        if let countryValues = countryDict![key as! String] {
+                                            if let name = countryValues[Country.Keys.Name] as? String {
+                                                // transform the name
+                                                var lastPaths = [name.lowercased()]
+                                                if name.contains(" ") {
+                                                    let newLastPath = name.lowercased().replacingOccurrences(of: " ", with: "-")
+                                                    lastPaths = [newLastPath,  "the-\(newLastPath)"]
+                                                }
+                                                
+                                                // add flag info
+                                                for lp in lastPaths {
+                                                    if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
+                                                        if let doc = self.readUrl(url: url) {
+                                                            print("flag info... \(key)")
+                                                            anthemDict[Anthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
+                                                            break
+                                                        } else {
+                                                            print("invalid url: \(url)")
+                                                        }
                                                     }
                                                 }
                                             }
