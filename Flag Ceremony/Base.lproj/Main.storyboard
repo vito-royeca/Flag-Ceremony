@@ -94,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="900" y="-802"/>
         </scene>
-        <!--Country-->
+        <!--Country View Controller-->
         <scene sceneID="Hwq-ob-zkw">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Z29-MB-lIF" customClass="CountryViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
@@ -233,8 +233,36 @@
                             <constraint firstItem="zKu-Gy-y4d" firstAttribute="bottom" secondItem="KlT-bV-QiF" secondAttribute="top" id="Wp2-sH-5rg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Country" id="7Ou-xG-I3d"/>
+                    <navigationItem key="navigationItem" id="7Ou-xG-I3d">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="close window" id="Gdi-nJ-fZy">
+                            <connections>
+                                <action selector="closeAction:" destination="Z29-MB-lIF" id="P1p-ZW-P2j"/>
+                            </connections>
+                        </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="J1S-fI-crL">
+                            <rect key="frame" x="117" y="6" width="307" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keo-yh-nGM">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="keo-yh-nGM" secondAttribute="trailing" id="FCx-wy-0aa"/>
+                                <constraint firstItem="keo-yh-nGM" firstAttribute="top" secondItem="J1S-fI-crL" secondAttribute="top" id="O0U-Dn-h5A"/>
+                                <constraint firstItem="keo-yh-nGM" firstAttribute="leading" secondItem="J1S-fI-crL" secondAttribute="leading" id="edJ-Q4-u9P"/>
+                                <constraint firstAttribute="bottom" secondItem="keo-yh-nGM" secondAttribute="bottom" id="x7l-8N-klm"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
+                        <outlet property="closeButton" destination="Gdi-nJ-fZy" id="l5x-Uw-Arr"/>
+                        <outlet property="nameLabel" destination="keo-yh-nGM" id="Rcg-u8-VP0"/>
                         <outlet property="tableView" destination="zKu-Gy-y4d" id="9Gh-bq-QZ5"/>
                     </connections>
                 </viewController>
@@ -246,7 +274,7 @@
         <scene sceneID="KF7-J8-a2a">
             <objects>
                 <navigationController id="i4I-GZ-Xl2" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6VH-GH-DKW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="6VH-GH-DKW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -409,6 +437,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close window" width="25" height="25"/>
         <image name="globe" width="25" height="25"/>
         <image name="map" width="25" height="25"/>
         <image name="ph.png" width="1600" height="800"/>

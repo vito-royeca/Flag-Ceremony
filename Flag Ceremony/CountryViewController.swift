@@ -13,7 +13,7 @@ enum CountryViewRows: Int {
     case lyrics, anthem, flag, country
 }
 
-class CountryViewController: DismissableViewController {
+class CountryViewController: UIViewController {
 
     // MARK: Variables
     var country:Country?
@@ -21,9 +21,16 @@ class CountryViewController: DismissableViewController {
     var selectedDataSegment = 0
     
     // MARK: Outlets
+    
+    @IBOutlet weak var closeButton: UIBarButtonItem!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Actions
+    @IBAction func closeAction(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func dataAction(_ sender: UISegmentedControl) {
         selectedDataSegment = sender.selectedSegmentIndex
@@ -35,8 +42,17 @@ class CountryViewController: DismissableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = country?.name
-        navigationController?.navigationItem.title = country?.name
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            navigationItem.leftBarButtonItems = nil
+        } else {
+            if let image = closeButton.image {
+                let tintedImage = image.withRenderingMode(.alwaysTemplate)
+                closeButton.image = tintedImage
+                closeButton.tintColor = UIColor.white
+            }
+        }
+        
+        nameLabel.text = country?.name
         
         tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")
         tableView.estimatedRowHeight = 88.0

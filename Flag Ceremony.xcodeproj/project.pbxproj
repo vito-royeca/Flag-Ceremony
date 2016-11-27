@@ -13,9 +13,6 @@
 		8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
-		8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
-		8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
-		8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */; };
 		8C23703B1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
 		8C23703C1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
 		8C23703D1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
@@ -99,7 +96,6 @@
 		7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag CeremonyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flag CeremonyTests/Pods-Flag CeremonyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
-		8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissableViewController.swift; sourceTree = "<group>"; };
 		8C23703A1DDD534D00F30712 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		8C2370421DDD56FB00F30712 /* FirebaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
 		8C4E97251D88ED50005A685B /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
-				8C0296771D8A7B2400BE8C02 /* DismissableViewController.swift */,
 				8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */,
 				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
 				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
@@ -618,7 +613,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE8E77C1DE524D5009097FF /* Scraper.swift in Sources */,
-				8C0296781D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CD893B71DE5B8F1007052C7 /* Anthem.swift in Sources */,
 				8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
@@ -645,7 +639,6 @@
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CD893B81DE5B8F1007052C7 /* Anthem.swift in Sources */,
-				8C0296791D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8C23703C1DDD534D00F30712 /* Country.swift in Sources */,
 				8CE297C71DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CEFB6441DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
@@ -671,7 +664,6 @@
 				8CE297C81DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CE297C01DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
-				8C02967A1D8A7B2400BE8C02 /* DismissableViewController.swift in Sources */,
 				8C23703D1DDD534D00F30712 /* Country.swift in Sources */,
 				8CD893B91DE5B8F1007052C7 /* Anthem.swift in Sources */,
 				8CEFB6451DDBF57100F34B4D /* ChartsViewController.swift in Sources */,

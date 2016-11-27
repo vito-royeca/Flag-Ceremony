@@ -6726,101 +6726,111 @@ And we preserve and we preserve our national independence.
 		<key>wiki</key>
 		<string>/wiki/Caminemos_pisando_las_sendas_de_nuestra_inmensa_felicidad</string>
 	</dict>
-	<key>GR</key>
-	<dict>
-		<key>dateAdopted</key>
-		<array>
-			<string>1865</string>
-		</array>
-		<key>flagInfo</key>
-		<string>The Greek flag originated during the uprising against the Turks in 1821, when a blue flag with a white cross was raised in order to oppose the Ottoman crescent. The flag in its present form was adopted in 1822. The cross was moved to the top left part of the flag and white and blue stripes were added. Nine striped should probably remind nine syllables of a revolutionary slogan "Eleftheria i Thanatos" ("Freedom or Death"). Blue symbolizes the sea, whose beauty inspired the idea of revolt. White stands for purity of revolutionists´ intentions and cross refers to the respect to the Orthodox Church, which helped to maintain national identity in times of occupation. The shade of blue was changed many times, yet the flag can be called "Galanolefci" (blue and white in translation).</string>
-		<key>info</key>
-		<string>The Greek Anthem is based on the “Hymn to the Freedom”, a large 158 verse poem written by Dionysios Solomos, a distinguished poet from Zakynthos Island. It was inspired by the Greek Revolution of 1821 against the Ottoman Empire. During 1828 Nikolaos Mantzaros composed the music for Solomos’ hymn, one version for the entire poem, and one for just the first two stanzas. Although King Othon (Otto) decorated both of them for their work (1845 and 1849), he did not replace the Royal Anthem of that time with the Solomos/Mantzaros hymn. The royal anthem then in use was a musical derivative from the German one, with a text glorifying Othon and his dynasty. After the overthrow of the dynasty, the new King George I and the Greek establishment decided to look for a clearly Greek work, both with respect to the poetry and the music. The “Hymn to the Freedom” was readily there – extremely popular since the Revolution times, often recited or sung during patriotic meetings and celebrations, and the “Hymn to Freedom” (with Mantzaro’s version for the first two stanzas only) became the national anthem.
-
-The Greek anthem is also used in Cyprus, which has a substantial Greek community.
-
-Special thanks to: Theo Stylianides for the sheet music.</string>
-		<key>lyrics</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>Greek lyrics (Greek script)</string>
-				<key>text</key>
-				<string>
-Σε γνωρίζω από την κόψη
-του σπαθιού την τρομερή,
-σε γνωρίζω από την όψη
-που με βιά μετράει την γη.
-
-Απ’ τα κόκκαλα βγαλμένη
-των Ελλήνων τα ιερά,
-και σαν πρώτα ανδρειωμένη,
-χαίρε, ω χαίρε, Ελευθεριά!
-και σαν πρώτα ανδρειωμένη,
-χαίρε, ω χαίρε, Ελευθεριά!
-και σαν πρώτα ανδρειωμένη,
-χαίρε, ω χαίρε, Ελευθεριά!
-
-</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>Greek lyrics (Romanization)</string>
-				<key>text</key>
-				<string>
-Se gnorizo apo tin kopsi
-tou spathiou tin tromeri,
-se gnorízo apo tin opsi,
-pou me via metrai tin gi.
-
-Ap’ ta kokkala vgalmeni
-ton Ellinon ta iera,
-kai san prota andriomeni,
-chere, o chere, Eleftheria!
-kai san prota andriomeni,
-chere, o chere, Eleftheria!
-kai san prota andriomeni,
-chere, o chere, Eleftheria!
-
-</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>English versification</string>
-				<key>text</key>
-				<string>
-I shall always recognise you
-By the dreadful sword you hold,
-As the earth, with searching vision,
-You survey, with spirit bold.
-
-‘Twas the Greeks of old whose dying
-Brought to birth our spirit free.
-Now, with ancient valour rising,
-Let us hail you, oh Liberty!
-Now, with ancient valour rising,
-Let us hail you, oh Liberty!
-Now, with ancient valour rising,
-Let us hail you, oh Liberty!
-
-</string>
-			</dict>
-		</array>
-		<key>lyricsWriter</key>
-		<array>
-			<string>Dionýsios Solomós</string>
-		</array>
-		<key>musicWriter</key>
-		<array>
-			<string>Nikolaos Mantzaros</string>
-		</array>
-		<key>nativeTitle</key>
-		<string>Ýmnos eis tīn Eleutherían</string>
-		<key>title</key>
-		<string>Hymn to Liberty</string>
-		<key>wiki</key>
-		<string>/wiki/Hymn_to_Liberty</string>
+    
+    <key>GR</key>
+    <dict>
+        <key>dateAdopted</key>
+        <array>
+            <string>1865</string>
+        </array>
+        <key>flagInfo</key>
+        <string>The Greek flag originated during the uprising against the Turks in 1821, when a blue flag with a white cross was raised in order to oppose the Ottoman crescent. The flag in its present form was adopted in 1822. The cross was moved to the top left part of the flag and white and blue stripes were added. Nine striped should probably remind nine syllables of a revolutionary slogan "Eleftheria i Thanatos" ("Freedom or Death"). Blue symbolizes the sea, whose beauty inspired the idea of revolt. White stands for purity of revolutionists´ intentions and cross refers to the respect to the Orthodox Church, which helped to maintain national identity in times of occupation. The shade of blue was changed many times, yet the flag can be called "Galanolefci" (blue and white in translation).</string>
+        <key>info</key>
+        <string>The Greek Anthem is based on the “Hymn to the Freedom”, a large 158 verse poem written by Dionysios Solomos, a distinguished poet from Zakynthos Island. It was inspired by the Greek Revolution of 1821 against the Ottoman Empire. During 1828 Nikolaos Mantzaros composed the music for Solomos’ hymn, one version for the entire poem, and one for just the first two stanzas. Although King Othon (Otto) decorated both of them for their work (1845 and 1849), he did not replace the Royal Anthem of that time with the Solomos/Mantzaros hymn. The royal anthem then in use was a musical derivative from the German one, with a text glorifying Othon and his dynasty. After the overthrow of the dynasty, the new King George I and the Greek establishment decided to look for a clearly Greek work, both with respect to the poetry and the music. The “Hymn to the Freedom” was readily there – extremely popular since the Revolution times, often recited or sung during patriotic meetings and celebrations, and the “Hymn to Freedom” (with Mantzaro’s version for the first two stanzas only) became the national anthem.
+            
+            The Greek anthem is also used in Cyprus, which has a substantial Greek community.
+            
+            Special thanks to: Theo Stylianides for the sheet music.</string>
+        <key>lyrics</key>
+        <array>
+            <dict>
+                <key>name</key>
+                <string>Greek lyrics (Greek script)</string>
+                <key>text</key>
+                <string>
+                    Σε γνωρίζω από την κόψη
+                    του σπαθιού την τρομερή,
+                    σε γνωρίζω από την όψη
+                    που με βιά μετράει την γη.
+                    
+                    Απ’ τα κόκκαλα βγαλμένη
+                    των Ελλήνων τα ιερά,
+                    και σαν πρώτα ανδρειωμένη,
+                    χαίρε, ω χαίρε, Ελευθεριά!
+                    και σαν πρώτα ανδρειωμένη,
+                    χαίρε, ω χαίρε, Ελευθεριά!
+                    και σαν πρώτα ανδρειωμένη,
+                    χαίρε, ω χαίρε, Ελευθεριά!
+                    
+                </string>
+            </dict>
+            <dict>
+                <key>name</key>
+                <string>Greek lyrics (Romanization)</string>
+                <key>text</key>
+                <string>
+                    Se gnorizo apo tin kopsi
+                    tou spathiou tin tromeri,
+                    se gnorízo apo tin opsi,
+                    pou me via metrai tin gi.
+                    
+                    Ap’ ta kokkala vgalmeni
+                    ton Ellinon ta iera,
+                    kai san prota andriomeni,
+                    chere, o chere, Eleftheria!
+                    kai san prota andriomeni,
+                    chere, o chere, Eleftheria!
+                    kai san prota andriomeni,
+                    chere, o chere, Eleftheria!
+                    
+                </string>
+            </dict>
+            <dict>
+                <key>name</key>
+                <string>English versification</string>
+                <key>text</key>
+                <string>
+                    I shall always recognise you
+                    By the dreadful sword you hold,
+                    As the earth, with searching vision,
+                    You survey, with spirit bold.
+                    
+                    ‘Twas the Greeks of old whose dying
+                    Brought to birth our spirit free.
+                    Now, with ancient valour rising,
+                    Let us hail you, oh Liberty!
+                    Now, with ancient valour rising,
+                    Let us hail you, oh Liberty!
+                    Now, with ancient valour rising,
+                    Let us hail you, oh Liberty!
+                    
+                </string>
+            </dict>
+        </array>
+        <key>lyricsWriter</key>
+        <array>
+            <string>Dionýsios Solomós</string>
+        </array>
+        <key>musicWriter</key>
+        <array>
+            <string>Nikolaos Mantzaros</string>
+        </array>
+        <key>nativeTitle</key>
+        <string>Ýmnos eis tīn Eleutherían</string>
+        <key>title</key>
+        <string>Hymn to Liberty</string>
+        <key>wiki</key>
+        <string>/wiki/Hymn_to_Liberty</string>
+    </dict>
+    
+    <key>GL</key>
+    <dict>
 	</dict>
+    
+    <key>BM</key>
+    <dict>
+    </dict>
+    
 	<key>GT</key>
 	<dict>
 		<key>dateAdopted</key>

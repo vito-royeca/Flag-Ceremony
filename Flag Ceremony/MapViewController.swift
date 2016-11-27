@@ -33,8 +33,10 @@ class MapViewController: UIViewController {
             mapView!.height = height
             mapView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
         } else {
+            let lon = (DefaultLocationLongitude * Float.pi)/180
+            let lat = (DefaultLocationLatitude * Float.pi)/180
             mapView!.height = DefaultLocationHeight
-            mapView!.animate(toPosition: MaplyCoordinateMake(DefaultLocationLongitude, DefaultLocationLatitude), time: 1.0)
+            mapView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
         }
     }
     
@@ -153,6 +155,7 @@ class MapViewController: UIViewController {
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
                             label.selectable = true
                             label.userObject = country
+                            label.layoutImportance = 1
                             countries.append(label)
                         
                         if let capital = country.capital {

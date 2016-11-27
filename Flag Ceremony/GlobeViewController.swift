@@ -14,6 +14,7 @@ import WhirlyGlobe
 class GlobeViewController: UIViewController {
 
     // MARK: Variables
+    
     var globeView: WhirlyGlobeViewController?
     
     // MARK: Overrides
@@ -40,8 +41,10 @@ class GlobeViewController: UIViewController {
             globeView!.height = height
             globeView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
         } else {
+            let lon = (DefaultLocationLongitude * Float.pi)/180
+            let lat = (DefaultLocationLatitude * Float.pi)/180
             globeView!.height = DefaultLocationHeight
-            globeView!.animate(toPosition: MaplyCoordinateMake(DefaultLocationLongitude, DefaultLocationLatitude), time: 1.0)
+            globeView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
         }
     }
     
@@ -106,7 +109,6 @@ class GlobeViewController: UIViewController {
                 let dict = snapshot.value as? [String: [String: Any]] ?? [:]
                 var countries = [MaplyScreenLabel]()
                 var capitals = [MaplyScreenLabel]()
-                //  Unicode: U+272A, UTF-8: E2 9C AA / \u{1830
                 
                 for (key,value) in dict {
                     let country = Country.init(key: key, dict: value)
