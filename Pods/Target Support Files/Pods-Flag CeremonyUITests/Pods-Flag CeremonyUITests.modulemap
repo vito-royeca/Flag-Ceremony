@@ -1,6 +1,0 @@
-framework module Pods_Flag_CeremonyUITests {
-  umbrella header "Pods-Flag CeremonyUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

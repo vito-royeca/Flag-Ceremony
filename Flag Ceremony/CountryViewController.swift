@@ -43,7 +43,7 @@ class CountryViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if UIDevice.current.userInterfaceIdiom == .phone {
-            navigationItem.leftBarButtonItems = nil
+            navigationItem.rightBarButtonItems = nil
         } else {
             if let image = closeButton.image {
                 let tintedImage = image.withRenderingMode(.alwaysTemplate)

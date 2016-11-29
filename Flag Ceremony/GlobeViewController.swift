@@ -15,6 +15,8 @@ class GlobeViewController: UIViewController {
 
     // MARK: Variables
     var globeView: WhirlyGlobeViewController?
+    var countryLabels = [MaplyScreenLabel]()
+    var capitalLabels = [MaplyScreenLabel]()
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -22,30 +24,22 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
-        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        globeView!.heading = 0
         if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
+            let position = MaplyCoordinateMake(lon, lat)
             globeView!.height = height
-            globeView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
-        } else {
-            let lon = (DefaultLocationLongitude * Float.pi)/180
-            let lat = (DefaultLocationLatitude * Float.pi)/180
-            globeView!.height = DefaultLocationHeight
-            globeView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
+            globeView!.heading = 0
+            globeView!.animate(toPosition: position, time: 1.0)
+            globeView!.heading = DefaultLocationHeading
         }
         
-//        if let heading = UserDefaults.standard.value(forKey: kLocationHeading) as? Float {
-//            globeView!.heading = heading
-//        } else {
-//            globeView!.heading = DefaultLocationHeading
-//        }
+        addFlags()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,7 +74,7 @@ class GlobeViewController: UIViewController {
         globeView!.clearColor = UIColor.black
         globeView!.frameInterval = 2
         globeView!.delegate = self
-        globeView!.keepNorthUp = true
+        globeView!.heading = DefaultLocationHeading
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         addChildViewController(globeView!)
@@ -97,59 +91,80 @@ class GlobeViewController: UIViewController {
             layer?.singleLevelLoading = false
             globeView!.add(layer)
         }
+        
+        // set default position
+        let lon = (DefaultLocationLongitude * Float.pi)/180
+        let lat = (DefaultLocationLatitude * Float.pi)/180
+        let position = MaplyCoordinateMake(lon, lat)
+        globeView!.height = DefaultLocationHeight
+        globeView!.heading = 0
+        globeView!.setPosition(position)
+        globeView!.heading = DefaultLocationHeading
     }
     
     func addFlags() {
+        if countryLabels.count > 0 &&
+            capitalLabels.count > 0 {
+            return
+        }
+
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                var countryLabels = [MaplyScreenLabel]()
-                var capitalLabels = [MaplyScreenLabel]()
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country], error: NSError?) in
+            if let _ = error {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 
-                for country in countries {
-                    // add flags only if there is an anthem and flag files
-                    if let _ = country.getAudioURL(),
-                        let _ = country.getFlagURLForSize(size: .mini) {
-                        var label = MaplyScreenLabel()
-                        var radians = country.getGeoRadians()
-                        
-                        label.text = "\(country.emojiFlag())\(country.name!)"
-                        label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                        label.selectable = true
-                        label.userObject = country
-                        label.layoutImportance = 1
-                        countryLabels.append(label)
-                        
-                        if let capital = country.capital {
-                            label = MaplyScreenLabel()
-                            radians = country.getCapitalGeoRadians()
+            } else {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    self.globeView!.remove(self.countryLabels)
+                    self.globeView!.remove(self.capitalLabels)
+                    self.countryLabels.removeAll()
+                    self.capitalLabels.removeAll()
+                    
+                    for country in countries {
+                        // add flags only if there is an anthem and flag files
+                        if let _ = country.getAudioURL(),
+                            let _ = country.getFlagURLForSize(size: .mini) {
+                            var label = MaplyScreenLabel()
+                            var radians = country.getGeoRadians()
                             
-                            label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
+                            label.text = "\(country.emojiFlag())\(country.name!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                            label.selectable = false
-                            capitalLabels.append(label)
+                            label.selectable = true
+                            label.userObject = country
+                            label.layoutImportance = 1
+                            self.countryLabels.append(label)
+                            
+                            if let capital = country.capital {
+                                label = MaplyScreenLabel()
+                                radians = country.getCapitalGeoRadians()
+                                
+                                label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
+                                label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                                label.selectable = false
+                                self.capitalLabels.append(label)
+                            }
+                            
+                        } else {
+                            print("anthem not found: \(country.name!)")
                         }
-                        
-                    } else {
-                        print("anthem not found: \(country.name!)")
                     }
-                }
-                
-                self.globeView!.addScreenLabels(countryLabels, desc: [
-                    kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
-                    kMaplyTextOutlineColor: UIColor.black,
-                    kMaplyTextOutlineSize: 2.0,
-                    kMaplyColor: UIColor.white
-                    ])
-                
-                self.globeView!.addScreenLabels(capitalLabels, desc: [
-                    kMaplyFont: UIFont.systemFont(ofSize: 14),
-                    kMaplyTextColor: UIColor.white
-                    ])
-                
-                DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    self.globeView!.addScreenLabels(self.countryLabels, desc: [
+                        kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
+                        kMaplyTextOutlineColor: UIColor.black,
+                        kMaplyTextOutlineSize: 2.0,
+                        kMaplyColor: UIColor.white
+                        ])
+                    
+                    self.globeView!.addScreenLabels(self.capitalLabels, desc: [
+                        kMaplyFont: UIFont.systemFont(ofSize: 14),
+                        kMaplyTextColor: UIColor.white
+                        ])
+                    
+                    DispatchQueue.main.async {
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
                 }
             }
         })
@@ -177,7 +192,6 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
         UserDefaults.standard.set(pos.x, forKey: kLocationLongitude)
         UserDefaults.standard.set(pos.y, forKey: kLocationLatitude)
         UserDefaults.standard.set(height, forKey: kLocationHeight)
-//        UserDefaults.standard.set(viewC.heading, forKey: kLocationHeading)
         UserDefaults.standard.synchronize()
     }
     

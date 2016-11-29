@@ -14,6 +14,8 @@ import WhirlyGlobe
 class MapViewController: UIViewController {
     // MARK: Variables
     var mapView: MaplyViewController?
+    var countryLabels = [MaplyScreenLabel]()
+    var capitalLabels = [MaplyScreenLabel]()
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -21,7 +23,6 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initMap()
-        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,14 +31,12 @@ class MapViewController: UIViewController {
         if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
+            let position = MaplyCoordinateMake(lon, lat)
             mapView!.height = height
-            mapView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
-        } else {
-            let lon = (DefaultLocationLongitude * Float.pi)/180
-            let lat = (DefaultLocationLatitude * Float.pi)/180
-            mapView!.height = DefaultLocationHeight
-            mapView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
+            mapView!.animate(toPosition: position, time: 1.0)
         }
+
+        addFlags()
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,59 +85,78 @@ class MapViewController: UIViewController {
                 mapView!.add(layer)
             }
         }
+        
+        // set default position
+        let lon = (DefaultLocationLongitude * Float.pi)/180
+        let lat = (DefaultLocationLatitude * Float.pi)/180
+        let position = MaplyCoordinateMake(lon, lat)
+        mapView!.height = DefaultLocationHeight
+        mapView!.animate(toPosition: position, time: 1.0)
     }
     
     func addFlags() {
+        if countryLabels.count > 0 &&
+            capitalLabels.count > 0 {
+            return
+        }
+        
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
-            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                var countryLabels = [MaplyScreenLabel]()
-                var capitalLabels = [MaplyScreenLabel]()
-                
-                for country in countries {
-                    // add flags only if there is an anthem and flag files
-                    if let _ = country.getAudioURL(),
-                        let _ = country.getFlagURLForSize(size: .mini) {
-                        var label = MaplyScreenLabel()
-                        var radians = country.getGeoRadians()
-                        
-                        label.text = "\(country.emojiFlag())\(country.name!)"
-                        label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                        label.selectable = true
-                        label.userObject = country
-                        label.layoutImportance = 1
-                        countryLabels.append(label)
-                        
-                        if let capital = country.capital {
-                            label = MaplyScreenLabel()
-                            radians = country.getCapitalGeoRadians()
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country], error: NSError?) in
+            if let _ = error {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            
+            } else {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    self.mapView!.remove(self.countryLabels)
+                    self.mapView!.remove(self.capitalLabels)
+                    self.countryLabels.removeAll()
+                    self.capitalLabels.removeAll()
+
+                    for country in countries {
+                        // add flags only if there is an anthem and flag files
+                        if let _ = country.getAudioURL(),
+                            let _ = country.getFlagURLForSize(size: .mini) {
+                            var label = MaplyScreenLabel()
+                            var radians = country.getGeoRadians()
                             
-                            label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
+                            label.text = "\(country.emojiFlag())\(country.name!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                            label.selectable = false
-                            capitalLabels.append(label)
+                            label.selectable = true
+                            label.userObject = country
+                            label.layoutImportance = 1
+                            self.countryLabels.append(label)
+                            
+                            if let capital = country.capital {
+                                label = MaplyScreenLabel()
+                                radians = country.getCapitalGeoRadians()
+                                
+                                label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
+                                label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                                label.selectable = false
+                                self.capitalLabels.append(label)
+                            }
+                            
+                        } else {
+                            print("anthem not found: \(country.name!)")
                         }
-                        
-                    } else {
-                        print("anthem not found: \(country.name!)")
                     }
-                }
-                
-                self.mapView!.addScreenLabels(countryLabels, desc: [
-                    kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
-                    kMaplyTextOutlineColor: UIColor.black,
-                    kMaplyTextOutlineSize: 2.0,
-                    kMaplyColor: UIColor.white
-                    ])
-                
-                self.mapView!.addScreenLabels(capitalLabels, desc: [
-                    kMaplyFont: UIFont.systemFont(ofSize: 14),
-                    kMaplyTextColor: UIColor.white
-                    ])
-                
-                DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
+                    
+                    self.mapView!.addScreenLabels(self.countryLabels, desc: [
+                        kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
+                        kMaplyTextOutlineColor: UIColor.black,
+                        kMaplyTextOutlineSize: 2.0,
+                        kMaplyColor: UIColor.white
+                        ])
+                    
+                    self.mapView!.addScreenLabels(self.capitalLabels, desc: [
+                        kMaplyFont: UIFont.systemFont(ofSize: 14),
+                        kMaplyTextColor: UIColor.white
+                        ])
+                    
+                    DispatchQueue.main.async {
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
                 }
             }
         })

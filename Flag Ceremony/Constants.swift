@@ -21,7 +21,6 @@ let DefaultLocationHeading   = Float(23.5)
 let kLocationLatitude        = "kLocationLatitude"
 let kLocationLongitude       = "kLocationLongitude"
 let kLocationHeight          = "kLocationHeight"
-let kLocationHeading         = "kLocationHeading"
 
 enum FlagSize: String {
     case mini  = "mini",

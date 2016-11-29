@@ -10,8 +10,9 @@ import Foundation
 import Firebase
 
 class FirebaseManager : NSObject {
-//    var anthems:NSDictionary?
     var queries = [String: FIRDatabaseQuery]()
+    var online = false
+    let connectionRef = FIRDatabase.database().reference(withPath: ".info/connected")
     
     func incrementCountryViews(_ key: String) {
         let ref = FIRDatabase.database().reference().child("countries").child(key)
@@ -60,24 +61,6 @@ class FirebaseManager : NSObject {
     }
 
     func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
-        // find anthem from local dict
-//        if anthemsDict == nil {
-//            if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
-//                if FileManager.default.fileExists(atPath: path) {
-//                    anthemsDict = NSDictionary(contentsOfFile: path)
-//                }
-//            }
-//        }
-//        
-//        if let anthemsDict = anthemsDict {
-//            var a:Anthem?
-//            
-//            if let anthem = anthemsDict[key] as? [String: Any] {
-//                a = Anthem(key: key, dict: anthem)
-//            }
-//            
-//            completion(a)
-//        }
         let anthem = FIRDatabase.database().reference().child("anthems").child(key)
         anthem.observeSingleEvent(of: .value, with: { (snapshot) in
             var a:Anthem?
@@ -89,18 +72,25 @@ class FirebaseManager : NSObject {
         })
     }
     
-    func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
-        let ref = FIRDatabase.database().reference()
-
-        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
+    func fetchAllCountries(completion: @escaping ([Country], NSError?) -> Void) {
+        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
             var countries = [Country]()
             
-            for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    countries.append(Country(snapshot: c))
-                }
+            if let connected = snapshot.value as? Bool, connected {
+                let ref = FIRDatabase.database().reference()
+                ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
+                    for child in snapshot.children {
+                        if let c = child as? FIRDataSnapshot {
+                            countries.append(Country(snapshot: c))
+                        }
+                    }
+                    completion(countries, nil)
+                })
+            } else {
+                let error = NSError(domain: "domain", code: 401, userInfo: [NSLocalizedDescriptionKey : "Can not connect to server."])
+                completion(countries, error)
             }
-            completion(countries)
         })
     }
     
