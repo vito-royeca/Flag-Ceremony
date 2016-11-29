@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import Networking
 
 class ChartsViewController: UIViewController {
@@ -28,22 +27,36 @@ class ChartsViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopViewedCell")
         tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopPlayedCell")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        FirebaseManager.sharedInstance.fetchTopViewed(completion: { (countries) in
+        FirebaseManager.sharedInstance.monitorTopViewed(completion: { (countries) in
             self.topViewedCountries = countries
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
             }
         })
         
-        FirebaseManager.sharedInstance.fetchTopPlayed(completion: { (countries) in
+        FirebaseManager.sharedInstance.monitorTopPlayed(completion: { (countries) in
             self.topPlayedCountries = countries
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
             }
         })
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        FirebaseManager.sharedInstance.demonitorTopCharts()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        tableView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailsAsPush" ||
             segue.identifier == "showDetailsAsModal" {

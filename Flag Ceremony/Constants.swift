@@ -24,8 +24,8 @@ let kLocationHeight          = "kLocationHeight"
 let kLocationHeading         = "kLocationHeading"
 
 enum FlagSize: String {
-    case Big  = "big",
-    Mini  = "mini",
-    Normal = "normal",
-    Ultra = "ultra"
+    case mini  = "mini",
+    normal = "normal",
+    big = "big",
+    ultra = "ultra"
 }

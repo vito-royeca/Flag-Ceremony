@@ -209,7 +209,7 @@ extension CountryViewController : UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "FlagCell")
-                let flagSize:FlagSize = UIDevice.current.userInterfaceIdiom == .phone ? .Normal : .Big
+                let flagSize:FlagSize = UIDevice.current.userInterfaceIdiom == .phone ? .normal : .big
                 
                 if let url = country!.getFlagURLForSize(size: flagSize) {
                     if let image = UIImage(contentsOfFile: url.path),

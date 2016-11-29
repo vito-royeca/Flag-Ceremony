@@ -14,7 +14,6 @@ import WhirlyGlobe
 class GlobeViewController: UIViewController {
 
     // MARK: Variables
-    
     var globeView: WhirlyGlobeViewController?
     
     // MARK: Overrides
@@ -29,12 +28,7 @@ class GlobeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let heading = UserDefaults.standard.value(forKey: kLocationHeading) as? Float {
-            globeView!.heading = heading
-        } else {
-            globeView!.heading = DefaultLocationHeading
-        }
-        
+//        globeView!.heading = 0
         if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
@@ -46,6 +40,12 @@ class GlobeViewController: UIViewController {
             globeView!.height = DefaultLocationHeight
             globeView!.animate(toPosition: MaplyCoordinateMake(lon, lat), time: 1.0)
         }
+        
+//        if let heading = UserDefaults.standard.value(forKey: kLocationHeading) as? Float {
+//            globeView!.heading = heading
+//        } else {
+//            globeView!.heading = DefaultLocationHeading
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,7 +80,7 @@ class GlobeViewController: UIViewController {
         globeView!.clearColor = UIColor.black
         globeView!.frameInterval = 2
         globeView!.delegate = self
-//        globeView!.tilt = Float((3.14/2)-23.0)
+        globeView!.keepNorthUp = true
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         addChildViewController(globeView!)
@@ -100,21 +100,17 @@ class GlobeViewController: UIViewController {
     }
     
     func addFlags() {
-        let ref = FIRDatabase.database().reference()
-        
         MBProgressHUD.showAdded(to: view, animated: true)
-        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+        
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                let dict = snapshot.value as? [String: [String: Any]] ?? [:]
-                var countries = [MaplyScreenLabel]()
-                var capitals = [MaplyScreenLabel]()
+                var countryLabels = [MaplyScreenLabel]()
+                var capitalLabels = [MaplyScreenLabel]()
                 
-                for (key,value) in dict {
-                    let country = Country.init(key: key, dict: value)
-                    
-                    // add flags only if there is an audio
-                    if let _ = country.getAudioURL() {
+                for country in countries {
+                    // add flags only if there is an anthem and flag files
+                    if let _ = country.getAudioURL(),
+                        let _ = country.getFlagURLForSize(size: .mini) {
                         var label = MaplyScreenLabel()
                         var radians = country.getGeoRadians()
                         
@@ -122,7 +118,8 @@ class GlobeViewController: UIViewController {
                         label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
                         label.selectable = true
                         label.userObject = country
-                        countries.append(label)
+                        label.layoutImportance = 1
+                        countryLabels.append(label)
                         
                         if let capital = country.capital {
                             label = MaplyScreenLabel()
@@ -131,7 +128,7 @@ class GlobeViewController: UIViewController {
                             label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
                             label.selectable = false
-                            capitals.append(label)
+                            capitalLabels.append(label)
                         }
                         
                     } else {
@@ -139,27 +136,23 @@ class GlobeViewController: UIViewController {
                     }
                 }
                 
-                self.globeView!.addScreenLabels(countries, desc: [
+                self.globeView!.addScreenLabels(countryLabels, desc: [
                     kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
                     kMaplyTextOutlineColor: UIColor.black,
                     kMaplyTextOutlineSize: 2.0,
                     kMaplyColor: UIColor.white
                     ])
                 
-                self.globeView!.addScreenLabels(capitals, desc: [
+                self.globeView!.addScreenLabels(capitalLabels, desc: [
                     kMaplyFont: UIFont.systemFont(ofSize: 14),
-                    kMaplyColor: UIColor.black
+                    kMaplyTextColor: UIColor.white
                     ])
+                
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }
             }
-            
-            DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            MBProgressHUD.hide(for: self.view, animated: true)
-        }
+        })
     }
 }
 
@@ -184,7 +177,7 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
         UserDefaults.standard.set(pos.x, forKey: kLocationLongitude)
         UserDefaults.standard.set(pos.y, forKey: kLocationLatitude)
         UserDefaults.standard.set(height, forKey: kLocationHeight)
-        UserDefaults.standard.set(viewC.heading, forKey: kLocationHeading)
+//        UserDefaults.standard.set(viewC.heading, forKey: kLocationHeading)
         UserDefaults.standard.synchronize()
     }
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 import MBProgressHUD
 import WhirlyGlobe
 
@@ -88,75 +88,27 @@ class MapViewController: UIViewController {
         }
     }
     
-//    func addFlags() {
-//        let ref = FIRDatabase.database().reference()
-//        
-//        MBProgressHUD.showAdded(to: view, animated: true)
-//        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
-//            
-//            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-//                let countries = snapshot.value as? [String: [String: Any]] ?? [:]
-//                var flags = [MaplyScreenMarker]()
-//                
-//                for (key,value) in countries {
-//                    let country = Country.init(key: key, dict: value)
-//                    
-//                    // add flags only if there is an audio
-//                    if let url = country.getFlagURLForSize(size: .Mini)/*,
-//                        let _ = country.getAudioURL()*/ {
-//                        let image = UIImage(contentsOfFile: url.path)
-//                        let marker = MaplyScreenMarker()
-//                        let radians = country.getGeoRadians()
-//                        
-//                        marker.image = image
-//                        marker.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-//                        marker.size = image!.size
-//                        marker.userObject = country
-//                        flags.append(marker)
-//                    } else {
-//                        print("flag not found: \(country.name!)")
-//                    }
-//                }
-//                
-//                self.mapView!.addScreenMarkers(flags, desc: nil)
-//            }
-//            
-//            DispatchQueue.main.async {
-//                MBProgressHUD.hide(for: self.view, animated: true)
-//            }
-//            
-//        }) { (error) in
-//            print(error.localizedDescription)
-//            MBProgressHUD.hide(for: self.view, animated: true)
-//        }
-//    }
-    
     func addFlags() {
-        let ref = FIRDatabase.database().reference()
-        
         MBProgressHUD.showAdded(to: view, animated: true)
-        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+        
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                let dict = snapshot.value as? [String: [String: Any]] ?? [:]
-                var countries = [MaplyScreenLabel]()
-                var capitals = [MaplyScreenLabel]()
-                //  Unicode: U+272A, UTF-8: E2 9C AA / \u{1830
+                var countryLabels = [MaplyScreenLabel]()
+                var capitalLabels = [MaplyScreenLabel]()
                 
-                for (key,value) in dict {
-                    let country = Country.init(key: key, dict: value)
-                    
-                    // add flags only if there is an audio
-                    if let _ = country.getAudioURL() {
-                            var label = MaplyScreenLabel()
-                            var radians = country.getGeoRadians()
+                for country in countries {
+                    // add flags only if there is an anthem and flag files
+                    if let _ = country.getAudioURL(),
+                        let _ = country.getFlagURLForSize(size: .mini) {
+                        var label = MaplyScreenLabel()
+                        var radians = country.getGeoRadians()
                         
-                            label.text = "\(country.emojiFlag())\(country.name!)"
-                            label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                            label.selectable = true
-                            label.userObject = country
-                            label.layoutImportance = 1
-                            countries.append(label)
+                        label.text = "\(country.emojiFlag())\(country.name!)"
+                        label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                        label.selectable = true
+                        label.userObject = country
+                        label.layoutImportance = 1
+                        countryLabels.append(label)
                         
                         if let capital = country.capital {
                             label = MaplyScreenLabel()
@@ -165,7 +117,7 @@ class MapViewController: UIViewController {
                             label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
                             label.selectable = false
-                            capitals.append(label)
+                            capitalLabels.append(label)
                         }
                         
                     } else {
@@ -173,27 +125,23 @@ class MapViewController: UIViewController {
                     }
                 }
                 
-                self.mapView!.addScreenLabels(countries, desc: [
+                self.mapView!.addScreenLabels(countryLabels, desc: [
                     kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
                     kMaplyTextOutlineColor: UIColor.black,
                     kMaplyTextOutlineSize: 2.0,
                     kMaplyColor: UIColor.white
-                ])
-                
-                self.mapView!.addScreenLabels(capitals, desc: [
-                    kMaplyFont: UIFont.systemFont(ofSize: 14),
-                    kMaplyColor: UIColor.black
                     ])
+                
+                self.mapView!.addScreenLabels(capitalLabels, desc: [
+                    kMaplyFont: UIFont.systemFont(ofSize: 14),
+                    kMaplyTextColor: UIColor.white
+                    ])
+                
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }
             }
-            
-            DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            MBProgressHUD.hide(for: self.view, animated: true)
-        }
+        })
     }
 }
 

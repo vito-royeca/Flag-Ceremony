@@ -41,7 +41,6 @@
                                 <constraint firstItem="hSc-S3-gL4" firstAttribute="leading" secondItem="UaB-lB-GQR" secondAttribute="leading" id="NXZ-uh-ALl"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ATA-1m-iHq"/>
                     </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsAsModal" modalPresentationStyle="formSheet" id="4mM-aD-pb6"/>
@@ -83,7 +82,6 @@
                                 <constraint firstItem="NvE-4c-zsz" firstAttribute="leading" secondItem="dvk-2w-0WC" secondAttribute="leading" id="tJT-6V-iRL"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="1Mr-X1-9iQ"/>
                     </navigationItem>
                     <connections>
                         <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showDetailsAsModal" modalPresentationStyle="formSheet" id="ZdL-oJ-FYe"/>
@@ -413,7 +411,6 @@
                                 <constraint firstAttribute="trailing" secondItem="0S8-n0-fDB" secondAttribute="trailing" id="z1t-ye-am3"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="SXK-Mg-N6d"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="scS-PW-OXa" id="9IP-cX-30N"/>
@@ -478,7 +475,7 @@
         <image name="view-filled" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4mM-aD-pb6"/>
+        <segue reference="3L4-tk-8vC"/>
         <segue reference="4dG-Ca-dtr"/>
     </inferredMetricsTieBreakers>
 </document>

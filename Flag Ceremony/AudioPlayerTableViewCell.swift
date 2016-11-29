@@ -38,9 +38,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var endLabel: UILabel!
     @IBOutlet weak var noAudioLabel: UILabel!
     
-    
     // MARK: Actions
-    
     @IBAction func playPauseAction(_ sender: UIButton) {
         if player!.isPlaying {
             pause()
@@ -48,7 +46,6 @@ class AudioPlayerTableViewCell: UITableViewCell {
             play()
         }
     }
-    
     
     @IBAction func progressAction(_ sender: UISlider) {
         update()
@@ -62,7 +59,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressTap!.delegate = self
         progressTap!.numberOfTouchesRequired = 1
         progressTap!.cancelsTouchesInView = false
-//        progressSlider.addGestureRecognizer(progressTap!)
+        progressSlider.addGestureRecognizer(progressTap!)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -124,7 +124,7 @@ extension SliderTableViewCell : UICollectionViewDataSource {
             sliderCell.viewsLabel.text = ""
             sliderCell.playsLabel.text = ""
             
-            if let url = country.getFlagURLForSize(size: .Normal) {
+            if let url = country.getFlagURLForSize(size: .normal) {
                 if let image = UIImage(contentsOfFile: url.path) {
                     sliderCell.imageView.image = imageWithBorder(fromImage: image)
                 }

@@ -10,7 +10,8 @@ import Foundation
 import Firebase
 
 class FirebaseManager : NSObject {
-    var anthemsDict:NSDictionary?
+//    var anthems:NSDictionary?
+    var queries = [String: FIRDatabaseQuery]()
     
     func incrementCountryViews(_ key: String) {
         let ref = FIRDatabase.database().reference().child("countries").child(key)
@@ -88,7 +89,22 @@ class FirebaseManager : NSObject {
         })
     }
     
-    func fetchTopViewed(completion: @escaping ([Country]) -> Void) {
+    func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
+        let ref = FIRDatabase.database().reference()
+
+        ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
+            var countries = [Country]()
+            
+            for child in snapshot.children {
+                if let c = child as? FIRDataSnapshot {
+                    countries.append(Country(snapshot: c))
+                }
+            }
+            completion(countries)
+        })
+    }
+    
+    func monitorTopViewed(completion: @escaping ([Country]) -> Void) {
         let ref = FIRDatabase.database().reference().child("countries")
         let query = ref.queryOrdered(byChild: Country.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
@@ -101,9 +117,11 @@ class FirebaseManager : NSObject {
             }
             completion(countries.reversed())
         })
+       
+        queries["topViewed"] = query
     }
     
-    func fetchTopPlayed(completion: @escaping ([Country]) -> Void) {
+    func monitorTopPlayed(completion: @escaping ([Country]) -> Void) {
         let ref = FIRDatabase.database().reference().child("countries")
         let query = ref.queryOrdered(byChild: Country.Keys.Plays).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
@@ -116,6 +134,20 @@ class FirebaseManager : NSObject {
             }
             completion(countries.reversed())
         })
+        
+        queries["topPlayed"] = query
+    }
+    
+    func demonitorTopCharts() {
+        if let query = queries["topViewed"] {
+            query.removeAllObservers()
+            queries["topViewed"] = nil
+        }
+        
+        if let query = queries["topPlayed"] {
+            query.removeAllObservers()
+            queries["topPlayed"] = nil
+        }
     }
     
     // MARK: - Shared Instance
