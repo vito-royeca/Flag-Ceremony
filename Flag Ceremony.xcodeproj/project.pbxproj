@@ -11,6 +11,7 @@
 		5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4241DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
+		5874E4261DEF2BE000E2D7AD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */; };
 		8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
 		8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
 		8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */; };
@@ -99,6 +100,7 @@
 /* Begin PBXFileReference section */
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
+		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag CeremonyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flag CeremonyTests/Pods-Flag CeremonyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5874E4261DEF2BE000E2D7AD /* AVFoundation.framework in Frameworks */,
 				F0B760F70B39745DFF111613 /* Pods_Flag_Ceremony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +178,7 @@
 		18D2A2613D7A69848D481217 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */,
 				9868A8B48C6062188ED92EAB /* Pods_Flag_Ceremony.framework */,
 				9FE45D831215CED85056C3D9 /* Pods_Flag_CeremonyTests.framework */,
 				F5148D537963A660A444EBED /* Pods_Flag_CeremonyUITests.framework */,
