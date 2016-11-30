@@ -1,0 +1,6 @@
+framework module Pods_Flag_Ceremony {
+  umbrella header "Pods-Flag Ceremony-umbrella.h"
+
+  export *
+  module * { export * }
+}

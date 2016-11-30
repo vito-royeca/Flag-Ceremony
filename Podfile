@@ -5,6 +5,7 @@ platform :ios, "9.0"
 use_frameworks!
 
 target "Flag Ceremony" do
+    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'Firebase/Core'
@@ -24,6 +25,7 @@ target "Flag Ceremony" do
     pod 'WhirlyGlobeResources'end
 
 target "Flag CeremonyTests" do
+    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'Firebase/Core'
@@ -44,6 +46,7 @@ target "Flag CeremonyTests" do
 end
 
 target "Flag CeremonyUITests" do
+    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'Firebase/Core'
