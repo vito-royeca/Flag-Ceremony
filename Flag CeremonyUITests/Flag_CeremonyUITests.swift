@@ -10,7 +10,6 @@ import XCTest
 
 class Flag_CeremonyUITests: XCTestCase {
     
-    
     override func setUp() {
         super.setUp()
         
@@ -19,9 +18,12 @@ class Flag_CeremonyUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launch()
     }
     
     override func tearDown() {
@@ -29,9 +31,25 @@ class Flag_CeremonyUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testScreenshots() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        let tabBarsQuery = app.tabBars
+        
+        sleep(45)
+        snapshot("01MapScreen")
+        
+        let globeButton = tabBarsQuery.buttons["Globe"]
+        globeButton.tap()
+        sleep(10)
+        snapshot("01GlobeScreen")
+        
+        let chartsButton = tabBarsQuery.buttons["Charts"]
+        chartsButton.tap()
+        sleep(10)
+        snapshot("01ChartsScreen")
     }
     
     
