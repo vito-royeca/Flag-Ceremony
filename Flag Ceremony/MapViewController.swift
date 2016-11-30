@@ -7,15 +7,25 @@
 //
 
 import UIKit
-//import Firebase
 import MBProgressHUD
 import WhirlyGlobe
 
 class MapViewController: UIViewController {
     // MARK: Variables
     var mapView: MaplyViewController?
+    var countries = [Country]()
     var countryLabels = [MaplyScreenLabel]()
     var capitalLabels = [MaplyScreenLabel]()
+    
+    // MARK: Actions
+    
+    @IBAction func searchAction(_ sender: UIBarButtonItem) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.performSegue(withIdentifier: "showCountriesAsPush", sender: nil)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            self.performSegue(withIdentifier: "showCountriesAsPopup", sender: nil)
+        }
+    }
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -28,6 +38,7 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // set the saved position
         if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
@@ -37,11 +48,15 @@ class MapViewController: UIViewController {
         }
 
         addFlags()
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.countrySelected(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,12 +69,28 @@ class MapViewController: UIViewController {
                 if let vc = nav.childViewControllers.first as? CountryViewController {
                     countryVC = vc
                 }
-            }else  if let vc = segue.destination as? CountryViewController {
+            } else  if let vc = segue.destination as? CountryViewController {
                 countryVC = vc
             }
             
             if let countryVC = countryVC {
                 countryVC.country = sender as? Country
+            }
+        } else if segue.identifier == "showCountriesAsPush" ||
+            segue.identifier == "showCountriesAsPopup" {
+            
+            var countryListVC:CountryListViewController?
+            
+            if let nav = segue.destination as? UINavigationController {
+                if let vc = nav.childViewControllers.first as? CountryListViewController {
+                    countryListVC = vc
+                }
+            } else  if let vc = segue.destination as? CountryListViewController {
+                countryListVC = vc
+            }
+            
+            if let countryListVC = countryListVC {
+                countryListVC.countries = countries
             }
         }
     }
@@ -102,64 +133,75 @@ class MapViewController: UIViewController {
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country], error: NSError?) in
-            if let _ = error {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            
-            } else {
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                    self.mapView!.remove(self.countryLabels)
-                    self.mapView!.remove(self.capitalLabels)
-                    self.countryLabels.removeAll()
-                    self.capitalLabels.removeAll()
-
-                    for country in countries {
-                        // add flags only if there is an anthem and flag files
-                        if let _ = country.getAudioURL(),
-                            let _ = country.getFlagURLForSize(size: .mini) {
-                            var label = MaplyScreenLabel()
-                            var radians = country.getGeoRadians()
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                self.mapView!.remove(self.countryLabels)
+                self.mapView!.remove(self.capitalLabels)
+                self.countries.removeAll()
+                self.countryLabels.removeAll()
+                self.capitalLabels.removeAll()
+                
+                for country in countries {
+                    // add flags only if there is an anthem and flag files
+                    if let _ = country.getAudioURL(),
+                        let _ = country.getFlagURLForSize(size: .mini) {
+                        var label = MaplyScreenLabel()
+                        var radians = country.getGeoRadians()
+                        
+                        label.text = "\(country.emojiFlag())\(country.name!)"
+                        label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                        label.selectable = true
+                        label.userObject = country
+                        label.layoutImportance = 1
+                        self.countryLabels.append(label)
+                        
+                        if let capital = country.capital {
+                            label = MaplyScreenLabel()
+                            radians = country.getCapitalGeoRadians()
                             
-                            label.text = "\(country.emojiFlag())\(country.name!)"
+                            label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                            label.selectable = true
-                            label.userObject = country
-                            label.layoutImportance = 1
-                            self.countryLabels.append(label)
-                            
-                            if let capital = country.capital {
-                                label = MaplyScreenLabel()
-                                radians = country.getCapitalGeoRadians()
-                                
-                                label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
-                                label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
-                                label.selectable = false
-                                self.capitalLabels.append(label)
-                            }
-                            
-                        } else {
-                            print("anthem not found: \(country.name!)")
+                            label.selectable = false
+                            self.capitalLabels.append(label)
                         }
+                        
+                        self.countries.append(country)
+                        
+                    } else {
+                        print("anthem not found: \(country.name!)")
                     }
-                    
-                    self.mapView!.addScreenLabels(self.countryLabels, desc: [
-                        kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
-                        kMaplyTextOutlineColor: UIColor.black,
-                        kMaplyTextOutlineSize: 2.0,
-                        kMaplyColor: UIColor.white
-                        ])
-                    
-                    self.mapView!.addScreenLabels(self.capitalLabels, desc: [
-                        kMaplyFont: UIFont.systemFont(ofSize: 14),
-                        kMaplyTextColor: UIColor.white
-                        ])
-                    
-                    DispatchQueue.main.async {
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                    }
+                }
+                
+                self.mapView!.addScreenLabels(self.countryLabels, desc: [
+                    kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
+                    kMaplyTextOutlineColor: UIColor.black,
+                    kMaplyTextOutlineSize: 2.0,
+                    kMaplyColor: UIColor.white
+                    ])
+                
+                self.mapView!.addScreenLabels(self.capitalLabels, desc: [
+                    kMaplyFont: UIFont.systemFont(ofSize: 14),
+                    kMaplyTextColor: UIColor.white
+                    ])
+                
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
             }
         })
+    }
+    
+    func countrySelected(_ notification: Notification) {
+        if let userInfo = (notification as NSNotification).userInfo {
+            if let country = userInfo["country"] as? Country,
+                let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
+                let radians = country.getGeoRadians()
+                let position = MaplyCoordinate(x: radians[0], y: radians[1])
+                
+                mapView!.height = height
+                mapView!.animate(toPosition: position, time: 1.0)
+            }
+        }
     }
 }
 
@@ -177,12 +219,12 @@ extension MapViewController : MaplyViewControllerDelegate {
     }
     
     func maplyViewController(_ viewC: MaplyViewController!, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>!, userMotion: Bool) {
-        var pos = MaplyCoordinate(x: 0, y: 0)
+        var position = MaplyCoordinate(x: 0, y: 0)
         var height = Float(0)
-        viewC.getPosition(&pos, height: &height)
+        viewC.getPosition(&position, height: &height)
         
-        UserDefaults.standard.set(pos.x, forKey: kLocationLongitude)
-        UserDefaults.standard.set(pos.y, forKey: kLocationLatitude)
+        UserDefaults.standard.set(position.x, forKey: kLocationLongitude)
+        UserDefaults.standard.set(position.y, forKey: kLocationLatitude)
         UserDefaults.standard.set(height, forKey: kLocationHeight)
         UserDefaults.standard.synchronize()
     }

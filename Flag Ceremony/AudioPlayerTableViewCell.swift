@@ -175,6 +175,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
             if let url = url {
                 try player = AVAudioPlayer(contentsOf: url)
                 player!.delegate = self
+                player!.prepareToPlay()
                 resetUI()
                 toggleUI(false)
             } else {

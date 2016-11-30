@@ -61,35 +61,84 @@ class FirebaseManager : NSObject {
     }
 
     func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
-        let anthem = FIRDatabase.database().reference().child("anthems").child(key)
-        anthem.observeSingleEvent(of: .value, with: { (snapshot) in
-            var a:Anthem?
-            
-            if let _ = snapshot.value as? [String: Any] {
-                 a = Anthem(snapshot: snapshot)
+        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+                let anthem = FIRDatabase.database().reference().child("anthems").child(key)
+                anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+                    var a:Anthem?
+                    
+                    if let _ = snapshot.value as? [String: Any] {
+                         a = Anthem(snapshot: snapshot)
+                    }
+                    completion(a)
+                })
+            } else {
+                // read the bundled json instead
+                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+                    if FileManager.default.fileExists(atPath: path) {
+                        do {
+                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                                
+                                var a:Anthem?
+                                
+                                if let dict = json["anthems"] {
+                                    if let anthem = dict[key] {
+                                        a = Anthem(key: key, dict: anthem)
+                                    }
+                                }
+                                completion(a)
+                            }
+                        } catch let error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
             }
-            completion(a)
         })
     }
     
-    func fetchAllCountries(completion: @escaping ([Country], NSError?) -> Void) {
+    func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
         let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         connectedRef.observe(.value, with: { snapshot in
             var countries = [Country]()
             
             if let connected = snapshot.value as? Bool, connected {
                 let ref = FIRDatabase.database().reference()
-                ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
+                ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value, with: { (snapshot) in
                     for child in snapshot.children {
                         if let c = child as? FIRDataSnapshot {
                             countries.append(Country(snapshot: c))
                         }
                     }
-                    completion(countries, nil)
+                    completion(countries)
                 })
             } else {
-                let error = NSError(domain: "domain", code: 401, userInfo: [NSLocalizedDescriptionKey : "Can not connect to server."])
-                completion(countries, error)
+                // read the bundled json instead
+                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+                    if FileManager.default.fileExists(atPath: path) {
+                        do {
+                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                                
+                                
+                                if let dict = json["countries"] {
+                                    for (key,value) in dict {
+                                        let country = Country(key: key, dict: value)
+                                        countries.append(country)
+                                    }
+                                }
+                                
+                                countries.sort { $0.name! < $1.name! }
+                            }
+                        } catch let error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+                
+                completion(countries)
             }
         })
     }

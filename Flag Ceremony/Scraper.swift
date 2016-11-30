@@ -60,15 +60,13 @@ class Scraper : NSObject {
         }
     }
 
-    func updateCountry(key: String, hasAnthemFile: Bool) {
+    func updateCountry(key: String, value: Any) {
         let countryRef = ref.child("countries").child(key)
         
         countryRef.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
-            if var post = currentData.value as? [String : Any] {
-                post[Country.Keys.HasAnthemFile] = NSNumber(value: hasAnthemFile)
-                
+            if let _ = currentData.value as? [String : Any] {
                 // Set value and report transaction success
-                currentData.value = post
+                currentData.value = value
                 
                 return FIRTransactionResult.success(withValue: currentData)
             }
@@ -102,7 +100,7 @@ class Scraper : NSObject {
                                         do {
                                             try data!.write(to: URL(fileURLWithPath: localPath))
                                             print("saved: \(localPath)")
-                                            self.updateCountry(key: key, hasAnthemFile: true)
+                                            self.updateCountry(key: key, value: NSNumber(value: true))
                                         } catch {
                                             
                                         }
@@ -111,13 +109,13 @@ class Scraper : NSObject {
                                 
                                 NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
                             } else {
-                                self.updateCountry(key: key, hasAnthemFile: false)
+                                self.updateCountry(key: key, value: NSNumber(value: false))
                             }
                         }
                         NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
                     
                     } else {
-                        self.updateCountry(key: key, hasAnthemFile: true)
+                        self.updateCountry(key: key, value: true)
                     }
                 }
             }
