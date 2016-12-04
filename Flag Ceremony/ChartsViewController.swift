@@ -119,7 +119,7 @@ extension ChartsViewController : UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ChartsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.size.height / 3
+        return tableView.frame.size.height / (UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

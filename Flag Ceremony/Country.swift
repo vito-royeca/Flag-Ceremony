@@ -39,7 +39,7 @@ struct Country {
     }
 
     // MARK: Properties
-    let key: String
+    let key: String?
     let ref: FIRDatabaseReference?
     
     let name: String?
@@ -108,7 +108,7 @@ struct Country {
 //    }
     
     func getFlagURLForSize(size: FlagSize) -> URL? {
-        if let path = Bundle.main.path(forResource: key.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
+        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
             if FileManager.default.fileExists(atPath: path) {
                 return URL(fileURLWithPath: path)
             }
@@ -118,7 +118,7 @@ struct Country {
     }
     
     func getAudioURL() -> URL? {
-        if let path = Bundle.main.path(forResource: key.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {
+        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {
             if FileManager.default.fileExists(atPath: path) {
                 return URL(fileURLWithPath: path)
             }

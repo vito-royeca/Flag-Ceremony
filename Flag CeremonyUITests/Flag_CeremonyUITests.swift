@@ -37,19 +37,26 @@ class Flag_CeremonyUITests: XCTestCase {
         
         let app = XCUIApplication()
         let tabBarsQuery = app.tabBars
-        
-        sleep(45)
+        snapshot("02Anthem")
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            app.navigationBars["Flag_Ceremony.CountryView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            app.navigationBars.matching(identifier: "Flag_Ceremony.CountryView").buttons["close window"].tap()
+        }
         snapshot("01MapScreen")
         
+        let mapButton = tabBarsQuery.buttons["Map"]
         let globeButton = tabBarsQuery.buttons["Globe"]
         globeButton.tap()
-        sleep(10)
-        snapshot("01GlobeScreen")
+        mapButton.tap()
+        globeButton.tap()
+        snapshot("03Anthem")
         
         let chartsButton = tabBarsQuery.buttons["Charts"]
         chartsButton.tap()
-        sleep(10)
-        snapshot("01ChartsScreen")
+        snapshot("04ChartsScreen")
+        
+        // record test here...
     }
     
     

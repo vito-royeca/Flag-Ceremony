@@ -143,6 +143,45 @@ class FirebaseManager : NSObject {
         })
     }
     
+    func findCountry(_ key: String, completion: @escaping (Country?) -> Void) {
+        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+                let anthem = FIRDatabase.database().reference().child("countries").child(key)
+                anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+                    var a:Country?
+                    
+                    if let _ = snapshot.value as? [String: Any] {
+                        a = Country(snapshot: snapshot)
+                    }
+                    completion(a)
+                })
+            } else {
+                // read the bundled json instead
+                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+                    if FileManager.default.fileExists(atPath: path) {
+                        do {
+                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                                
+                                var a:Country?
+                                
+                                if let dict = json["countries"] {
+                                    if let country = dict[key] {
+                                        a = Country(key: key, dict: country)
+                                    }
+                                }
+                                completion(a)
+                            }
+                        } catch let error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
     func monitorTopViewed(completion: @escaping ([Country]) -> Void) {
         let ref = FIRDatabase.database().reference().child("countries")
         let query = ref.queryOrdered(byChild: Country.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)

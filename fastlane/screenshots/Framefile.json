@@ -1,0 +1,37 @@
+{
+  "default": {
+    "title": {
+      "color": "#545454"
+    },
+    "background": "./background.jpg",
+    "padding": 50
+  },
+
+
+  "data": [
+    {
+      "filter": "Map",
+      "keyword": {
+        "color": "#3B5998"
+      }
+    },
+    {
+      "filter": "Anthem",
+      "keyword": {
+        "color": "#3B5998"
+      }
+    },
+    {
+      "filter": "Globe",
+      "keyword": {
+        "color": "#3B5998"
+      }
+    },
+    {
+      "filter": "Top Charts",
+      "keyword": {
+        "color": "#3B5998"
+      }
+    }
+  ]
+}

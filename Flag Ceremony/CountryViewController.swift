@@ -58,7 +58,7 @@ class CountryViewController: UIViewController {
         tableView.estimatedRowHeight = 88.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        FirebaseManager.sharedInstance.findAnthem(country!.key, completion: { (anthem) in
+        FirebaseManager.sharedInstance.findAnthem(country!.key!, completion: { (anthem) in
             self.anthem = anthem
             self.tableView.reloadData()
         })
@@ -83,7 +83,7 @@ class CountryViewController: UIViewController {
             cell.pause()
             cell.play()
             
-            FirebaseManager.sharedInstance.incrementCountryViews(country!.key)
+            FirebaseManager.sharedInstance.incrementCountryViews(country!.key!)
         }
     }
     
@@ -107,7 +107,7 @@ class CountryViewController: UIViewController {
             if let url = userInfo[kAudioURL] as? URL,
                 let country = country {
                 if url == country.getAudioURL() {
-                    FirebaseManager.sharedInstance.incrementCountryPlays(country.key)
+                    FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
                 }
             }
         }

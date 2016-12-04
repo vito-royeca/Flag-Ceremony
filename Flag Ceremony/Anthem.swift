@@ -25,7 +25,7 @@ struct Anthem {
     }
     
     // MARK: Properties
-    let key: String
+    let key: String?
     let ref: FIRDatabaseReference?
     
     let wiki: String?

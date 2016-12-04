@@ -16,6 +16,7 @@ class MapViewController: UIViewController {
     var countries = [Country]()
     var countryLabels = [MaplyScreenLabel]()
     var capitalLabels = [MaplyScreenLabel]()
+    private var hasShownCountryForScreenshot = false
     
     // MARK: Actions
     
@@ -53,6 +54,23 @@ class MapViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.countrySelected(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
 
+    func showCountryForScreenshot() {
+        FirebaseManager.sharedInstance.findCountry(DefaultCountry, completion: { (country) in
+            if self.hasShownCountryForScreenshot {
+                return
+            }
+            self.hasShownCountryForScreenshot = true
+            UserDefaults.standard.set(country!.getGeoRadians()[0], forKey: kLocationLongitude)
+            UserDefaults.standard.set(country!.getGeoRadians()[1], forKey: kLocationLatitude)
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
+            } else if UIDevice.current.userInterfaceIdiom == .pad {
+                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
+            }
+        })
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
@@ -186,6 +204,9 @@ class MapViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
+                    #if SHOW_COUNTRY_4_SCREENSHOT
+                        self.showCountryForScreenshot()
+                    #endif
                 }
             }
         })
