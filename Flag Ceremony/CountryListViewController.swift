@@ -115,9 +115,10 @@ extension CountryListViewController : UITableViewDataSource {
                         capitalText += "\(name)"
                     }
                 }
+                
                 c.textLabel?.text = "\(country.emojiFlag())\(country.name!)"
                 c.detailTextLabel?.text = capitalText
-                c.accessoryType = selectedRow == indexPath.row ? .checkmark : .none
+                c.accessoryType = (selectedRow == indexPath.row ? .checkmark : .none)
             }
             cell = c
         }
@@ -130,7 +131,7 @@ extension CountryListViewController : UITableViewDataSource {
         return keys[section]
     }
     
-    public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sectionedCountries.keys.sorted()
     }
 }
@@ -145,8 +146,8 @@ extension CountryListViewController : UITableViewDelegate {
             let country = carray[indexPath.row]
             
             selectedRow = indexPath.row
-            
             tableView.reloadData()
+            
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kCountrySelected), object: nil, userInfo: ["country": country])
             
             let radians = country.getGeoRadians()

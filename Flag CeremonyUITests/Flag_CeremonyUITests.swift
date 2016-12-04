@@ -43,18 +43,18 @@ class Flag_CeremonyUITests: XCTestCase {
         } else if UIDevice.current.userInterfaceIdiom == .pad {
             app.navigationBars.matching(identifier: "Flag_Ceremony.CountryView").buttons["close window"].tap()
         }
-        snapshot("01MapScreen")
+        snapshot("01Map")
         
         let mapButton = tabBarsQuery.buttons["Map"]
         let globeButton = tabBarsQuery.buttons["Globe"]
         globeButton.tap()
         mapButton.tap()
         globeButton.tap()
-        snapshot("03Anthem")
+        snapshot("03Globe")
         
         let chartsButton = tabBarsQuery.buttons["Charts"]
         chartsButton.tap()
-        snapshot("04ChartsScreen")
+        snapshot("04TopCharts")
         
         // record test here...
     }

@@ -24,7 +24,6 @@ class CountryViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Actions
