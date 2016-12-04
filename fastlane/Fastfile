@@ -67,8 +67,9 @@ platform :ios do
   
   # my lanes
   lane :screenshot do
-#  	snapshot
+  	snapshot
   	frameit(white: true)
+  	deliver
   end
   
 end
