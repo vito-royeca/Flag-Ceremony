@@ -204,9 +204,9 @@ class MapViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
-                    #if SHOW_COUNTRY_4_SCREENSHOT
-                        self.showCountryForScreenshot()
-                    #endif
+//                    #if SHOW_COUNTRY_4_SCREENSHOT
+//                        self.showCountryForScreenshot()
+//                    #endif
                 }
             }
         })

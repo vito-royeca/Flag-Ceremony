@@ -171,19 +171,42 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     // MARK: Private methods
     private func initPlayer() {
-        do {
-            if let url = url {
-                try player = AVAudioPlayer(contentsOf: url)
+        
+        if let url = url {
+            do {
+                let data = try Data(contentsOf: url)
+                player = try AVAudioPlayer(data: data)
+//                let fileTpes = [AVFileType3GPP,
+//                                AVFileType3GPP2,
+//                                AVFileTypeAIFC,
+//                                AVFileTypeAIFF,
+//                                AVFileTypeAMR,
+//                                AVFileTypeAC3,
+//                                AVFileTypeMPEGLayer3,
+//                                AVFileTypeSunAU,
+//                                AVFileTypeCoreAudioFormat,
+//                                AVFileTypeAppleM4V,
+//                                AVFileTypeMPEG4,
+//                                AVFileTypeAppleM4A,
+//                                AVFileTypeQuickTimeMovie,
+//                                AVFileTypeWAVE]
+//                for fileType in fileTpes {
+//                    player = try AVAudioPlayer(data: data, fileTypeHint: AVFileTypeCoreAudioFormat)
+//                    if player != nil {
+//                        break
+//                    }
+//                }
+                
                 player!.delegate = self
                 player!.prepareToPlay()
                 resetUI()
                 toggleUI(false)
-            } else {
-                stop()
-                toggleUI(true)
+            } catch let error {
+                print("error in audioPlayer: \(error)")
             }
-        } catch {
-            print("\(error)")
+        } else {
+            stop()
+            toggleUI(true)
         }
     }
 }
@@ -196,5 +219,9 @@ extension AudioPlayerTableViewCell : AVAudioPlayerDelegate {
         
         let userInfo = [kAudioURL: url]
         NotificationCenter.default.post(name: Notification.Name(rawValue: kPlayFinished), object: nil, userInfo: userInfo)
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("error in audioPlayer: \(error)")
     }
 }
