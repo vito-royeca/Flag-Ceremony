@@ -1,1 +1,1 @@
-anthem, national, lyrics
+anthem, national, lyrics, composer, star, spangled, banner
