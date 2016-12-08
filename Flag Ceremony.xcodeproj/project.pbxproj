@@ -395,14 +395,14 @@
 					};
 					8C4E97381D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 43CD66539H;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
 					8C4E97431D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 43CD66539H;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
 				};
@@ -745,9 +745,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -791,9 +793,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -818,11 +822,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony/Flag Ceremony.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag Ceremony/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SHOW_COUNTRY_4_SCREENSHOT;
 				SWIFT_VERSION = 3.0;
 			};
@@ -834,11 +840,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony/Flag Ceremony.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 43CD66539H;
 				INFOPLIST_FILE = "Flag Ceremony/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 3.0;
 			};
@@ -849,7 +857,8 @@
 			baseConfigurationReference = 7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
@@ -864,7 +873,8 @@
 			baseConfigurationReference = D779216E07AF4AA639CBFC53 /* Pods-Flag CeremonyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
@@ -878,7 +888,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B16DD7DD6F86D87482AFA18A /* Pods-Flag CeremonyUITests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 43CD66539H;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
@@ -892,7 +903,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E07FC3105D9115FB8D08231C /* Pods-Flag CeremonyUITests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 43CD66539H;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
