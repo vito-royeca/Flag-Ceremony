@@ -74,7 +74,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
   - hpple (0.2.0)
-  - InAppSettingsKit (2.8)
+  - InAppSettingsKit (2.8.1)
   - JJJUtils (0.3.2):
     - JJJUtils/OSX (= 0.3.2)
   - libjson (7.6.1)
@@ -93,15 +93,15 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - Networking (2.3.1)
+  - Networking (2.5.1)
   - proj4 (4.8.0)
   - SimulatorStatusMagic (1.9.2)
   - SMCalloutView (2.1.5)
   - tinyxml (2.1.0)
-  - TwitterCore (2.6.1):
+  - TwitterCore (2.7.0):
     - Fabric
-  - TwitterKit (2.6.1):
-    - TwitterCore (= 2.6.1)
+  - TwitterKit (2.7.0):
+    - TwitterCore (= 2.7.0)
   - WhirlyGlobe (2.4):
     - WhirlyGlobe/MaplyComponent (= 2.4)
   - WhirlyGlobe/aaplus (2.4)
@@ -177,19 +177,19 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
-  InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
+  InAppSettingsKit: 94d2fba3ccd700fc4e32c6d09fabcc0af2426744
   JJJUtils: 5abcb911388dc05e24cecdde9d4a3e18f1b1510e
   libjson: 1a065ca64704a5d1b51c3754268998942d57ac6f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
-  Networking: ccf5f074a956c194b233c1d379261dd51ae9bea9
+  Networking: 5f04f23e246c99c43309d7e755883f2305662149
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
   SimulatorStatusMagic: f6cf062b0e5a2df6f000bb0f98d1ae6977c8dbc1
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
-  TwitterCore: a8aea8bdaf2abd6572c8f264707a4ea4dc2d0eab
-  TwitterKit: d38c08d31dfd4ba604f95deca6cf8e174b5cbd96
+  TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
+  TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
