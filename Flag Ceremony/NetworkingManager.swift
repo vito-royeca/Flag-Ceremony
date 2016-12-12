@@ -53,13 +53,7 @@ class NetworkingManager: NSObject {
                     }
                 })
             case .Get:
-                var completPath = path
-                if let params = params {
-                    completPath = "\(completPath)?\(params)"
-                }
-                completPath = completPath.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-                
-                networker.GET(completPath, parameterType: paramType, completion: { (JSON, headers, error) in
+                networker.GET(path, parameters: params, completion: { (JSON, headers, error) in
                     if let error = error {
                         print("An error happened: \(error)")
                         completionHandler([[String : Any]](), error)

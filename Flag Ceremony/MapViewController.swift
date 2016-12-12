@@ -43,9 +43,22 @@ class MapViewController: UIViewController {
         if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
-            let position = MaplyCoordinateMake(lon, lat)
-            mapView!.height = height
-            mapView!.animate(toPosition: position, time: 1.0)
+            
+            if let mapView = mapView {
+                var cPosition = MaplyCoordinate(x: 0, y: 0)
+                var cHeight = Float(0)
+                mapView.getPosition(&cPosition, height: &cHeight)
+                
+                // do not reposition if in the same position
+                if lon != cPosition.x &&
+                    lat != cPosition.y &&
+                    height != cHeight {
+                    
+                    let position = MaplyCoordinateMake(lon, lat)
+                    mapView.height = height
+                    mapView.animate(toPosition: position, time: 1.0)
+                }
+            }
         }
 
         addFlags()
