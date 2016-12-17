@@ -7,19 +7,20 @@ public extension Int {
      - returns: The NetworkingStatusCodeType of the status code.
      */
     public func statusCodeType() -> Networking.StatusCodeType {
-        if self >= 100 && self < 200 {
-            return .informational
-        } else if self >= 200 && self < 300 {
-            return .successful
-        } else if self >= 300 && self < 400 {
-            return .redirection
-        } else if self >= 400 && self < 500 {
-            return .clientError
-        } else if self >= 500 && self < 600 {
-            return .serverError
-        } else if self == URLError.cancelled.rawValue {
+        switch self {
+        case URLError.cancelled.rawValue:
             return .cancelled
-        } else {
+        case 100 ..< 200:
+            return .informational
+        case 200 ..< 300:
+            return .successful
+        case 300 ..< 400:
+            return .redirection
+        case 400 ..< 500:
+            return .clientError
+        case 500 ..< 600:
+            return .serverError
+        default:
             return .unknown
         }
     }
@@ -163,10 +164,6 @@ public class Networking {
         self.cache = cache ?? NSCache()
     }
 
-    deinit {
-        self.session.invalidateAndCancel()
-    }
-
     /**
      Authenticates using Basic Authentication, it converts username:password to Base64 then sets the Authorization header to "Basic \(Base64(username:password))".
      - parameter username: The username to be used.
@@ -212,9 +209,11 @@ public class Networking {
      - parameter path: The path to be appended to the base URL.
      - returns: A NSURL generated after appending the path to the base URL.
      */
-    public func url(for path: String) -> URL {
+    public func url(for path: String) throws -> URL {
         let encodedPath = path.encodeUTF8() ?? path
-        guard let url = URL(string: self.baseURL + encodedPath) else { fatalError("Couldn't create a url using baseURL: \(self.baseURL) and encodedPath: \(encodedPath)") }
+        guard let url = URL(string: self.baseURL + encodedPath) else {
+            throw NSError(domain: Networking.domain, code: 0, userInfo: [NSLocalizedDescriptionKey: "Couldn't create a url using baseURL: \(self.baseURL) and encodedPath: \(encodedPath)"])
+        }
         return url
     }
 
@@ -225,7 +224,14 @@ public class Networking {
      */
     public func destinationURL(for path: String, cacheName: String? = nil) throws -> URL {
         let normalizedCacheName = cacheName?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let resourcesPath = normalizedCacheName ?? self.url(for: path).absoluteString
+        var resourcesPath: String
+        if let normalizedCacheName = normalizedCacheName {
+            resourcesPath = normalizedCacheName
+        } else {
+            let url = try self.url(for: path)
+            resourcesPath = url.absoluteString
+        }
+
         let normalizedResourcesPath = resourcesPath.replacingOccurrences(of: "/", with: "-")
         let folderPath = Networking.domain
         let finalPath = "\(folderPath)/\(normalizedResourcesPath)"
@@ -338,9 +344,7 @@ public class Networking {
         return object as? Data
     }
 
-    /**
-     Deletes the downloaded/cached files.
-     */
+    /// Deletes the downloaded/cached files.
     public static func deleteCachedFiles() {
         #if os(tvOS)
             let directory = FileManager.SearchPathDirectory.cachesDirectory
@@ -351,7 +355,7 @@ public class Networking {
             let folderURL = cachesURL.appendingPathComponent(URL(string: Networking.domain)!.absoluteString)
 
             if FileManager.default.exists(at: folderURL) {
-                FileManager.default.remove(at: folderURL)
+                let _ = try? FileManager.default.remove(at: folderURL)
             }
         }
     }
@@ -473,16 +477,13 @@ extension Networking {
                             case .data:
                                 self.cache.setObject(data as AnyObject, forKey: destinationURL.absoluteString as AnyObject)
                                 returnedResponse = data
-                                break
                             case .image:
                                 if let image = NetworkingImage(data: data) {
                                     self.cache.setObject(image, forKey: destinationURL.absoluteString as AnyObject)
                                     returnedResponse = image
                                 }
-                                break
                             default:
                                 fatalError("Response Type is different than Data and Image")
-                                break
                             }
                         }
                         TestCheck.testBlock(self.disableTestingMode) {
@@ -499,7 +500,7 @@ extension Networking {
     @discardableResult
     func dataRequest(_ requestType: RequestType, path: String, cacheName: String? = nil, parameterType: ParameterType?, parameters: Any?, parts: [FormDataPart]?, responseType: ResponseType, completion: @escaping (_ response: Data?, _ headers: [AnyHashable: Any], _ error: NSError?) -> Void) -> String {
         let requestID = UUID().uuidString
-        var request = URLRequest(url: self.url(for: path))
+        var request = URLRequest(url: try! self.url(for: path))
         request.httpMethod = requestType.rawValue
 
         if let parameterType = parameterType, let contentType = parameterType.contentType(self.boundary) {
@@ -529,36 +530,36 @@ extension Networking {
         var serializingError: NSError?
         if let parameterType = parameterType, let parameters = parameters {
             switch parameterType {
-            case .none:
-                break
+            case .none: break
             case .json:
                 do {
                     request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
                 } catch let error as NSError {
                     serializingError = error
                 }
-                break
             case .formURLEncoded:
                 guard let parametersDictionary = parameters as? [String: Any] else { fatalError("Couldn't convert parameters to a dictionary: \(parameters)") }
-                let formattedParameters = parametersDictionary.urlEncodedString()
-                switch requestType {
-                case .GET, .DELETE:
-                    let urlEncodedPath: String
-                    if path.contains("?") {
-                        if let lastCharacter = path.characters.last, lastCharacter == "?" {
-                            urlEncodedPath = path + formattedParameters
+                do {
+                    let formattedParameters = try parametersDictionary.urlEncodedString()
+                    switch requestType {
+                    case .GET, .DELETE:
+                        let urlEncodedPath: String
+                        if path.contains("?") {
+                            if let lastCharacter = path.characters.last, lastCharacter == "?" {
+                                urlEncodedPath = path + formattedParameters
+                            } else {
+                                urlEncodedPath = path + "&" + formattedParameters
+                            }
                         } else {
-                            urlEncodedPath = path + "&" + formattedParameters
+                            urlEncodedPath = path + "?" + formattedParameters
                         }
-                    } else {
-                        urlEncodedPath = path + "?" + formattedParameters
+                        request.url = try! self.url(for: urlEncodedPath)
+                    case .POST, .PUT:
+                        request.httpBody = formattedParameters.data(using: .utf8)
                     }
-                    request.url = self.url(for: urlEncodedPath)
-                case .POST, .PUT:
-                    request.httpBody = formattedParameters.data(using: .utf8)
+                } catch let error as NSError {
+                    serializingError = error
                 }
-
-                break
             case .multipartFormData:
                 var bodyData = Data()
 
@@ -582,10 +583,8 @@ extension Networking {
 
                 bodyData.append("--\(self.boundary)--\r\n".data(using: .utf8)!)
                 request.httpBody = bodyData as Data
-                break
             case .custom(_):
                 request.httpBody = parameters as? Data
-                break
             }
         }
 
@@ -653,13 +652,10 @@ extension Networking {
             switch sessionTaskType {
             case .data:
                 sessionTasks = dataTasks
-                break
             case .download:
                 sessionTasks = downloadTasks
-                break
             case .upload:
                 sessionTasks = uploadTasks
-                break
             }
 
             for sessionTask in sessionTasks {
@@ -718,13 +714,15 @@ extension Networking {
                         print("Failed pretty printing parameters: \(parameters), error: \(error)")
                         print(" ")
                     }
-                    break
                 case .formURLEncoded:
                     guard let parametersDictionary = parameters as? [String: Any] else { fatalError("Couldn't cast parameters as dictionary: \(parameters)") }
-                    let formattedParameters = parametersDictionary.urlEncodedString()
-                    print("Parameters: \(formattedParameters)")
+                    do {
+                        let formattedParameters = try parametersDictionary.urlEncodedString()
+                        print("Parameters: \(formattedParameters)")
+                    } catch let error as NSError {
+                        print("Failed parsing Parameters: \(parametersDictionary) — \(error)")
+                    }
                     print(" ")
-                    break
                 default: break
                 }
             }
