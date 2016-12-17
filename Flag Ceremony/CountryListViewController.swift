@@ -30,7 +30,6 @@ class CountryListViewController: UIViewController {
         // Do any additional setup after loading the view.
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
@@ -148,12 +147,17 @@ extension CountryListViewController : UITableViewDelegate {
             selectedRow = indexPath.row
             tableView.reloadData()
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kCountrySelected), object: nil, userInfo: ["country": country])
-            
             let radians = country.getGeoRadians()
             UserDefaults.standard.set(radians[0], forKey: kLocationLongitude)
             UserDefaults.standard.set(radians[1], forKey: kLocationLatitude)
             UserDefaults.standard.synchronize()
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                let _ = navigationController?.popToRootViewController(animated: true)
+            } else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kCountrySelected), object: nil, userInfo: ["country": country])
+                dismiss(animated: true, completion: nil)
+            }
         }
     }
 }
@@ -165,7 +169,3 @@ extension CountryListViewController : UISearchResultsUpdating {
     }
 }
 
-// MARK: UISearchBarDelegate
-extension CountryListViewController: UISearchBarDelegate {
-    
-}

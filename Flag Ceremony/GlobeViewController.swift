@@ -33,40 +33,15 @@ class GlobeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initGlobe()
+        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // set the saved position
-        if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
-            let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
-            let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
-            
-            
-            if let globeView = globeView {
-                var cPosition = MaplyCoordinate(x: 0, y: 0)
-                var cHeight = Float(0)
-                globeView.getPosition(&cPosition, height: &cHeight)
-                
-                // do not reposition if in the same position
-                if lon != cPosition.x &&
-                    lat != cPosition.y &&
-                    height != cHeight {
-                    
-                    let position = MaplyCoordinateMake(lon, lat)
-                    globeView.height = height
-                    globeView.heading = 0
-                    globeView.animate(toPosition: position, time: 1.0)
-                    globeView.heading = DefaultLocationHeading
-                }
-            }
-        }
-        
-        addFlags()
-        
+        showCountry(nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(GlobeViewController.countrySelected(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GlobeViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,32 +99,22 @@ class GlobeViewController: UIViewController {
         globeView!.clearColor = UIColor.black
         globeView!.frameInterval = 2
         globeView!.delegate = self
-        globeView!.heading = DefaultLocationHeading
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
+        globeView!.heading = DefaultLocationHeading
         addChildViewController(globeView!)
         
-        
         // set up the data source
-        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
-            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource)
-            layer?.handleEdges = true
-            layer?.coverPoles = true
-            layer?.requireElev = false
-            layer?.waitLoad = false
-            layer?.drawPriority = 0
-            layer?.singleLevelLoading = false
+        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres"),
+            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource) {
+            layer.handleEdges = true
+            layer.coverPoles = true
+            layer.requireElev = false
+            layer.waitLoad = false
+            layer.drawPriority = 0
+            layer.singleLevelLoading = false
             globeView!.add(layer)
         }
-        
-        // set default position
-        let lon = (DefaultLocationLongitude * Float.pi)/180
-        let lat = (DefaultLocationLatitude * Float.pi)/180
-        let position = MaplyCoordinateMake(lon, lat)
-        globeView!.height = DefaultLocationHeight
-        globeView!.heading = 0
-        globeView!.setPosition(position)
-        globeView!.heading = DefaultLocationHeading
     }
     
     func addFlags() {
@@ -218,18 +183,42 @@ class GlobeViewController: UIViewController {
         })
     }
     
-    func countrySelected(_ notification: Notification) {
-        if let userInfo = (notification as NSNotification).userInfo {
-            if let country = userInfo["country"] as? Country,
-                let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
-                let radians = country.getGeoRadians()
-                let position = MaplyCoordinate(x: radians[0], y: radians[1])
+    func showCountry(_ notification: Notification?) {
+        var newPosition:MaplyCoordinate?
+        var newHeight = Float(0)
+        var willGotoNewPosition = false
+        
+        if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
+            let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
+            let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
+            
+            var cPosition = MaplyCoordinate(x: 0, y: 0)
+            var cHeight = Float(0)
+            
+            if let globeView = globeView {
+                globeView.getPosition(&cPosition, height: &cHeight)
                 
-                globeView!.height = height
-                globeView!.heading = 0
-                globeView!.animate(toPosition: position, time: 1.0)
-                globeView!.heading = DefaultLocationHeading
+                // do not reposition if in the same position
+                if lon != cPosition.x ||
+                    lat != cPosition.y ||
+                    height != cHeight {
+                    
+                    newPosition = MaplyCoordinateMake(lon, lat)
+                    newHeight = height
+                    willGotoNewPosition = true
+                }
             }
+        } else {
+            // set default position
+            let lon = (DefaultLocationLongitude * Float.pi)/180
+            let lat = (DefaultLocationLatitude * Float.pi)/180
+            newPosition = MaplyCoordinateMake(lon, lat)
+            willGotoNewPosition = true
+        }
+        
+        if willGotoNewPosition {
+            globeView!.height = newHeight
+            globeView!.animate(toPosition: newPosition!, time: 1.0)
         }
     }
 }

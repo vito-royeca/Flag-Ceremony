@@ -176,27 +176,6 @@ class AudioPlayerTableViewCell: UITableViewCell {
             do {
                 let data = try Data(contentsOf: url)
                 player = try AVAudioPlayer(data: data)
-//                let fileTpes = [AVFileType3GPP,
-//                                AVFileType3GPP2,
-//                                AVFileTypeAIFC,
-//                                AVFileTypeAIFF,
-//                                AVFileTypeAMR,
-//                                AVFileTypeAC3,
-//                                AVFileTypeMPEGLayer3,
-//                                AVFileTypeSunAU,
-//                                AVFileTypeCoreAudioFormat,
-//                                AVFileTypeAppleM4V,
-//                                AVFileTypeMPEG4,
-//                                AVFileTypeAppleM4A,
-//                                AVFileTypeQuickTimeMovie,
-//                                AVFileTypeWAVE]
-//                for fileType in fileTpes {
-//                    player = try AVAudioPlayer(data: data, fileTypeHint: AVFileTypeCoreAudioFormat)
-//                    if player != nil {
-//                        break
-//                    }
-//                }
-                
                 player!.delegate = self
                 player!.prepareToPlay()
                 resetUI()

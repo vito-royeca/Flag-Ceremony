@@ -19,7 +19,6 @@ class MapViewController: UIViewController {
     private var hasShownCountryForScreenshot = false
     
     // MARK: Actions
-    
     @IBAction func searchAction(_ sender: UIBarButtonItem) {
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.performSegue(withIdentifier: "showCountriesAsPush", sender: nil)
@@ -34,37 +33,15 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initMap()
+        addFlags()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // set the saved position
-        if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
-            let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
-            let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
-            
-            if let mapView = mapView {
-                var cPosition = MaplyCoordinate(x: 0, y: 0)
-                var cHeight = Float(0)
-                mapView.getPosition(&cPosition, height: &cHeight)
-                
-                // do not reposition if in the same position
-                if lon != cPosition.x &&
-                    lat != cPosition.y &&
-                    height != cHeight {
-                    
-                    let position = MaplyCoordinateMake(lon, lat)
-                    mapView.height = height
-                    mapView.animate(toPosition: position, time: 1.0)
-                }
-            }
-        }
-
-        addFlags()
-        
+        showCountry(nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.countrySelected(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
 
     func showCountryForScreenshot() {
@@ -136,24 +113,16 @@ class MapViewController: UIViewController {
         addChildViewController(mapView!)
         
         // set up the data source
-        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres") {
-            if let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource) {
-                layer.handleEdges = false
-                layer.coverPoles = false
-                layer.requireElev = false
-                layer.waitLoad = false
-                layer.drawPriority = 0
-                layer.singleLevelLoading = false
-                mapView!.add(layer)
-            }
+        if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres"),
+            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource) {
+            layer.handleEdges = false
+            layer.coverPoles = false
+            layer.requireElev = false
+            layer.waitLoad = false
+            layer.drawPriority = 0
+            layer.singleLevelLoading = false
+            mapView!.add(layer)
         }
-        
-        // set default position
-        let lon = (DefaultLocationLongitude * Float.pi)/180
-        let lat = (DefaultLocationLatitude * Float.pi)/180
-        let position = MaplyCoordinateMake(lon, lat)
-        mapView!.height = DefaultLocationHeight
-        mapView!.animate(toPosition: position, time: 1.0)
     }
     
     func addFlags() {
@@ -225,16 +194,80 @@ class MapViewController: UIViewController {
         })
     }
     
-    func countrySelected(_ notification: Notification) {
-        if let userInfo = (notification as NSNotification).userInfo {
-            if let country = userInfo["country"] as? Country,
-                let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
-                let radians = country.getGeoRadians()
-                let position = MaplyCoordinate(x: radians[0], y: radians[1])
+    func showCountry(_ notification: Notification?) {
+        var newPosition:MaplyCoordinate?
+        var newHeight = Float(0)
+        var willGotoNewPosition = false
+        
+        if let lon = UserDefaults.standard.value(forKey: kLocationLongitude) as? Float,
+            let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
+            let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
+            
+            if let mapView = mapView {
+                var cPosition = MaplyCoordinate(x: 0, y: 0)
+                var cHeight = Float(0)
                 
-                mapView!.height = height
-                mapView!.animate(toPosition: position, time: 1.0)
+                mapView.getPosition(&cPosition, height: &cHeight)
+                
+                // do not reposition if in the same position
+                if lon != cPosition.x ||
+                    lat != cPosition.y ||
+                    height != cHeight {
+                    
+                    newPosition = MaplyCoordinateMake(lon, lat)
+                    newHeight = height
+                    willGotoNewPosition = true
+                }
             }
+
+            // WhirlyMaply does not remove screen labels :(
+//            if let notification = notification {
+//                if let userInfo = (notification as NSNotification).userInfo {
+//                    if let country = userInfo["country"] as? Country {
+//                        
+//                        // remove from countryLabels
+//                        var index = 0
+//                        for c in countryLabels {
+//                            if let xc = c.userObject as? Country {
+//                                if xc.key == country.key {
+//                                    mapView!.remove([c])
+//                                    break
+//                                }
+//                            }
+//                            index += 1
+//                        }
+//                        countryLabels.remove(at: index)
+//                        
+//                        // re-add to countryLabels
+//                        let label = MaplyScreenLabel()
+//                        label.text = "\(country.emojiFlag())\(country.name!)"
+//                        label.loc = MaplyCoordinate(x: lon, y: lat)
+//                        label.selectable = true
+//                        label.userObject = country
+//                        label.layoutImportance = 1
+//                        countryLabels.append(label)
+//                        
+//                        mapView!.addScreenLabels([label], desc: [
+//                            kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
+//                            kMaplyTextOutlineColor: UIColor.red,
+//                            kMaplyTextOutlineSize: 2.0,
+//                            kMaplyColor: UIColor.red
+//                        ])
+//                    }
+//                }
+//            }
+        } else {
+            // set default position
+            let lon = (DefaultLocationLongitude * Float.pi)/180
+            let lat = (DefaultLocationLatitude * Float.pi)/180
+            newPosition = MaplyCoordinateMake(lon, lat)
+            newHeight = DefaultLocationHeight
+            willGotoNewPosition = true
+        }
+        
+        if willGotoNewPosition {
+            mapView!.height = newHeight
+            mapView!.animate(toPosition: newPosition!, time: 1.0)
         }
     }
 }
