@@ -19,6 +19,24 @@ class ChartsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Actions
+    @IBAction func menuAction(_ sender: UIBarButtonItem) {
+        if let navigationVC = mm_drawerController.leftDrawerViewController as? UINavigationController {
+            var menuView:MenuViewController?
+            
+            for drawer in navigationVC.viewControllers {
+                if drawer is MenuViewController {
+                    menuView = drawer as? MenuViewController
+                }
+            }
+            if menuView == nil {
+                menuView = MenuViewController()
+                navigationVC.addChildViewController(menuView!)
+            }
+            
+            navigationVC.popToViewController(menuView!, animated: true)
+        }
+        mm_drawerController.toggle(.left, animated:true, completion:nil)
+    }
     
     // MARK: Overrides
     override func viewDidLoad() {
@@ -119,7 +137,20 @@ extension ChartsViewController : UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ChartsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.size.height / (UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6)
+        var divisor = CGFloat(0)
+        
+        switch UIApplication.shared.statusBarOrientation {
+        case .portrait,
+             .portraitUpsideDown:
+            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
+        case .landscapeLeft,
+             .landscapeRight:
+            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 5
+        default:
+            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
+        }
+        
+        return tableView.frame.size.height / divisor
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

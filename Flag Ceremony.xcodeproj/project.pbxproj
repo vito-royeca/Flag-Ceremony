@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1173C92C1E06EEC400C5DA16 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */; };
+		1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */; };
+		1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */; };
 		582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582D904B1DEE16260030DA46 /* SnapshotHelper.swift */; };
 		5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
@@ -98,6 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -280,6 +284,7 @@
 				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
 				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
 				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
+				1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -637,6 +642,7 @@
 				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CE297BE1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
+				1173C92C1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CD893B31DE5B571007052C7 /* FirebaseManager.swift in Sources */,
 				8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */,
@@ -661,6 +667,7 @@
 				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CE297BF1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
+				1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8CD893B41DE5B571007052C7 /* FirebaseManager.swift in Sources */,
 				8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
@@ -685,6 +692,7 @@
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
 				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
+				1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,

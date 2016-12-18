@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import MMDrawerController
 import WhirlyGlobe
 
 class MapViewController: UIViewController {
@@ -19,6 +20,25 @@ class MapViewController: UIViewController {
     private var hasShownCountryForScreenshot = false
     
     // MARK: Actions
+    @IBAction func menuAction(_ sender: UIBarButtonItem) {
+        if let navigationVC = mm_drawerController.leftDrawerViewController as? UINavigationController {
+            var menuView:MenuViewController?
+            
+            for drawer in navigationVC.viewControllers {
+                if drawer is MenuViewController {
+                    menuView = drawer as? MenuViewController
+                }
+            }
+            if menuView == nil {
+                menuView = MenuViewController()
+                navigationVC.addChildViewController(menuView!)
+            }
+            
+            navigationVC.popToViewController(menuView!, animated: true)
+        }
+        mm_drawerController.toggle(.left, animated:true, completion:nil)
+    }
+    
     @IBAction func searchAction(_ sender: UIBarButtonItem) {
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.performSegue(withIdentifier: "showCountriesAsPush", sender: nil)

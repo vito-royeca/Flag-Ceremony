@@ -29,3 +29,9 @@ enum FlagSize: String {
     big = "big",
     ultra = "ultra"
 }
+
+// iTunes Connect App IDs
+let WTHRM8_AppID             = "1122411144"
+let Decktracker_AppID        = "913992761"
+let CineKo_AppID             = "1105292175"
+let FunWithTTS_AppID         = "570754434"
