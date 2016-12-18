@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Appirater (2.1.2)
   - boost/graph-includes (1.51.0)
   - boost/math-includes (1.51.0)
   - boost/pointer_cast-includes (1.51.0)
@@ -138,6 +139,7 @@ PODS:
   - WhirlyGlobeResources (2.3)
 
 DEPENDENCIES:
+  - Appirater
   - Cosmos
   - Crashlytics
   - Fabric
@@ -159,6 +161,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
+  Appirater: f1c9e53e8b612193e6256144f6a0fd2e31f4340d
   boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
   clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
   Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
@@ -193,6 +196,6 @@ SPEC CHECKSUMS:
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 2dbaf778b9af8a4b34d9d069cc01c7408ba75460
+PODFILE CHECKSUM: 0258a428126c6607d3381ccf48c623494859340c
 
 COCOAPODS: 1.1.1

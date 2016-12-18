@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## Appirater
+
+Copyright 2016. Arash Payan. This library is distributed under the terms of the MIT/X11.
+
 ## Cosmos
 
 The MIT License
