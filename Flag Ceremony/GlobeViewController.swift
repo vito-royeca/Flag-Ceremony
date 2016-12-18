@@ -248,9 +248,9 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
             let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
+                performSegue(withIdentifier: "showDetailsAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
+                performSegue(withIdentifier: "showDetailsAsModal", sender: country)
             }
         }
     }

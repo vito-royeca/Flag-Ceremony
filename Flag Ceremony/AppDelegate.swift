@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Appirater
 import Fabric
 import Firebase
 import Crashlytics
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,9 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
         
         // init services
-        Fabric.with([Crashlytics.self/*, Twitter.self*/])
+        Fabric.with([Crashlytics.self, Twitter.self])
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
+        
+        // Appirater app rater
+        Appirater.setAppId(FlagCeremony_AppID)
+        Appirater.setSignificantEventsUntilPrompt(5)
+        // debug
+//        Appirater.setDebug(true)
+        // prod
+        Appirater.setDebug(false)
+        Appirater.appLaunched(false)
         
 //        Scraper.sharedInstance.getFlagInfo()
 //        Scraper.sharedInstance.insertAnthems()

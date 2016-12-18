@@ -253,6 +253,16 @@ class MapViewController: UIViewController {
             mapView!.animate(toPosition: newPosition!, time: 1.0)
         }
     }
+    
+    func showTwitter(_ notification: Notification?) {
+        mm_drawerController.toggle(.left, animated:true, completion:nil)
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            performSegue(withIdentifier: "showTwitterAsPush", sender: nil)
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            performSegue(withIdentifier: "showTwitterAsModal", sender: nil)
+        }
+    }
 }
 
 extension MapViewController : MaplyViewControllerDelegate {
@@ -261,9 +271,9 @@ extension MapViewController : MaplyViewControllerDelegate {
             let country = selectedObject.userObject as? Country
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
+                performSegue(withIdentifier: "showDetailsAsPush", sender: country)
             } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
+                performSegue(withIdentifier: "showDetailsAsModal", sender: country)
             }
         }
     }

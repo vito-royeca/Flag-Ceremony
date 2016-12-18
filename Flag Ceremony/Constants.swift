@@ -31,7 +31,13 @@ enum FlagSize: String {
 }
 
 // iTunes Connect App IDs
-let WTHRM8_AppID             = "1122411144"
-let Decktracker_AppID        = "913992761"
 let CineKo_AppID             = "1105292175"
+let Decktracker_AppID        = "913992761"
+let FlagCeremony_AppID       = "1180086391"
 let FunWithTTS_AppID         = "570754434"
+let WTHRM8_AppID             = "1122411144"
+
+// Developer
+let DeveloperName    = "Jovito Royeca"
+let DeveloperWebsite = "http://jovitoroyeca.com"
+let DeveloperTwitter = "@JovitoRoyeca"
