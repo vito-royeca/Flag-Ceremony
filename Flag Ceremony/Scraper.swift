@@ -42,19 +42,27 @@ class Scraper : NSObject {
     }
     
     func insertAnthems() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
-                if let dictionary = NSDictionary(contentsOfFile: path) {
-                    for (key,value) in dictionary {
-                        if let key2 = key as? String,
-                            let value2 = value as? [String: Any] {
+                
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        for (key,value) in dictionary {
                             
-                            let anthem = self.ref.child("anthems").child(key2)
-                            for (key3,value3) in value2 {
-                                anthem.child(key3).setValue(value3)
+                            if key == "anthems" {
+                                if let value2 = value as? [String: Any] {
+                                    for (key3,value3) in value2 {
+                                        let anthem = self.ref.child("anthems").child(key3)
+                                        anthem.child(key3).setValue(value3)
+                                    }
+                                }
                             }
                         }
                     }
+                }
+                catch let error {
+                    print("\(error)")
                 }
             }
         }
@@ -176,43 +184,97 @@ class Scraper : NSObject {
     }
     
     func getFlagInfo() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
-                if let dictionary = NSDictionary(contentsOfFile: path) {
-                    let newDict = NSMutableDictionary()
-                    var countryDict:[String: [String: Any]]?
-                    
-                    let country = FIRDatabase.database().reference().child("countries")
-                    country.observeSingleEvent(of: .value, with: { (snapshot) in
-                        if let snapshotValue = snapshot.value as? [String: [String: Any]] {
-                            countryDict = snapshotValue
-                            
-                            for (key,value) in dictionary {
-                                if let value2 = value as? [String: Any] {
-                                    var anthemDict = [String: Any]()
+                
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        
+                        var newDict = [String: Any]()
+                        for (key,value) in dictionary {
+                            if let value2 = value as? [String: Any] {
+                                var dict = [String: Any]()
+                                
+                                // copy
+                                for (key3,value3) in value2 {
+                                    dict[key3] = value3
                                     
-                                    // copy
-                                    for (key3,value3) in value2 {
-                                        anthemDict[key3] = value3
-                                    }
-                                    
-                                    if anthemDict[Anthem.Keys.FlagInfo] == nil {
-                                        if let countryValues = countryDict![key as! String] {
-                                            if let name = countryValues[Country.Keys.Name] as? String {
+                                    if key == "anthems" {
+                                        var anthemDict = [String: Any]()
+                                        for (key4,value4) in value3 as! [String: Any] {
+                                            anthemDict[key4] = value4
+                                        }
+                                        
+                                        // add lyrics
+                                        if anthemDict[Anthem.Keys.Lyrics] == nil {
+                                            print("getting lyrics for \(key3)...")
+                                            if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
+                                                if let doc = readUrl(url: url) {
+                                                    anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
+                                                }
+                                            }
+                                        }
+                                        
+                                        // add info
+                                        if anthemDict[Anthem.Keys.Info] == nil {
+                                            print("getting info for \(key3)...")
+                                            if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
+                                                if let doc = readUrl(url: url) {
+                                                    anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                                }
+                                            }
+                                        }
+                                        
+                                        // add flagInfo
+                                        var willGetFlagInfo = false
+                                        if let flagInfo = anthemDict[Anthem.Keys.FlagInfo] as? String {
+                                            if flagInfo.characters.count == 0 {
+                                                willGetFlagInfo = true
+                                            }
+                                        } else {
+                                            willGetFlagInfo = true
+                                        }
+                                        
+                                        if willGetFlagInfo {
+                                            let countriesDict = dictionary["countries"] as! [String : Any]
+                                            if let country = countriesDict[key3] as? [String : Any] {
+                                                var name = country[Country.Keys.Name] as! String
+                                                name = name.lowercased()
+                                                
                                                 // transform the name
-                                                var lastPaths = [name.lowercased()]
+                                                var lastPaths = [String]()
                                                 if name.contains(" ") {
-                                                    let newLastPath = name.lowercased().replacingOccurrences(of: " ", with: "-")
-                                                    lastPaths = [newLastPath,  "the-\(newLastPath)"]
+                                                    name = name.replacingOccurrences(of: " ", with: "-")
+                                                }
+                                                
+                                                if name == "korea-north" {
+                                                    lastPaths.append("north-korea")
+                                                } else if name == "korea-south" {
+                                                    lastPaths.append("south-korea")
+                                                } else if name == "timor-leste" {
+                                                    lastPaths.append("east-timor")
+                                                } else if name == "congo-democratic-republic" {
+                                                    lastPaths.append("the-democratic-republic-of-the-congo")
+                                                } else if name == "congo-republic" {
+                                                    lastPaths.append("the-republic-of-the-congo")
+                                                } else if name == "holy-see" {
+                                                    lastPaths.append("the-vatican-city")
+                                                } else if name == "china" {
+                                                    lastPaths.append("the-people-s-republic-of-china")
+                                                } else if name == "ivory-coast" {
+                                                    lastPaths.append("cote-d-ivoire")
+                                                } else {
+                                                    lastPaths.append(name)
+                                                    lastPaths.append("the-\(name)")
                                                 }
                                                 
                                                 // add flag info
                                                 for lp in lastPaths {
                                                     if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
                                                         if let doc = self.readUrl(url: url) {
-                                                            print("flag info... \(key)")
+                                                            print("getting flag info... \(key3)")
                                                             anthemDict[Anthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
-                                                            break
                                                         } else {
                                                             print("invalid url: \(url)")
                                                         }
@@ -220,31 +282,41 @@ class Scraper : NSObject {
                                                 }
                                             }
                                         }
+                                        
+                                        dict[key3] = anthemDict
                                     }
-                                    
-                                    newDict.setObject(anthemDict, forKey: key as! NSCopying)
                                 }
+                                
+                                newDict[key] = dict
                             }
-                            
-                            // write to disk
-                            do {
-                                let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                                let localPath = "\(docsPath)/anthems.dict"
-                                let localUrl = URL(fileURLWithPath: localPath)
-                                if FileManager.default.fileExists(atPath: localPath) {
-                                    try FileManager.default.removeItem(at: localUrl)
-                                }
-                                newDict.write(to: localUrl, atomically: true)
-                            } catch let error {
-                                print("error: \(error)")
-                            }
-                            
-                            
                         }
-                    })
+                        
+                        // write to disk
+                        do {
+                            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                            let localPath = "\(docsPath)/flag-ceremony-export.json"
+                            if FileManager.default.fileExists(atPath: localPath) {
+                                try FileManager.default.removeItem(atPath: localPath)
+                            }
+                            
+                            
+                            
+                            // creating JSON out of the above array
+                            let jsonData = try JSONSerialization.data(withJSONObject: newDict, options: .prettyPrinted)
+                            try jsonData.write(to: URL(fileURLWithPath: localPath))
+                        } catch let error {
+                            print("error: \(error)")
+                        }
+                    }
+                } catch let error {
+                    print("\(error)")
                 }
             }
         }
+    }
+    
+    func countryNameFrom(countries: [String: Any]) -> String {
+        return ""
     }
     
     func readUrl(url: URL) -> TFHpple? {

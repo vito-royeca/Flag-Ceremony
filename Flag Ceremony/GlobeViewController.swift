@@ -160,7 +160,7 @@ class GlobeViewController: UIViewController {
                         self.countries.append(country)
                         
                     } else {
-                        print("anthem not found: \(country.name!)")
+//                        print("anthem not found: \(country.name!)")
                     }
                 }
                 

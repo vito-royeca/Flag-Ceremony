@@ -168,7 +168,7 @@ class MapViewController: UIViewController {
                         self.countries.append(country)
                         
                     } else {
-                        print("anthem not found: \(country.name!)")
+//                        print("anthem not found: \(country.name!)")
                     }
                 }
                 
@@ -219,43 +219,6 @@ class MapViewController: UIViewController {
                     willGotoNewPosition = true
                 }
             }
-
-            // WhirlyMaply does not remove screen labels :(
-//            if let notification = notification {
-//                if let userInfo = (notification as NSNotification).userInfo {
-//                    if let country = userInfo["country"] as? Country {
-//                        
-//                        // remove from countryLabels
-//                        var index = 0
-//                        for c in countryLabels {
-//                            if let xc = c.userObject as? Country {
-//                                if xc.key == country.key {
-//                                    mapView!.remove([c])
-//                                    break
-//                                }
-//                            }
-//                            index += 1
-//                        }
-//                        countryLabels.remove(at: index)
-//                        
-//                        // re-add to countryLabels
-//                        let label = MaplyScreenLabel()
-//                        label.text = "\(country.emojiFlag())\(country.name!)"
-//                        label.loc = MaplyCoordinate(x: lon, y: lat)
-//                        label.selectable = true
-//                        label.userObject = country
-//                        label.layoutImportance = 1
-//                        countryLabels.append(label)
-//                        
-//                        mapView!.addScreenLabels([label], desc: [
-//                            kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
-//                            kMaplyTextOutlineColor: UIColor.red,
-//                            kMaplyTextOutlineSize: 2.0,
-//                            kMaplyColor: UIColor.red
-//                        ])
-//                    }
-//                }
-//            }
         } else {
             // set default position
             let lon = (DefaultLocationLongitude * Float.pi)/180
