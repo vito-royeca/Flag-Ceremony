@@ -54,7 +54,7 @@ class Scraper : NSObject {
                                 if let value2 = value as? [String: Any] {
                                     for (key3,value3) in value2 {
                                         let anthem = self.ref.child("anthems").child(key3)
-                                        anthem.child(key3).setValue(value3)
+                                        anthem.setValue(value3)
                                     }
                                 }
                             }
