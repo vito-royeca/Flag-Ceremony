@@ -43,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Appirater.setDebug(false)
         Appirater.appLaunched(false)
         
-//        Scraper.sharedInstance.getFlagInfo()
-//        Scraper.sharedInstance.insertAnthems()
+//        Scraper.sharedInstance.getAnthemInfo()
+        Scraper.sharedInstance.insertAnthems()
 //        Scraper.sharedInstance.getLyrics()
 //        Scraper.sharedInstance.insertAnthems()
         return true

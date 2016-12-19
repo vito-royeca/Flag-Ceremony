@@ -129,7 +129,7 @@ extension CountryViewController : UITableViewDataSource {
             case CountryViewRows.flag.rawValue:
                 sections += 1
             case CountryViewRows.country.rawValue:
-                sections += 8
+                sections += 3
             default:
                 ()
             }
@@ -138,56 +138,48 @@ extension CountryViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var title:String? = nil
+        
         switch section {
         case 0:
-            return nil
+            ()
         default:
             if let anthem = anthem {
                 switch selectedDataSegment {
                 case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[section-1]
-                        return lyricsDict[Anthem.Keys.LyricsName] as! String?
+                        title = lyricsDict[Anthem.Keys.LyricsName] as! String?
                     }
                 case CountryViewRows.anthem.rawValue:
                     switch section + 4 {
                     case 5:
-                        return "Date Adopted"
+                        title = "Date Adopted"
                     case 6:
-                        return "Composer"
+                        title = "Composer"
                     case 7:
-                        return "Lyricist"
+                        title = "Lyricist"
                     default:
-                        return nil
+                        ()
                     }
                 case CountryViewRows.country.rawValue:
                     switch section + 8 {
                     case 9:
-                        return "Capital"
+                        title = "Capital"
                     case 10:
-                        return "Telephone Code Prefix"
+                        title = "Background"
                     case 11:
-                        return "Top Level Domain code"
-                    case 12:
-                        return "ISO 3166-1-alpha-2 character code"
-                    case 13:
-                        return "ISO 3 character code"
-                    case 14:
-                        return "ISO Numeric code"
-                    case 15:
-                        return "FIPS code"
-                    case 16:
-                        return "Further Info"
+                        title = "Further Info"
                     default:
-                        return nil
+                        ()
                     }
                 default:
-                    return nil
+                    ()
                 }
             }
         }
         
-        return nil
+        return title
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -273,38 +265,8 @@ extension CountryViewController : UITableViewDataSource {
                             label.text = capital[Country.Keys.CapitalName] as! String?
                         }
                     case 2:
-                        label.text = country.telPref
+                        label.text = anthem.background
                     case 3:
-                        if let countryCodes = country.countryCodes {
-                            if let tld = countryCodes[Country.Keys.CountryCodesTld] {
-                                label.text = "\(tld)"
-                            }
-                        }
-                    case 4:
-                        if let countryCodes = country.countryCodes {
-                            if let iso2 = countryCodes[Country.Keys.CountryCodesIso2] {
-                                label.text = "\(iso2)"
-                            }
-                        }
-                    case 5:
-                        if let countryCodes = country.countryCodes {
-                            if let iso3 = countryCodes[Country.Keys.CountryCodesIso3] {
-                                label.text = "\(iso3)"
-                            }
-                        }
-                    case 6:
-                        if let countryCodes = country.countryCodes {
-                            if let ison = countryCodes[Country.Keys.CountryCodesIsoN] {
-                                label.text = "\(ison)"
-                            }
-                        }
-                    case 7:
-                        if let countryCodes = country.countryCodes {
-                            if let fips = countryCodes[Country.Keys.CountryCodesFips] {
-                                label.text = "\(fips)"
-                            }
-                        }
-                    case 8:
                         cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
                         cell!.accessoryType = .disclosureIndicator
                         cell!.textLabel?.text = country.countryInfo
@@ -371,7 +333,7 @@ extension CountryViewController : UITableViewDelegate {
         switch selectedDataSegment {
         case CountryViewRows.country.rawValue:
             switch indexPath.section {
-            case 8:
+            case 3:
                 return indexPath
             default:
                 return nil
@@ -385,7 +347,7 @@ extension CountryViewController : UITableViewDelegate {
         switch selectedDataSegment {
         case CountryViewRows.country.rawValue:
             switch indexPath.section {
-            case 8:
+            case 3:
                 if let country = country {
                     if let countryInfo = country.countryInfo {
                         if let url = URL(string: countryInfo) {

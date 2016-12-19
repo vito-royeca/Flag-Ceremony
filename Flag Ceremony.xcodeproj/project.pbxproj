@@ -43,9 +43,6 @@
 		8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
 		8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
 		8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
-		8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
-		8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
-		8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */; };
 		8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
 		8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
 		8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
@@ -132,7 +129,6 @@
 		8C4F76FE1DDF3CEB00B82A83 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8CBB26AF1DD9883300660EB9 /* Flag Ceremony.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Flag Ceremony.xcdatamodel"; sourceTree = "<group>"; };
 		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
@@ -263,7 +259,6 @@
 			children = (
 				8CD893B61DE5B8F1007052C7 /* Anthem.swift */,
 				8C23703A1DDD534D00F30712 /* Country.swift */,
-				8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */,
 				8C4F76FE1DDF3CEB00B82A83 /* User.swift */,
 			);
 			name = Model;
@@ -641,7 +636,6 @@
 				8CE8E77C1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CD893B71DE5B8F1007052C7 /* Anthem.swift in Sources */,
-				8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				8C23703B1DDD534D00F30712 /* Country.swift in Sources */,
 				8CE297C61DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
@@ -681,7 +675,6 @@
 				1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8CD893B41DE5B571007052C7 /* FirebaseManager.swift in Sources */,
-				8CBB26B11DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,7 +699,6 @@
 				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,
-				8CBB26B21DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
 				8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 				582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */,
 			);
@@ -974,19 +966,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8CBB26AE1DD9883300660EB9 /* Flag Ceremony.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8CBB26AF1DD9883300660EB9 /* Flag Ceremony.xcdatamodel */,
-			);
-			currentVersion = 8CBB26AF1DD9883300660EB9 /* Flag Ceremony.xcdatamodel */;
-			path = "Flag Ceremony.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8C4E971D1D88ED50005A685B /* Project object */;
 }

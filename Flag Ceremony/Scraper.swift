@@ -183,7 +183,7 @@ class Scraper : NSObject {
         }
     }
     
-    func getFlagInfo() {
+    func getAnthemInfo() {
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
                 
@@ -222,6 +222,19 @@ class Scraper : NSObject {
                                             if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
                                                 if let doc = readUrl(url: url) {
                                                     anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                                }
+                                            }
+                                        }
+                                        
+                                        // add background info
+                                        if let background = anthemDict[Anthem.Keys.Background] as? String {
+                                            anthemDict[Anthem.Keys.Background] = background.replacingOccurrences(of: "Background : ", with: "")
+                                        
+                                        } else {
+                                            print("getting background for \(key3)...")
+                                            if let url = URL(string: "\(CountriesURL)/geo/en/cc/\(key3.lowercased()).html") {
+                                                if let doc = readUrl(url: url) {
+                                                    anthemDict[Anthem.Keys.Background] = parseAnthemBackground(doc: doc)
                                                 }
                                             }
                                         }
@@ -374,11 +387,32 @@ class Scraper : NSObject {
             
             info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
             info = info!.replacingOccurrences(of: "\n", with: "\n\n")
+            info = info!.replacingOccurrences(of: "\t", with: "")
+            info = info!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
         }
         
         return info
     }
 
+    func parseAnthemBackground(doc: TFHpple) -> String? {
+        var info:String?
+        
+        if let elements = doc.search(withXPathQuery: "//div[@id='Background']") as? [TFHppleElement] {
+            info = ""
+            
+            for element in elements {
+                info! += parseElement(element: element)
+            }
+            
+            info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
+            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
+            info = info!.replacingOccurrences(of: "\t", with: "")
+            info = info!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
+        }
+        
+        return info
+    }
+    
     func parseFlagInfo(doc: TFHpple) -> String? {
         var info:String?
         
