@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Appirater.appLaunched(false)
         
 //        Scraper.sharedInstance.getAnthemInfo()
-        Scraper.sharedInstance.insertAnthems()
+//        Scraper.sharedInstance.insertAnthems()
 //        Scraper.sharedInstance.getLyrics()
 //        Scraper.sharedInstance.insertAnthems()
         return true

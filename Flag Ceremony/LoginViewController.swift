@@ -124,10 +124,46 @@ class LoginViewController: UIViewController {
             
             alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
-            
             self.present(alertController, animated: true, completion: nil)
+            
         case 12: // Retrieve Password
-            ()
+            let title = "Retrieve Password"
+            let alertController = UIAlertController(title: title, message: "We will send instructions to the email below on how to retrive your password.", preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                
+                if let fields = alertController.textFields {
+                    let email = fields[0].text
+                    
+                    // TO DO: add validation here...
+                    
+                    FIRAuth.auth()!.sendPasswordReset(withEmail: email!, completion: { error in
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        var message:String?
+                        
+                        if let error = error {
+                            message = error.localizedDescription
+                        } else {
+                            message = "Check the email you provided for any instructions. Then you may Login again here."
+                        }
+                        
+                        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    })
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Email"
+            }
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+            
         default:
             ()
         }
