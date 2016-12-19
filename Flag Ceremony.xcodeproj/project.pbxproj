@@ -11,6 +11,9 @@
 		1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */; };
 		1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */; };
 		1173C9301E0705FF00C5DA16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1173C92F1E0705FF00C5DA16 /* QuartzCore.framework */; };
+		1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
+		1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
+		1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582D904B1DEE16260030DA46 /* SnapshotHelper.swift */; };
 		5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
@@ -104,6 +107,7 @@
 /* Begin PBXFileReference section */
 		1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1173C92F1E0705FF00C5DA16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1173C9351E07359D00C5DA16 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -287,6 +291,7 @@
 				5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */,
 				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
 				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
+				1173C9351E07359D00C5DA16 /* LoginViewController.swift */,
 				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
 				1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */,
 			);
@@ -637,6 +642,7 @@
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CD893B71DE5B8F1007052C7 /* Anthem.swift in Sources */,
 				8CBB26B01DD9883300660EB9 /* Flag Ceremony.xcdatamodeld in Sources */,
+				1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				8C23703B1DDD534D00F30712 /* Country.swift in Sources */,
 				8CE297C61DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
@@ -662,6 +668,7 @@
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CD893B81DE5B8F1007052C7 /* Anthem.swift in Sources */,
+				1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				8C23703C1DDD534D00F30712 /* Country.swift in Sources */,
 				8CE297C71DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CEFB6441DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
@@ -687,6 +694,7 @@
 				8CE8E77E1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CD893B51DE5B571007052C7 /* FirebaseManager.swift in Sources */,
 				8CE297C81DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
+				1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				8CE297C01DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8C23703D1DDD534D00F30712 /* Country.swift in Sources */,

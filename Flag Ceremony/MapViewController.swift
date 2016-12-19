@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import MBProgressHUD
 import MMDrawerController
 import WhirlyGlobe
@@ -54,6 +55,15 @@ class MapViewController: UIViewController {
         // Do any additional setup after loading the view.
         initMap()
         addFlags()
+        
+        // check if user is logged in
+        FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
+            if let _ = user {
+                
+            } else {
+                self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +72,9 @@ class MapViewController: UIViewController {
         showCountry(nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kLoginShown), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showLogin(_:)), name: NSNotification.Name(rawValue: kLoginShown), object: nil)
     }
 
     func showCountryForScreenshot() {
@@ -254,14 +267,9 @@ class MapViewController: UIViewController {
         }
     }
     
-    func showTwitter(_ notification: Notification?) {
+    func showLogin(_ notification: Notification?) {
         mm_drawerController.toggle(.left, animated:true, completion:nil)
-        
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            performSegue(withIdentifier: "showTwitterAsPush", sender: nil)
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            performSegue(withIdentifier: "showTwitterAsModal", sender: nil)
-        }
+        self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
     }
 }
 

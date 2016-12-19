@@ -10,6 +10,7 @@ import UIKit
 import Appirater
 import Fabric
 import Firebase
+import FBSDKCoreKit
 import Crashlytics
 import TwitterKit
 
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self, Twitter.self])
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // Appirater app rater
         Appirater.setAppId(FlagCeremony_AppID)
@@ -68,5 +70,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        var handled = false
+        
+        if url.absoluteString.hasPrefix("fb") {
+            handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        } else if url.absoluteString.hasPrefix("com.googleusercontent.apps") {
+//            handled = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        }
+        
+        return handled
+    }
 }
 
