@@ -15,6 +15,7 @@ target "Flag Ceremony" do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
     pod 'hpple'
     pod 'InAppSettingsKit'
     pod 'JJJUtils'
@@ -26,7 +27,8 @@ target "Flag Ceremony" do
     pod 'TwitterKit'
     pod 'TwitterCore'
     pod 'WhirlyGlobe'
-    pod 'WhirlyGlobeResources'end
+    pod 'WhirlyGlobeResources'
+end
 
 target "Flag CeremonyTests" do
     pod 'Appirater'
@@ -38,9 +40,10 @@ target "Flag CeremonyTests" do
     pod 'FacebookShare'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
     pod 'hpple'
     pod 'InAppSettingsKit'
-    pod 'Firebase/Auth'
     pod 'JJJUtils'
     pod 'MBProgressHUD'
     pod 'MMDrawerController'
@@ -64,6 +67,7 @@ target "Flag CeremonyUITests" do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
     pod 'hpple'
     pod 'InAppSettingsKit'
     pod 'JJJUtils'
