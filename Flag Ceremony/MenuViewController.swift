@@ -24,7 +24,7 @@ class MenuViewController: UIViewController {
         if let _ = FIRAuth.auth()?.currentUser {
             do {
                 try FIRAuth.auth()?.signOut()
-                loginButton.title = "Login"
+                loginButton.image = UIImage(named: "login")
             } catch let error {
                 print("\(error)")
             }
@@ -44,9 +44,9 @@ class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let _ = FIRAuth.auth()?.currentUser {
-            loginButton.title = "Logout"
+            loginButton.image = UIImage(named: "logout")
         } else {
-            loginButton.title = "Login"
+            loginButton.image = UIImage(named: "login")
         }
         tableView.reloadData()
     }

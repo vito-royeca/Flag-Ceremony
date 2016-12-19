@@ -10,7 +10,10 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 import MBProgressHUD
+import TwitterCore
+import TwitterKit
 
 class LoginViewController: UIViewController {
 
@@ -20,7 +23,13 @@ class LoginViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        let message = "Your view and play counts will not be recorded. You may login anytime at the Left Menu to have your view and play counts recorded, as well as to manage your account settings."
+        let alertController = UIAlertController(title: "Login Cancelled", message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
@@ -154,11 +163,34 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func twitterAction(_ sender: UIButton) {
-        
+        Twitter.sharedInstance().logIn { session, error in
+            if let error = error {
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                if let session = session {
+                    MBProgressHUD.showAdded(to: self.view, animated: true)
+                    
+                    let credential = FIRTwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
+                    FIRAuth.auth()!.signIn(with: credential, completion: {(user: FIRUser?, error: Error?) in
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        
+                        if let error = error {
+                            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
+                }
+            }
+        }
     }
     
     @IBAction func googlePlusAction(_ sender: UIButton) {
-        
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func githubAction(_ sender: UIButton) {
@@ -170,6 +202,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -299,5 +333,56 @@ extension LoginViewController : UITableViewDelegate {
         }
         
         return height
+    }
+}
+
+// MARK: GIDSignInDelegate
+extension LoginViewController : GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+        
+            guard let authentication = user.authentication else { return }
+            let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                              accessToken: authentication.accessToken)
+
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            FIRAuth.auth()!.signIn(with: credential, completion: {(user: FIRUser?, error: Error?) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if let error = error {
+                    let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
+}
+
+// MARK: GIDSignInUIDelegate
+extension LoginViewController : GIDSignInUIDelegate {
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+//        myActivityIndicator.stopAnimating()
+    }
+    
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+//        sleep(1) // to fix blank white screen where Google SignIn view is not loaded
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }

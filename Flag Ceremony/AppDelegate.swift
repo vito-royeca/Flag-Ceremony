@@ -11,6 +11,7 @@ import Appirater
 import Fabric
 import Firebase
 import FBSDKCoreKit
+import GoogleSignIn
 import Crashlytics
 import TwitterKit
 
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self, Twitter.self])
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // Appirater app rater
@@ -76,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.absoluteString.hasPrefix("fb") {
             handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         } else if url.absoluteString.hasPrefix("com.googleusercontent.apps") {
-//            handled = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+            handled = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         }
         
         return handled
