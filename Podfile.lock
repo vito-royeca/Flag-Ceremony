@@ -21,6 +21,12 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appirater (2.1.2)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - boost/graph-includes (1.51.0)
   - boost/math-includes (1.51.0)
   - boost/pointer_cast-includes (1.51.0)
@@ -32,6 +38,25 @@ PODS:
     - Fabric (~> 1.6.3)
   - eigen (3.2.10)
   - Fabric (1.6.11)
+  - FacebookCore (0.2.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.15)
+  - FacebookLogin (0.2.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.2)
+    - FBSDKCoreKit (~> 4.15)
+    - FBSDKLoginKit (~> 4.15)
+  - FacebookShare (0.2.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.2)
+    - FBSDKCoreKit (~> 4.15)
+    - FBSDKShareKit (~> 4.15)
+  - FBSDKCoreKit (4.18.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.18.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.18.0):
+    - FBSDKCoreKit
   - Firebase/Auth (3.11.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.0)
@@ -143,6 +168,9 @@ DEPENDENCIES:
   - Cosmos
   - Crashlytics
   - Fabric
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -162,12 +190,19 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
   Appirater: f1c9e53e8b612193e6256144f6a0fd2e31f4340d
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
   clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
   Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
+  FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
+  FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
+  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
+  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
+  FBSDKShareKit: 0b8d6cc3f103c75297eb3c62caec284a2ccf1b9e
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseAuth: b436e4ecebe068bf8e8c6e4e29de5756ffe7ee24
@@ -196,6 +231,6 @@ SPEC CHECKSUMS:
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 0258a428126c6607d3381ccf48c623494859340c
+PODFILE CHECKSUM: 6402002795c87587001a79d917894460017f4d83
 
 COCOAPODS: 1.1.1
