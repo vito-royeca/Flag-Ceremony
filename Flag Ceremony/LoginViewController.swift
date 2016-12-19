@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Actions
-    
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         let message = "Your view and play counts will not be recorded. You may login anytime at the Left Menu to have your view and play counts recorded, as well as to manage your account settings."
         let alertController = UIAlertController(title: "Login Cancelled", message: message, preferredStyle: .alert)
@@ -52,7 +51,19 @@ class LoginViewController: UIViewController {
             if let email = email,
                 let password = password {
                 
-                // TO DO: add validation here...
+                var errors = [String]()
+                for error in validateEmail(email) {
+                    errors.append(error)
+                }
+                for error in validatePassword(password) {
+                    errors.append(error)
+                }
+                if errors.count > 0 {
+                    let alertController = UIAlertController(title: "Error", message: errors.joined(separator: "\n"), preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    return
+                }
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 FIRAuth.auth()!.signIn(withEmail: email, password: password,  completion: {(user: FIRUser?, error: Error?) in
@@ -72,17 +83,26 @@ class LoginViewController: UIViewController {
             let alertController = UIAlertController(title: "Sign Up", message: nil, preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
-                MBProgressHUD.showAdded(to: self.view, animated: true)
-                
                 if let fields = alertController.textFields {
                     let email = fields[0].text
-                    let password1 = fields[1].text
-                    let password2 = fields[2].text
+                    let password = fields[1].text
                     
-                    // TO DO: add validation here...
+                    var errors = [String]()
+                    for error in self.validateEmail(email!) {
+                        errors.append(error)
+                    }
+                    for error in self.validatePassword(password!) {
+                        errors.append(error)
+                    }
+                    if errors.count > 0 {
+                        let alertController = UIAlertController(title: "Error", message: errors.joined(separator: "\n"), preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        return
+                    }
                     
-                    
-                    FIRAuth.auth()!.createUser(withEmail: email!, password: password1!) { user, error in
+                    MBProgressHUD.showAdded(to: self.view, animated: true)
+                    FIRAuth.auth()!.createUser(withEmail: email!, password: password!) { user, error in
                         if let error = error {
                             MBProgressHUD.hide(for: self.view, animated: true)
                             
@@ -90,7 +110,7 @@ class LoginViewController: UIViewController {
                             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alertController, animated: true, completion: nil)
                         } else {
-                            FIRAuth.auth()!.signIn(withEmail: email!, password: password1!, completion: {(user: FIRUser?, error: Error?) in
+                            FIRAuth.auth()!.signIn(withEmail: email!, password: password!, completion: {(user: FIRUser?, error: Error?) in
                                 MBProgressHUD.hide(for: self.view, animated: true)
                                 
                                 if let error = error {
@@ -117,10 +137,6 @@ class LoginViewController: UIViewController {
                 textField.placeholder = "Password"
                 textField.isSecureTextEntry = true
             }
-            alertController.addTextField { (textField) in
-                textField.placeholder = "Confirm Password"
-                textField.isSecureTextEntry = true
-            }
             
             alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
@@ -131,13 +147,21 @@ class LoginViewController: UIViewController {
             let alertController = UIAlertController(title: title, message: "We will send instructions to the email below on how to retrive your password.", preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
-                MBProgressHUD.showAdded(to: self.view, animated: true)
-                
                 if let fields = alertController.textFields {
                     let email = fields[0].text
                     
-                    // TO DO: add validation here...
+                    var errors = [String]()
+                    for error in self.validateEmail(email!) {
+                        errors.append(error)
+                    }
+                    if errors.count > 0 {
+                        let alertController = UIAlertController(title: "Error", message: errors.joined(separator: "\n"), preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                        return
+                    }
                     
+                    MBProgressHUD.showAdded(to: self.view, animated: true)
                     FIRAuth.auth()!.sendPasswordReset(withEmail: email!, completion: { error in
                         MBProgressHUD.hide(for: self.view, animated: true)
                         var message:String?
@@ -253,6 +277,32 @@ class LoginViewController: UIViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    
+    // MARK: Custom methods
+    func validateEmail(_ email: String) -> [String] {
+        var errors = [String]()
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        
+        if email.characters.count == 0 {
+            errors.append("Empty Email.")
+        } else {
+            if !NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email) {
+                errors.append("Invalid email.")
+            }
+        }
+        
+        return errors
+    }
+    
+    func validatePassword(_ password: String) -> [String] {
+        var errors = [String]()
+        
+        if password.characters.count == 0 {
+            errors.append("Empty Password.")
+        }
+        
+        return errors
     }
 }
 

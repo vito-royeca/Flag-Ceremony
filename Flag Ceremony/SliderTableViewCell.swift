@@ -28,6 +28,16 @@ class SliderTableViewCell: UITableViewCell {
             updateDisplay()
         }
     }
+    fileprivate var _activities: [Activity]?
+    var activities : [Activity]? {
+        get {
+            return _activities
+        }
+        set (newValue) {
+            _activities = newValue
+            updateDisplay()
+        }
+    }
     var delegate:SliderTableViewCellDelegate?
     var slideshowTimer:Timer?
     
@@ -110,31 +120,62 @@ class SliderTableViewCell: UITableViewCell {
 // MARK: UICollectionViewDataSource
 extension SliderTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countries?.count ?? 0
+        var items = 0
+        
+        if let countries = countries {
+            items = countries.count
+        } else if let activities = activities {
+            items = activities.count
+        }
+        
+        return items
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = (indexPath as NSIndexPath).row
         var cell:UICollectionViewCell?
         
-        if let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SliderCollectionViewCell,
-            let countries = countries {
-            let country = countries[row]
-            sliderCell.imageView.image = nil
-            sliderCell.viewsLabel.text = ""
-            sliderCell.playsLabel.text = ""
-            
-            if let url = country.getFlagURLForSize(size: .normal) {
-                if let image = UIImage(contentsOfFile: url.path) {
-                    sliderCell.imageView.image = imageWithBorder(fromImage: image)
+        if let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SliderCollectionViewCell {
+            if let countries = countries {
+                let country = countries[row]
+                
+                sliderCell.nameLabel.text = country.name!
+                sliderCell.imageView.image = nil
+                sliderCell.viewsLabel.text = ""
+                sliderCell.playsLabel.text = ""
+                
+                if let url = country.getFlagURLForSize(size: .normal) {
+                    if let image = UIImage(contentsOfFile: url.path) {
+                        sliderCell.imageView.image = imageWithBorder(fromImage: image)
+                    }
                 }
-            }
 
-            if let views = country.views {
-                sliderCell.viewsLabel.text = "\(views)"
-            }
-            if let plays = country.plays {
-                sliderCell.playsLabel.text = "\(plays)"
+                if let views = country.views {
+                    sliderCell.viewsLabel.text = "\(views)"
+                }
+                if let plays = country.plays {
+                    sliderCell.playsLabel.text = "\(plays)"
+                }
+            } else if let activities = activities {
+                let activity = activities[row]
+                
+                sliderCell.nameLabel.text = activity.key
+                sliderCell.imageView.image = nil
+                sliderCell.viewsLabel.text = ""
+                sliderCell.playsLabel.text = ""
+                
+//                if let url = country.getFlagURLForSize(size: .normal) {
+//                    if let image = UIImage(contentsOfFile: url.path) {
+//                        sliderCell.imageView.image = imageWithBorder(fromImage: image)
+//                    }
+//                }
+                
+                if let viewCount = activity.viewCount {
+                    sliderCell.viewsLabel.text = "\(viewCount)"
+                }
+                if let playCount = activity.playCount {
+                    sliderCell.playsLabel.text = "\(playCount)"
+                }
             }
             
             cell = sliderCell

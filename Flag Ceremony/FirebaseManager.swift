@@ -26,13 +26,39 @@ class FirebaseManager : NSObject {
                 
                 // Set value and report transaction success
                 currentData.value = post
-                
                 return FIRTransactionResult.success(withValue: currentData)
             }
             return FIRTransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
                 print(error.localizedDescription)
+            }
+        }
+        
+        if let user = FIRAuth.auth()?.currentUser {
+            let ref2 = FIRDatabase.database().reference().child("activities").child(user.uid)
+            
+            ref2.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+                var post = currentData.value as? [String : Any] ?? [String : Any]()
+                    
+                var viewCount = post[Activity.Keys.ViewCount] as? Int ?? 0
+                viewCount += 1
+                post[Activity.Keys.ViewCount] = viewCount
+             
+                var views = post[Activity.Keys.Views] as? [String : Any] ?? [String : Any]()
+                var keyCount = views[key] as? Int ?? 0
+                keyCount += 1
+                views[key] = keyCount
+                post[Activity.Keys.Views] = views
+                
+                // Set value and report transaction success
+                currentData.value = post
+                return FIRTransactionResult.success(withValue: currentData)
+                
+            }) { (error, committed, snapshot) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -49,13 +75,39 @@ class FirebaseManager : NSObject {
                 
                 // Set value and report transaction success
                 currentData.value = post
-                
                 return FIRTransactionResult.success(withValue: currentData)
             }
             return FIRTransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
                 print(error.localizedDescription)
+            }
+        }
+        
+        if let user = FIRAuth.auth()?.currentUser {
+            let ref2 = FIRDatabase.database().reference().child("activities").child(user.uid)
+            
+            ref2.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+                var post = currentData.value as? [String : Any] ?? [String : Any]()
+                    
+                var playCount = post[Activity.Keys.PlayCount] as? Int ?? 0
+                playCount += 1
+                post[Activity.Keys.PlayCount] = playCount
+                
+                var plays = post[Activity.Keys.Plays] as? [String : Any] ?? [String : Any]()
+                var keyCount = plays[key] as? Int ?? 0
+                keyCount += 1
+                plays[key] = keyCount
+                post[Activity.Keys.Plays] = plays
+                
+                // Set value and report transaction success
+                currentData.value = post
+                return FIRTransactionResult.success(withValue: currentData)
+                
+            }) { (error, committed, snapshot) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -199,6 +251,23 @@ class FirebaseManager : NSObject {
         queries["topViewed"] = query
     }
     
+    func monitorTopViewers(completion: @escaping ([Activity]) -> Void) {
+        let ref = FIRDatabase.database().reference().child("activities")
+        let query = ref.queryOrdered(byChild: Activity.Keys.ViewCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
+        query.observe(.value, with: { snapshot in
+            var activities = [Activity]()
+            
+            for child in snapshot.children {
+                if let c = child as? FIRDataSnapshot {
+                    activities.append(Activity(snapshot: c))
+                }
+            }
+            completion(activities.reversed())
+        })
+        
+        queries["topViewers"] = query
+    }
+    
     func monitorTopPlayed(completion: @escaping ([Country]) -> Void) {
         let ref = FIRDatabase.database().reference().child("countries")
         let query = ref.queryOrdered(byChild: Country.Keys.Plays).queryStarting(atValue: 1).queryLimited(toLast: 20)
@@ -216,6 +285,23 @@ class FirebaseManager : NSObject {
         queries["topPlayed"] = query
     }
     
+    func monitorTopPlayers(completion: @escaping ([Activity]) -> Void) {
+        let ref = FIRDatabase.database().reference().child("activities")
+        let query = ref.queryOrdered(byChild: Activity.Keys.PlayCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
+        query.observe(.value, with: { snapshot in
+            var activities = [Activity]()
+            
+            for child in snapshot.children {
+                if let c = child as? FIRDataSnapshot {
+                    activities.append(Activity(snapshot: c))
+                }
+            }
+            completion(activities.reversed())
+        })
+        
+        queries["topPlayers"] = query
+    }
+    
     func demonitorTopCharts() {
         if let query = queries["topViewed"] {
             query.removeAllObservers()
@@ -225,6 +311,16 @@ class FirebaseManager : NSObject {
         if let query = queries["topPlayed"] {
             query.removeAllObservers()
             queries["topPlayed"] = nil
+        }
+        
+        if let query = queries["topViewers"] {
+            query.removeAllObservers()
+            queries["topViewers"] = nil
+        }
+        
+        if let query = queries["topPlayers"] {
+            query.removeAllObservers()
+            queries["topPlayers"] = nil
         }
     }
     

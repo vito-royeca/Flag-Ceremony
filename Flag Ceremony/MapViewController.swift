@@ -57,11 +57,15 @@ class MapViewController: UIViewController {
         addFlags()
         
         // check if user is logged in
-        FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
-            if let _ = user {
-                
-            } else {
-                self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+        if UserDefaults.standard.object(forKey: kLoginShown) == nil {
+            FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
+                if let _ = user {
+                    
+                } else {
+                    UserDefaults.standard.set(true, forKey: kLoginShown)
+                    UserDefaults.standard.synchronize()
+                    self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+                }
             }
         }
     }

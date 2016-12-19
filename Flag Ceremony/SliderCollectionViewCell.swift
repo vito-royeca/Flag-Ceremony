@@ -11,9 +11,8 @@ import UIKit
 class SliderCollectionViewCell: UICollectionViewCell {
 
     // MARK: Outlets
-    @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var viewsLabel: UILabel!
     @IBOutlet weak var playsLabel: UILabel!
     

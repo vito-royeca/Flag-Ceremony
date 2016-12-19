@@ -91,22 +91,6 @@ struct Country {
     }
     
     // MARK: Custom methods
-//    func toAnyObject() -> [String: Any] {
-//        return [
-//            Keys.Name: name,
-//            Keys.Capital: capital,
-//            Keys.GeoRectangle: geoRectangle,
-//            Keys.SeqID: seqId,
-//            Keys.GeoPt: geoPt,
-//            Keys.TelPref: telPref,
-//            Keys.CountryCodes: countryCodes,
-//            Keys.CountryInfo: countryInfo
-//            Keys.Plays: plays
-//            Keys.Views: views
-//            Keys.HasAnthemFile: hasAnthemFile    
-//        ]
-//    }
-    
     func getFlagURLForSize(size: FlagSize) -> URL? {
         if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
             if FileManager.default.fileExists(atPath: path) {

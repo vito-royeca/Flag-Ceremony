@@ -14,6 +14,8 @@ class ChartsViewController: UIViewController {
     // MARK: Variables
     var topViewedCountries:[Country]?
     var topPlayedCountries:[Country]?
+    var topViewers:[Activity]?
+    var topPlayers:[Activity]?
     
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,6 +47,8 @@ class ChartsViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopViewedCell")
         tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopPlayedCell")
+        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopViewerCell")
+        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopPlayerCell")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +65,20 @@ class ChartsViewController: UIViewController {
             self.topPlayedCountries = countries
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
+            }
+        })
+        
+        FirebaseManager.sharedInstance.monitorTopViewers(completion: { (activities) in
+            self.topViewers = activities
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
+            }
+        })
+        
+        FirebaseManager.sharedInstance.monitorTopPlayers(completion: { (activities) in
+            self.topPlayers = activities
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
             }
         })
     }
@@ -104,7 +122,7 @@ extension ChartsViewController : UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,6 +132,7 @@ extension ChartsViewController : UITableViewDataSource {
         case 0:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewedCell") as? SliderTableViewCell {
                 sliderCell.countries = topViewedCountries
+                sliderCell.activities = nil
                 sliderCell.delegate = self
                 cell = sliderCell
                 
@@ -121,6 +140,21 @@ extension ChartsViewController : UITableViewDataSource {
         case 1:
             if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayedCell") as? SliderTableViewCell {
                 sliderCell.countries = topPlayedCountries
+                sliderCell.activities = nil
+                sliderCell.delegate = self
+                cell = sliderCell
+            }
+        case 2:
+            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewerCell") as? SliderTableViewCell {
+                sliderCell.activities = topViewers
+                sliderCell.countries = nil
+                sliderCell.delegate = self
+                cell = sliderCell
+            }
+        case 3:
+            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayerCell") as? SliderTableViewCell {
+                sliderCell.activities = topPlayers
+                sliderCell.countries = nil
                 sliderCell.delegate = self
                 cell = sliderCell
             }
@@ -168,6 +202,12 @@ extension ChartsViewController : UITableViewDelegate {
                 case 1:
                     iconView.image = UIImage(named: "play-filled")
                     label.text = "Top Played"
+                case 2:
+                    iconView.image = UIImage(named: "view-filled")
+                    label.text = "Top Viewers"
+                case 3:
+                    iconView.image = UIImage(named: "play-filled")
+                    label.text = "Top Players"
                 default:
                     ()
                 }
