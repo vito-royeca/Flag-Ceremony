@@ -78,8 +78,7 @@ class ChartsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailsAsPush" ||
-            segue.identifier == "showDetailsAsModal" {
+        if segue.identifier == "showCountry" {
             
             var countryVC:CountryViewController?
             
@@ -87,7 +86,7 @@ class ChartsViewController: UIViewController {
                 if let vc = nav.childViewControllers.first as? CountryViewController {
                     countryVC = vc
                 }
-            }else  if let vc = segue.destination as? CountryViewController {
+            } else if let vc = segue.destination as? CountryViewController {
                 countryVC = vc
             }
             
@@ -185,12 +184,6 @@ extension ChartsViewController : UITableViewDelegate {
 
 extension ChartsViewController : SliderTableViewCellDelegate {
     func didSelectItem(_ item: Any) {
-        
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            self.performSegue(withIdentifier: "showDetailsAsPush", sender: item)
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            self.performSegue(withIdentifier: "showDetailsAsModal", sender: item)
-        }
+        self.performSegue(withIdentifier: "showCountry", sender: item)
     }
 }
-

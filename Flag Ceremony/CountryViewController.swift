@@ -41,16 +41,6 @@ class CountryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            navigationItem.rightBarButtonItems = nil
-        } else {
-            if let image = closeButton.image {
-                let tintedImage = image.withRenderingMode(.alwaysTemplate)
-                closeButton.image = tintedImage
-                closeButton.tintColor = UIColor.white
-            }
-        }
-        
         nameLabel.text = country?.name
         
         tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")

@@ -77,23 +77,6 @@ class MapViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showLogin(_:)), name: NSNotification.Name(rawValue: kLoginShown), object: nil)
     }
 
-    func showCountryForScreenshot() {
-        FirebaseManager.sharedInstance.findCountry(DefaultCountry, completion: { (country) in
-            if self.hasShownCountryForScreenshot {
-                return
-            }
-            self.hasShownCountryForScreenshot = true
-            UserDefaults.standard.set(country!.getGeoRadians()[0], forKey: kLocationLongitude)
-            UserDefaults.standard.set(country!.getGeoRadians()[1], forKey: kLocationLatitude)
-            
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                self.performSegue(withIdentifier: "showDetailsAsPush", sender: country)
-            } else if UIDevice.current.userInterfaceIdiom == .pad {
-                self.performSegue(withIdentifier: "showDetailsAsModal", sender: country)
-            }
-        })
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
@@ -101,8 +84,7 @@ class MapViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailsAsPush" ||
-            segue.identifier == "showDetailsAsModal" {
+        if segue.identifier == "showCountry" {
             
             var countryVC:CountryViewController?
             
@@ -271,18 +253,27 @@ class MapViewController: UIViewController {
         mm_drawerController.toggle(.left, animated:true, completion:nil)
         self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
     }
+    
+    // MARK: Fastlane
+    func showCountryForScreenshot() {
+        FirebaseManager.sharedInstance.findCountry(DefaultCountry, completion: { (country) in
+            if self.hasShownCountryForScreenshot {
+                return
+            }
+            self.hasShownCountryForScreenshot = true
+            UserDefaults.standard.set(country!.getGeoRadians()[0], forKey: kLocationLongitude)
+            UserDefaults.standard.set(country!.getGeoRadians()[1], forKey: kLocationLatitude)
+            
+            self.performSegue(withIdentifier: "showCountry", sender: country)
+        })
+    }
 }
 
 extension MapViewController : MaplyViewControllerDelegate {
     func maplyViewController(_ viewC: MaplyViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenLabel {
             let country = selectedObject.userObject as? Country
-            
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                performSegue(withIdentifier: "showDetailsAsPush", sender: country)
-            } else if UIDevice.current.userInterfaceIdiom == .pad {
-                performSegue(withIdentifier: "showDetailsAsModal", sender: country)
-            }
+            performSegue(withIdentifier: "showCountry", sender: country)
         }
     }
     
@@ -296,6 +287,4 @@ extension MapViewController : MaplyViewControllerDelegate {
         UserDefaults.standard.set(height, forKey: kLocationHeight)
         UserDefaults.standard.synchronize()
     }
-    
-    
 }
