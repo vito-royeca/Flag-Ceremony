@@ -132,7 +132,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - Networking (2.5.2)
+  - Networking (2.6.1)
   - proj4 (4.8.0)
   - SimulatorStatusMagic (1.9.2)
   - SMCalloutView (2.1.5)
@@ -238,7 +238,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MMDrawerController+Storyboard: c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
-  Networking: e215a5900d1e201c8f87d9bf34827db283f8d49b
+  Networking: 044e99ddb6a8b1b9bbf48b0778147f570943ac75
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
   SimulatorStatusMagic: f6cf062b0e5a2df6f000bb0f98d1ae6977c8dbc1
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481

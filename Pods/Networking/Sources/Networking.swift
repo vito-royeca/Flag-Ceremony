@@ -151,7 +151,11 @@ public class Networking {
     let boundary = String(format: "net.3lvis.networking.%08x%08x", arc4random(), arc4random())
 
     lazy var session: URLSession = {
-        return URLSession(configuration: self.sessionConfiguration())
+        var configuration = self.sessionConfiguration()
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.urlCache = nil
+
+        return URLSession(configuration: configuration)
     }()
 
     /**
@@ -175,9 +179,8 @@ public class Networking {
             let base64Credentials = credentialsData.base64EncodedString(options: [])
             let authString = "Basic \(base64Credentials)"
 
-            let config = self.sessionConfiguration()
-            config.httpAdditionalHeaders = [self.authorizationHeaderKey as AnyHashable: authString]
-            self.session = URLSession(configuration: config)
+            self.authorizationHeaderKey = "Authorization"
+            self.authorizationHeaderValue = authString
         }
     }
 
@@ -359,6 +362,18 @@ public class Networking {
             }
         }
     }
+
+    /// Removes the stored credentials and cached data.
+    public func reset() {
+        self.cache.removeAllObjects()
+        self.fakeRequests.removeAll()
+        self.token = nil
+        self.headerFields = nil
+        self.authorizationHeaderKey = "Authorization"
+        self.authorizationHeaderValue = nil
+
+        Networking.deleteCachedFiles()
+    }
 }
 
 extension Networking {
@@ -459,9 +474,7 @@ extension Networking {
                     }
                 }
             case .data, .image:
-                let trimmedPath = path.components(separatedBy: "?").first!
-
-                let object = self.objectFromCache(for: trimmedPath, cacheName: cacheName, responseType: responseType)
+                let object = self.objectFromCache(for: path, cacheName: cacheName, responseType: responseType)
                 if let object = object {
                     TestCheck.testBlock(self.disableTestingMode) {
                         completion(object, [String: Any](), nil)
@@ -471,7 +484,7 @@ extension Networking {
 
                         var returnedResponse: Any?
                         if let data = data, data.count > 0 {
-                            guard let destinationURL = try? self.destinationURL(for: trimmedPath, cacheName: cacheName) else { fatalError("Couldn't get destination URL for path: \(path) and cacheName: \(cacheName)") }
+                            guard let destinationURL = try? self.destinationURL(for: path, cacheName: cacheName) else { fatalError("Couldn't get destination URL for path: \(path) and cacheName: \(cacheName)") }
                             let _ = try? data.write(to: destinationURL, options: [.atomic])
                             switch responseType {
                             case .data:
