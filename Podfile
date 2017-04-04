@@ -23,6 +23,7 @@ target "Flag Ceremony" do
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
+    pod 'ReachabilitySwift'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'TwitterKit'
     pod 'TwitterCore'
@@ -49,6 +50,7 @@ target "Flag CeremonyTests" do
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
+    pod 'ReachabilitySwift'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'TwitterKit'
     pod 'TwitterCore'
@@ -75,6 +77,7 @@ target "Flag CeremonyUITests" do
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
     pod 'Networking'
+    pod 'ReachabilitySwift'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'TwitterKit'
     pod 'TwitterCore'

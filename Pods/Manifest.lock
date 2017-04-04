@@ -126,6 +126,7 @@ PODS:
     - MMDrawerController/Core
   - Networking (3.0.3)
   - proj4 (4.8.0)
+  - ReachabilitySwift (3)
   - SimulatorStatusMagic (1.9.4)
   - SMCalloutView (2.1.5)
   - tinyxml (2.1.0)
@@ -187,6 +188,7 @@ DEPENDENCIES:
   - MMDrawerController
   - MMDrawerController+Storyboard
   - Networking
+  - ReachabilitySwift
   - SimulatorStatusMagic
   - TwitterCore
   - TwitterKit
@@ -229,6 +231,7 @@ SPEC CHECKSUMS:
   MMDrawerController+Storyboard: c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
   Networking: e2c42013296d093e4249f8247acb08e36958a11a
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SimulatorStatusMagic: db93f00d164d854cd5ed7b5c75f48fba3b698c20
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481
   tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
@@ -237,6 +240,6 @@ SPEC CHECKSUMS:
   WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 156eb046536647d009e9aac0319723c61d898f5f
+PODFILE CHECKSUM: 484f87ff86ff7f88a18e420993e642079c7ca5db
 
 COCOAPODS: 1.2.0
