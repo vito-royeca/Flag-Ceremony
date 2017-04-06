@@ -41,7 +41,7 @@ class CountryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        nameLabel.text = country?.name
+        nameLabel.text = "\(country!.emojiFlag()) \(country!.name!)"
         
         tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")
         tableView.estimatedRowHeight = 88.0

@@ -17,7 +17,7 @@ class Scraper : NSObject {
     func insertCountries() {
         let baseURL = CountriesURL
         let path = "/api/en/countries/info/all.json"
-        let method:HTTPMethod = .Get
+        let method:HTTPMethod = .get
         let headers:[String: String]? = nil
         let paramType:Networking.ParameterType = .json
         let params = "?x=100" as AnyObject

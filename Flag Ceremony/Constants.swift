@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 let CountriesURL = "http://www.geognos.com"
 let HymnsURL     = "http://www.nationalanthems.info"
 let WikipediaURL = "https://en.wikipedia.org"
 let FlagpediaURL = "http://flagpedia.net"
+
+let kBlueColor   = UIColor(red: 0.23, green: 0.35, blue: 0.60, alpha: 1.0)
 
 // Map and Globe settings
 let DefaultLocationLatitude  = Float(14.35)  // Philippines

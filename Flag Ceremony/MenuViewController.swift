@@ -8,7 +8,6 @@
 
 import UIKit
 import Appirater
-import Firebase
 import SafariServices
 import StoreKit
 
@@ -16,39 +15,13 @@ let kLoginShown = "kLoginShown"
 
 class MenuViewController: UIViewController {
     // MARK: Outlets
-    @IBOutlet weak var loginButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
-    // MARK: Actions
-    @IBAction func loginAction(_ sender: UIBarButtonItem) {
-        if let _ = FIRAuth.auth()?.currentUser {
-            do {
-                try FIRAuth.auth()?.signOut()
-                loginButton.image = UIImage(named: "login")
-            } catch let error {
-                print("\(error)")
-            }
-        }
-        tableView.reloadData()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLoginShown), object: nil, userInfo: nil)
-    }
     
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let _ = FIRAuth.auth()?.currentUser {
-            loginButton.image = UIImage(named: "logout")
-        } else {
-            loginButton.image = UIImage(named: "login")
-        }
-        tableView.reloadData()
     }
     
     // MARK: Custom methods
@@ -94,12 +67,10 @@ extension MenuViewController : UITableViewDataSource {
         
         switch section {
         case 0:
-            rows = 1
-        case 1:
             rows = 2
-        case 2:
+        case 1:
             rows = 4
-        case 3:
+        case 2:
             rows = 1
         default:
             ()
@@ -109,18 +80,18 @@ extension MenuViewController : UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title:String?
         
         switch section {
-        case 1:
+        case 0:
             title = "Tools"
-        case 2:
+        case 1:
             title = "Apps"
-        case 3:
+        case 2:
             title = "Developer"
         default:
             ()
@@ -136,24 +107,6 @@ extension MenuViewController : UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            if let user = FIRAuth.auth()?.currentUser {
-                cell.textLabel!.text = user.displayName ?? user.email
-                
-                if let photoURL = user.photoURL {
-                    cell.imageView!.image = UIImage(named: "user")
-                    NetworkingManager.sharedInstance.downloadImage(url: photoURL, completionHandler: { (image: UIImage?, error: NSError?) in
-                        if let image = image {
-                            cell.imageView!.image = image
-                        }
-                    })
-                } else {
-                    cell.imageView!.image = UIImage(named: "user")
-                }
-            } else {
-                cell.textLabel!.text = nil
-                cell.imageView!.image = UIImage(named: "user")
-            }
-        case 1:
             switch indexPath.row {
             case 0:
                 cell.textLabel!.text = "Rate This App"
@@ -164,7 +117,7 @@ extension MenuViewController : UITableViewDataSource {
             default:
                 ()
             }
-        case 2:
+        case 1:
             // Rounded Rect for cell image
             if let imageLayer = cell.imageView?.layer {
                 imageLayer.cornerRadius = 9.0
@@ -187,7 +140,7 @@ extension MenuViewController : UITableViewDataSource {
             default:
                 ()
             }
-        case 3:
+        case 2:
             switch indexPath.row {
             case 0:
                 cell.textLabel!.text = DeveloperName
@@ -209,7 +162,7 @@ extension MenuViewController : UITableViewDataSource {
 extension MenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 1:
+        case 0:
             switch indexPath.row {
             case 0:
                 Appirater.forceShowPrompt(true)
@@ -219,7 +172,7 @@ extension MenuViewController : UITableViewDelegate {
             default:
                 ()
             }
-        case 2:
+        case 1:
             switch indexPath.row {
             case 0:
                 openStoreProduct(identifier: CineKo_AppID)
@@ -232,7 +185,7 @@ extension MenuViewController : UITableViewDelegate {
             default:
                 ()
             }
-        case 3:
+        case 2:
             switch indexPath.row {
             case 0:
                 if let url = URL(string: DeveloperWebsite) {
@@ -249,16 +202,7 @@ extension MenuViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height = CGFloat(0)
-        
-        switch indexPath.section {
-        case 0:
-            height = 88
-        default:
-            height = UITableViewAutomaticDimension
-        }
-        
-        return height
+        return UITableViewAutomaticDimension
     }
 }
 

@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        let message = "Your view and play counts will not be recorded. You may login anytime at the Left Menu to have your view and play counts recorded, as well as to manage your account settings."
+        let message = "Your view and play counts will not be recorded if you do not login."
         let alertController = UIAlertController(title: "Login Cancelled", message: message, preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action) in
@@ -419,6 +419,11 @@ extension LoginViewController : UITableViewDelegate {
         }
         
         return height
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // to fix white backgound in iOS 9x
+        cell.backgroundColor = kBlueColor
     }
 }
 

@@ -302,6 +302,23 @@ class FirebaseManager : NSObject {
         queries["topPlayers"] = query
     }
     
+    func monitorUsers(completion: @escaping ([Activity]) -> Void) {
+        let ref = FIRDatabase.database().reference().child("users")
+        let query = ref.queryOrderedByKey()
+        query.observe(.value, with: { snapshot in
+            var activities = [Activity]()
+            
+            for child in snapshot.children {
+                if let c = child as? FIRDataSnapshot {
+                    activities.append(Activity(snapshot: c))
+                }
+            }
+            completion(activities.reversed())
+        })
+        
+        queries["users"] = query
+    }
+    
     func demonitorTopCharts() {
         if let query = queries["topViewed"] {
             query.removeAllObservers()

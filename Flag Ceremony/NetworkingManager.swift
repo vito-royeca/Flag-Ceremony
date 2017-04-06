@@ -8,136 +8,135 @@
 
 import UIKit
 import Networking
+import ReachabilitySwift
 
 enum HTTPMethod: String {
-    case Post  = "Post",
-    Get  = "Get",
-    Head = "Head"
+    case post  = "Post",
+    get  = "Get",
+    head = "Head",
+    put = "Put"
 }
 
 typealias NetworkingResult = (_ result: [[String : Any]], _ error: NSError?) -> Void
 
 class NetworkingManager: NSObject {
     var networkers = [String: Any]()
+    let reachability = Reachability()!
     
-    func doOperation(_ baseUrl: String, path: String, method: HTTPMethod, headers: [String: String]?, paramType: Networking.ParameterType, params: AnyObject?, completionHandler: @escaping NetworkingResult) -> Void {
-        var networker:Networking?
-        
-        if let n = networkers[baseUrl] as? Networking {
-            networker = n
+    func doOperation(_ baseUrl: String,
+                     path: String,
+                     method: HTTPMethod,
+                     headers: [String: String]?,
+                     paramType: Networking.ParameterType,
+                     params: AnyObject?,
+                     completionHandler: @escaping NetworkingResult) -> Void {
+        if !reachability.isReachable {
+            let error = NSError(domain: "network", code: 408, userInfo: [NSLocalizedDescriptionKey: "Network error."])
+            completionHandler([[String : Any]](), error)
+            
         } else {
-            let newN = Networking(baseURL: baseUrl, configurationType: .default)
-            networkers[baseUrl] = newN
-            networker = newN
-        }
-        
-        if let networker = networker {
+            let networker = networking(forBaseUrl: baseUrl)
+            
             if let headers = headers {
                 networker.headerFields = headers
             }
             
             switch (method) {
-            case .Post:
-                networker.POST(path, parameterType: paramType, parameters: params, completion: {(JSON, headers, error) in
-                    if let error = error {
-                        print("An error happened: \(error)")
-                        completionHandler([[String : Any]](), error)
-                    } else {
-                        if let data = JSON as? [String : Any] {
-                            completionHandler([data], nil)
-                        } else if let data = JSON as? [[String : Any]] {
-                            completionHandler(data, nil)
+            case .post:
+                networker.post(path, parameterType: paramType, parameters: params, completion: {(result) in
+                    switch result {
+                    case .success(let response):
+                        if response.json.dictionary.count > 0 {
+                            completionHandler([response.json.dictionary], nil)
+                        } else if response.json.array.count > 0 {
+                            completionHandler(response.json.array, nil)
                         } else {
-                            completionHandler([[String : Any]](), error)
+                            completionHandler([[String : Any]](), nil)
                         }
+                    case .failure(let response):
+                        let error = response.error
+                        print("Networking error: \(error)")
+                        completionHandler([[String : Any]](), error)
                     }
                 })
-            case .Get:
-                networker.GET(path, parameters: params, completion: { (JSON, headers, error) in
-                    if let error = error {
-                        print("An error happened: \(error)")
-                        completionHandler([[String : Any]](), error)
-                    } else {
-                        if let data = JSON as? [String : Any] {
-                            completionHandler([data], nil)
-                        } else if let data = JSON as? [[String : Any]] {
-                            completionHandler(data, nil)
+            case .get:
+                networker.get(path, parameters: params, completion: {(result) in
+                    switch result {
+                    case .success(let response):
+                        if response.json.dictionary.count > 0 {
+                            completionHandler([response.json.dictionary], nil)
+                        } else if response.json.array.count > 0 {
+                            completionHandler(response.json.array, nil)
                         } else {
-                            completionHandler([[String : Any]](), error)
+                            completionHandler([[String : Any]](), nil)
                         }
+                    case .failure(let response):
+                        let error = response.error
+                        print("Networking error: \(error)")
+                        completionHandler([[String : Any]](), error)
                     }
                 })
-            case .Head:
+            case .head:
                 ()
+            case .put:
+                networker.put(path, parameterType: paramType, parameters: params, completion: {(result) in
+                    switch result {
+                    case .success(let response):
+                        if response.json.dictionary.count > 0 {
+                            completionHandler([response.json.dictionary], nil)
+                        } else if response.json.array.count > 0 {
+                            completionHandler(response.json.array, nil)
+                        } else {
+                            completionHandler([[String : Any]](), nil)
+                        }
+                    case .failure(let response):
+                        let error = response.error
+                        print("Networking error: \(error)")
+                        completionHandler([[String : Any]](), error)
+                    }
+                })
             }
         }
     }
     
-    func downloadImage(url: URL, completionHandler: @escaping (_ image: UIImage?, _ error: NSError?) -> Void) {
-        var baseString = ""
+    func downloadImage(url: URL, completionHandler: @escaping (_ origURL: URL?, _ image: UIImage?, _ error: NSError?) -> Void) {
+        let networker = networking(forUrl: url)
         let path = url.path
-        var networker:Networking?
         
-        if let scheme = url.scheme {
-            baseString = "\(scheme)://"
-        }
-        if let host = url.host {
-            baseString.append(host)
-        }
-        
-        if let n = networkers[baseString] as? Networking {
-            networker = n
-        } else {
-            let newN = Networking(baseURL: baseString, configurationType: .default)
-            networkers[baseString] = newN
-            networker = newN
-        }
-        
-        // skip from iCloud backups!
-        // TODO: also move the movies to Documents directory and exclude from iCloud backup
-        do {
-            var destinationURL = try networker!.destinationURL(for: path)
-            var resourceValues = URLResourceValues()
-            resourceValues.isExcludedFromBackup = true
-            try destinationURL.setResourceValues(resourceValues)
-        } catch _{
-        }
-        
-        networker!.downloadImage(path) { networkingImage, networkingError in
-            // TO DO:
-            // Image from network
-            networker!.downloadImage(path) { networkingImage2, networkingError2 in
-                // Image from cache
-                if let networkinError2 = networkingError2 {
-                    completionHandler(nil, networkinError2)
-                } else {
-                    completionHandler(networkingImage2, nil)
+        networker.downloadImage(path, completion: {(result) in
+            switch result {
+            case .success(let response):
+                // skip from iCloud backups!
+                do {
+                    var destinationURL = try networker.destinationURL(for: path)
+                    var resourceValues = URLResourceValues()
+                    resourceValues.isExcludedFromBackup = true
+                    try destinationURL.setResourceValues(resourceValues)
                 }
+                catch {}
+                completionHandler(url, response.image, nil)
+            case .failure(let response):
+                let error = response.error
+                print("Networking error: \(error)")
+                completionHandler(nil, nil, error)
             }
-        }
+        })
     }
     
     func downloadFile(url: URL, completionHandler: @escaping (Data?, NSError?) -> Void) {
-        var baseString = ""
+        let networker = networking(forUrl: url)
         let path = url.path
-        var networker:Networking?
         
-        if let scheme = url.scheme {
-            baseString = "\(scheme)://"
-        }
-        if let host = url.host {
-            baseString.append(host)
-        }
-        
-        if let n = networkers[baseString] as? Networking {
-            networker = n
-        } else {
-            let newN = Networking(baseURL: baseString, configurationType: .default)
-            networkers[baseString] = newN
-            networker = newN
-        }
-        
-        networker!.downloadData(for: path, completion: completionHandler)
+        networker.downloadData(path, cacheName: nil, completion: {(result) in
+            switch result {
+            case .success(let response):
+                completionHandler(response.data, nil)
+            case .failure(let response):
+                let error = response.error
+                print("Networking error: \(error)")
+                completionHandler(nil, error)
+            }
+        })
     }
     
     func fileExistsAt(url : URL, completion: @escaping (Bool) -> Void) {
@@ -153,6 +152,42 @@ class NetworkingManager: NSObject {
         })
         
         task.resume()
+    }
+    
+    // MARK: Private methods
+    private func networking(forBaseUrl url: String) -> Networking {
+        var networker:Networking?
+        
+        if let n = networkers[url] as? Networking {
+            networker = n
+        } else {
+            let newN = Networking(baseURL: url, configurationType: .default)
+            networkers[url] = newN
+            networker = newN
+        }
+        
+        return networker!
+    }
+    
+    private func networking(forUrl url: URL) -> Networking {
+        var networker:Networking?
+        var baseUrl = ""
+        if let scheme = url.scheme {
+            baseUrl = "\(scheme)://"
+        }
+        if let host = url.host {
+            baseUrl.append(host)
+        }
+        
+        if let n = networkers[baseUrl] as? Networking {
+            networker = n
+        } else {
+            let newN = Networking(baseURL: baseUrl, configurationType: .default)
+            networkers[baseUrl] = newN
+            networker = newN
+        }
+        
+        return networker!
     }
     
     // MARK: - Shared Instance

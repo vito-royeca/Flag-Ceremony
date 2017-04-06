@@ -9,10 +9,9 @@
 import UIKit
 import Firebase
 import MBProgressHUD
-import MMDrawerController
 import WhirlyGlobe
 
-class MapViewController: UIViewController {
+class MapViewController: CommonViewController {
     // MARK: Variables
     var mapView: MaplyViewController?
     var countries = [Country]()
@@ -22,30 +21,11 @@ class MapViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func menuAction(_ sender: UIBarButtonItem) {
-        if let navigationVC = mm_drawerController.leftDrawerViewController as? UINavigationController {
-            var menuView:MenuViewController?
-            
-            for drawer in navigationVC.viewControllers {
-                if drawer is MenuViewController {
-                    menuView = drawer as? MenuViewController
-                }
-            }
-            if menuView == nil {
-                menuView = MenuViewController()
-                navigationVC.addChildViewController(menuView!)
-            }
-            
-            navigationVC.popToViewController(menuView!, animated: true)
-        }
-        mm_drawerController.toggle(.left, animated:true, completion:nil)
+        showMenu()
     }
     
     @IBAction func searchAction(_ sender: UIBarButtonItem) {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            self.performSegue(withIdentifier: "showCountriesAsPush", sender: nil)
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            self.performSegue(withIdentifier: "showCountriesAsPopup", sender: nil)
-        }
+        showCountryList()
     }
     
     // MARK: Overrides
@@ -76,9 +56,6 @@ class MapViewController: UIViewController {
         showCountry(nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kLoginShown), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showLogin(_:)), name: NSNotification.Name(rawValue: kLoginShown), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -251,11 +228,6 @@ class MapViewController: UIViewController {
             mapView!.height = newHeight
             mapView!.animate(toPosition: newPosition!, time: 1.0)
         }
-    }
-    
-    func showLogin(_ notification: Notification?) {
-        mm_drawerController.toggle(.left, animated:true, completion:nil)
-        self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
     }
     
     // MARK: Fastlane
