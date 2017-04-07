@@ -18,7 +18,7 @@ class CountryViewController: UIViewController {
     // MARK: Variables
     var country:Country?
     var anthem:Anthem?
-    var selectedDataSegment = 0
+    var selectedSegmentIndex = 0
     
     // MARK: Outlets
     
@@ -32,7 +32,7 @@ class CountryViewController: UIViewController {
     }
     
     @IBAction func dataAction(_ sender: UISegmentedControl) {
-        selectedDataSegment = sender.selectedSegmentIndex
+        selectedSegmentIndex = sender.selectedSegmentIndex
         tableView.reloadData()
     }
     
@@ -119,7 +119,7 @@ extension CountryViewController : UITableViewDataSource {
         var sections = 1
      
         if let anthem = anthem {
-            switch selectedDataSegment {
+            switch selectedSegmentIndex {
             case CountryViewRows.lyrics.rawValue :
                 if let lyrics = anthem.lyrics {
                     sections += lyrics.count
@@ -145,7 +145,7 @@ extension CountryViewController : UITableViewDataSource {
             ()
         default:
             if let anthem = anthem {
-                switch selectedDataSegment {
+                switch selectedSegmentIndex {
                 case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[section-1]
@@ -231,7 +231,7 @@ extension CountryViewController : UITableViewDataSource {
 
                 label.text = ""
                 
-                switch selectedDataSegment {
+                switch selectedSegmentIndex {
                 case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[indexPath.section-1]
@@ -330,7 +330,7 @@ extension CountryViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        switch selectedDataSegment {
+        switch selectedSegmentIndex {
         case CountryViewRows.country.rawValue:
             switch indexPath.section {
             case 3:
@@ -344,7 +344,7 @@ extension CountryViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch selectedDataSegment {
+        switch selectedSegmentIndex {
         case CountryViewRows.country.rawValue:
             switch indexPath.section {
             case 3:

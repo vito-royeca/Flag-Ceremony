@@ -302,21 +302,19 @@ class FirebaseManager : NSObject {
         queries["topPlayers"] = query
     }
     
-    func monitorUsers(completion: @escaping ([Activity]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("users")
+    func monitorUsers(completion: @escaping ([FIRUser]) -> Void) {
+        let ref = FIRDatabase.database().reference().child("registered_users")
         let query = ref.queryOrderedByKey()
         query.observe(.value, with: { snapshot in
-            var activities = [Activity]()
+            var users = [FIRUser]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    activities.append(Activity(snapshot: c))
+                if let c = child as? FIRUser {
+                    users.append(c)
                 }
             }
-            completion(activities.reversed())
+            completion(users)
         })
-        
-        queries["users"] = query
     }
     
     func demonitorTopCharts() {

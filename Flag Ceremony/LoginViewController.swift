@@ -84,10 +84,14 @@ class LoginViewController: UIViewController {
             
             let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
                 if let fields = alertController.textFields {
-                    let email = fields[0].text
-                    let password = fields[1].text
+                    let name = fields[0].text
+                    let email = fields[1].text
+                    let password = fields[2].text
                     
                     var errors = [String]()
+                    for error in self.validateName(name!) {
+                        errors.append(error)
+                    }
                     for error in self.validateEmail(email!) {
                         errors.append(error)
                     }
@@ -130,6 +134,9 @@ class LoginViewController: UIViewController {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
             
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Name"
+            }
             alertController.addTextField { (textField) in
                 textField.placeholder = "Email"
             }
@@ -280,6 +287,16 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: Custom methods
+    func validateName(_ name: String) -> [String] {
+        var errors = [String]()
+        
+        if name.characters.count <= 4 {
+            errors.append("Name must be at least 3 characters.")
+        }
+        
+        return errors
+    }
+    
     func validateEmail(_ email: String) -> [String] {
         var errors = [String]()
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
@@ -298,8 +315,8 @@ class LoginViewController: UIViewController {
     func validatePassword(_ password: String) -> [String] {
         var errors = [String]()
         
-        if password.characters.count == 0 {
-            errors.append("Empty Password.")
+        if password.characters.count <= 9 {
+            errors.append("Password must be at least 8 characters.")
         }
         
         return errors

@@ -9,13 +9,14 @@
 import UIKit
 import Networking
 
-class ChartsViewController: UIViewController {
+class ChartsViewController: CommonViewController {
 
     // MARK: Variables
     var topViewedCountries:[Country]?
     var topPlayedCountries:[Country]?
     var topViewers:[Activity]?
     var topPlayers:[Activity]?
+    var selectedSegmentIndex = 0
     
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -40,47 +41,48 @@ class ChartsViewController: UIViewController {
         mm_drawerController.toggle(.left, animated:true, completion:nil)
     }
     
+    @IBAction func dataChanged(_ sender: UISegmentedControl) {
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        
+        switch selectedSegmentIndex {
+        case 0:
+            showTopViewed()
+        case 1:
+            showTopPlayed()
+        case 2:
+            showTopViewers()
+        case 3:
+            showTopPlayers()
+        default:
+            showTopViewed()
+        }
+    }
+    
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopViewedCell")
-        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopPlayedCell")
-        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopViewerCell")
-        tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "TopPlayerCell")
+        tableView.register(UINib(nibName: "DataTableViewCell", bundle: nil), forCellReuseIdentifier: "DataCell")
+        
+        getUsers()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        FirebaseManager.sharedInstance.monitorTopViewed(completion: { (countries) in
-            self.topViewedCountries = countries
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-            }
-        })
-        
-        FirebaseManager.sharedInstance.monitorTopPlayed(completion: { (countries) in
-            self.topPlayedCountries = countries
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
-            }
-        })
-        
-        FirebaseManager.sharedInstance.monitorTopViewers(completion: { (activities) in
-            self.topViewers = activities
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .automatic)
-            }
-        })
-        
-        FirebaseManager.sharedInstance.monitorTopPlayers(completion: { (activities) in
-            self.topPlayers = activities
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
-            }
-        })
+        switch selectedSegmentIndex {
+        case 0:
+            showTopViewed()
+        case 1:
+            showTopPlayed()
+        case 2:
+            showTopViewers()
+        case 3:
+            showTopPlayers()
+        default:
+            showTopViewed()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,16 +115,144 @@ class ChartsViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: Custom methods
+    func showTopViewed() {
+        FirebaseManager.sharedInstance.monitorTopViewed(completion: { (countries) in
+            self.topViewedCountries = countries
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func showTopPlayed() {
+        FirebaseManager.sharedInstance.monitorTopPlayed(completion: { (countries) in
+            self.topPlayedCountries = countries
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func showTopViewers() {
+        FirebaseManager.sharedInstance.monitorTopViewers(completion: { (activities) in
+            self.topViewers = activities
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func showTopPlayers() {
+        FirebaseManager.sharedInstance.monitorTopPlayers(completion: { (activities) in
+            self.topPlayers = activities
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func getUsers() {
+        FirebaseManager.sharedInstance.monitorUsers(completion: { (users) in
+            for user in users {
+                print("\(user.displayName)")
+            }
+        })
+    }
+    
+    func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
+        switch selectedSegmentIndex {
+        case 0:
+            if let topViewedCountries = topViewedCountries {
+                let country = topViewedCountries[indexPath.row]
+                
+                if let url = country.getFlagURLForSize(size: .normal) {
+                    if let image = UIImage(contentsOfFile: url.path) {
+                        cell.imageIcon.image = imageWithBorder(fromImage: image)
+                    }
+                }
+                cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.nameLabel.text = country.name
+                cell.statIcon.image = UIImage(named: "view-filled")
+                if let views = country.views {
+                    cell.statLabel.text = "\(views)"
+                }
+            }
+        case 1:
+            if let topPlayedCountries = topPlayedCountries {
+                let country = topPlayedCountries[indexPath.row]
+                
+                if let url = country.getFlagURLForSize(size: .normal) {
+                    if let image = UIImage(contentsOfFile: url.path) {
+                        cell.imageIcon.image = imageWithBorder(fromImage: image)
+                    }
+                }
+                cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.nameLabel.text = country.name
+                cell.statIcon.image = UIImage(named: "play-filled")
+                if let plays = country.plays {
+                    cell.statLabel.text = "\(plays)"
+                }
+            }
+        case 2:
+            if let topViewers = topViewers {
+                let activity = topViewers[indexPath.row]
+                
+                cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.nameLabel.text = activity.key
+                cell.statIcon.image = UIImage(named: "view-filled")
+                if let views = activity.viewCount {
+                    cell.statLabel.text = "\(views)"
+                }
+            }
+        case 3:
+            if let topPlayers = topPlayers {
+                let activity = topPlayers[indexPath.row]
+
+                cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.nameLabel.text = activity.key
+                cell.statIcon.image = UIImage(named: "play-filled")
+                if let plays = activity.playCount {
+                    cell.statLabel.text = "\(plays)"
+                }
+            }
+        default:
+            ()
+        }
+    }
 }
 
 // MARK: UITableViewDataSource
 extension ChartsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        var rows = 0
+        
+        switch section {
+        case 0:
+            rows = 1
+        case 1:
+            switch selectedSegmentIndex {
+            case 0:
+                rows = topViewedCountries?.count ?? 0
+            case 1:
+                rows = topPlayedCountries?.count ?? 0
+            case 2:
+                rows = topViewers?.count ?? 0
+            case 3:
+                rows = topPlayers?.count ?? 0
+            default:
+                ()
+            }
+        default:
+            ()
+        }
+        
+        return rows
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,33 +260,13 @@ extension ChartsViewController : UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewedCell") as? SliderTableViewCell {
-                sliderCell.countries = topViewedCountries
-                sliderCell.activities = nil
-                sliderCell.delegate = self
-                cell = sliderCell
-                
+            if let c = tableView.dequeueReusableCell(withIdentifier: "SegmentedCell") {
+                cell = c
             }
         case 1:
-            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayedCell") as? SliderTableViewCell {
-                sliderCell.countries = topPlayedCountries
-                sliderCell.activities = nil
-                sliderCell.delegate = self
-                cell = sliderCell
-            }
-        case 2:
-            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopViewerCell") as? SliderTableViewCell {
-                sliderCell.activities = topViewers
-                sliderCell.countries = nil
-                sliderCell.delegate = self
-                cell = sliderCell
-            }
-        case 3:
-            if let sliderCell = tableView.dequeueReusableCell(withIdentifier: "TopPlayerCell") as? SliderTableViewCell {
-                sliderCell.activities = topPlayers
-                sliderCell.countries = nil
-                sliderCell.delegate = self
-                cell = sliderCell
+            if let dataCell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as? DataTableViewCell {
+                configure(cell: dataCell, at: indexPath)
+                cell = dataCell
             }
         default:
             ()
@@ -170,60 +280,34 @@ extension ChartsViewController : UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension ChartsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var divisor = CGFloat(0)
+        var height = CGFloat(0)
         
-        switch UIApplication.shared.statusBarOrientation {
-        case .portrait,
-             .portraitUpsideDown:
-            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
-        case .landscapeLeft,
-             .landscapeRight:
-            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 5
+        switch indexPath.section {
+        case 0:
+            height = UITableViewAutomaticDimension
+        case 1:
+            height = 88
         default:
-            divisor = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
+            ()
         }
         
-        return tableView.frame.size.height / divisor
+        return height
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var header:UIView?
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") {
-            header = cell
-            
-            if let iconView = cell.viewWithTag(1) as? UIImageView,
-                let label = cell.viewWithTag(2) as? UILabel {
-                
-                switch section {
-                case 0:
-                    iconView.image = UIImage(named: "view-filled")
-                    label.text = "Top Viewed"
-                case 1:
-                    iconView.image = UIImage(named: "play-filled")
-                    label.text = "Top Played"
-                case 2:
-                    iconView.image = UIImage(named: "view-filled")
-                    label.text = "Top Viewers"
-                case 3:
-                    iconView.image = UIImage(named: "play-filled")
-                    label.text = "Top Players"
-                default:
-                    ()
-                }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch selectedSegmentIndex {
+        case 0:
+            if let topViewedCountries = topViewedCountries {
+                let country = topViewedCountries[indexPath.row]
+                self.performSegue(withIdentifier: "showCountry", sender: country)
             }
+        case 1:
+            if let topPlayedCountries = topPlayedCountries {
+                let country = topPlayedCountries[indexPath.row]
+                self.performSegue(withIdentifier: "showCountry", sender: country)
+            }
+        default:
+            ()
         }
-        
-        return header!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(24)
-    }
-}
-
-extension ChartsViewController : SliderTableViewCellDelegate {
-    func didSelectItem(_ item: Any) {
-        self.performSegue(withIdentifier: "showCountry", sender: item)
     }
 }
