@@ -168,7 +168,7 @@ class ChartsViewController: CommonViewController {
                 
                 if let url = country.getFlagURLForSize(size: .normal) {
                     if let image = UIImage(contentsOfFile: url.path) {
-                        cell.imageIcon.image = imageWithBorder(fromImage: image)
+                        cell.imageIcon.image = ImageUtil.imageWithBorder(fromImage: image)
                     }
                 }
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
@@ -184,7 +184,7 @@ class ChartsViewController: CommonViewController {
                 
                 if let url = country.getFlagURLForSize(size: .normal) {
                     if let image = UIImage(contentsOfFile: url.path) {
-                        cell.imageIcon.image = imageWithBorder(fromImage: image)
+                        cell.imageIcon.image = ImageUtil.imageWithBorder(fromImage: image)
                     }
                 }
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
