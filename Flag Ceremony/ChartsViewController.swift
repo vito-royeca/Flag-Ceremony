@@ -161,6 +161,9 @@ class ChartsViewController: CommonViewController {
     }
     
     func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
+        cell.statIcon2.isHidden = true
+        cell.statLabel2.isHidden = true
+        
         switch selectedSegmentIndex {
         case 0:
             if let topViewedCountries = topViewedCountries {

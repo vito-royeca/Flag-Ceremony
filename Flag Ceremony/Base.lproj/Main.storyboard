@@ -735,28 +735,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="FhR-ce-Qea" detailTextLabel="IF6-ZW-unH" style="IBUITableViewCellStyleSubtitle" id="mvb-Zx-58M">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DataCell" rowHeight="88" id="mvb-Zx-58M">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mvb-Zx-58M" id="O2V-Aa-Seu">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="87.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SegmentedCell" id="DU2-Sy-afM">
+                                        <rect key="frame" x="0.0" y="116" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DU2-Sy-afM" id="hX9-Tj-0at">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FhR-ce-Qea">
-                                                    <rect key="frame" x="48" y="5" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IF6-ZW-unH">
-                                                    <rect key="frame" x="48" y="25.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jfh-bQ-y5Q">
+                                                    <rect key="frame" x="8" y="7" width="752" height="29"/>
+                                                    <segments>
+                                                        <segment title="Viewed"/>
+                                                        <segment title="Played"/>
+                                                    </segments>
+                                                    <color key="tintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="dataChanged:" destination="g47-nE-uKx" eventType="valueChanged" id="JAR-Ay-V2z"/>
+                                                    </connections>
+                                                </segmentedControl>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jfh-bQ-y5Q" firstAttribute="leading" secondItem="hX9-Tj-0at" secondAttribute="leadingMargin" id="11s-mu-iec"/>
+                                                <constraint firstItem="jfh-bQ-y5Q" firstAttribute="trailing" secondItem="hX9-Tj-0at" secondAttribute="trailingMargin" id="JFm-qi-NRD"/>
+                                                <constraint firstItem="jfh-bQ-y5Q" firstAttribute="centerY" secondItem="hX9-Tj-0at" secondAttribute="centerY" id="esG-o7-Tqy"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -807,6 +817,7 @@
                         <outlet property="loginButton" destination="DR8-68-90o" id="8DB-9g-xRF"/>
                         <outlet property="tableView" destination="Nda-oo-rv8" id="nee-ME-2DN"/>
                         <segue destination="XWm-v0-Sif" kind="presentation" identifier="showLoginAsModal" id="SJS-H0-2ZP"/>
+                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showCountry" modalPresentationStyle="formSheet" id="b9u-LR-pcX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Og8-XN-oid" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1069,9 +1080,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SJS-H0-2ZP"/>
-        <segue reference="3L4-tk-8vC"/>
         <segue reference="l87-iQ-vgf"/>
         <segue reference="Q6A-TY-pWV"/>
+        <segue reference="ZdL-oJ-FYe"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

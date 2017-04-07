@@ -16,7 +16,8 @@ class DataTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statIcon: UIImageView!
     @IBOutlet weak var statLabel: UILabel!
-    
+    @IBOutlet weak var statIcon2: UIImageView!
+    @IBOutlet weak var statLabel2: UILabel!
     
     // MARK: Overrides
     override func prepareForReuse() {
@@ -26,6 +27,8 @@ class DataTableViewCell: UITableViewCell {
         nameLabel.text = nil
         statIcon.image = nil
         statLabel.text = nil
+        statIcon2.image = nil
+        statLabel2.text = nil
     }
     
     override func awakeFromNib() {

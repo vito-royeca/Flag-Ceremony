@@ -345,6 +345,19 @@ class FirebaseManager : NSObject {
         })
     }
     
+    func monitorUserData(completion: @escaping (Activity?) -> Void) {
+        if let user = FIRAuth.auth()?.currentUser {
+            let ref = FIRDatabase.database().reference().child("activities").child(user.uid)
+            let query = ref.queryOrderedByKey()
+            query.observe(.value, with: { snapshot in
+                let activity = Activity(snapshot: snapshot)
+                completion(activity)
+            })
+            
+            queries["userData"] = query
+        }
+    }
+    
     func demonitorTopCharts() {
         if let query = queries["topViewed"] {
             query.removeAllObservers()
@@ -372,6 +385,13 @@ class FirebaseManager : NSObject {
         }
     }
     
+    func demonitorUserData() {
+        if let query = queries["userData"] {
+            query.removeAllObservers()
+            queries["userData"] = nil
+        }
+    }
+
     // MARK: - Shared Instance
     static let sharedInstance = FirebaseManager()
 }

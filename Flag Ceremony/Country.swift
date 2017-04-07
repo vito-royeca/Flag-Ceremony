@@ -144,5 +144,18 @@ struct Country {
         
         return string
     }
+    
+    var description: String {
+        return self.key!
+    }
+    
+    var hashValue: Int {
+        return self.key!.hashValue
+    }
+
+
+    static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.key == rhs.key
+    }
 
 }
