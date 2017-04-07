@@ -42,4 +42,12 @@ class DataTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: Custom methods
+    func toggleRoundImage(round: Bool) {
+        let height = imageIcon.frame.size.height
+        
+        imageIcon.layer.cornerRadius = round ? (height / 2) : 0
+        imageIcon.layer.masksToBounds = true
+        imageIcon.layer.borderWidth = 0
+    }
 }

@@ -180,6 +180,7 @@ class ChartsViewController: CommonViewController {
                 if let views = country.views {
                     cell.statLabel.text = "\(views)"
                 }
+                cell.toggleRoundImage(round: false)
             }
         case 1:
             if let topPlayedCountries = topPlayedCountries {
@@ -196,6 +197,7 @@ class ChartsViewController: CommonViewController {
                 if let plays = country.plays {
                     cell.statLabel.text = "\(plays)"
                 }
+                cell.toggleRoundImage(round: false)
             }
         case 2:
             if let topViewers = topViewers {
@@ -220,11 +222,11 @@ class ChartsViewController: CommonViewController {
                         }
                     }
                 }
-                
                 cell.statIcon.image = UIImage(named: "view-filled")
                 if let views = activity.viewCount {
                     cell.statLabel.text = "\(views)"
                 }
+                cell.toggleRoundImage(round: true)
             }
         case 3:
             if let topPlayers = topPlayers {
@@ -249,11 +251,11 @@ class ChartsViewController: CommonViewController {
                         }
                     }
                 }
-
                 cell.statIcon.image = UIImage(named: "play-filled")
                 if let plays = activity.playCount {
                     cell.statLabel.text = "\(plays)"
                 }
+                cell.toggleRoundImage(round: true)
             }
         default:
             ()

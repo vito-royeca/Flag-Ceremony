@@ -53,13 +53,12 @@ class AccountViewController: CommonViewController {
         
         FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
             self.countries = countries
+            self.updateDataDisplay()
         })
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        updateDataDisplay()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,6 +109,7 @@ class AccountViewController: CommonViewController {
     }
     
     func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
+        cell.toggleRoundImage(round: false)
         cell.rankLabel.isHidden = true
         cell.statIcon2.isHidden = true
         cell.statLabel2.isHidden = true
@@ -206,6 +206,7 @@ extension AccountViewController : UITableViewDataSource {
         switch indexPath.section {
         case 0:
             if let dataCell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as? DataTableViewCell {
+                dataCell.toggleRoundImage(round: true)
                 dataCell.imageIcon.image = UIImage(named: "user")
                 dataCell.rankLabel.isHidden = false
                 dataCell.statIcon2.isHidden = false
@@ -276,42 +277,49 @@ extension AccountViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch selectedSegmentIndex {
+        switch indexPath.section {
         case 0:
-            if let views = activity!.views,
-                let countries = countries {
-                let keys = Array(views.keys)
-                let key = keys[indexPath.row]
-                var country:Country?
-                
-                for c in countries {
-                    if c.key == key {
-                        country = c
-                        break
+            () // TODO: handle account selection
+        case 2:
+            switch selectedSegmentIndex {
+            case 0:
+                if let views = activity!.views,
+                    let countries = countries {
+                    let keys = Array(views.keys)
+                    let key = keys[indexPath.row]
+                    var country:Country?
+                    
+                    for c in countries {
+                        if c.key == key {
+                            country = c
+                            break
+                        }
+                    }
+                    
+                    if let country = country {
+                        self.performSegue(withIdentifier: "showCountry", sender: country)
                     }
                 }
-                
-                if let country = country {
-                    self.performSegue(withIdentifier: "showCountry", sender: country)
-                }
-            }
-        case 1:
-            if let plays = activity!.plays,
-                let countries = countries {
-                let keys = Array(plays.keys)
-                let key = keys[indexPath.row]
-                var country:Country?
-                
-                for c in countries {
-                    if c.key == key {
-                        country = c
-                        break
+            case 1:
+                if let plays = activity!.plays,
+                    let countries = countries {
+                    let keys = Array(plays.keys)
+                    let key = keys[indexPath.row]
+                    var country:Country?
+                    
+                    for c in countries {
+                        if c.key == key {
+                            country = c
+                            break
+                        }
+                    }
+                    
+                    if let country = country {
+                        self.performSegue(withIdentifier: "showCountry", sender: country)
                     }
                 }
-                
-                if let country = country {
-                    self.performSegue(withIdentifier: "showCountry", sender: country)
-                }
+            default:
+                ()
             }
         default:
             ()
