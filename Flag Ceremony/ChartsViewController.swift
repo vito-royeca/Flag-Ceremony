@@ -16,6 +16,7 @@ class ChartsViewController: CommonViewController {
     var topPlayedCountries:[Country]?
     var topViewers:[Activity]?
     var topPlayers:[Activity]?
+    var users:[User]?
     var selectedSegmentIndex = 0
     
     // MARK: Outlets
@@ -155,9 +156,7 @@ class ChartsViewController: CommonViewController {
     
     func getUsers() {
         FirebaseManager.sharedInstance.monitorUsers(completion: { (users) in
-            for user in users {
-                print("\(user.displayName)")
-            }
+            self.users = users
         })
     }
     
@@ -200,7 +199,25 @@ class ChartsViewController: CommonViewController {
                 let activity = topViewers[indexPath.row]
                 
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
-                cell.nameLabel.text = activity.key
+                if let users = users {
+                    for u in users {
+                        if u.key == activity.key {
+                            cell.nameLabel.text = u.displayName
+                            if let photoURL = u.photoURL {
+                                let url = URL(string: photoURL)
+                                NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
+                                    if let image = image {
+                                        cell.imageIcon.image = image
+                                    }
+                                })
+                            } else {
+                                cell.imageIcon.image = UIImage(named: "user")
+                            }
+                            break
+                        }
+                    }
+                }
+                
                 cell.statIcon.image = UIImage(named: "view-filled")
                 if let views = activity.viewCount {
                     cell.statLabel.text = "\(views)"
@@ -209,9 +226,27 @@ class ChartsViewController: CommonViewController {
         case 3:
             if let topPlayers = topPlayers {
                 let activity = topPlayers[indexPath.row]
-
+                
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
-                cell.nameLabel.text = activity.key
+                if let users = users {
+                    for u in users {
+                        if u.key == activity.key {
+                            cell.nameLabel.text = u.displayName
+                            if let photoURL = u.photoURL {
+                                let url = URL(string: photoURL)
+                                NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
+                                    if let image = image {
+                                        cell.imageIcon.image = image
+                                    }
+                                })
+                            } else {
+                                cell.imageIcon.image = UIImage(named: "user")
+                            }
+                            break
+                        }
+                    }
+                }
+
                 cell.statIcon.image = UIImage(named: "play-filled")
                 if let plays = activity.playCount {
                     cell.statLabel.text = "\(plays)"

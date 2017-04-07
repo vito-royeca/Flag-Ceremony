@@ -14,6 +14,34 @@ class FirebaseManager : NSObject {
     var online = false
     let connectionRef = FIRDatabase.database().reference(withPath: ".info/connected")
     
+    func updateUser(email: String?, photoURL: URL?, displayName: String?) {
+        if let user = FIRAuth.auth()?.currentUser {
+            let ref = FIRDatabase.database().reference().child("users").child(user.uid)
+            
+            ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+                var post = currentData.value as? [String : Any] ?? [String : Any]()
+                var providerData = [String]()
+                for pd in user.providerData {
+                    providerData.append(pd.providerID)
+                }
+                
+                post[User.Keys.Email] = email ?? ""
+                post[User.Keys.PhotoURL] = photoURL?.absoluteString ?? ""
+                post[User.Keys.DisplayName] = displayName ?? ""
+                post[User.Keys.ProviderData] = providerData
+                
+                // Set value and report transaction success
+                currentData.value = post
+                return FIRTransactionResult.success(withValue: currentData)
+                
+            }) { (error, committed, snapshot) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     func incrementCountryViews(_ key: String) {
         let ref = FIRDatabase.database().reference().child("countries").child(key)
         
@@ -302,15 +330,15 @@ class FirebaseManager : NSObject {
         queries["topPlayers"] = query
     }
     
-    func monitorUsers(completion: @escaping ([FIRUser]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("registered_users")
+    func monitorUsers(completion: @escaping ([User]) -> Void) {
+        let ref = FIRDatabase.database().reference().child("users")
         let query = ref.queryOrderedByKey()
         query.observe(.value, with: { snapshot in
-            var users = [FIRUser]()
+            var users = [User]()
             
             for child in snapshot.children {
-                if let c = child as? FIRUser {
-                    users.append(c)
+                if let c = child as? FIRDataSnapshot {
+                    users.append(User(snapshot: c))
                 }
             }
             completion(users)
@@ -336,6 +364,11 @@ class FirebaseManager : NSObject {
         if let query = queries["topPlayers"] {
             query.removeAllObservers()
             queries["topPlayers"] = nil
+        }
+        
+        if let query = queries["users"] {
+            query.removeAllObservers()
+            queries["users"] = nil
         }
     }
     

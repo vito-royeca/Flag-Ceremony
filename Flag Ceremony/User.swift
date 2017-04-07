@@ -10,16 +10,42 @@ import Foundation
 import Firebase
 
 struct User {
-  
-    let uid: String?
-    let email: String?
-    let photoUrl: URL?
-    let displayName: String?
+
+    struct Keys {
+        static let Email        = "email"
+        static let PhotoURL     = "photoUrl"
+        static let DisplayName  = "displayName"
+        static let ProviderData = "providerData"
+    }
     
-    init(authData: FIRUser) {
-        uid = authData.uid
-        email = authData.email!
-        photoUrl = authData.photoURL
-        displayName = authData.displayName
+    // MARK: Properties
+    let key: String?
+    let ref: FIRDatabaseReference?
+    
+    let email: String?
+    let photoURL: String?
+    let displayName: String?
+    let providerData: [String]?
+    
+    // MARK: Initialization
+    init(key: String, dict: [String: Any]) {
+        self.key = key
+        self.ref = nil
+        
+        self.email = dict[Keys.Email] as? String
+        self.photoURL = dict[Keys.PhotoURL] as? String
+        self.displayName = dict[Keys.DisplayName] as? String
+        self.providerData = dict[Keys.ProviderData] as? [String]
+    }
+    
+    init(snapshot: FIRDataSnapshot) {
+        let value = snapshot.value as! [String: Any]
+        self.key = snapshot.key
+        self.ref = snapshot.ref
+        
+        self.email = value[Keys.Email] as? String
+        self.photoURL = value[Keys.PhotoURL] as? String
+        self.displayName = value[Keys.DisplayName] as? String
+        self.providerData = value[Keys.ProviderData] as? [String]
     }
 }

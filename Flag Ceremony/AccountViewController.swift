@@ -66,24 +66,20 @@ extension AccountViewController : UITableViewDataSource {
         var cell:UITableViewCell?
         
         if let c = tableView.dequeueReusableCell(withIdentifier: "Cell") {
+            c.textLabel!.text = nil
+            c.detailTextLabel?.text = nil
+            c.imageView!.image = UIImage(named: "user")
+            
             if let user = FIRAuth.auth()?.currentUser {
                 c.textLabel!.text = user.displayName ?? user.email
                 c.detailTextLabel?.text = nil
-                
                 if let photoURL = user.photoURL {
-                    c.imageView!.image = UIImage(named: "user")
                     NetworkingManager.sharedInstance.downloadImage(url: photoURL, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
                         if let image = image {
                             c.imageView!.image = image
                         }
                     })
-                } else {
-                    c.imageView!.image = UIImage(named: "user")
                 }
-            } else {
-                c.textLabel!.text = nil
-                c.detailTextLabel?.text = nil
-                c.imageView!.image = UIImage(named: "user")
             }
 
             cell = c

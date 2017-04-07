@@ -75,6 +75,7 @@ class LoginViewController: UIViewController {
                         self.present(alertController, animated: true, completion: nil)
                     } else {
                         self.dismiss(animated: true, completion: nil)
+                        self.updateUser()
                     }
                 })
             }
@@ -125,6 +126,7 @@ class LoginViewController: UIViewController {
                                     self.present(alertController, animated: true, completion: nil)
                                 } else {
                                     self.dismiss(animated: true, completion: nil)
+                                    self.updateUser()
                                 }
                             })
                         }
@@ -222,6 +224,7 @@ class LoginViewController: UIViewController {
                             self.present(alertController, animated: true, completion: nil)
                         } else {
                             self.dismiss(animated: true, completion: nil)
+                            self.updateUser()
                         }
                     })
                 }
@@ -249,6 +252,7 @@ class LoginViewController: UIViewController {
                             self.present(alertController, animated: true, completion: nil)
                         } else {
                             self.dismiss(animated: true, completion: nil)
+                            self.updateUser()
                         }
                     })
                 }
@@ -290,7 +294,7 @@ class LoginViewController: UIViewController {
     func validateName(_ name: String) -> [String] {
         var errors = [String]()
         
-        if name.characters.count <= 4 {
+        if name.characters.count < 4 {
             errors.append("Name must be at least 3 characters.")
         }
         
@@ -315,11 +319,17 @@ class LoginViewController: UIViewController {
     func validatePassword(_ password: String) -> [String] {
         var errors = [String]()
         
-        if password.characters.count <= 9 {
-            errors.append("Password must be at least 8 characters.")
+        if password.characters.count == 0 {
+            errors.append("Password is empty.")
         }
         
         return errors
+    }
+    
+    func updateUser() {
+        if let user = FIRAuth.auth()?.currentUser {
+            FirebaseManager.sharedInstance.updateUser(email: user.email, photoURL: user.photoURL, displayName: user.displayName)
+        }
     }
 }
 
@@ -467,6 +477,7 @@ extension LoginViewController : GIDSignInDelegate {
                     self.present(alertController, animated: true, completion: nil)
                 } else {
                     self.dismiss(animated: true, completion: nil)
+                    self.updateUser()
                 }
             })
         }
@@ -492,5 +503,6 @@ extension LoginViewController : GIDSignInUIDelegate {
     
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         viewController.dismiss(animated: true, completion: nil)
+        self.updateUser()
     }
 }
