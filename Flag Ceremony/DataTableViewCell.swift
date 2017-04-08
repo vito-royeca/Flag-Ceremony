@@ -8,6 +8,8 @@
 
 import UIKit
 
+let DataTableViewCellHeight = CGFloat(88)
+
 class DataTableViewCell: UITableViewCell {
 
     // MARK: Outlets
@@ -40,14 +42,5 @@ class DataTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    // MARK: Custom methods
-    func toggleRoundImage(round: Bool) {
-        let height = imageIcon.frame.size.height
-        
-        imageIcon.layer.cornerRadius = round ? (height / 2) : 0
-        imageIcon.layer.masksToBounds = true
-        imageIcon.layer.borderWidth = 0
     }
 }

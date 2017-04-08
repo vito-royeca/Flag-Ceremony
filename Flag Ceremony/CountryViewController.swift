@@ -19,9 +19,9 @@ class CountryViewController: UIViewController {
     var country:Country?
     var anthem:Anthem?
     var selectedSegmentIndex = 0
+    var isPlaying = false
     
     // MARK: Outlets
-    
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +29,14 @@ class CountryViewController: UIViewController {
     // MARK: Actions
     @IBAction func closeAction(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func playPauseAction(_ sender: UIButton) {
+        isPlaying = !isPlaying
+        updatePlayButton()
+        
+        let userInfo = [kAudioPlayerStatus: isPlaying ? kAudioPlayerStatusPlay : kAudioPlayerStatusPause]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kPlayPauseNotification), object: nil, userInfo: userInfo)
     }
     
     @IBAction func dataAction(_ sender: UISegmentedControl) {
@@ -56,8 +64,8 @@ class CountryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kPlayFinished), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kAudioPlayerStatus), object: nil)
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = country!.getAudioURL()
@@ -69,8 +77,11 @@ class CountryViewController: UIViewController {
         tableView.reloadData()
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            cell.pause()
-            cell.play()
+            if !isPlaying {
+                cell.pause()
+                cell.play()
+                isPlaying = true
+            }
             
             FirebaseManager.sharedInstance.incrementCountryViews(country!.key!)
         }
@@ -79,7 +90,7 @@ class CountryViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayFinished), object:nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
             cell.url = nil
@@ -91,12 +102,36 @@ class CountryViewController: UIViewController {
     }
     
     // MARK: Custom methods
+    func updatePlayButton() {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
+            if let button = cell.viewWithTag(200) as? UIButton {
+                let image = isPlaying ? UIImage(named: "circled pause") : UIImage(named: "circled play")
+                let tintedImage = image!.withRenderingMode(.alwaysTemplate)
+                button.setImage(tintedImage, for: .normal)
+                button.imageView!.tintColor = kBlueColor
+                button.isHidden = isPlaying
+            }
+        }
+    }
+
     func playListener(_ notification: Notification) {
         if let userInfo = notification.userInfo {
-            if let url = userInfo[kAudioURL] as? URL,
-                let country = country {
-                if url == country.getAudioURL() {
-                    FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
+            if let status = userInfo[kAudioPlayerStatus] as? String {
+                
+                if status == kAudioPlayerStatusPlay {
+                    isPlaying = true
+                    updatePlayButton()
+                } else if status == kAudioPlayerStatusPause {
+                    isPlaying = false
+                    updatePlayButton()
+                } else if status == kAudioPlayerStatusFinished {
+                    if let url = userInfo[kAudioURL] as? URL,
+                        let country = country {
+                        
+                        if url == country.getAudioURL() {
+                            FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
+                        }
+                    }
                 }
             }
         }
@@ -194,8 +229,14 @@ extension CountryViewController : UITableViewDataSource {
                 
                 if let url = country!.getFlagURLForSize(size: flagSize) {
                     if let image = UIImage(contentsOfFile: url.path),
-                        let imageView = cell?.viewWithTag(1) as? UIImageView {
+                        let imageView = cell?.viewWithTag(100) as? UIImageView {
                         imageView.image = ImageUtil.imageWithBorder(fromImage: image)
+                    }
+                    if let button = cell?.viewWithTag(200) as? UIButton {
+                        let image = isPlaying ? UIImage(named: "circled pause") : UIImage(named: "circled play")
+                        let tintedImage = image!.withRenderingMode(.alwaysTemplate)
+                        button.setImage(tintedImage, for: .normal)
+                        button.imageView!.tintColor = kBlueColor
                     }
                 }
             case 1:
@@ -314,38 +355,62 @@ extension CountryViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        switch selectedSegmentIndex {
-        case CountryViewRows.country.rawValue:
-            switch indexPath.section {
-            case 3:
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
                 return indexPath
             default:
                 return nil
             }
         default:
-            return nil
+            switch selectedSegmentIndex {
+            case CountryViewRows.country.rawValue:
+                switch indexPath.section {
+                case 3:
+                    return indexPath
+                default:
+                    return nil
+                }
+            default:
+                return nil
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch selectedSegmentIndex {
-        case CountryViewRows.country.rawValue:
-            switch indexPath.section {
-            case 3:
-                if let country = country {
-                    if let countryInfo = country.countryInfo {
-                        if let url = URL(string: countryInfo) {
-                            let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                            svc.delegate = self
-                            navigationController?.present(svc, animated: true, completion: nil)
-                        }
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
+                    if let button = cell.viewWithTag(200) as? UIButton {
+                        playPauseAction(button)
                     }
                 }
             default:
                 ()
             }
         default:
-            ()
+            switch selectedSegmentIndex {
+            case CountryViewRows.country.rawValue:
+                switch indexPath.section {
+                case 3:
+                    if let country = country {
+                        if let countryInfo = country.countryInfo {
+                            if let url = URL(string: countryInfo) {
+                                let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                                svc.delegate = self
+                                navigationController?.present(svc, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                default:
+                    ()
+                }
+            default:
+                ()
+            }
         }
     }
 }

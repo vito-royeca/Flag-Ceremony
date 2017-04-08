@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MBProgressHUD
 
 class AccountViewController: CommonViewController {
 
@@ -59,6 +60,7 @@ class AccountViewController: CommonViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateDataDisplay()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,9 +98,12 @@ class AccountViewController: CommonViewController {
     func updateDataDisplay() {
         if let _ = FIRAuth.auth()?.currentUser {
             loginButton.image = UIImage(named: "logout")
+//            MBProgressHUD.showAdded(to: self.view, animated: true)
+            
             FirebaseManager.sharedInstance.monitorUserData(completion: { (activity: Activity?) in
                 self.activity = activity
                 DispatchQueue.main.async {
+//                    MBProgressHUD.hide(for: self.view, animated: true)
                     self.tableView.reloadData()
                 }
             })
@@ -109,64 +114,56 @@ class AccountViewController: CommonViewController {
     }
     
     func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
-        cell.toggleRoundImage(round: false)
-        cell.rankLabel.isHidden = true
-        cell.statIcon2.isHidden = true
-        cell.statLabel2.isHidden = true
+        var country:Country?
+        var stat = 0
+        
+        cell.rankLabel.text = " "
+        cell.statIcon2.image = nil
+        cell.statLabel2.text = " "
         
         switch selectedSegmentIndex {
         case 0:
             if let views = activity!.views,
                 let countries = countries {
-                let keys = Array(views.keys)
+                let keys = Array(views.keys).sorted()
                 let key = keys[indexPath.row]
-                var country:Country?
                 
                 for c in countries {
                     if c.key == key {
                         country = c
+                        stat = views[key]!
                         break
                     }
                 }
-                
-                if let country = country {
-                    if let url = country.getFlagURLForSize(size: .normal) {
-                        if let image = UIImage(contentsOfFile: url.path) {
-                            cell.imageIcon.image = ImageUtil.imageWithBorder(fromImage: image)
-                        }
-                    }
-                    cell.nameLabel.text = country.name
-                    cell.statIcon.image = UIImage(named: "view-filled")
-                    cell.statLabel.text = String(describing: views[key]!)
-                }
+                cell.statIcon.image = UIImage(named: "view-filled")
             }
         case 1:
             if let plays = activity!.plays,
                 let countries = countries {
-                let keys = Array(plays.keys)
+                let keys = Array(plays.keys).sorted()
                 let key = keys[indexPath.row]
-                var country:Country?
                 
                 for c in countries {
                     if c.key == key {
                         country = c
+                        stat = plays[key]!
                         break
                     }
                 }
-                
-                if let country = country {
-                    if let url = country.getFlagURLForSize(size: .normal) {
-                        if let image = UIImage(contentsOfFile: url.path) {
-                            cell.imageIcon.image = ImageUtil.imageWithBorder(fromImage: image)
-                        }
-                    }
-                    cell.nameLabel.text = country.name
-                    cell.statIcon.image = UIImage(named: "play-filled")
-                    cell.statLabel.text = String(describing: plays[key]!)
-                }
+                cell.statIcon.image = UIImage(named: "play-filled")
             }
         default:
             ()
+        }
+        
+        if let country = country {
+            if let url = country.getFlagURLForSize(size: .normal) {
+                if let image = UIImage(contentsOfFile: url.path) {
+                    cell.imageIcon.image = ImageUtil.imageWithBorder(fromImage: image)
+                }
+            }
+            cell.nameLabel.text = country.name
+            cell.statLabel.text = String(describing: stat)
         }
     }
 }
@@ -206,11 +203,13 @@ extension AccountViewController : UITableViewDataSource {
         switch indexPath.section {
         case 0:
             if let dataCell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as? DataTableViewCell {
-                dataCell.toggleRoundImage(round: true)
                 dataCell.imageIcon.image = UIImage(named: "user")
-                dataCell.rankLabel.isHidden = false
-                dataCell.statIcon2.isHidden = false
-                dataCell.statLabel2.isHidden = false
+                dataCell.rankLabel.text = " "
+                dataCell.nameLabel.text = "Not logged in"
+                dataCell.statIcon.image = nil
+                dataCell.statLabel.text = nil
+                dataCell.statIcon2.image = nil
+                dataCell.statLabel2.text = nil
                 
                 if let user = FIRAuth.auth()?.currentUser,
                     let activity = activity {
@@ -230,15 +229,6 @@ extension AccountViewController : UITableViewDataSource {
                     if let playCount = activity.playCount {
                         dataCell.statLabel2.text = String(describing: playCount)
                     }
-                } else {
-                    dataCell.rankLabel.isHidden = true
-                    dataCell.statIcon2.isHidden = true
-                    dataCell.statLabel2.isHidden = true
-                    dataCell.nameLabel.text = nil
-                    dataCell.statIcon.image = nil
-                    dataCell.statLabel.text = nil
-                    dataCell.statIcon2.image = nil
-                    dataCell.statLabel2.text = nil
                 }
                 cell = dataCell
             }
@@ -266,7 +256,7 @@ extension AccountViewController : UITableViewDelegate {
         
         switch indexPath.section {
         case 0,2:
-            height = 88
+            height = DataTableViewCellHeight
         case 1:
             height = UITableViewAutomaticDimension
         default:
@@ -277,6 +267,8 @@ extension AccountViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var country:Country?
+        
         switch indexPath.section {
         case 0:
             () // TODO: handle account selection
@@ -285,37 +277,27 @@ extension AccountViewController : UITableViewDelegate {
             case 0:
                 if let views = activity!.views,
                     let countries = countries {
-                    let keys = Array(views.keys)
+                    let keys = Array(views.keys).sorted()
                     let key = keys[indexPath.row]
-                    var country:Country?
                     
                     for c in countries {
                         if c.key == key {
                             country = c
                             break
                         }
-                    }
-                    
-                    if let country = country {
-                        self.performSegue(withIdentifier: "showCountry", sender: country)
                     }
                 }
             case 1:
                 if let plays = activity!.plays,
                     let countries = countries {
-                    let keys = Array(plays.keys)
+                    let keys = Array(plays.keys).sorted()
                     let key = keys[indexPath.row]
-                    var country:Country?
                     
                     for c in countries {
                         if c.key == key {
                             country = c
                             break
                         }
-                    }
-                    
-                    if let country = country {
-                        self.performSegue(withIdentifier: "showCountry", sender: country)
                     }
                 }
             default:
@@ -323,6 +305,10 @@ extension AccountViewController : UITableViewDelegate {
             }
         default:
             ()
+        }
+        
+        if let country = country {
+            self.performSegue(withIdentifier: "showCountry", sender: country)
         }
     }
 }

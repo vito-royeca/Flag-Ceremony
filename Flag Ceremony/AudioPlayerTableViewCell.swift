@@ -9,8 +9,12 @@
 import UIKit
 import AVFoundation
 
-let kPlayFinished = "kPlayFinished"
-let kAudioURL     = "kAudioURL"
+let kAudioPlayerStatus         = "kAudioPlayerStatus"
+let kAudioPlayerStatusPlay     = "kAudioPlayerStatusPlay"
+let kAudioPlayerStatusPause    = "kAudioPlayerStatusPause"
+let kAudioPlayerStatusFinished = "kAudioPlayerStatusFinished"
+let kAudioURL                  = "kAudioURL"
+let kPlayPauseNotification     = "kPlayPauseNotification"
 
 class AudioPlayerTableViewCell: UITableViewCell {
 
@@ -60,6 +64,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressTap!.numberOfTouchesRequired = 1
         progressTap!.cancelsTouchesInView = false
         progressSlider.addGestureRecognizer(progressTap!)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AudioPlayerTableViewCell.handlePlayPauseNotification(_:)), name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -69,11 +76,24 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     // MARK: Custom methods
+    func handlePlayPauseNotification(_ notification: Notification?) {
+        if let status = notification?.userInfo?[kAudioPlayerStatus] as? String {
+            if status == kAudioPlayerStatusPlay {
+               play()
+            } else if status == kAudioPlayerStatusPause {
+                pause()
+            }
+        }
+    }
+
     func pause() {
         if let player = player {
             player.pause()
         }
         playButton.setImage(UIImage(named: "play"), for: .normal)
+        
+        let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
     }
     
     func play() {
@@ -82,6 +102,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
             player.play()
         }
         playButton.setImage(UIImage(named: "pause"), for: .normal)
+        
+        let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
     }
     
     func stop() {
@@ -97,6 +120,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
         if let tracker = tracker {
             tracker.invalidate()
         }
+        
+        let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
     }
     
     func update() {
@@ -107,6 +133,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
             let currentTime = TimeInterval(position) * duration
             player.currentTime = currentTime
             play()
+            
+            let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
+            NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
         }
     }
     
@@ -196,11 +225,12 @@ extension AudioPlayerTableViewCell : AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         stop()
         
-        let userInfo = [kAudioURL: url]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kPlayFinished), object: nil, userInfo: userInfo)
+        let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusFinished,
+                        kAudioURL: url!] as [String : Any]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print("error in audioPlayer: \(error)")
+        print("error in audioPlayer: \(error!)")
     }
 }

@@ -15,6 +15,8 @@ import MBProgressHUD
 import TwitterCore
 import TwitterKit
 
+let kLoginSuccess = "kLoginSuccess"
+
 class LoginViewController: UIViewController {
 
     // MARK: Outlets

@@ -101,7 +101,11 @@ class NetworkingManager: NSObject {
     
     func downloadImage(url: URL, completionHandler: @escaping (_ origURL: URL?, _ image: UIImage?, _ error: NSError?) -> Void) {
         let networker = networking(forUrl: url)
-        let path = url.path
+        var path = url.path
+        
+        if let query = url.query {
+            path += query
+        }
         
         networker.downloadImage(path, completion: {(result) in
             switch result {

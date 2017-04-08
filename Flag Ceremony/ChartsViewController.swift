@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 import Networking
+import MBProgressHUD
 
 class ChartsViewController: CommonViewController {
 
@@ -119,36 +122,48 @@ class ChartsViewController: CommonViewController {
     
     // MARK: Custom methods
     func showTopViewed() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         FirebaseManager.sharedInstance.monitorTopViewed(completion: { (countries) in
             self.topViewedCountries = countries
             DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.tableView.reloadData()
             }
         })
     }
     
     func showTopPlayed() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         FirebaseManager.sharedInstance.monitorTopPlayed(completion: { (countries) in
             self.topPlayedCountries = countries
             DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.tableView.reloadData()
             }
         })
     }
     
     func showTopViewers() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         FirebaseManager.sharedInstance.monitorTopViewers(completion: { (activities) in
             self.topViewers = activities
             DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.tableView.reloadData()
             }
         })
     }
     
     func showTopPlayers() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         FirebaseManager.sharedInstance.monitorTopPlayers(completion: { (activities) in
             self.topPlayers = activities
             DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.tableView.reloadData()
             }
         })
@@ -180,7 +195,6 @@ class ChartsViewController: CommonViewController {
                 if let views = country.views {
                     cell.statLabel.text = "\(views)"
                 }
-                cell.toggleRoundImage(round: false)
             }
         case 1:
             if let topPlayedCountries = topPlayedCountries {
@@ -197,26 +211,40 @@ class ChartsViewController: CommonViewController {
                 if let plays = country.plays {
                     cell.statLabel.text = "\(plays)"
                 }
-                cell.toggleRoundImage(round: false)
             }
         case 2:
             if let topViewers = topViewers {
                 let activity = topViewers[indexPath.row]
                 
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.imageIcon.image = UIImage(named: "user")
                 if let users = users {
                     for u in users {
                         if u.key == activity.key {
                             cell.nameLabel.text = u.displayName
+                            
+//                            if let current = FBSDKAccessToken.current() {
+//                                let credential = FIRFacebookAuthProvider.credential(withAccessToken: current.tokenString)
+                            
+                            var accessToken = ""
+                            if let providerData = u.providerData {
+                                for pd in providerData {
+                                    if pd == "facebook.com" {
+                                        if let current = FBSDKAccessToken.current() {
+                                            accessToken = "&access_token=\(current.tokenString!)"
+                                        }
+                                    }
+                                }
+                            }
+                            
                             if let photoURL = u.photoURL {
-                                let url = URL(string: photoURL)
+                                let url = URL(string: "\(photoURL)\(accessToken)")
+                                
                                 NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
                                     if let image = image {
                                         cell.imageIcon.image = image
                                     }
                                 })
-                            } else {
-                                cell.imageIcon.image = UIImage(named: "user")
                             }
                             break
                         }
@@ -226,13 +254,13 @@ class ChartsViewController: CommonViewController {
                 if let views = activity.viewCount {
                     cell.statLabel.text = "\(views)"
                 }
-                cell.toggleRoundImage(round: true)
             }
         case 3:
             if let topPlayers = topPlayers {
                 let activity = topPlayers[indexPath.row]
                 
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
+                cell.imageIcon.image = UIImage(named: "user")
                 if let users = users {
                     for u in users {
                         if u.key == activity.key {
@@ -244,8 +272,6 @@ class ChartsViewController: CommonViewController {
                                         cell.imageIcon.image = image
                                     }
                                 })
-                            } else {
-                                cell.imageIcon.image = UIImage(named: "user")
                             }
                             break
                         }
@@ -255,7 +281,6 @@ class ChartsViewController: CommonViewController {
                 if let plays = activity.playCount {
                     cell.statLabel.text = "\(plays)"
                 }
-                cell.toggleRoundImage(round: true)
             }
         default:
             ()
@@ -326,7 +351,7 @@ extension ChartsViewController : UITableViewDelegate {
         case 0:
             height = UITableViewAutomaticDimension
         case 1:
-            height = 88
+            height = DataTableViewCellHeight
         default:
             ()
         }
