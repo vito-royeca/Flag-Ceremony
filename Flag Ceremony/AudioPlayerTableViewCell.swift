@@ -65,6 +65,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressTap!.cancelsTouchesInView = false
         progressSlider.addGestureRecognizer(progressTap!)
         
+        updatePlayButton()
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AudioPlayerTableViewCell.handlePlayPauseNotification(_:)), name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
     }
@@ -76,6 +78,14 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     // MARK: Custom methods
+    func updatePlayButton() {
+        if let image = playButton.imageView!.image {
+            let tintedImage = image.withRenderingMode(.alwaysTemplate)
+            playButton.setImage(tintedImage, for: .normal)
+            playButton.imageView!.tintColor = kBlueColor
+        }
+    }
+    
     func handlePlayPauseNotification(_ notification: Notification?) {
         if let status = notification?.userInfo?[kAudioPlayerStatus] as? String {
             if status == kAudioPlayerStatusPlay {
@@ -91,6 +101,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
             player.pause()
         }
         playButton.setImage(UIImage(named: "play"), for: .normal)
+        updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
         NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
@@ -102,6 +113,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
             player.play()
         }
         playButton.setImage(UIImage(named: "pause"), for: .normal)
+        updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
         NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
@@ -120,9 +132,6 @@ class AudioPlayerTableViewCell: UITableViewCell {
         if let tracker = tracker {
             tracker.invalidate()
         }
-        
-        let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
     }
     
     func update() {
@@ -145,6 +154,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
             self.startLabel.text = self.stringFromTimeInterval(0.0)
             self.endLabel.text = self.stringFromTimeInterval(self.player!.duration)
             self.playButton.setImage(UIImage(named: "play"), for: .normal)
+            self.updatePlayButton()
         }
     }
     

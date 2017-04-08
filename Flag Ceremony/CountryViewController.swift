@@ -126,7 +126,10 @@ class CountryViewController: UIViewController {
                 } else if status == kAudioPlayerStatusFinished {
                     if let url = userInfo[kAudioURL] as? URL,
                         let country = country {
-                        
+                    
+                        isPlaying = false
+                        updatePlayButton()
+
                         if url == country.getAudioURL() {
                             FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
                         }
