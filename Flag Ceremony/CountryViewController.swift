@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SafariServices
 
 enum CountryViewRows: Int {
     case lyrics, anthem, flag, country
@@ -164,7 +163,7 @@ extension CountryViewController : UITableViewDataSource {
             case CountryViewRows.flag.rawValue:
                 sections += 1
             case CountryViewRows.country.rawValue:
-                sections += 3
+                sections += 2
             default:
                 ()
             }
@@ -198,13 +197,11 @@ extension CountryViewController : UITableViewDataSource {
                         ()
                     }
                 case CountryViewRows.country.rawValue:
-                    switch section + 8 {
-                    case 9:
+                    switch section + 7 {
+                    case 8:
                         title = "Capital"
-                    case 10:
+                    case 9:
                         title = "Background"
-                    case 11:
-                        title = "Further Info"
                     default:
                         ()
                     }
@@ -307,10 +304,6 @@ extension CountryViewController : UITableViewDataSource {
                         }
                     case 2:
                         label.text = anthem.background
-                    case 3:
-                        cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-                        cell!.accessoryType = .disclosureIndicator
-                        cell!.textLabel?.text = country.countryInfo
                     default:
                         ()
                     }
@@ -364,17 +357,7 @@ extension CountryViewController : UITableViewDelegate {
                 return nil
             }
         default:
-            switch selectedSegmentIndex {
-            case CountryViewRows.country.rawValue:
-                switch indexPath.section {
-                case 3:
-                    return indexPath
-                default:
-                    return nil
-                }
-            default:
-                return nil
-            }
+            return nil
         }
     }
     
@@ -392,32 +375,7 @@ extension CountryViewController : UITableViewDelegate {
                 ()
             }
         default:
-            switch selectedSegmentIndex {
-            case CountryViewRows.country.rawValue:
-                switch indexPath.section {
-                case 3:
-                    if let country = country {
-                        if let countryInfo = country.countryInfo {
-                            if let url = URL(string: countryInfo) {
-                                let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                                svc.delegate = self
-                                navigationController?.present(svc, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                default:
-                    ()
-                }
-            default:
-                ()
-            }
+            ()
         }
-    }
-}
-
-// MARK: SFSafariViewControllerDelegate
-extension CountryViewController : SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
     }
 }
