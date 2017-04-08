@@ -35,14 +35,19 @@ class Flag_CeremonyUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
+        
+        
+        
         let app = XCUIApplication()
         let tabBarsQuery = app.tabBars
+        
+        // dismiss the login screen
+//        app.navigationBars["Flag_Ceremony.LoginView"].buttons["Cancel"].tap()
+//        app.alerts["Login Cancelled"].buttons["OK"].tap()
+        
         snapshot("02Anthem")
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            app.navigationBars["Flag_Ceremony.CountryView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            app.navigationBars.matching(identifier: "Flag_Ceremony.CountryView").buttons["close window"].tap()
-        }
+        app.navigationBars["Flag_Ceremony.CountryView"].buttons["close window"].tap()
+        
         snapshot("01Map")
         
         let mapButton = tabBarsQuery.buttons["Map"]
@@ -55,8 +60,6 @@ class Flag_CeremonyUITests: XCTestCase {
         let chartsButton = tabBarsQuery.buttons["Charts"]
         chartsButton.tap()
         snapshot("04TopCharts")
-        
-        // record test here...
     }
     
     

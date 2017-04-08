@@ -37,6 +37,7 @@ class MapViewController: CommonViewController {
         addFlags()
         
         // check if user is logged in
+        // comment if making screenshots
         if UserDefaults.standard.object(forKey: kLoginShown) == nil {
             FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
                 if let _ = user {
@@ -52,12 +53,19 @@ class MapViewController: CommonViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         showCountry(nil)
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // uncomment if making screenshots
+//        showCountryForScreenshot()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     
@@ -182,9 +190,6 @@ class MapViewController: CommonViewController {
                 
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
-//                    #if SHOW_COUNTRY_4_SCREENSHOT
-//                        self.showCountryForScreenshot()
-//                    #endif
                 }
             }
         })

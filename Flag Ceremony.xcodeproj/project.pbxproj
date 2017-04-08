@@ -24,6 +24,8 @@
 		1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		11946DFD1E9897D2007F4AA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
+		11E23D1E1E992A910014A4F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
+		11E23D1F1E992A980014A4F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
 		11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A81E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A91E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
@@ -690,6 +692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E23D1E1E992A910014A4F2 /* User.swift in Sources */,
 				8CE8E77D1DE524D5009097FF /* Scraper.swift in Sources */,
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
@@ -719,6 +722,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E23D1F1E992A980014A4F2 /* User.swift in Sources */,
 				8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CE8E77E1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CD893B51DE5B571007052C7 /* FirebaseManager.swift in Sources */,

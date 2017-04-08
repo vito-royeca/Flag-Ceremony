@@ -1,1 +1,2 @@
-
+* Account creation and login
+* Numerous enhancements and bug fixes
