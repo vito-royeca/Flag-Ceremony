@@ -33,7 +33,7 @@ PODS:
   - boost/shared_ptr-includes (1.51.0)
   - boost/string_algorithms-includes (1.51.0)
   - clipper (6.1.3a)
-  - Cosmos (8.0.2)
+  - Cosmos (9.0.0)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - eigen (3.2.10)
@@ -201,7 +201,7 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
   clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
-  Cosmos: 007c0b8e33a85e5363911bdd933571bbe221f7ef
+  Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
