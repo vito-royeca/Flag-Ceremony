@@ -104,7 +104,7 @@ class NetworkingManager: NSObject {
         var path = url.path
         
         if let query = url.query {
-            path += query
+            path += "?\(query)"
         }
         
         networker.downloadImage(path, completion: {(result) in

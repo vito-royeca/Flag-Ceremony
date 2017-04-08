@@ -23,6 +23,7 @@
 		1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
+		11946DFD1E9897D2007F4AA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
 		11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A81E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A91E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
@@ -51,7 +52,6 @@
 		8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E973D1D88ED51005A685B /* Flag_CeremonyTests.swift */; };
 		8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */; };
 		8C4E97571D890900005A685B /* data in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E97561D890900005A685B /* data */; };
-		8C4F76FF1DDF3CEB00B82A83 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F76FE1DDF3CEB00B82A83 /* User.swift */; };
 		8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
 		8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
 		8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
@@ -123,6 +123,7 @@
 		1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1173C92F1E0705FF00C5DA16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1173C9351E07359D00C5DA16 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		11946DFC1E9897D2007F4AA6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		11E5B8A61E9692020021ABB5 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag_CeremonyUITests.swift; sourceTree = "<group>"; };
 		8C4E974A1D88ED51005A685B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C4E97561D890900005A685B /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
-		8C4F76FE1DDF3CEB00B82A83 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 				11215BAD1E085FEA0070DD8A /* Activity.swift */,
 				8CD893B61DE5B8F1007052C7 /* Anthem.swift */,
 				8C23703A1DDD534D00F30712 /* Country.swift */,
-				8C4F76FE1DDF3CEB00B82A83 /* User.swift */,
+				11946DFC1E9897D2007F4AA6 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -670,8 +670,8 @@
 				11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
-				8C4F76FF1DDF3CEB00B82A83 /* User.swift in Sources */,
 				11215BAE1E085FEA0070DD8A /* Activity.swift in Sources */,
+				11946DFD1E9897D2007F4AA6 /* User.swift in Sources */,
 				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CE297BE1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,

@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FBSDKCoreKit
-import FBSDKLoginKit
+//import FBSDKCoreKit
 import Networking
 import MBProgressHUD
 
@@ -223,22 +222,8 @@ class ChartsViewController: CommonViewController {
                         if u.key == activity.key {
                             cell.nameLabel.text = u.displayName
                             
-//                            if let current = FBSDKAccessToken.current() {
-//                                let credential = FIRFacebookAuthProvider.credential(withAccessToken: current.tokenString)
-                            
-                            var accessToken = ""
-                            if let providerData = u.providerData {
-                                for pd in providerData {
-                                    if pd == "facebook.com" {
-                                        if let current = FBSDKAccessToken.current() {
-                                            accessToken = "&access_token=\(current.tokenString!)"
-                                        }
-                                    }
-                                }
-                            }
-                            
                             if let photoURL = u.photoURL {
-                                let url = URL(string: "\(photoURL)\(accessToken)")
+                                let url = URL(string: photoURL)
                                 
                                 NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
                                     if let image = image {
@@ -265,8 +250,10 @@ class ChartsViewController: CommonViewController {
                     for u in users {
                         if u.key == activity.key {
                             cell.nameLabel.text = u.displayName
+                            
                             if let photoURL = u.photoURL {
                                 let url = URL(string: photoURL)
+
                                 NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
                                     if let image = image {
                                         cell.imageIcon.image = image

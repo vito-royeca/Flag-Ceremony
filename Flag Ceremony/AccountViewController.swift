@@ -213,6 +213,7 @@ extension AccountViewController : UITableViewDataSource {
                 
                 if let user = FIRAuth.auth()?.currentUser,
                     let activity = activity {
+                    
                     if let photoURL = user.photoURL {
                         NetworkingManager.sharedInstance.downloadImage(url: photoURL, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
                             if let image = image {
