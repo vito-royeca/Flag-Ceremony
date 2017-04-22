@@ -32,10 +32,15 @@ class CountryViewController: UIViewController {
     
     @IBAction func playPauseAction(_ sender: UIButton) {
         isPlaying = !isPlaying
-        updatePlayButton()
+//        updatePlayButton()
         
-        let userInfo = [kAudioPlayerStatus: isPlaying ? kAudioPlayerStatusPlay : kAudioPlayerStatusPause]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kPlayPauseNotification), object: nil, userInfo: userInfo)
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
+            if isPlaying {
+                cell.play()
+            } else {
+                cell.pause()
+            }
+        }
     }
     
     @IBAction func dataAction(_ sender: UISegmentedControl) {
@@ -53,10 +58,12 @@ class CountryViewController: UIViewController {
         tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")
         tableView.estimatedRowHeight = 88.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+
         FirebaseManager.sharedInstance.findAnthem(country!.key!, completion: { (anthem) in
             self.anthem = anthem
             self.tableView.reloadData()
+            
+            FirebaseManager.sharedInstance.incrementCountryViews(self.country!.key!)
         })
     }
 
@@ -65,24 +72,18 @@ class CountryViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kAudioPlayerStatus), object: nil)
-        
-        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            cell.url = country!.getAudioURL()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+//        tableView.reloadData()
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            if !isPlaying {
-                cell.pause()
+            if let url = country!.getAudioURL() {
+                cell.initPlayer(withURL: url)
                 cell.play()
                 isPlaying = true
             }
-            
-            FirebaseManager.sharedInstance.incrementCountryViews(country!.key!)
         }
     }
     
@@ -92,7 +93,7 @@ class CountryViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
         
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            cell.url = nil
+            cell.stop()
         }
     }
     

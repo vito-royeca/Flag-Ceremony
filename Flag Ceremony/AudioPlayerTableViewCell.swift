@@ -14,23 +14,11 @@ let kAudioPlayerStatusPlay     = "kAudioPlayerStatusPlay"
 let kAudioPlayerStatusPause    = "kAudioPlayerStatusPause"
 let kAudioPlayerStatusFinished = "kAudioPlayerStatusFinished"
 let kAudioURL                  = "kAudioURL"
-let kPlayPauseNotification     = "kPlayPauseNotification"
 
 class AudioPlayerTableViewCell: UITableViewCell {
 
     // MARK: Variables
-    fileprivate var _url: URL?
-    var url : URL? {
-        get {
-            return _url
-        }
-        set (newValue) {
-            if newValue != _url {
-                _url = newValue
-                initPlayer()
-            }
-        }
-    }
+    var url : URL?
     var player:AVAudioPlayer?
     var tracker:CADisplayLink?
     var progressTap: UITapGestureRecognizer?
@@ -64,11 +52,6 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressTap!.numberOfTouchesRequired = 1
         progressTap!.cancelsTouchesInView = false
         progressSlider.addGestureRecognizer(progressTap!)
-        
-        updatePlayButton()
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AudioPlayerTableViewCell.handlePlayPauseNotification(_:)), name: NSNotification.Name(rawValue: kPlayPauseNotification), object: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -86,48 +69,46 @@ class AudioPlayerTableViewCell: UITableViewCell {
         }
     }
     
-    func handlePlayPauseNotification(_ notification: Notification?) {
-        if let status = notification?.userInfo?[kAudioPlayerStatus] as? String {
-            if status == kAudioPlayerStatusPlay {
-               play()
-            } else if status == kAudioPlayerStatusPause {
-                pause()
-            }
-        }
-    }
-
     func pause() {
-        if let player = player {
-            player.pause()
-        }
         playButton.setImage(UIImage(named: "play"), for: .normal)
         updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
         NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+        
+        if let player = player {
+            player.pause()
+        }
     }
     
     func play() {
-        if let player = player {
-            setupTracker()
-            player.play()
+        // reinit the player in case we stop()
+        if player == nil {
+            if let url = url {
+                initPlayer(withURL: url)
+            }
         }
+        
         playButton.setImage(UIImage(named: "pause"), for: .normal)
         updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
         NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+        
+        if let player = player {
+            setupTracker()
+            player.play()
+        }
     }
     
     func stop() {
-        resetUI()
-        
         if let player = player {
             if player.isPlaying {
                 player.stop()
             }
             player.currentTime = 0.0
         }
+        player = nil
         
         if let tracker = tracker {
             tracker.invalidate()
@@ -149,13 +130,11 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     func resetUI() {
-        DispatchQueue.main.async {
-            self.progressSlider.value = 0.0
-            self.startLabel.text = self.stringFromTimeInterval(0.0)
-            self.endLabel.text = self.stringFromTimeInterval(self.player!.duration)
-            self.playButton.setImage(UIImage(named: "play"), for: .normal)
-            self.updatePlayButton()
-        }
+        progressSlider.value = 0.0
+        startLabel.text = self.stringFromTimeInterval(0.0)
+        endLabel.text = self.stringFromTimeInterval(self.player!.duration)
+        playButton.setImage(UIImage(named: "play"), for: .normal)
+        updatePlayButton()
     }
     
     func stringFromTimeInterval(_ interval:TimeInterval) -> String {
@@ -209,22 +188,17 @@ class AudioPlayerTableViewCell: UITableViewCell {
     }
     
     // MARK: Private methods
-    private func initPlayer() {
+    func initPlayer(withURL url: URL) {
+        self.url = url
         
-        if let url = url {
-            do {
-                let data = try Data(contentsOf: url)
-                player = try AVAudioPlayer(data: data)
-                player!.delegate = self
-                player!.prepareToPlay()
-                resetUI()
-                toggleUI(false)
-            } catch let error {
-                print("error in audioPlayer: \(error)")
-            }
-        } else {
-            stop()
-            toggleUI(true)
+        if player == nil {
+            let data = try! Data(contentsOf: url)
+            player = try! AVAudioPlayer(data: data)
+            player!.delegate = self
+            player!.prepareToPlay()
+            
+            resetUI()
+            toggleUI(false)
         }
     }
 }
@@ -233,6 +207,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
 extension AudioPlayerTableViewCell : AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        resetUI()
         stop()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusFinished,
