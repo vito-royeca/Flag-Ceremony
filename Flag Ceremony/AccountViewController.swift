@@ -36,7 +36,9 @@ class AccountViewController: CommonViewController {
             }
             updateDataDisplay()
         } else {
-            performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+            showParentalGate {
+                self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+            }
         }
     }
     

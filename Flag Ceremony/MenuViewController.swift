@@ -13,7 +13,7 @@ import StoreKit
 
 let kLoginShown = "kLoginShown"
 
-class MenuViewController: UIViewController {
+class MenuViewController: CommonViewController {
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -188,10 +188,14 @@ extension MenuViewController : UITableViewDelegate {
         case 2:
             switch indexPath.row {
             case 0:
-                if let url = URL(string: DeveloperWebsite) {
-                    let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                    svc.delegate = self
-                    navigationController?.present(svc, animated: true, completion: nil)
+                showParentalGate {
+                    if let url = URL(string: DeveloperWebsite),
+                        let navigationController = self.navigationController {
+                        let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                        svc.delegate = self
+                        navigationController.present(svc, animated: true, completion: nil)
+                    }
+
                 }
             default:
                 ()

@@ -35,20 +35,6 @@ class MapViewController: CommonViewController {
         // Do any additional setup after loading the view.
         initMap()
         addFlags()
-        
-        // check if user is logged in
-        // comment if making screenshots
-        if UserDefaults.standard.object(forKey: kLoginShown) == nil {
-            FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
-                if let _ = user {
-                    
-                } else {
-                    UserDefaults.standard.set(true, forKey: kLoginShown)
-                    UserDefaults.standard.synchronize()
-                    self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
-                }
-            }
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

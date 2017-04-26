@@ -45,4 +45,40 @@ class CommonViewController: UIViewController {
             self.performSegue(withIdentifier: "showCountriesAsPopup", sender: nil)
         }
     }
+    
+    func showParentalGate(completion: @escaping (Void) -> Void) {
+        let random = NSNumber.randomNumber()
+        let roman = random.toRomanNumeral()
+        
+        let alertController = UIAlertController(title: "Parental Gate", message: "Ask your parent or guardian to help you answer the question below.\n\nThe Roman Numeral \(roman) is equivalent to?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
+            var answer:String?
+            
+            if let textField = alertController.textFields!.first {
+                answer = textField.text
+            }
+            
+            if answer == random.stringValue {
+                completion()
+            } else {
+                let ac2 = UIAlertController(title: "Parental Gate", message: "The answer is incorrect answer.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default) { (_) in }
+                ac2.addAction(action)
+                self.present(ac2, animated: true, completion: nil)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Answer"
+            textField.keyboardType = .numberPad
+        }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }

@@ -32,6 +32,9 @@
 		11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
 		11E5B8AC1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
 		11E5B8AD1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
+		11F3C13F1EB01F610012BC47 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F3C13E1EB01F610012BC47 /* RomanNumber.swift */; };
+		11F3C1401EB01F610012BC47 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F3C13E1EB01F610012BC47 /* RomanNumber.swift */; };
+		11F3C1411EB01F610012BC47 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F3C13E1EB01F610012BC47 /* RomanNumber.swift */; };
 		582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582D904B1DEE16260030DA46 /* SnapshotHelper.swift */; };
 		5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
@@ -126,8 +129,12 @@
 		1173C92F1E0705FF00C5DA16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1173C9351E07359D00C5DA16 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		11946DFC1E9897D2007F4AA6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		119AF47B1EACE13E0061C48F /* Flag Ceremony-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag Ceremony-Bridging-Header.h"; sourceTree = "<group>"; };
+		119AF47C1EACE13E0061C48F /* Flag CeremonyTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag CeremonyTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		119AF47D1EACE13F0061C48F /* Flag CeremonyUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag CeremonyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		11E5B8A61E9692020021ABB5 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
+		11F3C13E1EB01F610012BC47 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -252,6 +259,9 @@
 				8C4E97581D891511005A685B /* Model */,
 				8C4E975B1D891525005A685B /* Utilities */,
 				8C4E97591D891518005A685B /* View */,
+				119AF47B1EACE13E0061C48F /* Flag Ceremony-Bridging-Header.h */,
+				119AF47C1EACE13E0061C48F /* Flag CeremonyTests-Bridging-Header.h */,
+				119AF47D1EACE13F0061C48F /* Flag CeremonyUITests-Bridging-Header.h */,
 			);
 			path = "Flag Ceremony";
 			sourceTree = "<group>";
@@ -326,6 +336,7 @@
 				8CD893B21DE5B571007052C7 /* FirebaseManager.swift */,
 				8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */,
 				8CE8E77B1DE524D5009097FF /* Scraper.swift */,
+				11F3C13E1EB01F610012BC47 /* RomanNumber.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -422,7 +433,7 @@
 					8C4E97241D88ED50005A685B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 43CD66539H;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -431,13 +442,13 @@
 					};
 					8C4E97381D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
 					8C4E97431D88ED51005A685B = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8C4E97241D88ED50005A685B;
 					};
@@ -679,6 +690,7 @@
 				8CE297BE1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
 				1173C92C1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
+				11F3C13F1EB01F610012BC47 /* RomanNumber.swift in Sources */,
 				8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CD893B31DE5B571007052C7 /* FirebaseManager.swift in Sources */,
 				11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */,
@@ -714,6 +726,7 @@
 				11E5B8AC1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F81E974BDA00178709 /* DataTableViewCell.swift in Sources */,
 				8CD893B41DE5B571007052C7 /* FirebaseManager.swift in Sources */,
+				11F3C1401EB01F610012BC47 /* RomanNumber.swift in Sources */,
 				8CC2657A1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -744,6 +757,7 @@
 				11E5B8AD1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F91E974BDA00178709 /* DataTableViewCell.swift in Sources */,
 				8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
+				11F3C1411EB01F610012BC47 /* RomanNumber.swift in Sources */,
 				582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -877,6 +891,7 @@
 			baseConfigurationReference = C455875A4C4252BB458AD7FA /* Pods-Flag Ceremony.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony/Flag Ceremony.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 43CD66539H;
@@ -886,6 +901,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SHOW_COUNTRY_4_SCREENSHOT;
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag Ceremony-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -895,6 +912,7 @@
 			baseConfigurationReference = 90657E9BAA631738CD2F2B77 /* Pods-Flag Ceremony.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony/Flag Ceremony.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 43CD66539H;
@@ -904,6 +922,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag Ceremony-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -913,12 +932,15 @@
 			baseConfigurationReference = 7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag CeremonyTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flag Ceremony.app/Flag Ceremony";
 			};
@@ -929,12 +951,14 @@
 			baseConfigurationReference = D779216E07AF4AA639CBFC53 /* Pods-Flag CeremonyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag CeremonyTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flag Ceremony.app/Flag Ceremony";
 			};
@@ -944,12 +968,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B16DD7DD6F86D87482AFA18A /* Pods-Flag CeremonyUITests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag CeremonyUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Flag Ceremony";
 			};
@@ -959,12 +986,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E07FC3105D9115FB8D08231C /* Pods-Flag CeremonyUITests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Flag CeremonyUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-CeremonyUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flag Ceremony/Flag CeremonyUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Flag Ceremony";
 			};

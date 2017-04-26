@@ -113,7 +113,6 @@
                         <segue destination="V53-t0-Mb8" kind="popoverPresentation" identifier="showCountriesAsPopup" popoverAnchorBarButtonItem="tbb-JY-31h" id="Q6A-TY-pWV">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
-                        <segue destination="XWm-v0-Sif" kind="presentation" identifier="showLoginAsModal" id="fZd-9w-Feg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qed-dW-Ifh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,7 +318,7 @@
                         <viewControllerLayoutGuide type="top" id="Cfw-E7-OYa"/>
                         <viewControllerLayoutGuide type="bottom" id="NQN-4c-DU4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dXu-Db-kGm">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="dXu-Db-kGm">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -401,7 +400,7 @@
         <scene sceneID="KF7-J8-a2a">
             <objects>
                 <navigationController id="i4I-GZ-Xl2" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="6VH-GH-DKW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="6VH-GH-DKW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -524,14 +523,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="PSZ-82-zWH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="768" height="88"/>
+                                                    <rect key="frame" x="192" y="22" width="384" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="384" id="jpF-bZ-f47"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="PSZ-82-zWH" firstAttribute="top" secondItem="Qrj-s9-JDr" secondAttribute="top" id="9l4-TE-SN2"/>
-                                                <constraint firstAttribute="trailing" secondItem="PSZ-82-zWH" secondAttribute="trailing" id="LOB-Ni-J3O"/>
-                                                <constraint firstItem="PSZ-82-zWH" firstAttribute="leading" secondItem="Qrj-s9-JDr" secondAttribute="leading" id="YyM-Si-eL2"/>
-                                                <constraint firstAttribute="bottom" secondItem="PSZ-82-zWH" secondAttribute="bottom" id="qzq-zD-kZl"/>
+                                                <constraint firstItem="PSZ-82-zWH" firstAttribute="top" secondItem="Qrj-s9-JDr" secondAttribute="topMargin" constant="14" id="NSO-0g-gNY"/>
+                                                <constraint firstItem="PSZ-82-zWH" firstAttribute="centerY" secondItem="Qrj-s9-JDr" secondAttribute="centerY" id="P8s-yd-UoZ"/>
+                                                <constraint firstItem="PSZ-82-zWH" firstAttribute="centerX" secondItem="Qrj-s9-JDr" secondAttribute="centerX" id="jss-Xd-tEt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -808,7 +809,7 @@
                             <rect key="frame" x="230.5" y="5.5" width="307" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-UU-b7F">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-UU-b7F">
                                     <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
                                 </imageView>
                             </subviews>
@@ -842,7 +843,7 @@
             <objects>
                 <navigationController id="Wqg-S6-mPY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Charts" image="report card" id="Qf0-Ym-Uaz"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QGu-ik-vJB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="QGu-ik-vJB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -931,22 +932,23 @@
                                 <action selector="menuAction:" destination="EF8-Xi-Sd7" id="5X3-So-ySs"/>
                             </connections>
                         </barButtonItem>
-                        <view key="titleView" contentMode="scaleToFill" id="dEb-rw-jVX">
+                        <view key="titleView" contentMode="scaleToFill" id="kZd-Da-WLp">
                             <rect key="frame" x="230.5" y="5.5" width="307" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="0S8-n0-fDB">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="Z5c-wW-LdB">
                                     <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="0S8-n0-fDB" firstAttribute="leading" secondItem="dEb-rw-jVX" secondAttribute="leading" id="0ka-qB-mD1"/>
-                                <constraint firstAttribute="bottom" secondItem="0S8-n0-fDB" secondAttribute="bottom" id="ca7-8B-DEm"/>
-                                <constraint firstItem="0S8-n0-fDB" firstAttribute="top" secondItem="dEb-rw-jVX" secondAttribute="top" id="cnj-nB-NpI"/>
-                                <constraint firstAttribute="trailing" secondItem="0S8-n0-fDB" secondAttribute="trailing" id="z1t-ye-am3"/>
+                                <constraint firstAttribute="trailing" secondItem="Z5c-wW-LdB" secondAttribute="trailing" id="Q2q-H5-G5y"/>
+                                <constraint firstItem="Z5c-wW-LdB" firstAttribute="top" secondItem="kZd-Da-WLp" secondAttribute="top" id="bxU-aL-gQb"/>
+                                <constraint firstItem="Z5c-wW-LdB" firstAttribute="leading" secondItem="kZd-Da-WLp" secondAttribute="leading" id="d2h-pt-i4T"/>
+                                <constraint firstAttribute="bottom" secondItem="Z5c-wW-LdB" secondAttribute="bottom" id="qcW-1s-HMm"/>
                             </constraints>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" image="blank" id="9aG-Pr-avI"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="scS-PW-OXa" id="9IP-cX-30N"/>
@@ -963,7 +965,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="01M-8A-n3O" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="E5W-ev-oVV"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="KDK-NG-rYw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="KDK-NG-rYw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -984,7 +986,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9vS-55-Pu9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Globe" image="globe" id="wOe-oH-lsJ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2w1-1k-f5E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="2w1-1k-f5E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1004,7 +1006,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V53-t0-Mb8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="BHy-Qc-IlH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="BHy-Qc-IlH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -1023,7 +1025,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jvf-pP-PQI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QGt-pY-MmT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="QGt-pY-MmT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1041,7 +1043,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XWm-v0-Sif" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xSx-Lq-cz7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xSx-Lq-cz7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1061,7 +1063,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oUm-Mz-UtX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="user" id="c3j-d9-Cpp"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="swN-jM-kCE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="swN-jM-kCE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1077,6 +1079,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="blank" width="25" height="25"/>
         <image name="circled play" width="50" height="50"/>
         <image name="close window" width="25" height="25"/>
         <image name="facebook" width="25" height="25"/>
@@ -1093,10 +1096,9 @@
         <image name="user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SJS-H0-2ZP"/>
-        <segue reference="b9u-LR-pcX"/>
-        <segue reference="l87-iQ-vgf"/>
-        <segue reference="Q6A-TY-pWV"/>
+        <segue reference="ine-Dg-JAj"/>
+        <segue reference="jN8-r2-9ps"/>
+        <segue reference="3L4-tk-8vC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
