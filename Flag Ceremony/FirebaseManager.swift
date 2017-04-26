@@ -141,42 +141,44 @@ class FirebaseManager : NSObject {
     }
 
     func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
-        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-            if let connected = snapshot.value as? Bool, connected {
-                let anthem = FIRDatabase.database().reference().child("anthems").child(key)
-                anthem.observeSingleEvent(of: .value, with: { (snapshot) in
-                    var a:Anthem?
-                    
-                    if let _ = snapshot.value as? [String: Any] {
-                         a = Anthem(snapshot: snapshot)
-                    }
-                    completion(a)
-                })
-            } else {
-                // read the bundled json instead
-                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
-                    if FileManager.default.fileExists(atPath: path) {
-                        do {
-                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
-                                
-                                var a:Anthem?
-                                
-                                if let dict = json["anthems"] {
-                                    if let anthem = dict[key] {
-                                        a = Anthem(key: key, dict: anthem)
-                                    }
-                                }
-                                completion(a)
+        // read the bundled json
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                        
+                        var a:Anthem?
+                        
+                        if let dict = json["anthems"] {
+                            if let anthem = dict[key] {
+                                a = Anthem(key: key, dict: anthem)
                             }
-                        } catch let error {
-                            print(error.localizedDescription)
                         }
+                        completion(a)
                     }
+                } catch let error {
+                    print(error.localizedDescription)
                 }
             }
-        })
+            
+        } else { // look it up in Firebase
+            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            
+            connectedRef.observe(.value, with: { snapshot in
+                if let connected = snapshot.value as? Bool, connected {
+                    let anthem = FIRDatabase.database().reference().child("anthems").child(key)
+                    anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+                        var a:Anthem?
+                        
+                        if let _ = snapshot.value as? [String: Any] {
+                            a = Anthem(snapshot: snapshot)
+                        }
+                        completion(a)
+                    })
+                }
+            })
+        }
     }
     
     func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
