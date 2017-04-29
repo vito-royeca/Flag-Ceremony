@@ -32,10 +32,16 @@ class AudioPlayerTableViewCell: UITableViewCell {
     
     // MARK: Actions
     @IBAction func playPauseAction(_ sender: UIButton) {
-        if player!.isPlaying {
-            pause()
+        if let player = player {
+            if player.isPlaying {
+                pause()
+            } else {
+                play()
+            }
         } else {
-            play()
+            if let url = url {
+                initPlayer(withURL: url)
+            }
         }
     }
     
