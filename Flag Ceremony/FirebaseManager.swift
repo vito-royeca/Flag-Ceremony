@@ -182,86 +182,88 @@ class FirebaseManager : NSObject {
     }
     
     func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
-        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-            var countries = [Country]()
-            
-            if let connected = snapshot.value as? Bool, connected {
-                let ref = FIRDatabase.database().reference()
-                ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value, with: { (snapshot) in
-                    for child in snapshot.children {
-                        if let c = child as? FIRDataSnapshot {
-                            countries.append(Country(snapshot: c))
-                        }
-                    }
-                    completion(countries)
-                })
-            } else {
-                // read the bundled json instead
-                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
-                    if FileManager.default.fileExists(atPath: path) {
-                        do {
-                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
-                                
-                                
-                                if let dict = json["countries"] {
-                                    for (key,value) in dict {
-                                        let country = Country(key: key, dict: value)
-                                        countries.append(country)
-                                    }
-                                }
-                                
-                                countries.sort { $0.name! < $1.name! }
+        var countries = [Country]()
+        
+        // read the bundled json instead
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                        
+                        
+                        if let dict = json["countries"] {
+                            for (key,value) in dict {
+                                let country = Country(key: key, dict: value)
+                                countries.append(country)
                             }
-                        } catch let error {
-                            print(error.localizedDescription)
                         }
+                        
+                        countries.sort { $0.name! < $1.name! }
+                        completion(countries)
                     }
+                } catch let error {
+                    print(error.localizedDescription)
                 }
-                
-                completion(countries)
             }
-        })
+            
+        } else {
+            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            
+            connectedRef.observe(.value, with: { snapshot in
+                if let connected = snapshot.value as? Bool, connected {
+                    let ref = FIRDatabase.database().reference()
+                    ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value, with: { (snapshot) in
+                        for child in snapshot.children {
+                            if let c = child as? FIRDataSnapshot {
+                                countries.append(Country(snapshot: c))
+                            }
+                        }
+                        completion(countries)
+                    })
+                }
+            })
+        }
     }
     
     func findCountry(_ key: String, completion: @escaping (Country?) -> Void) {
-        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-            if let connected = snapshot.value as? Bool, connected {
-                let anthem = FIRDatabase.database().reference().child("countries").child(key)
-                anthem.observeSingleEvent(of: .value, with: { (snapshot) in
-                    var a:Country?
-                    
-                    if let _ = snapshot.value as? [String: Any] {
-                        a = Country(snapshot: snapshot)
-                    }
-                    completion(a)
-                })
-            } else {
-                // read the bundled json instead
-                if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
-                    if FileManager.default.fileExists(atPath: path) {
-                        do {
-                            let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
-                                
-                                var a:Country?
-                                
-                                if let dict = json["countries"] {
-                                    if let country = dict[key] {
-                                        a = Country(key: key, dict: country)
-                                    }
-                                }
-                                completion(a)
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                        
+                        var a:Country?
+                        
+                        if let dict = json["countries"] {
+                            if let country = dict[key] {
+                                a = Country(key: key, dict: country)
                             }
-                        } catch let error {
-                            print(error.localizedDescription)
                         }
+                        completion(a)
                     }
+                } catch let error {
+                    print(error.localizedDescription)
                 }
             }
-        })
+        
+        } else {
+            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            
+            connectedRef.observe(.value, with: { snapshot in
+                if let connected = snapshot.value as? Bool, connected {
+                    let anthem = FIRDatabase.database().reference().child("countries").child(key)
+                    anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+                        var a:Country?
+                        
+                        if let _ = snapshot.value as? [String: Any] {
+                            a = Country(snapshot: snapshot)
+                        }
+                        completion(a)
+                    })
+                }
+            })
+        }
     }
     
     func monitorTopViewed(completion: @escaping ([Country]) -> Void) {
