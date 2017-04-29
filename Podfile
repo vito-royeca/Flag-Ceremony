@@ -6,7 +6,6 @@ use_frameworks!
 
 target "Flag Ceremony" do
     pod 'Appirater'
-    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'FacebookCore'
@@ -17,8 +16,6 @@ target "Flag Ceremony" do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
     pod 'hpple'
-    pod 'InAppSettingsKit'
-    pod 'JJJUtils'
     pod 'MBProgressHUD'
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
@@ -33,7 +30,6 @@ end
 
 target "Flag CeremonyTests" do
     pod 'Appirater'
-    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'FacebookCore'
@@ -44,8 +40,6 @@ target "Flag CeremonyTests" do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
     pod 'hpple'
-    pod 'InAppSettingsKit'
-    pod 'JJJUtils'
     pod 'MBProgressHUD'
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
@@ -60,7 +54,6 @@ end
 
 target "Flag CeremonyUITests" do
     pod 'Appirater'
-    pod 'Cosmos'
     pod 'Crashlytics'
     pod 'Fabric'
     pod 'FacebookCore'
@@ -71,8 +64,6 @@ target "Flag CeremonyUITests" do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
     pod 'hpple'
-    pod 'InAppSettingsKit'
-    pod 'JJJUtils'
     pod 'MBProgressHUD'
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
