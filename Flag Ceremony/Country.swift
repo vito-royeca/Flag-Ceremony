@@ -101,16 +101,6 @@ struct Country {
         return nil
     }
     
-    func getAudioURL() -> URL? {
-        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {
-            if FileManager.default.fileExists(atPath: path) {
-                return URL(fileURLWithPath: path)
-            }
-        }
-        
-        return nil
-    }
-    
     /* 
      * Convert lat/long to radians
      * Radians = Degrees * PI / 180

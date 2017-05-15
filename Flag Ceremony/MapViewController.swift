@@ -132,9 +132,8 @@ class MapViewController: CommonViewController {
                 self.capitalLabels.removeAll()
                 
                 for country in countries {
-                    // add flags only if there is an anthem and flag files
-                    if let _ = country.getAudioURL(),
-                        let _ = country.getFlagURLForSize(size: .mini) {
+                    // add flags only if there is a flag files
+                    if  let _ = country.getFlagURLForSize(size: .mini) {
                         var label = MaplyScreenLabel()
                         var radians = country.getGeoRadians()
                         

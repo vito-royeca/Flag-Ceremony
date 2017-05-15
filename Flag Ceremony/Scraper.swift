@@ -97,34 +97,34 @@ class Scraper : NSObject {
                     let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
                     let localPath = "\(docsPath)/\(key.lowercased()).mp3"
                     
-                    if country.getAudioURL() == nil {
-                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
-                            if fileExistsAtServer {
-                                print ("downloading... \(country.name!)")
-                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
-                                    if let error = error {
-                                        print("error: \(error)")
-                                    } else {
-                                        do {
-                                            try data!.write(to: URL(fileURLWithPath: localPath))
-                                            print("saved: \(localPath)")
-                                            self.updateCountry(key: key, value: NSNumber(value: true))
-                                        } catch {
-                                            
-                                        }
-                                    }
-                                }
-                                
-                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
-                            } else {
-                                self.updateCountry(key: key, value: NSNumber(value: false))
-                            }
-                        }
-                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
-                    
-                    } else {
-                        self.updateCountry(key: key, value: true)
-                    }
+//                    if country.getAudioURL() == nil {
+//                        let existsHandler = { (fileExistsAtServer: Bool) -> Void in
+//                            if fileExistsAtServer {
+//                                print ("downloading... \(country.name!)")
+//                                let completionHandler = { (data: Data?, error: NSError?) -> Void in
+//                                    if let error = error {
+//                                        print("error: \(error)")
+//                                    } else {
+//                                        do {
+//                                            try data!.write(to: URL(fileURLWithPath: localPath))
+//                                            print("saved: \(localPath)")
+//                                            self.updateCountry(key: key, value: NSNumber(value: true))
+//                                        } catch {
+//                                            
+//                                        }
+//                                    }
+//                                }
+//                                
+//                                NetworkingManager.sharedInstance.downloadFile(url: url, completionHandler: completionHandler)
+//                            } else {
+//                                self.updateCountry(key: key, value: NSNumber(value: false))
+//                            }
+//                        }
+//                        NetworkingManager.sharedInstance.fileExistsAt(url: url, completion: existsHandler);
+//                    
+//                    } else {
+//                        self.updateCountry(key: key, value: true)
+//                    }
                 }
             }
             

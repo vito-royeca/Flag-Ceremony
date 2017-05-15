@@ -81,18 +81,11 @@ class CountryViewController: UIViewController {
         
         if let flagCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) ,
             let anthemCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            // anthems are bundled
-//            if let url = country!.getAudioURL() {
-//                anthemCell.initPlayer(withURL: url)
-//                anthemCell.play()
-//                isPlaying = true
-//            }
             
             // anthems are fetched from Firebase
             if let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
                 let anthemsDir = "\(cacheDir)/anthems"
                 let localPath = "\(anthemsDir)/\(country!.key!.lowercased()).mp3"
-//                let localURL = URL(fileURLWithPath: "\(anthemsDir)/\(country!.key!.lowercased()).mp3")
                 
                 if FileManager.default.fileExists(atPath: localPath) {
                     anthemCell.initPlayer(withURL: URL(fileURLWithPath: localPath))
@@ -159,15 +152,12 @@ class CountryViewController: UIViewController {
                     isPlaying = false
                     updatePlayButton(true)
                 } else if status == kAudioPlayerStatusFinished {
-                    if let url = userInfo[kAudioURL] as? URL,
+                    if let _ = userInfo[kAudioURL] as? URL,
                         let country = country {
                     
                         isPlaying = false
                         updatePlayButton(true)
-
-                        if url == country.getAudioURL() {
-                            FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
-                        }
+                        FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
                     }
                 }
             }
@@ -276,7 +266,6 @@ extension CountryViewController : UITableViewDataSource {
                 }
             case 1:
                 if let audioPlayerCell = tableView.dequeueReusableCell(withIdentifier: "AudioPlayerCell") as? AudioPlayerTableViewCell {
-                    audioPlayerCell.url = country!.getAudioURL()
                     cell = audioPlayerCell
                 }
             case 2:

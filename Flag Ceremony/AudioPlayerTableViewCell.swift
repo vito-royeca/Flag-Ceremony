@@ -39,9 +39,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
                 play()
             }
         } else {
-            if let url = url {
-                initPlayer(withURL: url)
-            }
+            play()
         }
     }
     
