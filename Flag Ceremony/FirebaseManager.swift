@@ -396,6 +396,29 @@ class FirebaseManager : NSObject {
         }
     }
 
+    func downloadAnthem(country: Country, completion: @escaping (_ url: URL?, _ error: Error?) -> Void) {
+        if let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
+            let anthemsDir = "\(cacheDir)/anthems"
+            let localPath = "\(anthemsDir)/\(country.key!.lowercased()).mp3"
+            let remotePath = "gs://flag-ceremony.appspot.com/anthems/\(country.key!.lowercased()).mp3"
+            let storage = FIRStorage.storage()
+            let gsReference = storage.reference(forURL: remotePath)
+            
+            // create anthems dir if not existing
+            if !FileManager.default.fileExists(atPath: anthemsDir) {
+                try! FileManager.default.createDirectory(atPath: anthemsDir, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            gsReference.write(toFile: URL(fileURLWithPath: localPath), completion: { (url: URL?, error: Error?) in
+                if let error = error {
+                    completion(nil, error)
+                } else {
+                    completion(url, nil)
+                }
+            })
+        }
+    }
+    
     // MARK: - Shared Instance
     static let sharedInstance = FirebaseManager()
 }

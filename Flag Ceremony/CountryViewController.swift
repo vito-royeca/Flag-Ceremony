@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 enum CountryViewRows: Int {
     case lyrics, anthem, flag, country
@@ -78,11 +79,42 @@ class CountryViewController: UIViewController {
         super.viewDidAppear(animated)
 //        tableView.reloadData()
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            if let url = country!.getAudioURL() {
-                cell.initPlayer(withURL: url)
-                cell.play()
-                isPlaying = true
+        if let flagCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) ,
+            let anthemCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
+            // anthems are bundled
+//            if let url = country!.getAudioURL() {
+//                anthemCell.initPlayer(withURL: url)
+//                anthemCell.play()
+//                isPlaying = true
+//            }
+            
+            // anthems are fetched from Firebase
+            if let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
+                let anthemsDir = "\(cacheDir)/anthems"
+                let localPath = "\(anthemsDir)/\(country!.key!.lowercased()).mp3"
+//                let localURL = URL(fileURLWithPath: "\(anthemsDir)/\(country!.key!.lowercased()).mp3")
+                
+                if FileManager.default.fileExists(atPath: localPath) {
+                    anthemCell.initPlayer(withURL: URL(fileURLWithPath: localPath))
+                    anthemCell.play()
+                    self.isPlaying = true
+
+                } else {
+                    MBProgressHUD.showAdded(to: flagCell, animated: true)
+                    anthemCell.toggleUI(true)
+                    FirebaseManager.sharedInstance.downloadAnthem(country: country!, completion: {(url: URL?, error: Error?) in
+                        MBProgressHUD.hide(for: flagCell, animated: true)
+                        
+                        if let _ = error {
+                            self.updatePlayButton(false)
+                        } else {
+                            anthemCell.toggleUI(false)
+                            anthemCell.initPlayer(withURL: url!)
+                            anthemCell.play()
+                            self.isPlaying = true
+                        }
+                    })
+                }
             }
         }
     }
@@ -102,11 +134,13 @@ class CountryViewController: UIViewController {
     }
     
     // MARK: Custom methods
-    func updatePlayButton() {
+    func updatePlayButton(_ success: Bool) {
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if let button = cell.viewWithTag(200) as? UIButton {
-                let image = isPlaying ? UIImage(named: "circled pause") : UIImage(named: "circled play")
-                let tintedImage = image!.withRenderingMode(.alwaysTemplate)
+                let playImage = isPlaying ? UIImage(named: "circled pause") : UIImage(named: "circled play")
+                let errorImage = UIImage(named: "error")
+                
+                let tintedImage = success ? playImage!.withRenderingMode(.alwaysTemplate) : errorImage!.withRenderingMode(.alwaysTemplate)
                 button.setImage(tintedImage, for: .normal)
                 button.imageView!.tintColor = kBlueColor
                 button.isHidden = isPlaying
@@ -120,16 +154,16 @@ class CountryViewController: UIViewController {
                 
                 if status == kAudioPlayerStatusPlay {
                     isPlaying = true
-                    updatePlayButton()
+                    updatePlayButton(true)
                 } else if status == kAudioPlayerStatusPause {
                     isPlaying = false
-                    updatePlayButton()
+                    updatePlayButton(true)
                 } else if status == kAudioPlayerStatusFinished {
                     if let url = userInfo[kAudioURL] as? URL,
                         let country = country {
                     
                         isPlaying = false
-                        updatePlayButton()
+                        updatePlayButton(true)
 
                         if url == country.getAudioURL() {
                             FirebaseManager.sharedInstance.incrementCountryPlays(country.key!)
