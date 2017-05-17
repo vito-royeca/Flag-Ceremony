@@ -27,8 +27,8 @@ class MenuViewController: CommonViewController {
     // MARK: Custom methods
     func showShareActivity(sourceView: UIView) {
         let appIcon = UIImage(named: "AppIcon40x40")
-        let objectsToShare = ["Flag Ceremony displays flags and plays national anthems from various countries around the world", appIcon!] as [Any]
-        let excludedActivities = [UIActivityType.postToWeibo, UIActivityType.message, UIActivityType.mail, UIActivityType.print,UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.saveToCameraRoll, UIActivityType.addToReadingList, UIActivityType.postToFlickr, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.airDrop]
+        let objectsToShare = ["Flag Ceremony is an iOS app that displays flags and plays national anthems from various countries around the world.", appIcon!] as [Any]
+        let excludedActivities = [UIActivityType.postToWeibo, UIActivityType.print,UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.saveToCameraRoll, UIActivityType.addToReadingList, UIActivityType.postToFlickr, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.airDrop]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         activityVC.excludedActivityTypes = excludedActivities
@@ -165,23 +165,35 @@ extension MenuViewController : UITableViewDelegate {
         case 0:
             switch indexPath.row {
             case 0:
-                Appirater.forceShowPrompt(true)
+                showParentalGate {
+                    Appirater.forceShowPrompt(true)
+                }
             case 1:
-                let cell = self.tableView(tableView, cellForRowAt: indexPath)
-                showShareActivity(sourceView: cell)
+                showParentalGate {
+                    let cell = self.tableView(tableView, cellForRowAt: indexPath)
+                    self.showShareActivity(sourceView: cell)
+                }
             default:
                 ()
             }
         case 1:
             switch indexPath.row {
             case 0:
-                openStoreProduct(identifier: CineKo_AppID)
+                showParentalGate {
+                    self.openStoreProduct(identifier: CineKo_AppID)
+                }
             case 1:
-                openStoreProduct(identifier: Decktracker_AppID)
+                showParentalGate {
+                    self.openStoreProduct(identifier: Decktracker_AppID)
+                }
             case 2:
-                openStoreProduct(identifier: FunWithTTS_AppID)
+                showParentalGate {
+                    self.openStoreProduct(identifier: FunWithTTS_AppID)
+                }
             case 3:
-                openStoreProduct(identifier: WTHRM8_AppID)
+                showParentalGate {
+                    self.openStoreProduct(identifier: WTHRM8_AppID)
+                }
             default:
                 ()
             }

@@ -13,7 +13,7 @@ extension NSNumber {
      * Create a random number between 1 and 10000
      */
     class func randomNumber() -> NSNumber {
-        let max = UInt32(1000)
+        let max = UInt32(500)
         let random = Int(arc4random_uniform(max) + 1)
         return NSNumber(value: random)
     }
