@@ -31,6 +31,55 @@ class CountryViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func shareAction(_ sender: UIBarButtonItem) {
+        var objectsToShare = [Any]()
+        
+        // country name
+        objectsToShare.append(country!.name!)
+        
+        // anthem title
+        if let anthem = anthem {
+            var title = anthem.nativeTitle!
+        
+            // show subtitle if nativeTitle is not equal to title
+            if anthem.nativeTitle != anthem.title {
+                title += " \(anthem.title!)"
+            }
+            
+            objectsToShare.append(title)
+        }
+
+        // flag image
+        if let url = country!.getFlagURLForSize(size: .big) {
+            objectsToShare.append(UIImage(contentsOfFile: url.path)!)
+        }
+        
+        // audio file url
+        let audioPath = "https://firebasestorage.googleapis.com/v0/b/flag-ceremony.appspot.com/o/anthems%2F\(country!.key!.lowercased()).mp3?alt=media"
+        objectsToShare.append(URL(string: audioPath)!)
+        
+        // app name hashtag
+        objectsToShare.append("#FlagCeremony")
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let excludedActivities = [UIActivityType.print,UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.airDrop]
+        
+        activityVC.excludedActivityTypes = excludedActivities
+        activityVC.completionWithItemsHandler = { activity, success, items, error in
+            // user did not cancel
+            if success {
+                if let e = error {
+                    print("error sharing: \(e)")
+                }
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        activityVC.popoverPresentationController?.sourceView = self.view
+        present(activityVC, animated: true, completion: nil)
+    }
+    
     @IBAction func playPauseAction(_ sender: UIButton) {
         isPlaying = !isPlaying
 //        updatePlayButton()
