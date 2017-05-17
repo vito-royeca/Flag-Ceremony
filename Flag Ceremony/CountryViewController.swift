@@ -94,14 +94,15 @@ class CountryViewController: UIViewController {
 
                 } else {
                     MBProgressHUD.showAdded(to: flagCell, animated: true)
-                    anthemCell.toggleUI(true)
+                    anthemCell.toggleUI(true, message: "Downloading...")
                     FirebaseManager.sharedInstance.downloadAnthem(country: country!, completion: {(url: URL?, error: Error?) in
                         MBProgressHUD.hide(for: flagCell, animated: true)
                         
                         if let _ = error {
                             self.updatePlayButton(false)
+                            anthemCell.toggleUI(true, message: "Audio file not found.")
                         } else {
-                            anthemCell.toggleUI(false)
+                            anthemCell.toggleUI(false, message: nil)
                             anthemCell.initPlayer(withURL: url!)
                             anthemCell.play()
                             self.isPlaying = true

@@ -90,6 +90,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
         if player == nil {
             if let url = url {
                 initPlayer(withURL: url)
+            } else {
+                return
             }
         }
         
@@ -183,12 +185,13 @@ class AudioPlayerTableViewCell: UITableViewCell {
         update()
     }
     
-    func toggleUI(_ hidden: Bool) {
+    func toggleUI(_ hidden: Bool, message: String?) {
         playButton.isHidden = hidden
         startLabel.isHidden = hidden
         progressSlider.isHidden = hidden
         endLabel.isHidden = hidden
         noAudioLabel.isHidden = !hidden
+        noAudioLabel.text = message
     }
     
     // MARK: Private methods
@@ -202,7 +205,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
             player!.prepareToPlay()
             
             resetUI()
-            toggleUI(false)
+            toggleUI(false, message: nil)
         }
     }
 }
