@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
                 }
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
-                FIRAuth.auth()!.signIn(withEmail: email, password: password,  completion: {(user: FIRUser?, error: Error?) in
+                Auth.auth().signIn(withEmail: email, password: password,  completion: {(user: User?, error: Error?) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
                     if let error = error {
@@ -109,7 +109,7 @@ class LoginViewController: UIViewController {
                     }
                     
                     MBProgressHUD.showAdded(to: self.view, animated: true)
-                    FIRAuth.auth()!.createUser(withEmail: email!, password: password!) { user, error in
+                    Auth.auth().createUser(withEmail: email!, password: password!) { user, error in
                         if let error = error {
                             MBProgressHUD.hide(for: self.view, animated: true)
                             
@@ -117,7 +117,7 @@ class LoginViewController: UIViewController {
                             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                             self.present(alertController, animated: true, completion: nil)
                         } else {
-                            FIRAuth.auth()!.signIn(withEmail: email!, password: password!, completion: {(user: FIRUser?, error: Error?) in
+                            Auth.auth().signIn(withEmail: email!, password: password!, completion: {(user: User?, error: Error?) in
                                 MBProgressHUD.hide(for: self.view, animated: true)
                                 
                                 if let error = error {
@@ -173,7 +173,7 @@ class LoginViewController: UIViewController {
                     }
                     
                     MBProgressHUD.showAdded(to: self.view, animated: true)
-                    FIRAuth.auth()!.sendPasswordReset(withEmail: email!, completion: { error in
+                    Auth.auth().sendPasswordReset(withEmail: email!, completion: { error in
                         MBProgressHUD.hide(for: self.view, animated: true)
                         var message:String?
                         
@@ -216,8 +216,8 @@ class LoginViewController: UIViewController {
                 if let current = FBSDKAccessToken.current() {
                     MBProgressHUD.showAdded(to: self.view, animated: true)
                     
-                    let credential = FIRFacebookAuthProvider.credential(withAccessToken: current.tokenString)
-                    FIRAuth.auth()!.signIn(with: credential, completion: {(user: FIRUser?, error: Error?) in
+                    let credential = FacebookAuthProvider.credential(withAccessToken: current.tokenString)
+                    Auth.auth().signIn(with: credential, completion: {(user: User?, error: Error?) in
                         MBProgressHUD.hide(for: self.view, animated: true)
                         
                         if let error = error {
@@ -244,8 +244,8 @@ class LoginViewController: UIViewController {
                 if let session = session {
                     MBProgressHUD.showAdded(to: self.view, animated: true)
                     
-                    let credential = FIRTwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
-                    FIRAuth.auth()!.signIn(with: credential, completion: {(user: FIRUser?, error: Error?) in
+                    let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
+                    Auth.auth().signIn(with: credential, completion: {(user: User?, error: Error?) in
                         MBProgressHUD.hide(for: self.view, animated: true)
                         
                         if let error = error {
@@ -329,7 +329,7 @@ class LoginViewController: UIViewController {
     }
     
     func updateUser() {
-        if let user = FIRAuth.auth()?.currentUser {
+        if let user = Auth.auth().currentUser {
             FirebaseManager.sharedInstance.updateUser(email: user.email, photoURL: user.photoURL, displayName: user.displayName)
         }
     }
@@ -466,11 +466,11 @@ extension LoginViewController : GIDSignInDelegate {
         } else {
         
             guard let authentication = user.authentication else { return }
-            let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                               accessToken: authentication.accessToken)
 
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            FIRAuth.auth()!.signIn(with: credential, completion: {(user: FIRUser?, error: Error?) in
+            Auth.auth().signIn(with: credential, completion: {(user: User?, error: Error?) in
                 MBProgressHUD.hide(for: self.view, animated: true)
                 
                 if let error = error {

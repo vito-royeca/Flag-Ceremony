@@ -14,7 +14,7 @@ import WhirlyGlobe
 class MapViewController: CommonViewController {
     // MARK: Variables
     var mapView: MaplyViewController?
-    var countries = [Country]()
+    var countries = [FCCountry]()
     var countryLabels = [MaplyScreenLabel]()
     var capitalLabels = [MaplyScreenLabel]()
     private var hasShownCountryForScreenshot = false
@@ -72,7 +72,7 @@ class MapViewController: CommonViewController {
             }
             
             if let countryVC = countryVC {
-                countryVC.country = sender as? Country
+                countryVC.country = sender as? FCCountry
             }
         } else if segue.identifier == "showCountriesAsPush" ||
             segue.identifier == "showCountriesAsPopup" {
@@ -123,7 +123,7 @@ class MapViewController: CommonViewController {
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [FCCountry]) in
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                 self.mapView!.remove(self.countryLabels)
                 self.mapView!.remove(self.capitalLabels)
@@ -148,7 +148,7 @@ class MapViewController: CommonViewController {
                             label = MaplyScreenLabel()
                             radians = country.getCapitalGeoRadians()
                             
-                            label.text = "\u{272A} \(capital[Country.Keys.CapitalName]!)"
+                            label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
                             label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
                             label.selectable = false
                             self.capitalLabels.append(label)
@@ -238,7 +238,7 @@ class MapViewController: CommonViewController {
 extension MapViewController : MaplyViewControllerDelegate {
     func maplyViewController(_ viewC: MaplyViewController!, didSelect selectedObj: NSObject!) {
         if let selectedObject = selectedObj as? MaplyScreenLabel {
-            let country = selectedObject.userObject as? Country
+            let country = selectedObject.userObject as? FCCountry
             performSegue(withIdentifier: "showCountry", sender: country)
         }
     }

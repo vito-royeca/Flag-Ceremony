@@ -14,9 +14,9 @@ let kCountrySelected = "kCountrySelected"
 class CountryListViewController: UIViewController {
 
     // MARK: Variables
-    var countries = [Country]()
-    var filteredCountries:[Country]?
-    var sectionedCountries = [String: [Country]]()
+    var countries = [FCCountry]()
+    var filteredCountries:[FCCountry]?
+    var sectionedCountries = [String: [FCCountry]]()
     var selectedRow = -1
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -63,7 +63,7 @@ class CountryListViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func createSections(array: [Country]) {
+    func createSections(array: [FCCountry]) {
         sectionedCountries.removeAll()
         
         for c in array {
@@ -74,7 +74,7 @@ class CountryListViewController: UIViewController {
             if let _ = sectionedCountries[prefix] {
                 sectionedCountries[prefix]!.append(c)
             } else {
-                var ncarray = [Country]()
+                var ncarray = [FCCountry]()
                 ncarray.append(c)
                 sectionedCountries[prefix] = ncarray
             }
@@ -110,7 +110,7 @@ extension CountryListViewController : UITableViewDataSource {
                 var capitalText = "Capital: "
                 
                 if let capital = country.capital {
-                    if let name = capital[Country.Keys.CapitalName] {
+                    if let name = capital[FCCountry.Keys.CapitalName] {
                         capitalText += "\(name)"
                     }
                 }

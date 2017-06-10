@@ -12,7 +12,7 @@ import hpple
 import Networking
 
 class Scraper : NSObject {
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     
     func insertCountries() {
         let baseURL = CountriesURL
@@ -71,14 +71,14 @@ class Scraper : NSObject {
     func updateCountry(key: String, value: Any) {
         let countryRef = ref.child("countries").child(key)
         
-        countryRef.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+        countryRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if let _ = currentData.value as? [String : Any] {
                 // Set value and report transaction success
                 currentData.value = value
                 
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
             }
-            return FIRTransactionResult.success(withValue: currentData)
+            return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
                 print(error.localizedDescription)
@@ -91,7 +91,7 @@ class Scraper : NSObject {
             let countries = snapshot.value as? [String: [String: Any]] ?? [:]
             
             for (key,value) in countries {
-                let country = Country.init(key: key, dict: value)
+                let country = FCCountry.init(key: key, dict: value)
                 
                 if let url = URL(string: "\(HymnsURL)/\(key.lowercased()).mp3") {
                     let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -152,12 +152,12 @@ class Scraper : NSObject {
                             }
                             
                             // add lyrics and info
-                            if anthemDict[Anthem.Keys.Lyrics] == nil ||
-                                anthemDict[Anthem.Keys.Info] == nil {
+                            if anthemDict[FCAnthem.Keys.Lyrics] == nil ||
+                                anthemDict[FCAnthem.Keys.Info] == nil {
                                 if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
                                     if let doc = readUrl(url: url) {
-                                        anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
-                                        anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                        anthemDict[FCAnthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
+                                        anthemDict[FCAnthem.Keys.Info] = parseAnthemInfo(doc: doc)
                                     }
                                 }
                             }
@@ -207,41 +207,41 @@ class Scraper : NSObject {
                                         }
                                         
                                         // add lyrics
-                                        if anthemDict[Anthem.Keys.Lyrics] == nil {
+                                        if anthemDict[FCAnthem.Keys.Lyrics] == nil {
                                             print("getting lyrics for \(key3)...")
                                             if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
                                                 if let doc = readUrl(url: url) {
-                                                    anthemDict[Anthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
+                                                    anthemDict[FCAnthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
                                                 }
                                             }
                                         }
                                         
                                         // add info
-                                        if anthemDict[Anthem.Keys.Info] == nil {
+                                        if anthemDict[FCAnthem.Keys.Info] == nil {
                                             print("getting info for \(key3)...")
                                             if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
                                                 if let doc = readUrl(url: url) {
-                                                    anthemDict[Anthem.Keys.Info] = parseAnthemInfo(doc: doc)
+                                                    anthemDict[FCAnthem.Keys.Info] = parseAnthemInfo(doc: doc)
                                                 }
                                             }
                                         }
                                         
                                         // add background info
-                                        if let background = anthemDict[Anthem.Keys.Background] as? String {
-                                            anthemDict[Anthem.Keys.Background] = background.replacingOccurrences(of: "Background : ", with: "")
+                                        if let background = anthemDict[FCAnthem.Keys.Background] as? String {
+                                            anthemDict[FCAnthem.Keys.Background] = background.replacingOccurrences(of: "Background : ", with: "")
                                         
                                         } else {
                                             print("getting background for \(key3)...")
                                             if let url = URL(string: "\(CountriesURL)/geo/en/cc/\(key3.lowercased()).html") {
                                                 if let doc = readUrl(url: url) {
-                                                    anthemDict[Anthem.Keys.Background] = parseAnthemBackground(doc: doc)
+                                                    anthemDict[FCAnthem.Keys.Background] = parseAnthemBackground(doc: doc)
                                                 }
                                             }
                                         }
                                         
                                         // add flagInfo
                                         var willGetFlagInfo = false
-                                        if let flagInfo = anthemDict[Anthem.Keys.FlagInfo] as? String {
+                                        if let flagInfo = anthemDict[FCAnthem.Keys.FlagInfo] as? String {
                                             if flagInfo.characters.count == 0 {
                                                 willGetFlagInfo = true
                                             }
@@ -252,7 +252,7 @@ class Scraper : NSObject {
                                         if willGetFlagInfo {
                                             let countriesDict = dictionary["countries"] as! [String : Any]
                                             if let country = countriesDict[key3] as? [String : Any] {
-                                                var name = country[Country.Keys.Name] as! String
+                                                var name = country[FCCountry.Keys.Name] as! String
                                                 name = name.lowercased()
                                                 
                                                 // transform the name
@@ -287,7 +287,7 @@ class Scraper : NSObject {
                                                     if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
                                                         if let doc = self.readUrl(url: url) {
                                                             print("getting flag info... \(key3)")
-                                                            anthemDict[Anthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
+                                                            anthemDict[FCAnthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
                                                         } else {
                                                             print("invalid url: \(url)")
                                                         }
@@ -366,8 +366,8 @@ class Scraper : NSObject {
         if keys.count > 0 {
             for i in 0...keys.count-1 {
                 var lyrics = [String: Any]()
-                lyrics[Anthem.Keys.LyricsName] = keys[i]
-                lyrics[Anthem.Keys.LyricsText] = values[i]
+                lyrics[FCAnthem.Keys.LyricsName] = keys[i]
+                lyrics[FCAnthem.Keys.LyricsText] = values[i]
                 array.append(lyrics)
             }
         }

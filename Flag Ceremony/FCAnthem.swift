@@ -1,5 +1,5 @@
 //
-//  Anthem.swift
+//  FCAnthem.swift
 //  Flag Ceremony
 //
 //  Created by Jovit Royeca on 23/11/2016.
@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct Anthem {
+struct FCAnthem {
     struct Keys {
         static let Wiki         = "wiki"
         static let NativeTitle  = "nativeTitle"

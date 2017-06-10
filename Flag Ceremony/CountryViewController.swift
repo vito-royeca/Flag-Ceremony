@@ -16,8 +16,8 @@ enum CountryViewRows: Int {
 class CountryViewController: UIViewController {
 
     // MARK: Variables
-    var country:Country?
-    var anthem:Anthem?
+    var country:FCCountry?
+    var anthem:FCAnthem?
     var selectedSegmentIndex = 0
     var isPlaying = false
     
@@ -261,7 +261,7 @@ extension CountryViewController : UITableViewDataSource {
                 case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[section-1]
-                        title = lyricsDict[Anthem.Keys.LyricsName] as! String?
+                        title = lyricsDict[FCAnthem.Keys.LyricsName] as! String?
                     }
                 case CountryViewRows.anthem.rawValue:
                     switch section + 4 {
@@ -350,7 +350,7 @@ extension CountryViewController : UITableViewDataSource {
                 case CountryViewRows.lyrics.rawValue:
                     if let lyrics = anthem.lyrics {
                         let lyricsDict = lyrics[indexPath.section-1]
-                        label.text = lyricsDict[Anthem.Keys.LyricsText] as! String?
+                        label.text = lyricsDict[FCAnthem.Keys.LyricsText] as! String?
                     }
                 case CountryViewRows.anthem.rawValue:
                     switch indexPath.section {
@@ -377,7 +377,7 @@ extension CountryViewController : UITableViewDataSource {
                     switch indexPath.section {
                     case 1:
                         if let capital = country.capital {
-                            label.text = capital[Country.Keys.CapitalName] as! String?
+                            label.text = capital[FCCountry.Keys.CapitalName] as! String?
                         }
                     case 2:
                         label.text = anthem.background

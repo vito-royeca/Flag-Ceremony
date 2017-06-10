@@ -10,29 +10,29 @@ import Foundation
 import Firebase
 
 class FirebaseManager : NSObject {
-    var queries = [String: FIRDatabaseQuery]()
+    var queries = [String: DatabaseQuery]()
     var online = false
-    let connectionRef = FIRDatabase.database().reference(withPath: ".info/connected")
+    let connectionRef = Database.database().reference(withPath: ".info/connected")
     
     func updateUser(email: String?, photoURL: URL?, displayName: String?) {
-        if let user = FIRAuth.auth()?.currentUser {
-            let ref = FIRDatabase.database().reference().child("users").child(user.uid)
+        if let user = Auth.auth().currentUser {
+            let ref = Database.database().reference().child("users").child(user.uid)
             
-            ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
                 var post = currentData.value as? [String : Any] ?? [String : Any]()
                 var providerData = [String]()
                 for pd in user.providerData {
                     providerData.append(pd.providerID)
                 }
                 
-                post[User.Keys.Email] = email ?? ""
-                post[User.Keys.PhotoURL] = photoURL?.absoluteString ?? ""
-                post[User.Keys.DisplayName] = displayName ?? ""
-                post[User.Keys.ProviderData] = providerData
+                post[FCUser.Keys.Email] = email ?? ""
+                post[FCUser.Keys.PhotoURL] = photoURL?.absoluteString ?? ""
+                post[FCUser.Keys.DisplayName] = displayName ?? ""
+                post[FCUser.Keys.ProviderData] = providerData
                 
                 // Set value and report transaction success
                 currentData.value = post
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
                 
             }) { (error, committed, snapshot) in
                 if let error = error {
@@ -43,45 +43,45 @@ class FirebaseManager : NSObject {
     }
     
     func incrementCountryViews(_ key: String) {
-        let ref = FIRDatabase.database().reference().child("countries").child(key)
+        let ref = Database.database().reference().child("countries").child(key)
         
-        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if var post = currentData.value as? [String : Any] {
                 
-                var views = post[Country.Keys.Views] as? Int ?? 0
+                var views = post[FCCountry.Keys.Views] as? Int ?? 0
                 views += 1
-                post[Country.Keys.Views] = views
+                post[FCCountry.Keys.Views] = views
                 
                 // Set value and report transaction success
                 currentData.value = post
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
             }
-            return FIRTransactionResult.success(withValue: currentData)
+            return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
                 print(error.localizedDescription)
             }
         }
         
-        if let user = FIRAuth.auth()?.currentUser {
-            let ref2 = FIRDatabase.database().reference().child("activities").child(user.uid)
+        if let user = Auth.auth().currentUser {
+            let ref2 = Database.database().reference().child("activities").child(user.uid)
             
-            ref2.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            ref2.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
                 var post = currentData.value as? [String : Any] ?? [String : Any]()
                     
-                var viewCount = post[Activity.Keys.ViewCount] as? Int ?? 0
+                var viewCount = post[FCActivity.Keys.ViewCount] as? Int ?? 0
                 viewCount += 1
-                post[Activity.Keys.ViewCount] = viewCount
+                post[FCActivity.Keys.ViewCount] = viewCount
              
-                var views = post[Activity.Keys.Views] as? [String : Any] ?? [String : Any]()
+                var views = post[FCActivity.Keys.Views] as? [String : Any] ?? [String : Any]()
                 var keyCount = views[key] as? Int ?? 0
                 keyCount += 1
                 views[key] = keyCount
-                post[Activity.Keys.Views] = views
+                post[FCActivity.Keys.Views] = views
                 
                 // Set value and report transaction success
                 currentData.value = post
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
                 
             }) { (error, committed, snapshot) in
                 if let error = error {
@@ -92,45 +92,45 @@ class FirebaseManager : NSObject {
     }
     
     func incrementCountryPlays(_ key: String) {
-        let ref = FIRDatabase.database().reference().child("countries").child(key)
+        let ref = Database.database().reference().child("countries").child(key)
         
-        ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             if var post = currentData.value as? [String : Any] {
                 
-                var plays = post[Country.Keys.Plays] as? Int ?? 0
+                var plays = post[FCCountry.Keys.Plays] as? Int ?? 0
                 plays += 1
-                post[Country.Keys.Plays] = plays
+                post[FCCountry.Keys.Plays] = plays
                 
                 // Set value and report transaction success
                 currentData.value = post
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
             }
-            return FIRTransactionResult.success(withValue: currentData)
+            return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
                 print(error.localizedDescription)
             }
         }
         
-        if let user = FIRAuth.auth()?.currentUser {
-            let ref2 = FIRDatabase.database().reference().child("activities").child(user.uid)
+        if let user = Auth.auth().currentUser {
+            let ref2 = Database.database().reference().child("activities").child(user.uid)
             
-            ref2.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+            ref2.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
                 var post = currentData.value as? [String : Any] ?? [String : Any]()
                     
-                var playCount = post[Activity.Keys.PlayCount] as? Int ?? 0
+                var playCount = post[FCActivity.Keys.PlayCount] as? Int ?? 0
                 playCount += 1
-                post[Activity.Keys.PlayCount] = playCount
+                post[FCActivity.Keys.PlayCount] = playCount
                 
-                var plays = post[Activity.Keys.Plays] as? [String : Any] ?? [String : Any]()
+                var plays = post[FCActivity.Keys.Plays] as? [String : Any] ?? [String : Any]()
                 var keyCount = plays[key] as? Int ?? 0
                 keyCount += 1
                 plays[key] = keyCount
-                post[Activity.Keys.Plays] = plays
+                post[FCActivity.Keys.Plays] = plays
                 
                 // Set value and report transaction success
                 currentData.value = post
-                return FIRTransactionResult.success(withValue: currentData)
+                return TransactionResult.success(withValue: currentData)
                 
             }) { (error, committed, snapshot) in
                 if let error = error {
@@ -140,7 +140,7 @@ class FirebaseManager : NSObject {
         }
     }
 
-    func findAnthem(_ key: String, completion: @escaping (Anthem?) -> Void) {
+    func findAnthem(_ key: String, completion: @escaping (FCAnthem?) -> Void) {
         // read the bundled json
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
@@ -148,11 +148,11 @@ class FirebaseManager : NSObject {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
                     if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
                         
-                        var a:Anthem?
+                        var a:FCAnthem?
                         
                         if let dict = json["anthems"] {
                             if let anthem = dict[key] {
-                                a = Anthem(key: key, dict: anthem)
+                                a = FCAnthem(key: key, dict: anthem)
                             }
                         }
                         completion(a)
@@ -163,16 +163,16 @@ class FirebaseManager : NSObject {
             }
             
         } else { // look it up in Firebase
-            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            let connectedRef = Database.database().reference(withPath: ".info/connected")
             
             connectedRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
-                    let anthem = FIRDatabase.database().reference().child("anthems").child(key)
+                    let anthem = Database.database().reference().child("anthems").child(key)
                     anthem.observeSingleEvent(of: .value, with: { (snapshot) in
-                        var a:Anthem?
+                        var a:FCAnthem?
                         
                         if let _ = snapshot.value as? [String: Any] {
-                            a = Anthem(snapshot: snapshot)
+                            a = FCAnthem(snapshot: snapshot)
                         }
                         completion(a)
                     })
@@ -181,8 +181,8 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func fetchAllCountries(completion: @escaping ([Country]) -> Void) {
-        var countries = [Country]()
+    func fetchAllCountries(completion: @escaping ([FCCountry]) -> Void) {
+        var countries = [FCCountry]()
         
         // read the bundled json instead
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
@@ -194,7 +194,7 @@ class FirebaseManager : NSObject {
                         
                         if let dict = json["countries"] {
                             for (key,value) in dict {
-                                let country = Country(key: key, dict: value)
+                                let country = FCCountry(key: key, dict: value)
                                 countries.append(country)
                             }
                         }
@@ -208,15 +208,15 @@ class FirebaseManager : NSObject {
             }
             
         } else {
-            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            let connectedRef = Database.database().reference(withPath: ".info/connected")
             
             connectedRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
-                    let ref = FIRDatabase.database().reference()
+                    let ref = Database.database().reference()
                     ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value, with: { (snapshot) in
                         for child in snapshot.children {
-                            if let c = child as? FIRDataSnapshot {
-                                countries.append(Country(snapshot: c))
+                            if let c = child as? DataSnapshot {
+                                countries.append(FCCountry(snapshot: c))
                             }
                         }
                         completion(countries)
@@ -226,18 +226,18 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func findCountry(_ key: String, completion: @escaping (Country?) -> Void) {
+    func findCountry(_ key: String, completion: @escaping (FCCountry?) -> Void) {
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
                     if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
                         
-                        var a:Country?
+                        var a:FCCountry?
                         
                         if let dict = json["countries"] {
                             if let country = dict[key] {
-                                a = Country(key: key, dict: country)
+                                a = FCCountry(key: key, dict: country)
                             }
                         }
                         completion(a)
@@ -248,16 +248,16 @@ class FirebaseManager : NSObject {
             }
         
         } else {
-            let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+            let connectedRef = Database.database().reference(withPath: ".info/connected")
             
             connectedRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
-                    let anthem = FIRDatabase.database().reference().child("countries").child(key)
+                    let anthem = Database.database().reference().child("countries").child(key)
                     anthem.observeSingleEvent(of: .value, with: { (snapshot) in
-                        var a:Country?
+                        var a:FCCountry?
                         
                         if let _ = snapshot.value as? [String: Any] {
-                            a = Country(snapshot: snapshot)
+                            a = FCCountry(snapshot: snapshot)
                         }
                         completion(a)
                     })
@@ -266,15 +266,15 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func monitorTopViewed(completion: @escaping ([Country]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("countries")
-        let query = ref.queryOrdered(byChild: Country.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
+    func monitorTopViewed(completion: @escaping ([FCCountry]) -> Void) {
+        let ref = Database.database().reference().child("countries")
+        let query = ref.queryOrdered(byChild: FCCountry.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
-            var countries = [Country]()
+            var countries = [FCCountry]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    countries.append(Country(snapshot: c))
+                if let c = child as? DataSnapshot {
+                    countries.append(FCCountry(snapshot: c))
                 }
             }
             completion(countries.reversed())
@@ -283,15 +283,15 @@ class FirebaseManager : NSObject {
         queries["topViewed"] = query
     }
     
-    func monitorTopViewers(completion: @escaping ([Activity]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("activities")
-        let query = ref.queryOrdered(byChild: Activity.Keys.ViewCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
+    func monitorTopViewers(completion: @escaping ([FCActivity]) -> Void) {
+        let ref = Database.database().reference().child("activities")
+        let query = ref.queryOrdered(byChild: FCActivity.Keys.ViewCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
-            var activities = [Activity]()
+            var activities = [FCActivity]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    activities.append(Activity(snapshot: c))
+                if let c = child as? DataSnapshot {
+                    activities.append(FCActivity(snapshot: c))
                 }
             }
             completion(activities.reversed())
@@ -300,15 +300,15 @@ class FirebaseManager : NSObject {
         queries["topViewers"] = query
     }
     
-    func monitorTopPlayed(completion: @escaping ([Country]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("countries")
-        let query = ref.queryOrdered(byChild: Country.Keys.Plays).queryStarting(atValue: 1).queryLimited(toLast: 20)
+    func monitorTopPlayed(completion: @escaping ([FCCountry]) -> Void) {
+        let ref = Database.database().reference().child("countries")
+        let query = ref.queryOrdered(byChild: FCCountry.Keys.Plays).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
-            var countries = [Country]()
+            var countries = [FCCountry]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    countries.append(Country(snapshot: c))
+                if let c = child as? DataSnapshot {
+                    countries.append(FCCountry(snapshot: c))
                 }
             }
             completion(countries.reversed())
@@ -317,15 +317,15 @@ class FirebaseManager : NSObject {
         queries["topPlayed"] = query
     }
     
-    func monitorTopPlayers(completion: @escaping ([Activity]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("activities")
-        let query = ref.queryOrdered(byChild: Activity.Keys.PlayCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
+    func monitorTopPlayers(completion: @escaping ([FCActivity]) -> Void) {
+        let ref = Database.database().reference().child("activities")
+        let query = ref.queryOrdered(byChild: FCActivity.Keys.PlayCount).queryStarting(atValue: 1).queryLimited(toLast: 20)
         query.observe(.value, with: { snapshot in
-            var activities = [Activity]()
+            var activities = [FCActivity]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    activities.append(Activity(snapshot: c))
+                if let c = child as? DataSnapshot {
+                    activities.append(FCActivity(snapshot: c))
                 }
             }
             completion(activities.reversed())
@@ -334,27 +334,27 @@ class FirebaseManager : NSObject {
         queries["topPlayers"] = query
     }
     
-    func monitorUsers(completion: @escaping ([User]) -> Void) {
-        let ref = FIRDatabase.database().reference().child("users")
+    func monitorUsers(completion: @escaping ([FCUser]) -> Void) {
+        let ref = Database.database().reference().child("users")
         let query = ref.queryOrderedByKey()
         query.observe(.value, with: { snapshot in
-            var users = [User]()
+            var users = [FCUser]()
             
             for child in snapshot.children {
-                if let c = child as? FIRDataSnapshot {
-                    users.append(User(snapshot: c))
+                if let c = child as? DataSnapshot {
+                    users.append(FCUser(snapshot: c))
                 }
             }
             completion(users)
         })
     }
     
-    func monitorUserData(completion: @escaping (Activity?) -> Void) {
-        if let user = FIRAuth.auth()?.currentUser {
-            let ref = FIRDatabase.database().reference().child("activities").child(user.uid)
+    func monitorUserData(completion: @escaping (FCActivity?) -> Void) {
+        if let user = Auth.auth().currentUser {
+            let ref = Database.database().reference().child("activities").child(user.uid)
             let query = ref.queryOrderedByKey()
             query.observe(.value, with: { snapshot in
-                let activity = Activity(snapshot: snapshot)
+                let activity = FCActivity(snapshot: snapshot)
                 completion(activity)
             })
             
@@ -396,12 +396,12 @@ class FirebaseManager : NSObject {
         }
     }
 
-    func downloadAnthem(country: Country, completion: @escaping (_ url: URL?, _ error: Error?) -> Void) {
+    func downloadAnthem(country: FCCountry, completion: @escaping (_ url: URL?, _ error: Error?) -> Void) {
         if let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
             let anthemsDir = "\(cacheDir)/anthems"
             let localPath = "\(anthemsDir)/\(country.key!.lowercased()).mp3"
             let remotePath = "gs://flag-ceremony.appspot.com/anthems/\(country.key!.lowercased()).mp3"
-            let storage = FIRStorage.storage()
+            let storage = Storage.storage()
             let gsReference = storage.reference(forURL: remotePath)
             
             // create anthems dir if not existing

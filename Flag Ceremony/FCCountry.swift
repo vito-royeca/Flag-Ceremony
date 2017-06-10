@@ -1,5 +1,5 @@
 //
-//  Country.swift
+//  FCCountry.swift
 //  Flag Ceremony
 //
 //  Created by Jovit Royeca on 17/11/2016.
@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct Country {
+struct FCCountry {
     struct Keys {
         static let Name              = "Name"
         static let Capital           = "Capital"
@@ -144,7 +144,7 @@ struct Country {
     }
 
 
-    static func == (lhs: Country, rhs: Country) -> Bool {
+    static func == (lhs: FCCountry, rhs: FCCountry) -> Bool {
         return lhs.key == rhs.key
     }
 

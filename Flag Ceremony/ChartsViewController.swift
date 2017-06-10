@@ -14,11 +14,11 @@ import MBProgressHUD
 class ChartsViewController: CommonViewController {
 
     // MARK: Variables
-    var topViewedCountries:[Country]?
-    var topPlayedCountries:[Country]?
-    var topViewers:[Activity]?
-    var topPlayers:[Activity]?
-    var users:[User]?
+    var topViewedCountries:[FCCountry]?
+    var topPlayedCountries:[FCCountry]?
+    var topViewers:[FCActivity]?
+    var topPlayers:[FCActivity]?
+    var users:[FCUser]?
     var selectedSegmentIndex = 0
     
     // MARK: Outlets
@@ -114,7 +114,7 @@ class ChartsViewController: CommonViewController {
             }
             
             if let countryVC = countryVC {
-                countryVC.country = sender as? Country
+                countryVC.country = sender as? FCCountry
             }
         }
     }

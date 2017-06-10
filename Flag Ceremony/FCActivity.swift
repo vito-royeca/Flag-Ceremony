@@ -1,5 +1,5 @@
 //
-//  Activity.swift
+//  FCActivity.swift
 //  Flag Ceremony
 //
 //  Created by Jovito Royeca on 19/12/2016.
@@ -10,7 +10,7 @@ import Foundation
 
 import Firebase
 
-struct Activity {
+struct FCActivity {
     struct Keys {
         static let PlayCount    = "PlayCount"
         static let Plays        = "Plays"

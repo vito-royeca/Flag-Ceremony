@@ -18,8 +18,8 @@ import Networking
 class SliderTableViewCell: UITableViewCell {
 
     // MARK: Variables
-    fileprivate var _countries: [Country]?
-    var countries : [Country]? {
+    fileprivate var _countries: [FCCountry]?
+    var countries : [FCCountry]? {
         get {
             return _countries
         }
@@ -28,8 +28,8 @@ class SliderTableViewCell: UITableViewCell {
             updateDisplay()
         }
     }
-    fileprivate var _activities: [Activity]?
-    var activities : [Activity]? {
+    fileprivate var _activities: [FCActivity]?
+    var activities : [FCActivity]? {
         get {
             return _activities
         }

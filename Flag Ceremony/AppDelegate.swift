@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // init services
         Fabric.with([Crashlytics.self, Twitter.self])
-        FIRApp.configure()
-        FIRDatabase.database().persistenceEnabled = true
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // Appirater app rater

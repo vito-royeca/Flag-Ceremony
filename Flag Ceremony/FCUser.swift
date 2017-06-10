@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  FCUser.swift
 //  Flag Ceremony
 //
 //  Created by Jovit Royeca on 17/11/2016.
@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct User {
+struct FCUser {
 
     struct Keys {
         static let Email        = "email"
