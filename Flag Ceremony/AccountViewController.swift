@@ -13,8 +13,8 @@ import MBProgressHUD
 class AccountViewController: CommonViewController {
 
     // MARK: Variables
-    var activity:Activity?
-    var countries:[Country]?
+    var activity:FCActivity?
+    var countries:[FCCountry]?
     var selectedSegmentIndex = 0
     
     // MARK: Outlets
@@ -27,9 +27,9 @@ class AccountViewController: CommonViewController {
     }
     
     @IBAction func loginAction(_ sender: UIBarButtonItem) {
-        if let _ = FIRAuth.auth()?.currentUser {
+        if let _ = Auth.auth().currentUser {
             do {
-                try FIRAuth.auth()?.signOut()
+                try Auth.auth().signOut()
                 activity = nil
             } catch let error {
                 print("\(error)")
@@ -54,7 +54,7 @@ class AccountViewController: CommonViewController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "DataTableViewCell", bundle: nil), forCellReuseIdentifier: "DataCell")
         
-        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [Country]) in
+        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [FCCountry]) in
             self.countries = countries
             self.updateDataDisplay()
         })
@@ -91,18 +91,18 @@ class AccountViewController: CommonViewController {
             }
             
             if let countryVC = countryVC {
-                countryVC.country = sender as? Country
+                countryVC.country = sender as? FCCountry
             }
         }
     }
 
     // Mark: Custom methods
     func updateDataDisplay() {
-        if let _ = FIRAuth.auth()?.currentUser {
+        if let _ = Auth.auth().currentUser {
             loginButton.image = UIImage(named: "logout")
 //            MBProgressHUD.showAdded(to: self.view, animated: true)
             
-            FirebaseManager.sharedInstance.monitorUserData(completion: { (activity: Activity?) in
+            FirebaseManager.sharedInstance.monitorUserData(completion: { (activity: FCActivity?) in
                 self.activity = activity
                 DispatchQueue.main.async {
 //                    MBProgressHUD.hide(for: self.view, animated: true)
@@ -116,7 +116,7 @@ class AccountViewController: CommonViewController {
     }
     
     func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
-        var country:Country?
+        var country:FCCountry?
         var stat = 0
         
         cell.rankLabel.text = " "
@@ -213,7 +213,7 @@ extension AccountViewController : UITableViewDataSource {
                 dataCell.statIcon2.image = nil
                 dataCell.statLabel2.text = nil
                 
-                if let user = FIRAuth.auth()?.currentUser,
+                if let user = Auth.auth().currentUser,
                     let activity = activity {
                     
                     if let photoURL = user.photoURL {
@@ -270,7 +270,7 @@ extension AccountViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var country:Country?
+        var country:FCCountry?
         
         switch indexPath.section {
         case 0:

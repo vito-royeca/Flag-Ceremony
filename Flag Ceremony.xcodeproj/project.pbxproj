@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11215BAE1E085FEA0070DD8A /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* Activity.swift */; };
-		11215BAF1E085FEA0070DD8A /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* Activity.swift */; };
-		11215BB01E085FEA0070DD8A /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* Activity.swift */; };
+		11215BAE1E085FEA0070DD8A /* FCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* FCActivity.swift */; };
+		11215BAF1E085FEA0070DD8A /* FCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* FCActivity.swift */; };
+		11215BB01E085FEA0070DD8A /* FCActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11215BAD1E085FEA0070DD8A /* FCActivity.swift */; };
 		116FD6F71E974BDA00178709 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FD6F51E974BDA00178709 /* DataTableViewCell.swift */; };
 		116FD6F81E974BDA00178709 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FD6F51E974BDA00178709 /* DataTableViewCell.swift */; };
 		116FD6F91E974BDA00178709 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FD6F51E974BDA00178709 /* DataTableViewCell.swift */; };
@@ -23,9 +23,9 @@
 		1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
 		1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173C9351E07359D00C5DA16 /* LoginViewController.swift */; };
-		11946DFD1E9897D2007F4AA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
-		11E23D1E1E992A910014A4F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
-		11E23D1F1E992A980014A4F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* User.swift */; };
+		11946DFD1E9897D2007F4AA6 /* FCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* FCUser.swift */; };
+		11E23D1E1E992A910014A4F2 /* FCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* FCUser.swift */; };
+		11E23D1F1E992A980014A4F2 /* FCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11946DFC1E9897D2007F4AA6 /* FCUser.swift */; };
 		11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A81E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
 		11E5B8A91E9692020021ABB5 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8A61E9692020021ABB5 /* AccountViewController.swift */; };
@@ -46,9 +46,9 @@
 		8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
 		8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */; };
-		8C23703B1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
-		8C23703C1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
-		8C23703D1DDD534D00F30712 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* Country.swift */; };
+		8C23703B1DDD534D00F30712 /* FCCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* FCCountry.swift */; };
+		8C23703C1DDD534D00F30712 /* FCCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* FCCountry.swift */; };
+		8C23703D1DDD534D00F30712 /* FCCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23703A1DDD534D00F30712 /* FCCountry.swift */; };
 		8C2370431DDD56FB00F30712 /* FirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2370421DDD56FB00F30712 /* FirebaseTests.swift */; };
 		8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97281D88ED50005A685B /* AppDelegate.swift */; };
 		8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E972C1D88ED50005A685B /* Main.storyboard */; };
@@ -75,9 +75,9 @@
 		8CD893B31DE5B571007052C7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B21DE5B571007052C7 /* FirebaseManager.swift */; };
 		8CD893B41DE5B571007052C7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B21DE5B571007052C7 /* FirebaseManager.swift */; };
 		8CD893B51DE5B571007052C7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B21DE5B571007052C7 /* FirebaseManager.swift */; };
-		8CD893B71DE5B8F1007052C7 /* Anthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* Anthem.swift */; };
-		8CD893B81DE5B8F1007052C7 /* Anthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* Anthem.swift */; };
-		8CD893B91DE5B8F1007052C7 /* Anthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* Anthem.swift */; };
+		8CD893B71DE5B8F1007052C7 /* FCAnthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* FCAnthem.swift */; };
+		8CD893B81DE5B8F1007052C7 /* FCAnthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* FCAnthem.swift */; };
+		8CD893B91DE5B8F1007052C7 /* FCAnthem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD893B61DE5B8F1007052C7 /* FCAnthem.swift */; };
 		8CE297BE1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE297BC1DE5EF1000B47CAA /* SliderTableViewCell.swift */; };
 		8CE297BF1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE297BC1DE5EF1000B47CAA /* SliderTableViewCell.swift */; };
 		8CE297C01DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE297BC1DE5EF1000B47CAA /* SliderTableViewCell.swift */; };
@@ -122,13 +122,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11215BAD1E085FEA0070DD8A /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		11215BAD1E085FEA0070DD8A /* FCActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCActivity.swift; sourceTree = "<group>"; };
 		116FD6F51E974BDA00178709 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		116FD6F61E974BDA00178709 /* DataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewCell.xib; sourceTree = "<group>"; };
 		1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1173C92F1E0705FF00C5DA16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1173C9351E07359D00C5DA16 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		11946DFC1E9897D2007F4AA6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		11946DFC1E9897D2007F4AA6 /* FCUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCUser.swift; sourceTree = "<group>"; };
 		119AF47B1EACE13E0061C48F /* Flag Ceremony-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag Ceremony-Bridging-Header.h"; sourceTree = "<group>"; };
 		119AF47C1EACE13E0061C48F /* Flag CeremonyTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag CeremonyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		119AF47D1EACE13F0061C48F /* Flag CeremonyUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flag CeremonyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		7CFE490719178C95D5EC68B8 /* Pods-Flag CeremonyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flag CeremonyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flag CeremonyTests/Pods-Flag CeremonyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
-		8C23703A1DDD534D00F30712 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		8C23703A1DDD534D00F30712 /* FCCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCCountry.swift; sourceTree = "<group>"; };
 		8C2370421DDD56FB00F30712 /* FirebaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
 		8C4E97251D88ED50005A685B /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4E97281D88ED50005A685B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
 		8CD893B21DE5B571007052C7 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		8CD893B61DE5B8F1007052C7 /* Anthem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anthem.swift; sourceTree = "<group>"; };
+		8CD893B61DE5B8F1007052C7 /* FCAnthem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAnthem.swift; sourceTree = "<group>"; };
 		8CE297BC1DE5EF1000B47CAA /* SliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		8CE297BD1DE5EF1000B47CAA /* SliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
 		8CE297C41DE5F17B00B47CAA /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -289,10 +289,10 @@
 		8C4E97581D891511005A685B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				11215BAD1E085FEA0070DD8A /* Activity.swift */,
-				8CD893B61DE5B8F1007052C7 /* Anthem.swift */,
-				8C23703A1DDD534D00F30712 /* Country.swift */,
-				11946DFC1E9897D2007F4AA6 /* User.swift */,
+				11215BAD1E085FEA0070DD8A /* FCActivity.swift */,
+				8CD893B61DE5B8F1007052C7 /* FCAnthem.swift */,
+				8C23703A1DDD534D00F30712 /* FCCountry.swift */,
+				11946DFC1E9897D2007F4AA6 /* FCUser.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -677,15 +677,15 @@
 			files = (
 				8CE8E77C1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
-				8CD893B71DE5B8F1007052C7 /* Anthem.swift in Sources */,
+				8CD893B71DE5B8F1007052C7 /* FCAnthem.swift in Sources */,
 				1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */,
-				8C23703B1DDD534D00F30712 /* Country.swift in Sources */,
+				8C23703B1DDD534D00F30712 /* FCCountry.swift in Sources */,
 				8CE297C61DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
-				11215BAE1E085FEA0070DD8A /* Activity.swift in Sources */,
-				11946DFD1E9897D2007F4AA6 /* User.swift in Sources */,
+				11215BAE1E085FEA0070DD8A /* FCActivity.swift in Sources */,
+				11946DFD1E9897D2007F4AA6 /* FCUser.swift in Sources */,
 				8C02966C1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				8C0296701D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CE297BE1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
@@ -705,18 +705,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11E23D1E1E992A910014A4F2 /* User.swift in Sources */,
+				11E23D1E1E992A910014A4F2 /* FCUser.swift in Sources */,
 				8CE8E77D1DE524D5009097FF /* Scraper.swift in Sources */,
 				8C0296711D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
-				8CD893B81DE5B8F1007052C7 /* Anthem.swift in Sources */,
+				8CD893B81DE5B8F1007052C7 /* FCAnthem.swift in Sources */,
 				1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */,
-				8C23703C1DDD534D00F30712 /* Country.swift in Sources */,
+				8C23703C1DDD534D00F30712 /* FCCountry.swift in Sources */,
 				11E5B8A81E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CE297C71DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CEFB6441DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
-				11215BAF1E085FEA0070DD8A /* Activity.swift in Sources */,
+				11215BAF1E085FEA0070DD8A /* FCActivity.swift in Sources */,
 				8C2370431DDD56FB00F30712 /* FirebaseTests.swift in Sources */,
 				8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */,
 				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
@@ -736,7 +736,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11E23D1F1E992A980014A4F2 /* User.swift in Sources */,
+				11E23D1F1E992A980014A4F2 /* FCUser.swift in Sources */,
 				8C0296721D8A471000BE8C02 /* GlobeViewController.swift in Sources */,
 				8CE8E77E1DE524D5009097FF /* Scraper.swift in Sources */,
 				8CD893B51DE5B571007052C7 /* FirebaseManager.swift in Sources */,
@@ -745,10 +745,10 @@
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				11E5B8A91E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CE297C01DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
-				8C23703D1DDD534D00F30712 /* Country.swift in Sources */,
+				8C23703D1DDD534D00F30712 /* FCCountry.swift in Sources */,
 				5874E4241DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
-				11215BB01E085FEA0070DD8A /* Activity.swift in Sources */,
-				8CD893B91DE5B8F1007052C7 /* Anthem.swift in Sources */,
+				11215BB01E085FEA0070DD8A /* FCActivity.swift in Sources */,
+				8CD893B91DE5B8F1007052C7 /* FCAnthem.swift in Sources */,
 				8CEFB6451DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
 				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
