@@ -81,7 +81,8 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
-  install_resource "TwitterKit/iOS/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
+  install_resource "TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle"
+  install_resource "TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle"
   install_resource "WhirlyGlobeResources/base_maps/geography-class_medres.mbtiles"
   install_resource "WhirlyGlobeResources/base_maps/lowres_wtb/lowres_wtb_0x0.pvrtc"
   install_resource "WhirlyGlobeResources/base_maps/lowres_wtb/lowres_wtb_0x1.pvrtc"
@@ -472,7 +473,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
-  install_resource "TwitterKit/iOS/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
+  install_resource "TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle"
+  install_resource "TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle"
   install_resource "WhirlyGlobeResources/base_maps/geography-class_medres.mbtiles"
   install_resource "WhirlyGlobeResources/base_maps/lowres_wtb/lowres_wtb_0x0.pvrtc"
   install_resource "WhirlyGlobeResources/base_maps/lowres_wtb/lowres_wtb_0x1.pvrtc"

@@ -2777,6 +2777,7 @@
 		2268BFD17F6798CBC18C093D7DBC97A0 /* MaplyActiveObject.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = MaplyActiveObject.mm; path = "WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/src/MaplyActiveObject.mm"; sourceTree = "<group>"; };
 		228645C5E2E8F21CE591E304F024F2B9 /* pj_geocent.c */ = {isa = PBXFileReference; includeInIndex = 1; name = pj_geocent.c; path = proj/src/pj_geocent.c; sourceTree = "<group>"; };
 		228B1759705E2622EA2E6B1C3A146C69 /* COG.geojson */ = {isa = PBXFileReference; includeInIndex = 1; name = COG.geojson; path = vectors/country_json_50m/COG.geojson; sourceTree = "<group>"; };
+		22AB4D6E2AC25076DCD67481029A4942 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = Frameworks/FirebaseNanoPB.framework; sourceTree = "<group>"; };
 		22CD7C30785B236DB7663E0A522E3B58 /* FBSDKShareOpenGraphContent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKShareOpenGraphContent.h; path = FBSDKShareKit/FBSDKShareKit/FBSDKShareOpenGraphContent.h; sourceTree = "<group>"; };
 		22FF57F18353606717359EFB1F4EC664 /* directedLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = directedLine.h; path = WhirlyGlobeSrc/local_libs/glues/source/libnurbs/nurbtess/directedLine.h; sourceTree = "<group>"; };
 		2303ADC701B7D4A276EB5ED810B94F99 /* FBSDKAppEventsState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKAppEventsState.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsState.h; sourceTree = "<group>"; };
@@ -2962,6 +2963,7 @@
 		36A9DCB9E754723EB19C23338940391F /* LayerThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LayerThread.h; path = WhirlyGlobeSrc/WhirlyGlobeLib/include/LayerThread.h; sourceTree = "<group>"; };
 		36D9085CAF86404FD2AA56416B7B270D /* AAIlluminatedFraction.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = AAIlluminatedFraction.cpp; path = WhirlyGlobeSrc/local_libs/aaplus/AAIlluminatedFraction.cpp; sourceTree = "<group>"; };
 		3741A80C9C0F0EFBAFD70F24DAAD0674 /* AAPhysicalMars.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AAPhysicalMars.h; path = WhirlyGlobeSrc/local_libs/aaplus/AAPhysicalMars.h; sourceTree = "<group>"; };
+		3762C5DB3FF1715C6D9548E0C10A9711 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = iOS/TwitterKit.framework/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		37631DAF21DE63BB286CE3EE6812CB3A /* bchgen.c */ = {isa = PBXFileReference; includeInIndex = 1; name = bchgen.c; path = proj/src/bchgen.c; sourceTree = "<group>"; };
 		3784358C759B93846BAB9FB621EC6866 /* GridClipper.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = GridClipper.mm; path = WhirlyGlobeSrc/WhirlyGlobeLib/src/GridClipper.mm; sourceTree = "<group>"; };
 		3787B6A7D56F1C8E4B64A0164C944286 /* shptree.c */ = {isa = PBXFileReference; includeInIndex = 1; name = shptree.c; path = WhirlyGlobeSrc/local_libs/shapefile/shptree.c; sourceTree = "<group>"; };
@@ -3249,6 +3251,7 @@
 		5C99C3297293894B1FE43B9173DC74D1 /* FBSDKKeychainStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKKeychainStore.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStore.m; sourceTree = "<group>"; };
 		5CA1030B804FDD54C59EE9B8B00F04CE /* golf-24@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "golf-24@2x.png"; path = "maki icons/golf-24@2x.png"; sourceTree = "<group>"; };
 		5CC8C17E37113217E402A20E95019839 /* ASM.geojson */ = {isa = PBXFileReference; includeInIndex = 1; name = ASM.geojson; path = vectors/country_json_50m/ASM.geojson; sourceTree = "<group>"; };
+		5D06D88E01A358AEBE44BD49DD93CBCA /* TwitterShareExtensionUIResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TwitterShareExtensionUIResources.bundle; path = iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle; sourceTree = "<group>"; };
 		5D08B0A6FE9553DBE81457F808A0A184 /* FBSDKLoginManager+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBSDKLoginManager+Internal.h"; path = "FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManager+Internal.h"; sourceTree = "<group>"; };
 		5D14EE0631009AF2864F7A6A8655C06A /* PJ_natearth.c */ = {isa = PBXFileReference; includeInIndex = 1; name = PJ_natearth.c; path = proj/src/PJ_natearth.c; sourceTree = "<group>"; };
 		5D1ADE673EFFBF8FD688FC9205BCF662 /* Pods-Flag Ceremony.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Flag Ceremony.release.xcconfig"; sourceTree = "<group>"; };
@@ -3279,7 +3282,6 @@
 		604F803034447ED4D04570DF7873E19B /* USA.geojson */ = {isa = PBXFileReference; includeInIndex = 1; name = USA.geojson; path = vectors/country_json_50m/USA.geojson; sourceTree = "<group>"; };
 		60823113943CF055BDC3A1F1BAFE9AD2 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Result.swift; sourceTree = "<group>"; };
 		60870C93AB51CC5D19F24FC806789FBB /* UpdateDisplayLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UpdateDisplayLayer.h; path = WhirlyGlobeSrc/WhirlyGlobeLib/include/UpdateDisplayLayer.h; sourceTree = "<group>"; };
-		608EB98D9008E48755EDC7A3F1702212 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		6095AA88E5EDA87980617113B432C4E4 /* town-24@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "town-24@2x.png"; path = "maki icons/town-24@2x.png"; sourceTree = "<group>"; };
 		609A50DC507623B56F1C39DD22B5160A /* pj_gridlist.c */ = {isa = PBXFileReference; includeInIndex = 1; name = pj_gridlist.c; path = proj/src/pj_gridlist.c; sourceTree = "<group>"; };
 		60C8C038F362A044DB5673C7C5B8C58D /* FBSDKShareOpenGraphAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKShareOpenGraphAction.m; path = FBSDKShareKit/FBSDKShareKit/FBSDKShareOpenGraphAction.m; sourceTree = "<group>"; };
@@ -3625,6 +3627,7 @@
 		8C36E8E9343D9D064790D32ED3DE6C22 /* cemetery-24@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "cemetery-24@2x.png"; path = "maki icons/cemetery-24@2x.png"; sourceTree = "<group>"; };
 		8C3F84FAE846658DD657A1FA3B94C9D5 /* AppInvite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppInvite.swift; path = Sources/Share/Dialogs/AppInvite/AppInvite.swift; sourceTree = "<group>"; };
 		8C40183BA5AEE8FEB8DDD887F964B860 /* LabelRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LabelRenderer.h; path = WhirlyGlobeSrc/WhirlyGlobeLib/include/LabelRenderer.h; sourceTree = "<group>"; };
+		8C5016AEC17281CFE04CD1F81E5D7CB1 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = iOS/TwitterKit.framework; sourceTree = "<group>"; };
 		8C5AE828D2EAE7B1BBC13DF40A0FF3BC /* FBSDKPaymentObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKPaymentObserver.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKPaymentObserver.h; sourceTree = "<group>"; };
 		8C68C26E529D8A67399A0EF318882CA6 /* AARiseTransitSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AARiseTransitSet.h; path = WhirlyGlobeSrc/local_libs/aaplus/AARiseTransitSet.h; sourceTree = "<group>"; };
 		8C881F3A32D6E3AB7F725B851C1F87EB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -4078,6 +4081,7 @@
 		BF7EE3598767131491D66EAE5A022A54 /* ContentSharingResultProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentSharingResultProtocol.swift; path = Sources/Share/Content/Common/ContentSharingResultProtocol.swift; sourceTree = "<group>"; };
 		BF803F94A71320C862216584E7B6B304 /* LCA.geojson */ = {isa = PBXFileReference; includeInIndex = 1; name = LCA.geojson; path = vectors/country_json_50m/LCA.geojson; sourceTree = "<group>"; };
 		BFBC2493E6B96F92DD4C0BBBB8FE6DEA /* tinyxml.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = tinyxml.xcconfig; sourceTree = "<group>"; };
+		BFDA7C72E1E30D463D6748BC56B17850 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
 		BFF0B86C621075318DA1627B3E452F49 /* org_proj4_Projections.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = org_proj4_Projections.h; path = proj/src/org_proj4_Projections.h; sourceTree = "<group>"; };
 		C00D1F8CFCCB3C66D8629DA6B227E49C /* TFHppleElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
 		C00FEB8A7C0BBE86DBAA77A67C22B5F4 /* museum-24@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "museum-24@2x.png"; path = "maki icons/museum-24@2x.png"; sourceTree = "<group>"; };
@@ -4370,6 +4374,7 @@
 		E0F5B874E6676FE86B8AA7B7EB925BAB /* BFExecutor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFExecutor.h; path = Bolts/Common/BFExecutor.h; sourceTree = "<group>"; };
 		E0F9D5E8E396CCC1C98EE223F74FD08D /* PJ_vandg2.c */ = {isa = PBXFileReference; includeInIndex = 1; name = PJ_vandg2.c; path = proj/src/PJ_vandg2.c; sourceTree = "<group>"; };
 		E1062708F0B512C3D59C163EA813278C /* Networking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Networking.xcconfig; sourceTree = "<group>"; };
+		E11BF7D73E286E626CAA0C31E1D57488 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Frameworks/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		E142BBE18A41CDC0305B82B96D837543 /* da.lproj */ = {isa = PBXFileReference; includeInIndex = 1; path = da.lproj; sourceTree = "<group>"; };
 		E14ADD7E0D9AF6E1C81468105E5CABB2 /* rtodms.c */ = {isa = PBXFileReference; includeInIndex = 1; name = rtodms.c; path = proj/src/rtodms.c; sourceTree = "<group>"; };
 		E1C6A4827D3D27C6418872130052DDFC /* AANearParabolic.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = AANearParabolic.cpp; path = WhirlyGlobeSrc/local_libs/aaplus/AANearParabolic.cpp; sourceTree = "<group>"; };
@@ -4435,7 +4440,6 @@
 		E8F6C581118343E9F5D072C50CE6A173 /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
 		E922FFDC1101D966048E2DFC4B1FE0E0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E959CBB4E775B6883CFB39CA75E18C63 /* bezierarc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bezierarc.h; path = WhirlyGlobeSrc/local_libs/glues/source/libnurbs/internals/bezierarc.h; sourceTree = "<group>"; };
-		E981BB2AD6775FAC5856B0B38CD7F249 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = iOS/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		E9A41C28AF68A95F5EA8B800A6267E50 /* FBSDKGraphRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKGraphRequest.m; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequest.m; sourceTree = "<group>"; };
 		E9E32318DBA2AEC3EE4F56F2E48E7C5E /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		E9EC11258E20F4F2236BA550D39090E7 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
@@ -4458,7 +4462,6 @@
 		EC83B2D0A2469B3D5EFF4090FB662135 /* GTM.geojson */ = {isa = PBXFileReference; includeInIndex = 1; name = GTM.geojson; path = vectors/country_json_50m/GTM.geojson; sourceTree = "<group>"; };
 		EC8564EB6B16B63F55C7976AD16E9242 /* _FBSDKTemporaryErrorRecoveryAttempter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = _FBSDKTemporaryErrorRecoveryAttempter.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/_FBSDKTemporaryErrorRecoveryAttempter.h; sourceTree = "<group>"; };
 		EC97CDD9144E6EC82A16189F38065CAF /* libjson-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "libjson-dummy.m"; sourceTree = "<group>"; };
-		ECF7ADCDB0D9982778C6F2B677E77276 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = iOS/TwitterKit.framework; sourceTree = "<group>"; };
 		ED052184BED23E1138AA35E129C28B17 /* world_web_mercator.sqlite */ = {isa = PBXFileReference; includeInIndex = 1; name = world_web_mercator.sqlite; path = elevation/world_web_mercator.sqlite; sourceTree = "<group>"; };
 		ED384A6815BEC5A5549C03E08DD84473 /* FBSDKCoreKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSDKCoreKit-prefix.pch"; sourceTree = "<group>"; };
 		ED522D3D6FF185E9F73880828EFB24CC /* SphericalMercator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SphericalMercator.h; path = WhirlyGlobeSrc/WhirlyGlobeLib/include/SphericalMercator.h; sourceTree = "<group>"; };
@@ -5763,14 +5766,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3FE9C0FAEE061D29E1074F94DFBD993D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				ECF7ADCDB0D9982778C6F2B677E77276 /* TwitterKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3FEEC7825BDEE62850207D501DB081FE /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
@@ -5814,6 +5809,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		43E6FB1980D0B4610709D00183136E1E /* TwitterKit */ = {
+			isa = PBXGroup;
+			children = (
+				FCA71AEDCF153A01EB6155E2ECFFFD0C /* Frameworks */,
+				489BEB2B2DD884ACD1E646FECCB1B001 /* Resources */,
+			);
+			name = TwitterKit;
+			path = TwitterKit;
+			sourceTree = "<group>";
+		};
 		45068FC1C8CFCAFA5F35BB7A29E37791 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -5826,6 +5831,15 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/FacebookCore";
+			sourceTree = "<group>";
+		};
+		489BEB2B2DD884ACD1E646FECCB1B001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3762C5DB3FF1715C6D9548E0C10A9711 /* TwitterKitResources.bundle */,
+				5D06D88E01A358AEBE44BD49DD93CBCA /* TwitterShareExtensionUIResources.bundle */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		4A5AEE2EDADC474F01F553DF6CE40200 /* NSURLConnection */ = {
@@ -5967,6 +5981,16 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/hpple";
+			sourceTree = "<group>";
+		};
+		5CBC07839822CAF23DF47C2CBFC584B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA7C72E1E30D463D6748BC56B17850 /* FirebaseCore.framework */,
+				E11BF7D73E286E626CAA0C31E1D57488 /* FirebaseCoreDiagnostics.framework */,
+				22AB4D6E2AC25076DCD67481029A4942 /* FirebaseNanoPB.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5CDEF2DD3D80C664D9442DA3680901D4 /* UIKit */ = {
@@ -6158,14 +6182,6 @@
 			name = "MaplyComponent-Headers";
 			sourceTree = "<group>";
 		};
-		6C587AE58884E0330C001233C7180E67 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				608EB98D9008E48755EDC7A3F1702212 /* FirebaseCore.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		71ECDA07326FEA86340EF868AA58D668 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -6186,7 +6202,7 @@
 				DA848C35E0B3E80F408F3C4DC01860D8 /* Firebase */,
 				2C7E1022B337243EF5211320C6BB5223 /* FirebaseAnalytics */,
 				2F045FC1D9AC61C2AE40F5ED7896100F /* FirebaseAuth */,
-				CBC49FCFDAF92324A153F9B84B13320E /* FirebaseCore */,
+				84305EB08638ED60C703CF78A089B628 /* FirebaseCore */,
 				4AE34487EF1D1F6B8AA3CC94533394CA /* FirebaseDatabase */,
 				0DD8F55C3684ED563A385F4F5CD09402 /* FirebaseInstanceID */,
 				B8117B481FF2A0560CEE0F99D02EE5C4 /* FirebaseStorage */,
@@ -6209,7 +6225,7 @@
 				C50495EE406AD3F56C304B33CC6C45E7 /* SMCalloutView */,
 				96F11D0499E7B8E831CD190FE4C62328 /* tinyxml */,
 				E31B74AD9E74197682A0A3BCA285C454 /* TwitterCore */,
-				C5537005075CF1423BA6029C2639DDD2 /* TwitterKit */,
+				43E6FB1980D0B4610709D00183136E1E /* TwitterKit */,
 				8D4FE742DC5D53E5E30B1C8DC8C2D105 /* WhirlyGlobe */,
 				29F07276CE2136424D82123979ABD7BB /* WhirlyGlobeResources */,
 			);
@@ -6460,6 +6476,15 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/FBSDKCoreKit";
+			sourceTree = "<group>";
+		};
+		84305EB08638ED60C703CF78A089B628 /* FirebaseCore */ = {
+			isa = PBXGroup;
+			children = (
+				5CBC07839822CAF23DF47C2CBFC584B7 /* Frameworks */,
+			);
+			name = FirebaseCore;
+			path = FirebaseCore;
 			sourceTree = "<group>";
 		};
 		8443C7677D8E1D0E1284D314229D1168 /* clipper */ = {
@@ -6730,14 +6755,6 @@
 			);
 			name = WhirlyGlobe;
 			path = WhirlyGlobe;
-			sourceTree = "<group>";
-		};
-		91F198EA398187AD9607FE0C3D1DEAF2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E981BB2AD6775FAC5856B0B38CD7F249 /* TwitterKitResources.bundle */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		93052818CEF193E203A83D28C59B4B34 /* Security */ = {
@@ -7210,16 +7227,6 @@
 			path = SMCalloutView;
 			sourceTree = "<group>";
 		};
-		C5537005075CF1423BA6029C2639DDD2 /* TwitterKit */ = {
-			isa = PBXGroup;
-			children = (
-				3FE9C0FAEE061D29E1074F94DFBD993D /* Frameworks */,
-				91F198EA398187AD9607FE0C3D1DEAF2 /* Resources */,
-			);
-			name = TwitterKit;
-			path = TwitterKit;
-			sourceTree = "<group>";
-		};
 		C778AF3A8827A96628A8E7043F296212 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -7229,15 +7236,6 @@
 			);
 			name = MBProgressHUD;
 			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		CBC49FCFDAF92324A153F9B84B13320E /* FirebaseCore */ = {
-			isa = PBXGroup;
-			children = (
-				6C587AE58884E0330C001233C7180E67 /* Frameworks */,
-			);
-			name = FirebaseCore;
-			path = FirebaseCore;
 			sourceTree = "<group>";
 		};
 		CF5EBEA161E41006C6F570EBED445871 /* NSString+URLArguments */ = {
@@ -8166,6 +8164,14 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SimulatorStatusMagic";
+			sourceTree = "<group>";
+		};
+		FCA71AEDCF153A01EB6155E2ECFFFD0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C5016AEC17281CFE04CD1F81E5D7CB1 /* TwitterKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
