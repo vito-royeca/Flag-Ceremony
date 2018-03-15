@@ -223,13 +223,13 @@ class ChartsViewController: CommonViewController {
                             cell.nameLabel.text = u.displayName
                             
                             if let photoURL = u.photoURL {
-                                let url = URL(string: photoURL)
-                                
-                                NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
-                                    if let image = image {
-                                        cell.imageIcon.image = image
-                                    }
-                                })
+                                if let url = URL(string: photoURL) {
+                                    NetworkingManager.sharedInstance.downloadImage(url: url, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
+                                        if let image = image {
+                                            cell.imageIcon.image = image
+                                        }
+                                    })
+                                }
                             }
                             break
                         }
