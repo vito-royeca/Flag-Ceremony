@@ -8,7 +8,6 @@
 
 import UIKit
 import Networking
-import ReachabilitySwift
 
 enum HTTPMethod: String {
     case post  = "Post",
@@ -21,7 +20,6 @@ typealias NetworkingResult = (_ result: [[String : Any]], _ error: NSError?) -> 
 
 class NetworkingManager: NSObject {
     var networkers = [String: Any]()
-    let reachability = Reachability()!
     
     func doOperation(_ baseUrl: String,
                      path: String,
@@ -30,11 +28,7 @@ class NetworkingManager: NSObject {
                      paramType: Networking.ParameterType,
                      params: AnyObject?,
                      completionHandler: @escaping NetworkingResult) -> Void {
-        if !reachability.isReachable {
-            let error = NSError(domain: "network", code: 408, userInfo: [NSLocalizedDescriptionKey: "Network error."])
-            completionHandler([[String : Any]](), error)
-            
-        } else {
+        
             let networker = networking(forBaseUrl: baseUrl)
             
             if let headers = headers {
@@ -46,10 +40,10 @@ class NetworkingManager: NSObject {
                 networker.post(path, parameterType: paramType, parameters: params, completion: {(result) in
                     switch result {
                     case .success(let response):
-                        if response.json.dictionary.count > 0 {
-                            completionHandler([response.json.dictionary], nil)
-                        } else if response.json.array.count > 0 {
-                            completionHandler(response.json.array, nil)
+                        if response.dictionaryBody.count > 0 {
+                            completionHandler([response.dictionaryBody], nil)
+                        } else if response.arrayBody.count > 0 {
+                            completionHandler(response.arrayBody, nil)
                         } else {
                             completionHandler([[String : Any]](), nil)
                         }
@@ -63,10 +57,10 @@ class NetworkingManager: NSObject {
                 networker.get(path, parameters: params, completion: {(result) in
                     switch result {
                     case .success(let response):
-                        if response.json.dictionary.count > 0 {
-                            completionHandler([response.json.dictionary], nil)
-                        } else if response.json.array.count > 0 {
-                            completionHandler(response.json.array, nil)
+                        if response.dictionaryBody.count > 0 {
+                            completionHandler([response.dictionaryBody], nil)
+                        } else if response.arrayBody.count > 0 {
+                            completionHandler(response.arrayBody, nil)
                         } else {
                             completionHandler([[String : Any]](), nil)
                         }
@@ -82,10 +76,10 @@ class NetworkingManager: NSObject {
                 networker.put(path, parameterType: paramType, parameters: params, completion: {(result) in
                     switch result {
                     case .success(let response):
-                        if response.json.dictionary.count > 0 {
-                            completionHandler([response.json.dictionary], nil)
-                        } else if response.json.array.count > 0 {
-                            completionHandler(response.json.array, nil)
+                        if response.dictionaryBody.count > 0 {
+                            completionHandler([response.dictionaryBody], nil)
+                        } else if response.arrayBody.count > 0 {
+                            completionHandler(response.arrayBody, nil)
                         } else {
                             completionHandler([[String : Any]](), nil)
                         }
@@ -96,7 +90,7 @@ class NetworkingManager: NSObject {
                     }
                 })
             }
-        }
+        
     }
     
     func downloadImage(url: URL, completionHandler: @escaping (_ origURL: URL?, _ image: UIImage?, _ error: NSError?) -> Void) {
@@ -161,14 +155,17 @@ class NetworkingManager: NSObject {
     // MARK: Private methods
     private func networking(forBaseUrl url: String) -> Networking {
         var networker:Networking?
-        
-        if let n = networkers[url] as? Networking {
-            networker = n
-        } else {
-            let newN = Networking(baseURL: url, configurationType: .default)
-            networkers[url] = newN
-            networker = newN
-        }
+//
+//        if let n = networkers[url] as? Networking {
+//            networker = n
+//        } else {
+//            let newN = Networking(baseURL: url, configurationType: .default)
+//
+//            networkers[url] = newN
+//            networker = newN
+//        }
+//
+        networker = Networking(baseURL: url, configuration: .default)
         
         return networker!
     }
@@ -183,14 +180,16 @@ class NetworkingManager: NSObject {
             baseUrl.append(host)
         }
         
-        if let n = networkers[baseUrl] as? Networking {
-            networker = n
-        } else {
-            let newN = Networking(baseURL: baseUrl, configurationType: .default)
-            networkers[baseUrl] = newN
-            networker = newN
-        }
+//        if let n = networkers[baseUrl] as? Networking {
+//            networker = n
+//        } else {
+//            let newN = Networking(baseURL: baseUrl, configurationType: .default)
+//
+//            networkers[baseUrl] = newN
+//            networker = newN
+//        }
         
+        networker = Networking(baseURL: baseUrl, configuration: .default)
         return networker!
     }
     

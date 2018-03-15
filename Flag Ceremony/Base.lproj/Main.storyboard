@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xbX-80-daL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xbX-80-daL">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
         <!--Globe View Controller-->
         <scene sceneID="Zei-v3-eUS">
             <objects>
-                <viewController id="v19-cJ-vPn" customClass="GlobeViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v19-cJ-vPn" customClass="GlobeViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iqG-ly-PGz"/>
                         <viewControllerLayoutGuide type="bottom" id="zUw-hf-cI5"/>
@@ -68,7 +68,7 @@
         <!--Map View Controller-->
         <scene sceneID="wF9-27-vUm">
             <objects>
-                <viewController id="efe-pB-qzf" customClass="MapViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="efe-pB-qzf" customClass="MapViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pp8-Db-J8K"/>
                         <viewControllerLayoutGuide type="bottom" id="drs-V4-M19"/>
@@ -404,7 +404,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KF7-J8-a2a">
             <objects>
-                <navigationController id="i4I-GZ-Xl2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i4I-GZ-Xl2" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="6VH-GH-DKW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -480,7 +480,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mw-Ll-GSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3255" y="1419"/>
+            <point key="canvasLocation" x="-1157" y="-485"/>
         </scene>
         <!--Drawer Controller-->
         <scene sceneID="Jfv-Qa-7bE">
@@ -502,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rd0-RO-5fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2094" y="504"/>
+            <point key="canvasLocation" x="-2784" y="504"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="KKx-0r-FKi">
@@ -741,7 +741,7 @@
         <!--Account View Controller-->
         <scene sceneID="mRc-NV-hK6">
             <objects>
-                <viewController id="g47-nE-uKx" customClass="AccountViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="g47-nE-uKx" customClass="AccountViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jhn-XR-9GS"/>
                         <viewControllerLayoutGuide type="bottom" id="1af-Wu-Zjf"/>
@@ -865,7 +865,7 @@
         <!--Charts View Controller-->
         <scene sceneID="YHe-4a-WfX">
             <objects>
-                <viewController id="EF8-Xi-Sd7" customClass="ChartsViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="EF8-Xi-Sd7" customClass="ChartsViewController" customModule="Flag_Ceremony" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A5C-8l-CGx"/>
                         <viewControllerLayoutGuide type="bottom" id="5Gh-Rx-3fF"/>
@@ -1041,7 +1041,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC9-dL-MkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3255" y="504"/>
+            <point key="canvasLocation" x="-2095" y="-484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TqI-AC-qOV">
@@ -1101,9 +1101,9 @@
         <image name="user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ine-Dg-JAj"/>
-        <segue reference="jN8-r2-9ps"/>
-        <segue reference="3L4-tk-8vC"/>
+        <segue reference="ZdL-oJ-FYe"/>
+        <segue reference="l87-iQ-vgf"/>
+        <segue reference="Q6A-TY-pWV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

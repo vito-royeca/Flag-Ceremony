@@ -235,7 +235,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func twitterAction(_ sender: UIButton) {
-        Twitter.sharedInstance().logIn { session, error in
+        TWTRTwitter.sharedInstance().logIn { session, error in
             if let error = error {
                 let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))

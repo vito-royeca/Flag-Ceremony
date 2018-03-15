@@ -126,38 +126,12 @@ class CountryViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        tableView.reloadData()
-        
-        if let flagCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) ,
-            let anthemCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
-            
-            // anthems are fetched from Firebase
-            if let cacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
-                let anthemsDir = "\(cacheDir)/anthems"
-                let localPath = "\(anthemsDir)/\(country!.key!.lowercased()).mp3"
-                
-                if FileManager.default.fileExists(atPath: localPath) {
-                    anthemCell.initPlayer(withURL: URL(fileURLWithPath: localPath))
-                    anthemCell.play()
-                    self.isPlaying = true
 
-                } else {
-                    MBProgressHUD.showAdded(to: flagCell, animated: true)
-                    anthemCell.toggleUI(true, message: "Downloading...")
-                    FirebaseManager.sharedInstance.downloadAnthem(country: country!, completion: {(url: URL?, error: Error?) in
-                        MBProgressHUD.hide(for: flagCell, animated: true)
-                        
-                        if let _ = error {
-                            self.updatePlayButton(false)
-                            anthemCell.toggleUI(true, message: "Audio file not found.")
-                        } else {
-                            anthemCell.toggleUI(false, message: nil)
-                            anthemCell.initPlayer(withURL: url!)
-                            anthemCell.play()
-                            self.isPlaying = true
-                        }
-                    })
-                }
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
+            if let url = country!.getAudioURL() {
+                cell.initPlayer(withURL: url)
+                cell.play()
+                isPlaying = true
             }
         }
     }

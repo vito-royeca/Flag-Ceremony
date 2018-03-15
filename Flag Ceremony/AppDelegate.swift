@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("docsPath = \(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])")
         
         // init services
-        Fabric.with([Crashlytics.self, Twitter.self])
+//        Fabric.with([Crashlytics.self, Twitter.self])
+//        TWTRTwitter.sharedInstance().start(withConsumerKey: "", consumerSecret: "")
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID

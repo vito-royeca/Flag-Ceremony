@@ -40,9 +40,9 @@ class CommonViewController: UIViewController {
 
     func showCountryList() {
         if UIDevice.current.userInterfaceIdiom == .phone {
-            self.performSegue(withIdentifier: "showCountriesAsPush", sender: nil)
+            performSegue(withIdentifier: "showCountriesAsPush", sender: nil)
         } else if UIDevice.current.userInterfaceIdiom == .pad {
-            self.performSegue(withIdentifier: "showCountriesAsPopup", sender: nil)
+            performSegue(withIdentifier: "showCountriesAsPopup", sender: nil)
         }
     }
     
