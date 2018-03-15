@@ -10,11 +10,12 @@ Flag Ceremony is now available on the [App Store](https://itunes.apple.com/WebOb
 
 ## Cloning
 
-Clone the GitHub repository and open the project workspace `Flag Ceremony.xcworkspace`. You may not need to install the Cocoapod dependencies as they are already inluded in the project repository.
+Clone the GitHub repository and the install the Cocoapods. Open the project workspace `Flag Ceremony.xcworkspace`.
 
 ```
 $ git clone https://github.com/jovito-royeca/Flag-Ceremony.git
 $ cd Flag-Ceremony
+$ pod install
 $ open Flag Ceremony.xcworkspace
 ```
 
