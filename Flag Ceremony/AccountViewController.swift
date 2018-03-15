@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MBProgressHUD
+import SDWebImage
 
 class AccountViewController: CommonViewController {
 
@@ -205,7 +206,9 @@ extension AccountViewController : UITableViewDataSource {
         switch indexPath.section {
         case 0:
             if let dataCell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as? DataTableViewCell {
-                dataCell.imageIcon.image = UIImage(named: "user")
+                let placeholderImage = UIImage(named: "user")
+                
+                dataCell.imageIcon.image = placeholderImage
                 dataCell.rankLabel.text = " "
                 dataCell.nameLabel.text = "Not logged in"
                 dataCell.statIcon.image = nil
@@ -216,12 +219,8 @@ extension AccountViewController : UITableViewDataSource {
                 if let user = Auth.auth().currentUser,
                     let activity = activity {
                     
-                    if let photoURL = user.photoURL {
-                        NetworkingManager.sharedInstance.downloadImage(url: photoURL, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
-                            if let image = image {
-                                dataCell.imageIcon.image = image
-                            }
-                        })
+                    if let url = user.photoURL {
+                        dataCell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
                     }
                     dataCell.nameLabel.text = user.displayName ?? user.email
                     dataCell.statIcon.image = UIImage(named: "view-filled")

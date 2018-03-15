@@ -20,8 +20,8 @@ def shared_pods
     pod 'MBProgressHUD'
     pod 'MMDrawerController'
     pod 'MMDrawerController+Storyboard'
-    pod 'Networking'
-    pod 'ReachabilitySwift'
+    pod 'PromiseKit', '~> 6.0'
+    pod 'PromiseKit/Foundation'
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
     pod 'TwitterKit'
     pod 'TwitterCore'

@@ -8,8 +8,8 @@
 
 import UIKit
 //import FBSDKCoreKit
-import Networking
 import MBProgressHUD
+import SDWebImage
 
 class ChartsViewController: CommonViewController {
 
@@ -175,6 +175,8 @@ class ChartsViewController: CommonViewController {
     }
     
     func configure(cell: DataTableViewCell, at indexPath: IndexPath) {
+        let placeholderImage = UIImage(named: "user")
+        
         cell.statIcon2.isHidden = true
         cell.statLabel2.isHidden = true
         
@@ -216,7 +218,7 @@ class ChartsViewController: CommonViewController {
                 let activity = topViewers[indexPath.row]
                 
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
-                cell.imageIcon.image = UIImage(named: "user")
+                cell.imageIcon.image = placeholderImage
                 if let users = users {
                     for u in users {
                         if u.key == activity.key {
@@ -224,11 +226,7 @@ class ChartsViewController: CommonViewController {
                             
                             if let photoURL = u.photoURL {
                                 if let url = URL(string: photoURL) {
-                                    NetworkingManager.sharedInstance.downloadImage(url: url, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
-                                        if let image = image {
-                                            cell.imageIcon.image = image
-                                        }
-                                    })
+                                    cell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
                                 }
                             }
                             break
@@ -245,20 +243,16 @@ class ChartsViewController: CommonViewController {
                 let activity = topPlayers[indexPath.row]
                 
                 cell.rankLabel.text = "#\(indexPath.row + 1)"
-                cell.imageIcon.image = UIImage(named: "user")
+                cell.imageIcon.image = placeholderImage
                 if let users = users {
                     for u in users {
                         if u.key == activity.key {
                             cell.nameLabel.text = u.displayName
                             
                             if let photoURL = u.photoURL {
-                                let url = URL(string: photoURL)
-
-                                NetworkingManager.sharedInstance.downloadImage(url: url!, completionHandler: { (origURL: URL?, image: UIImage?, error: NSError?) in
-                                    if let image = image {
-                                        cell.imageIcon.image = image
-                                    }
-                                })
+                                if let url = URL(string: photoURL) {
+                                    cell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
+                                }
                             }
                             break
                         }

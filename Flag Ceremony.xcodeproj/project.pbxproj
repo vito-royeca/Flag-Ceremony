@@ -57,9 +57,6 @@
 		8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E973D1D88ED51005A685B /* Flag_CeremonyTests.swift */; };
 		8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */; };
 		8C4E97571D890900005A685B /* data in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E97561D890900005A685B /* data */; };
-		8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
-		8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
-		8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */; };
 		8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
 		8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
 		8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
@@ -156,7 +153,6 @@
 		8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag_CeremonyUITests.swift; sourceTree = "<group>"; };
 		8C4E974A1D88ED51005A685B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C4E97561D890900005A685B /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
-		8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
@@ -334,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				8CD893B21DE5B571007052C7 /* FirebaseManager.swift */,
-				8CBB26A21DD983BD00660EB9 /* NetworkingManager.swift */,
 				8CE8E77B1DE524D5009097FF /* Scraper.swift */,
 				11F3C13E1EB01F610012BC47 /* RomanNumber.swift */,
 			);
@@ -560,8 +555,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController+Storyboard/MMDrawerController_Storyboard.framework",
-				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SMCalloutView/SMCalloutView.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
@@ -594,8 +588,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController_Storyboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SMCalloutView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
@@ -1434,8 +1427,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController+Storyboard/MMDrawerController_Storyboard.framework",
-				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SMCalloutView/SMCalloutView.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
@@ -1468,8 +1460,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController_Storyboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SMCalloutView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
@@ -1530,8 +1521,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/MMDrawerController+Storyboard/MMDrawerController_Storyboard.framework",
-				"${BUILT_PRODUCTS_DIR}/Networking/Networking.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SMCalloutView/SMCalloutView.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
@@ -1564,8 +1554,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController_Storyboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Networking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SMCalloutView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
@@ -3233,7 +3222,6 @@
 				8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */,
 				1173C92C1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				11F3C13F1EB01F610012BC47 /* RomanNumber.swift in Sources */,
-				8CBB26A31DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CD893B31DE5B571007052C7 /* FirebaseManager.swift in Sources */,
 				11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F71E974BDA00178709 /* DataTableViewCell.swift in Sources */,
@@ -3260,7 +3248,6 @@
 				11215BAF1E085FEA0070DD8A /* FCActivity.swift in Sources */,
 				8C2370431DDD56FB00F30712 /* FirebaseTests.swift in Sources */,
 				8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */,
-				8CBB26A41DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8CE297BF1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8C02966D1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
@@ -3292,7 +3279,6 @@
 				8CD893B91DE5B8F1007052C7 /* FCAnthem.swift in Sources */,
 				8CEFB6451DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
-				8CBB26A51DD983BD00660EB9 /* NetworkingManager.swift in Sources */,
 				8C02966E1D8A46FD00BE8C02 /* MapViewController.swift in Sources */,
 				1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,

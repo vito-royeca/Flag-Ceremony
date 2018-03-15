@@ -9,36 +9,53 @@
 import Foundation
 import Firebase
 import hpple
-import Networking
+import PromiseKit
 
 class Scraper : NSObject {
     let ref = Database.database().reference()
     
+    // MARK: Firebase
     func insertCountries() {
-        let baseURL = CountriesURL
-        let path = "/api/en/countries/info/all.json"
-        let method:HTTPMethod = .get
-        let headers:[String: String]? = nil
-        let paramType:Networking.ParameterType = .json
-        let params = "?x=100" as AnyObject
-        let completionHandler = { (result: [[String : Any]], error: NSError?) -> Void in
-            if let error = error {
-                print("error: \(error)")
-            } else {
-                if let data = result.first {
-                    if let countries = data["Results"] as? [String: [String: Any]] {
-                        for (key,value) in countries {
-                            let country = self.ref.child("countries").child(key)
-                            for (key2,value2) in value {
-                                country.child(key2).setValue(value2)
-                            }
-                        }
-                    }
-                }
+        if let url = URL(string: "\(CountriesURL)//api/en/countries/info/all.json?x=100") {
+            var rq = URLRequest(url: url)
+            rq.httpMethod = "GET"
+            rq.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            rq.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            firstly {
+                URLSession.shared.dataTask(.promise, with: rq)
+                }.compactMap {
+                    try JSONSerialization.jsonObject(with: $0.data, options: .allowFragments)
+                }.done { foo in
+                    //…
+                }.catch { error in
+                    //…
             }
         }
-        
-        NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
+//        let baseURL = CountriesURL
+//        let path = "/api/en/countries/info/all.json"
+//        let method:HTTPMethod = .get
+//        let headers:[String: String]? = nil
+//        let paramType:Networking.ParameterType = .json
+//        let params = "?x=100" as AnyObject
+//        let completionHandler = { (result: [[String : Any]], error: NSError?) -> Void in
+//            if let error = error {
+//                print("error: \(error)")
+//            } else {
+//                if let data = result.first {
+//                    if let countries = data["Results"] as? [String: [String: Any]] {
+//                        for (key,value) in countries {
+//                            let country = self.ref.child("countries").child(key)
+//                            for (key2,value2) in value {
+//                                country.child(key2).setValue(value2)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
     }
     
     func insertAnthems() {
@@ -86,7 +103,8 @@ class Scraper : NSObject {
         }
     }
     
-    func downloadAnthemFiles() {
+    // MARK: Scraper
+    func getAnthemFiles() {
         ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
             let countries = snapshot.value as? [String: [String: Any]] ?? [:]
             
@@ -242,7 +260,7 @@ class Scraper : NSObject {
                                         // add flagInfo
                                         var willGetFlagInfo = false
                                         if let flagInfo = anthemDict[FCAnthem.Keys.FlagInfo] as? String {
-                                            if flagInfo.characters.count == 0 {
+                                            if flagInfo.count == 0 {
                                                 willGetFlagInfo = true
                                             }
                                         } else {
@@ -312,8 +330,6 @@ class Scraper : NSObject {
                                 try FileManager.default.removeItem(atPath: localPath)
                             }
                             
-                            
-                            
                             // creating JSON out of the above array
                             let jsonData = try JSONSerialization.data(withJSONObject: newDict, options: .prettyPrinted)
                             try jsonData.write(to: URL(fileURLWithPath: localPath))
@@ -328,10 +344,11 @@ class Scraper : NSObject {
         }
     }
     
-    func countryNameFrom(countries: [String: Any]) -> String {
-        return ""
-    }
+//    func countryNameFrom(countries: [String: Any]) -> String {
+//        return ""
+//    }
     
+    // MARK: Parser
     func readUrl(url: URL) -> TFHpple? {
         do {
             let data = try Data(contentsOf: url)
