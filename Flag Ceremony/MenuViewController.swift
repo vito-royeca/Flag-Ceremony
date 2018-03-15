@@ -13,6 +13,13 @@ import StoreKit
 
 let kLoginShown = "kLoginShown"
 
+let kAppsInfo = [["id": CineKo_AppID,
+                  "name": "Cine Ko!",
+                  "image": "cineKo"],
+                 ["id": WTHRM8_AppID,
+                  "name": "WTHRM8",
+                  "image": "wthrm8"]]
+
 class MenuViewController: CommonViewController {
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -69,7 +76,7 @@ extension MenuViewController : UITableViewDataSource {
         case 0:
             rows = 2
         case 1:
-            rows = 4
+            rows = kAppsInfo.count
         case 2:
             rows = 1
         default:
@@ -124,22 +131,9 @@ extension MenuViewController : UITableViewDataSource {
                 imageLayer.masksToBounds = true
             }
             
-            switch indexPath.row {
-            case 0:
-                cell.textLabel!.text = "Cine Ko!"
-                cell.imageView!.image = UIImage(named: "cineKo")
-            case 1:
-                cell.textLabel!.text = "Decktracker"
-                cell.imageView!.image = UIImage(named: "decktracker")
-            case 2:
-                cell.textLabel!.text = "Fun With TTS"
-                cell.imageView!.image = UIImage(named: "funWithTTS")
-            case 3:
-                cell.textLabel!.text = "WTHRM8"
-                cell.imageView!.image = UIImage(named: "wthrm8")
-            default:
-                ()
-            }
+            cell.textLabel!.text = kAppsInfo[indexPath.row]["name"]
+            cell.imageView!.image = UIImage(named: kAppsInfo[indexPath.row]["image"]!)
+            
         case 2:
             switch indexPath.row {
             case 0:
@@ -177,26 +171,10 @@ extension MenuViewController : UITableViewDelegate {
                 ()
             }
         case 1:
-            switch indexPath.row {
-            case 0:
-                showParentalGate {
-                    self.openStoreProduct(identifier: CineKo_AppID)
-                }
-            case 1:
-                showParentalGate {
-                    self.openStoreProduct(identifier: Decktracker_AppID)
-                }
-            case 2:
-                showParentalGate {
-                    self.openStoreProduct(identifier: FunWithTTS_AppID)
-                }
-            case 3:
-                showParentalGate {
-                    self.openStoreProduct(identifier: WTHRM8_AppID)
-                }
-            default:
-                ()
+            showParentalGate {
+                self.openStoreProduct(identifier: kAppsInfo[indexPath.row]["id"]!)
             }
+            
         case 2:
             switch indexPath.row {
             case 0:
