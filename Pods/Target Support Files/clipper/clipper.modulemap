@@ -1,6 +1,0 @@
-framework module clipper {
-  umbrella header "clipper-umbrella.h"
-
-  export *
-  module * { export * }
-}
