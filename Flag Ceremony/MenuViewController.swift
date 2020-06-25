@@ -35,8 +35,18 @@ class MenuViewController: CommonViewController {
     func showShareActivity(sourceView: UIView) {
         let appIcon = UIImage(named: "AppIcon40x40")
         let objectsToShare = ["Flag Ceremony is an iOS app that displays flags and plays national anthems from various countries around the world.", appIcon!] as [Any]
-        let excludedActivities = [UIActivityType.postToWeibo, UIActivityType.print,UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.saveToCameraRoll, UIActivityType.addToReadingList, UIActivityType.postToFlickr, UIActivityType.postToVimeo, UIActivityType.postToTencentWeibo, UIActivityType.airDrop]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let excludedActivities = [UIActivity.ActivityType.postToWeibo,
+                                  UIActivity.ActivityType.print,
+                                  UIActivity.ActivityType.copyToPasteboard,
+                                  UIActivity.ActivityType.assignToContact,
+                                  UIActivity.ActivityType.saveToCameraRoll,
+                                  UIActivity.ActivityType.addToReadingList,
+                                  UIActivity.ActivityType.postToFlickr,
+                                  UIActivity.ActivityType.postToVimeo,
+                                  UIActivity.ActivityType.postToTencentWeibo,
+                                  UIActivity.ActivityType.airDrop]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare,
+                                                  applicationActivities: nil)
         
         activityVC.excludedActivityTypes = excludedActivities
         activityVC.completionWithItemsHandler = { activity, success, items, error in
@@ -196,7 +206,7 @@ extension MenuViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

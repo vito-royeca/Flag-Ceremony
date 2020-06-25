@@ -36,7 +36,7 @@ class ChartsViewController: CommonViewController {
             }
             if menuView == nil {
                 menuView = MenuViewController()
-                navigationVC.addChildViewController(menuView!)
+                navigationVC.addChild(menuView!)
             }
             
             navigationVC.popToViewController(menuView!, animated: true)
@@ -106,7 +106,7 @@ class ChartsViewController: CommonViewController {
             var countryVC:CountryViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryViewController {
+                if let vc = nav.children.first as? CountryViewController {
                     countryVC = vc
                 }
             } else if let vc = segue.destination as? CountryViewController {
@@ -226,7 +226,10 @@ class ChartsViewController: CommonViewController {
                             
                             if let photoURL = u.photoURL {
                                 if let url = URL(string: photoURL) {
-                                    cell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
+                                    cell.imageIcon.sd_setImage(with: url,
+                                                               placeholderImage: placeholderImage,
+                                                               options: SDWebImageOptions.lowPriority,
+                                                               completed: nil)
                                 }
                             }
                             break
@@ -330,7 +333,7 @@ extension ChartsViewController : UITableViewDelegate {
         
         switch indexPath.section {
         case 0:
-            height = UITableViewAutomaticDimension
+            height = UITableView.automaticDimension
         case 1:
             height = DataTableViewCellHeight
         default:

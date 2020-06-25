@@ -84,7 +84,7 @@ class AccountViewController: CommonViewController {
             var countryVC:CountryViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryViewController {
+                if let vc = nav.children.first as? CountryViewController {
                     countryVC = vc
                 }
             } else if let vc = segue.destination as? CountryViewController {
@@ -260,7 +260,7 @@ extension AccountViewController : UITableViewDelegate {
         case 0,2:
             height = DataTableViewCellHeight
         case 1:
-            height = UITableViewAutomaticDimension
+            height = UITableView.automaticDimension
         default:
             ()
         }

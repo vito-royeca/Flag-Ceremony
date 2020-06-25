@@ -62,8 +62,13 @@ class CountryViewController: UIViewController {
         // app name hashtag
         objectsToShare.append("#FlagCeremony")
         
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        let excludedActivities = [UIActivityType.print,UIActivityType.copyToPasteboard, UIActivityType.assignToContact, UIActivityType.addToReadingList, UIActivityType.airDrop]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare,
+                                                  applicationActivities: nil)
+        let excludedActivities = [UIActivity.ActivityType.print,
+                                  UIActivity.ActivityType.copyToPasteboard,
+                                  UIActivity.ActivityType.assignToContact,
+                                  UIActivity.ActivityType.addToReadingList,
+                                  UIActivity.ActivityType.airDrop]
         
         activityVC.excludedActivityTypes = excludedActivities
         activityVC.completionWithItemsHandler = { activity, success, items, error in
@@ -105,9 +110,10 @@ class CountryViewController: UIViewController {
         // Do any additional setup after loading the view.
         nameLabel.text = "\(country!.emojiFlag()) \(country!.name!)"
         
-        tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "AudioPlayerCell")
+        tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: "AudioPlayerCell")
         tableView.estimatedRowHeight = 88.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 
         FirebaseManager.sharedInstance.findAnthem(country!.key!, completion: { (anthem) in
             self.anthem = anthem
@@ -120,8 +126,13 @@ class CountryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CountryViewController.playListener(_:)), name: NSNotification.Name(rawValue: kAudioPlayerStatus), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: kAudioPlayerStatus),
+                                                  object:nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CountryViewController.playListener(_:)),
+                                               name: NSNotification.Name(rawValue: kAudioPlayerStatus),
+                                               object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,14 +169,14 @@ class CountryViewController: UIViewController {
                 let errorImage = UIImage(named: "error")
                 
                 let tintedImage = success ? playImage!.withRenderingMode(.alwaysTemplate) : errorImage!.withRenderingMode(.alwaysTemplate)
-                button.setImage(tintedImage, for: .normal)
+                button.setImage(tintedImage, for : .normal)
                 button.imageView!.tintColor = kBlueColor
                 button.isHidden = isPlaying
             }
         }
     }
 
-    func playListener(_ notification: Notification) {
+    @objc func playListener(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             if let status = userInfo[kAudioPlayerStatus] as? String {
                 
@@ -389,10 +400,10 @@ extension CountryViewController : UITableViewDelegate {
                     height = tableView.frame.size.height / 3
                 }
             default:
-                height =  UITableViewAutomaticDimension
+                height =  UITableView.automaticDimension
             }
         default:
-            height =  UITableViewAutomaticDimension
+            height =  UITableView.automaticDimension
         }
         
         return height

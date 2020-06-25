@@ -8,12 +8,12 @@
 
 import UIKit
 import Appirater
-import Fabric
-import Firebase
+//import Crashlytics
+//import Fabric
 import FBSDKCoreKit
+import Firebase
 import GoogleSignIn
-import Crashlytics
-import TwitterKit
+import Sync
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // print docs path
@@ -29,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // init services
 //        Fabric.with([Crashlytics.self, Twitter.self])
-//        TWTRTwitter.sharedInstance().start(withConsumerKey: "", consumerSecret: "")
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application,
+                                               didFinishLaunchingWithOptions: launchOptions)
         
         // Appirater app rater
         Appirater.setAppId(FlagCeremony_AppID)
@@ -43,11 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prod
         Appirater.setDebug(false)
         Appirater.appLaunched(false)
-        
+
+//        Scraper.sharedInstance.getCountries()
+//        Scraper.sharedInstance.getAnthems(ccFilter: "AT")
 //        Scraper.sharedInstance.getAnthemInfo()
 //        Scraper.sharedInstance.insertAnthems()
 //        Scraper.sharedInstance.getLyrics()
-//        Scraper.sharedInstance.insertAnthems()
         return true
     }
 
@@ -73,13 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var handled = false
         
         if url.absoluteString.hasPrefix("fb") {
-            handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+            handled = ApplicationDelegate.shared.application(app,
+                                                             open: url,
+                                                             options: options)
         } else if url.absoluteString.hasPrefix("com.googleusercontent.apps") {
-            handled = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+            handled = GIDSignIn.sharedInstance().handle(url)
         }
         
         return handled

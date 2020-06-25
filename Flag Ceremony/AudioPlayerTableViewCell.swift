@@ -51,7 +51,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        progressTap = UITapGestureRecognizer(target: self, action: #selector(AudioPlayerTableViewCell.progressTapAction(_:)))
+        progressTap = UITapGestureRecognizer(target: self,
+                                             action: #selector(AudioPlayerTableViewCell.progressTapAction(_:)))
         progressTap!.delegate = self
         progressTap!.numberOfTouchesRequired = 1
         progressTap!.cancelsTouchesInView = false
@@ -157,11 +158,12 @@ class AudioPlayerTableViewCell: UITableViewCell {
         }
         
         tracker = CADisplayLink(target: self, selector: #selector(AudioPlayerTableViewCell.trackAudio))
-        tracker!.frameInterval = 1
-        tracker!.add(to: RunLoop.current, forMode: .commonModes)
+        //tracker!.frameInterval = 1
+        tracker!.preferredFramesPerSecond = 1
+        tracker!.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
     }
     
-    func trackAudio() {
+    @objc  func trackAudio() {
         let currentTime = player!.currentTime
         let duration = player!.duration
         let normalizedTime = Float(currentTime / duration)
@@ -175,7 +177,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         }
     }
     
-    func progressTapAction(_ sender: UITapGestureRecognizer) {
+    @objc func progressTapAction(_ sender: UITapGestureRecognizer) {
         let pointTapped: CGPoint = sender.location(in: self)
         let positionOfSlider: CGPoint = progressSlider.frame.origin
         let widthOfSlider: CGFloat = progressSlider.frame.size.width

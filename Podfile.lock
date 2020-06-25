@@ -1,132 +1,133 @@
 PODS:
-  - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection (= 2.4.1)
-    - AFNetworking/NSURLSession (= 2.4.1)
-    - AFNetworking/Reachability (= 2.4.1)
-    - AFNetworking/Security (= 2.4.1)
-    - AFNetworking/Serialization (= 2.4.1)
-    - AFNetworking/UIKit (= 2.4.1)
-  - AFNetworking/NSURLConnection (2.4.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.4.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.4.1)
-  - AFNetworking/Security (2.4.1)
-  - AFNetworking/Serialization (2.4.1)
-  - AFNetworking/UIKit (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - Appirater (2.3.1)
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.9.0)
-  - boost/graph-includes (1.51.0)
-  - boost/math-includes (1.51.0)
-  - boost/pointer_cast-includes (1.51.0)
-  - boost/shared_ptr-includes (1.51.0)
-  - boost/string_algorithms-includes (1.51.0)
-  - clipper (6.1.3a)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
+  - DATASource (7.4.0)
+  - DATAStack (8.0.2)
   - eigen (3.2.10)
-  - Fabric (1.7.5)
-  - FacebookCore (0.3.0):
-    - Bolts (~> 1.8)
-    - FBSDKCoreKit (~> 4.27)
-  - FacebookLogin (0.3.0):
-    - Bolts (~> 1.8)
-    - FacebookCore (~> 0.3)
-    - FBSDKCoreKit (~> 4.27)
-    - FBSDKLoginKit (~> 4.27)
-  - FacebookShare (0.2.0):
-    - Bolts (~> 1.8)
-    - FacebookCore (~> 0.2)
-    - FBSDKCoreKit (~> 4.21)
-    - FBSDKShareKit (~> 4.21)
-  - FBSDKCoreKit (4.31.1):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.31.1):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.31.1):
-    - FBSDKCoreKit (~> 4.31.1)
-  - Firebase/Auth (4.10.1):
-    - Firebase/Core
-    - FirebaseAuth (= 4.4.4)
-  - Firebase/Core (4.10.1):
-    - FirebaseAnalytics (= 4.1.0)
-    - FirebaseCore (= 4.0.17)
-  - Firebase/Database (4.10.1):
-    - Firebase/Core
-    - FirebaseDatabase (= 4.1.5)
-  - Firebase/Storage (4.10.1):
-    - Firebase/Core
-    - FirebaseStorage (= 2.1.3)
-  - FirebaseAnalytics (4.1.0):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseAuth (4.4.4):
-    - FirebaseAnalytics (~> 4.1)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FBSDKCoreKit (5.15.1):
+    - FBSDKCoreKit/Basics (= 5.15.1)
+    - FBSDKCoreKit/Core (= 5.15.1)
+  - FBSDKCoreKit/Basics (5.15.1)
+  - FBSDKCoreKit/Core (5.15.1):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.15.1):
+    - FBSDKLoginKit/Login (= 5.15.1)
+  - FBSDKLoginKit/Login (5.15.1):
+    - FBSDKCoreKit (~> 5.0)
+  - Firebase/Auth (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 6.6.0)
+  - Firebase/Core (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.6.1)
+  - Firebase/CoreOnly (6.27.0):
+    - FirebaseCore (= 6.8.0)
+  - Firebase/Database (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.3.0)
+  - FirebaseAnalytics (6.6.1):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.4)
+    - GoogleAppMeasurement (= 6.6.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - FirebaseAuth (6.6.0):
+    - FirebaseCore (~> 6.8)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.5)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.17):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseDatabase (4.1.5):
-    - FirebaseAnalytics (~> 4.1)
-    - FirebaseCore (~> 4.0)
-    - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.9):
-    - FirebaseCore (~> 4.0)
-  - FirebaseStorage (2.1.3):
-    - FirebaseAnalytics (~> 4.1)
-    - FirebaseCore (~> 4.0)
+  - FirebaseCore (6.8.0):
+    - FirebaseCoreDiagnostics (~> 1.3)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+  - FirebaseCoreDiagnostics (1.4.0):
+    - GoogleDataTransportCCTSupport (~> 3.1)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+    - nanopb (~> 1.30905.0)
+  - FirebaseDatabase (6.3.0):
+    - FirebaseCore (~> 6.8)
+    - leveldb-library (~> 1.22)
+  - FirebaseInstallations (1.4.0):
+    - FirebaseCore (~> 6.8)
+    - GoogleUtilities/Environment (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.6)
+    - PromisesObjC (~> 1.2)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GoogleAppMeasurement (6.6.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - GoogleDataTransport (6.2.1)
+  - GoogleDataTransportCCTSupport (3.2.0):
+    - GoogleDataTransport (~> 6.1)
+    - nanopb (~> 1.30905.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI/Storage (4.5.4):
-    - Firebase/Storage (~> 4.0)
-    - SDWebImage (~> 4.0)
-  - FMDB (2.7.2):
-    - FMDB/standard (= 2.7.2)
-  - FMDB/standard (2.7.2)
-  - GoogleSignIn (4.1.2):
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
-    - GTMOAuth2 (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
-  - GTMOAuth2 (1.1.6):
+  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.6.0):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.6.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.6.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.6.0)"
+  - GoogleUtilities/Reachability (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.6.0):
+    - GoogleUtilities/Logger
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.14):
-    - GTMSessionFetcher/Full (= 1.1.14)
-  - GTMSessionFetcher/Core (1.1.14)
-  - GTMSessionFetcher/Full (1.1.14):
-    - GTMSessionFetcher/Core (= 1.1.14)
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
+  - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
   - hpple (0.2.0)
-  - leveldb-library (1.20)
+  - KissXML (5.3.1):
+    - KissXML/All (= 5.3.1)
+  - KissXML/Additions (5.3.1):
+    - KissXML/Core
+  - KissXML/All (5.3.1):
+    - KissXML/Additions
+    - KissXML/Core
+  - KissXML/Core (5.3.1)
+  - leveldb-library (1.22)
   - libjson (7.6.1)
-  - MBProgressHUD (1.1.0)
+  - MBProgressHUD (1.2.0)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
     - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
     - MMDrawerController/Subclass (= 0.6.0)
-  - MMDrawerController+Storyboard (0.0.2):
+  - "MMDrawerController+Storyboard (0.0.2)":
     - MMDrawerController
   - MMDrawerController/Core (0.6.0)
   - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
@@ -135,144 +136,159 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
+  - nanopb (1.30905.0):
+    - nanopb/decode (= 1.30905.0)
+    - nanopb/encode (= 1.30905.0)
+  - nanopb/decode (1.30905.0)
+  - nanopb/encode (1.30905.0)
   - proj4 (4.8.0)
-  - PromiseKit (6.2.1):
-    - PromiseKit/CorePromise (= 6.2.1)
-    - PromiseKit/Foundation (= 6.2.1)
-    - PromiseKit/UIKit (= 6.2.1)
-  - PromiseKit/CorePromise (6.2.1)
-  - PromiseKit/Foundation (6.2.1):
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.2.1):
+  - PromiseKit/UIKit (6.13.1):
     - PromiseKit/CorePromise
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
-  - SimulatorStatusMagic (2.1)
+  - PromisesObjC (1.2.9)
+  - SDWebImage (5.8.1):
+    - SDWebImage/Core (= 5.8.1)
+  - SDWebImage/Core (5.8.1)
+  - SimulatorStatusMagic (2.4.1)
   - SMCalloutView (2.1.5)
-  - tinyxml (2.1.0)
-  - TwitterCore (3.1.0)
-  - TwitterKit (3.3.0):
-    - TwitterCore (>= 3.1.0)
-  - WhirlyGlobe (2.4):
-    - WhirlyGlobe/MaplyComponent (= 2.4)
-  - WhirlyGlobe/aaplus (2.4)
-  - WhirlyGlobe/glues-wg (2.4)
-  - WhirlyGlobe/kissxml (2.4)
-  - WhirlyGlobe/Lib (2.4):
-    - clipper (~> 6.1.3a)
-    - libjson (~> 7.6.0)
-    - proj4 (~> 4.8.0)
-    - tinyxml (~> 2.1.0)
-    - WhirlyGlobe/glues-wg
-    - WhirlyGlobe/Lib-Headers
-    - WhirlyGlobe/octencoding
-    - WhirlyGlobe/shapefile
-  - WhirlyGlobe/Lib-Headers (2.4):
-    - boost/graph-includes (<= 1.51.0)
-    - boost/math-includes (<= 1.51.0)
-    - boost/pointer_cast-includes (<= 1.51.0)
-    - boost/shared_ptr-includes (<= 1.51.0)
-    - boost/string_algorithms-includes (<= 1.51.0)
-    - eigen (~> 3.2.4)
-  - WhirlyGlobe/MaplyComponent (2.4):
-    - AFNetworking (~> 2.4.0)
+  - Sync (6.0.3)
+  - WhirlyGlobe (2.6.5):
+    - WhirlyGlobe/MaplyComponent (= 2.6.5)
+  - WhirlyGlobe/glues (2.6.5)
+  - WhirlyGlobe/locallibs (2.6.5)
+  - WhirlyGlobe/MaplyComponent (2.6.5):
+    - eigen
     - FMDB
+    - KissXML
+    - libjson
+    - proj4
     - SMCalloutView
-    - WhirlyGlobe/aaplus
-    - WhirlyGlobe/kissxml
-    - WhirlyGlobe/Lib
-    - WhirlyGlobe/MaplyComponent-Headers
-  - WhirlyGlobe/MaplyComponent-Headers (2.4):
-    - WhirlyGlobe/Lib-Headers
-  - WhirlyGlobe/octencoding (2.4)
-  - WhirlyGlobe/shapefile (2.4)
+    - WhirlyGlobe/glues
+    - WhirlyGlobe/locallibs
   - WhirlyGlobeResources (2.3)
 
 DEPENDENCIES:
   - Appirater
-  - Crashlytics
-  - Fabric
+  - DATASource
+  - DATAStack
   - FacebookCore
   - FacebookLogin
-  - FacebookShare (from `https://github.com/1amageek/facebook-sdk-swift`)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
-  - FirebaseUI/Storage
   - GoogleSignIn
   - hpple
   - MBProgressHUD
   - MMDrawerController
-  - MMDrawerController+Storyboard
-  - PromiseKit (~> 6.0)
-  - PromiseKit/Foundation
+  - "MMDrawerController+Storyboard"
+  - PromiseKit
+  - SDWebImage
   - SimulatorStatusMagic
-  - TwitterCore
-  - TwitterKit
-  - WhirlyGlobe
+  - Sync
+  - WhirlyGlobe (from `https://github.com/mousebird/WhirlyGlobe`)
   - WhirlyGlobeResources
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AppAuth
+    - Appirater
+    - DATASource
+    - DATAStack
+    - eigen
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseDatabase
+    - FirebaseInstallations
+    - FMDB
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
+    - GoogleSignIn
+    - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - hpple
+    - KissXML
+    - leveldb-library
+    - libjson
+    - MBProgressHUD
+    - MMDrawerController
+    - "MMDrawerController+Storyboard"
+    - nanopb
+    - proj4
+    - PromiseKit
+    - PromisesObjC
+    - SDWebImage
+    - SimulatorStatusMagic
+    - SMCalloutView
+    - Sync
+    - WhirlyGlobeResources
+
 EXTERNAL SOURCES:
-  FacebookShare:
-    :git: https://github.com/1amageek/facebook-sdk-swift
+  WhirlyGlobe:
+    :git: https://github.com/mousebird/WhirlyGlobe
 
 CHECKOUT OPTIONS:
-  FacebookShare:
-    :commit: 3ac76c770e9849285c380f380309d866911d2e93
-    :git: https://github.com/1amageek/facebook-sdk-swift
+  WhirlyGlobe:
+    :commit: ffd8cca6c83806a42248f1da47a54e68f9409ae8
+    :git: https://github.com/mousebird/WhirlyGlobe
 
 SPEC CHECKSUMS:
-  AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  boost: 6c5c8d8daef26ac83c1e1c00ad14de62b80161d7
-  clipper: b009ea56c501e756299e6999e2c73eef6e1ed218
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  DATASource: 0247c087cbed41b27b91f52e89fe1f8aa6ac3d35
+  DATAStack: 9c415f6e7733eafb9cf5c076613bfb5958c407cb
   eigen: e2d5ffb7be5a884d4608ebe35a97b6f65e13ed8b
-  Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
-  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
-  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
-  FacebookShare: d086f7a4610bbbca9cec5e774de450a9b3e1a20b
-  FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
-  FBSDKLoginKit: 99797ac39252fef6f72600b886f6ee60b4b29cab
-  FBSDKShareKit: e640c41c9fcd61929eeb3d0c21ad335103e7cb62
-  Firebase: 92c6ba593e32db0defde464a9adc981d5cb49f97
-  FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
-  FirebaseAuth: d040bb7a9db6dfc29d0e7ec82d48be51352b2581
-  FirebaseCore: 872307b001bbefda1dfa0dbfffa50a6919023d4a
-  FirebaseDatabase: 5f0bc6134c5c237cf55f9e1249d406770a75eafd
-  FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
-  FirebaseStorage: 9a863a2bb96c406958eeff7c2f1dfa9f44c44a13
-  FirebaseUI: a9465a3068e9ba9fbc024b1ee3981d9eaf6cec5e
-  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
-  GTMSessionFetcher: 390ea358e5a0d0133153806f744662dad933d06b
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
+  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
+  FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
+  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
+  FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
+  FirebaseAuth: b85c064e0ac60f82486728d50a4803f235687302
+  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
+  FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
+  FirebaseDatabase: 3d02ffa794ec174853c086cf87cf2dc79bd6da49
+  FirebaseInstallations: 293f567159b6d66d1c990f13bb868066096c94ec
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
+  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
+  GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
+  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
-  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   libjson: 1a065ca64704a5d1b51c3754268998942d57ac6f
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
-  MMDrawerController+Storyboard: c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  "MMDrawerController+Storyboard": c98f86c0f32cdef1d466d19a7da3ad2fc6c6ac00
+  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   proj4: 234525105d05a33b2ae9a90a6fe3935f7a246f7e
-  PromiseKit: edaca6f0a7ed73b08c287600537d13867a7fabc7
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
-  SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
   SMCalloutView: 5c0ee363dc8e7204b2fda17dfad38c93e9e23481
-  tinyxml: 41d718babd106ac5d39d4e98b43c835d3b9080d8
-  TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
-  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
-  WhirlyGlobe: 2849f458220be42d92d814ba04377586cadbf7f1
+  Sync: 40735880f9c7dfb222fa48078bea320a90276d62
+  WhirlyGlobe: 4045ad4b71d6491cf2e287b5ac5904972d760139
   WhirlyGlobeResources: d7b3e929e828f958a8477ff6797f962fdb165472
 
-PODFILE CHECKSUM: 7eac328819ba29289b8f9e26e8af107e80f3ff0d
+PODFILE CHECKSUM: 1e43b705b6f305f0cb2b47b0fd00ad7ed1ce8b87
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.9.3

@@ -56,7 +56,8 @@ class SliderTableViewCell: UITableViewCell {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         
-        collectionView.register(UINib(nibName: "SliderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.register(UINib(nibName: "SliderCollectionViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: "Cell")
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -67,7 +68,11 @@ class SliderTableViewCell: UITableViewCell {
     }
     
     func startSlideShow() {
-        slideshowTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(SliderTableViewCell.showSlide), userInfo: nil, repeats: true)
+        slideshowTimer = Timer.scheduledTimer(timeInterval: 6,
+                                              target: self,
+                                              selector: #selector(SliderTableViewCell.showSlide),
+                                              userInfo: nil,
+                                              repeats: true)
     }
     
     func stopSlideShow() {
@@ -77,7 +82,7 @@ class SliderTableViewCell: UITableViewCell {
         slideshowTimer = nil
     }
     
-    func showSlide() {
+    @objc func showSlide() {
         if collectionView.indexPathsForVisibleItems.count > 0 {
             let indexPath = collectionView.indexPathsForVisibleItems.first
             let rows = collectionView(collectionView, numberOfItemsInSection: 0)
@@ -89,12 +94,15 @@ class SliderTableViewCell: UITableViewCell {
                 row = 0
                 bWillSlide = false
                 
+//                UICollectionView.ScrollPosition   row += 1
             } else {
                 row += 1
             }
             
             newIndexPath = IndexPath(row: row, section: 0)
-            collectionView.scrollToItem(at: newIndexPath!, at: UICollectionViewScrollPosition.left, animated: bWillSlide)
+            collectionView.scrollToItem(at: newIndexPath!,
+                                        at: UICollectionView.ScrollPosition.left,
+                                        animated: bWillSlide)
             
         }
     }

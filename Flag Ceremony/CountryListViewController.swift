@@ -39,7 +39,7 @@ class CountryListViewController: UIViewController {
     // MARK: Custom methods
     func doSearch() {
         if let text = searchController.searchBar.text {
-            let count = text.characters.count
+            let count = text.count
             
             if count > 0 {
                 filteredCountries = countries.filter({

@@ -117,7 +117,11 @@ struct FCCountry {
      * Degrees = Radians * 180 / PI
      */
     func getGeoRadians() -> [Float] {
-        return [(geoPt![1] * Float.pi)/180, (geoPt![0] * Float.pi)/180]
+        if geoPt != nil {
+            return [(geoPt![1] * Float.pi)/180, (geoPt![0] * Float.pi)/180]
+        } else {
+            return[0.0, 0.0]
+        }
     }
     
     func getCapitalGeoRadians() -> [Float] {
@@ -135,7 +139,7 @@ struct FCCountry {
         
         if let countryCodes = countryCodes {
             if let iso2 = countryCodes[Keys.CountryCodesIso2] as? String {
-                var country = iso2.uppercased()
+                let country = iso2.uppercased()
                 for uS in country.unicodeScalars {
                     string += String(UnicodeScalar(127397 + uS.value)!)
                 }

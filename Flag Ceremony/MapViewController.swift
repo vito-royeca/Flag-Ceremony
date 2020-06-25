@@ -41,8 +41,13 @@ class MapViewController: CommonViewController {
         super.viewWillAppear(animated)
         showCountry(nil)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: kCountrySelected),
+                                                  object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MapViewController.showCountry(_:)),
+                                               name: NSNotification.Name(rawValue: kCountrySelected),
+                                               object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,7 +69,7 @@ class MapViewController: CommonViewController {
             var countryVC:CountryViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryViewController {
+                if let vc = nav.children.first as? CountryViewController {
                     countryVC = vc
                 }
             } else  if let vc = segue.destination as? CountryViewController {
@@ -76,11 +81,10 @@ class MapViewController: CommonViewController {
             }
         } else if segue.identifier == "showCountriesAsPush" ||
             segue.identifier == "showCountriesAsPopup" {
-            
             var countryListVC:CountryListViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryListViewController {
+                if let vc = nav.children.first as? CountryListViewController {
                     countryListVC = vc
                 }
             } else  if let vc = segue.destination as? CountryListViewController {
@@ -100,7 +104,7 @@ class MapViewController: CommonViewController {
         mapView!.delegate = self
         view.addSubview(mapView!.view)
         mapView!.view.frame = view.bounds
-        addChildViewController(mapView!)
+        addChild(mapView!)
         
         // set up the data source
         if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres"),
@@ -180,7 +184,7 @@ class MapViewController: CommonViewController {
         })
     }
     
-    func showCountry(_ notification: Notification?) {
+    @objc func showCountry(_ notification: Notification?) {
         var newPosition:MaplyCoordinate?
         var newHeight = Float(0)
         var willGotoNewPosition = false
@@ -236,14 +240,14 @@ class MapViewController: CommonViewController {
 }
 
 extension MapViewController : MaplyViewControllerDelegate {
-    func maplyViewController(_ viewC: MaplyViewController!, didSelect selectedObj: NSObject!) {
+    func maplyViewController(_ viewC: MaplyViewController, didSelect selectedObj: NSObject) {
         if let selectedObject = selectedObj as? MaplyScreenLabel {
             let country = selectedObject.userObject as? FCCountry
             performSegue(withIdentifier: "showCountry", sender: country)
         }
     }
     
-    func maplyViewController(_ viewC: MaplyViewController!, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>!, userMotion: Bool) {
+    func maplyViewController(_ viewC: MaplyViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
         var position = MaplyCoordinate(x: 0, y: 0)
         var height = Float(0)
         viewC.getPosition(&position, height: &height)

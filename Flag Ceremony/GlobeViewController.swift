@@ -41,14 +41,21 @@ class GlobeViewController: CommonViewController {
         super.viewWillAppear(animated)
         
         showCountry(nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(GlobeViewController.showCountry(_:)), name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: kCountrySelected),
+                                                  object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(GlobeViewController.showCountry(_:)),
+                                               name: NSNotification.Name(rawValue: kCountrySelected),
+                                               object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kCountrySelected), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: kCountrySelected),
+                                                  object: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,7 +64,7 @@ class GlobeViewController: CommonViewController {
             var countryVC:CountryViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryViewController {
+                if let vc = nav.children.first as? CountryViewController {
                     countryVC = vc
                 }
             }else  if let vc = segue.destination as? CountryViewController {
@@ -74,7 +81,7 @@ class GlobeViewController: CommonViewController {
             var countryListVC:CountryListViewController?
             
             if let nav = segue.destination as? UINavigationController {
-                if let vc = nav.childViewControllers.first as? CountryListViewController {
+                if let vc = nav.children.first as? CountryListViewController {
                     countryListVC = vc
                 }
             } else  if let vc = segue.destination as? CountryListViewController {
@@ -102,7 +109,7 @@ class GlobeViewController: CommonViewController {
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         globeView!.heading = DefaultLocationHeading
-        addChildViewController(globeView!)
+        addChild(globeView!)
         
         // set up the data source
         if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres"),
@@ -182,7 +189,7 @@ class GlobeViewController: CommonViewController {
         })
     }
     
-    func showCountry(_ notification: Notification?) {
+    @objc func showCountry(_ notification: Notification?) {
         var newPosition:MaplyCoordinate?
         var newHeight = Float(0)
         var willGotoNewPosition = false
@@ -223,7 +230,7 @@ class GlobeViewController: CommonViewController {
 }
 
 extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
-    func globeViewController(_ viewC: WhirlyGlobeViewController!, didSelect selectedObj: NSObject!) {
+    func globeViewController(_ viewC: WhirlyGlobeViewController, didSelect selectedObj: NSObject) {
         if let selectedObject = selectedObj as? MaplyScreenLabel {
             let country = selectedObject.userObject as? FCCountry
             
@@ -231,7 +238,7 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
         }
     }
     
-    func globeViewController(_ viewC: WhirlyGlobeViewController!, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>!, userMotion: Bool) {
+    func globeViewController(_ viewC: WhirlyGlobeViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
         var position = MaplyCoordinate(x: 0, y: 0)
         var height = Float(0)
         viewC.getPosition(&position, height: &height)

@@ -10,13 +10,14 @@ import Foundation
 import Firebase
 import hpple
 import PromiseKit
+import Sync
 
 class Scraper : NSObject {
     let ref = Database.database().reference()
     
     // MARK: Firebase
     func insertCountries() {
-        if let url = URL(string: "\(CountriesURL)//api/en/countries/info/all.json?x=100") {
+        if let url = URL(string: "\(CountriesURL)/api/en/countries/info/all.json?x=100") {
             var rq = URLRequest(url: url)
             rq.httpMethod = "GET"
             rq.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -103,7 +104,154 @@ class Scraper : NSObject {
         }
     }
     
+    
     // MARK: Scraper
+    func getCountries() {
+        if let url = URL(string: "\(CountriesURL)/api/en/countries/info/all.json") {
+            var rq = URLRequest(url: url)
+            rq.httpMethod = "GET"
+            rq.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            rq.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            firstly {
+                URLSession.shared.dataTask(.promise, with: rq)
+                }.compactMap {
+                    try JSONSerialization.jsonObject(with: $0.data, options: .allowFragments) as? [String: Any]
+                    
+                }.done { json in
+                    if let results = json["Results"] as? [String: Any] {
+                        var countries = [[String: Any]]()
+                        
+                        for (k,v) in results {
+                            if let d = v as? [String: Any] {
+                                var country = [String: Any]()
+                                
+                                country["country_code"] = k
+                                country["name"] = d["Name"]
+                                country["country_info"] = d["CountryInfo"]
+                                
+                                if let capital = d["Capital"] as? [String: Any] {
+                                    country["capital"] =  capital["Name"]
+                                    if let geoPt = capital["GeoPt"] as? [Double] {
+                                        country["capital_geo_x"] =  geoPt[0]
+                                        country["capital_geo_y"] =  geoPt[1]
+                                    }
+                                }
+                                
+                                if let geoPt = d["GeoPt"] as? [Double] {
+                                    country["geo_x"] =  geoPt[0]
+                                    country["geo_y"] =  geoPt[1]
+                                }
+                                
+                                countries.append(country)
+                            }
+                        }
+                        
+                        DatabaseManager.sharedInstance.dataStack.sync(countries, inEntityNamed: "DBCountry") { error in
+                            if let error = error {
+                                print("getCountries: \(error)")
+                            }
+                        }
+                    }
+                    
+                }.catch { error in
+                    print("getCountries: \(error)")
+            }
+        }
+    }
+    
+    func getAnthems(ccFilter: String?) {
+        let request: NSFetchRequest<DBCountry> = NSFetchRequest(entityName: "DBCountry")
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        if let ccFilter = ccFilter {
+            request.predicate = NSPredicate(format: "countryCode == %@", ccFilter)
+        }
+        
+        for country in try! DatabaseManager.sharedInstance.dataStack.mainContext.fetch(request) {
+            if let countryCode = country.countryCode {
+                print("\(countryCode)...")
+                
+                if let anthem = findOrCreateObject("DBAnthem", objectFinder: ["country.countryCode": countryCode as AnyObject]) as? DBAnthem {
+                    anthem.country = country
+
+                    // anthem info and lyrics
+                    if let url = URL(string: "\(HymnsURL)/\(countryCode.lowercased()).htm") {
+                        if let doc = readUrl(url: url) {
+                            anthem.info = parseAnthemInfo(doc: doc)
+                            
+                            for dict in parseAnthemLyrics(doc: doc) {
+                                if let lyrics = findOrCreateObject("DBLyrics", objectFinder: ["name": dict["name"] as AnyObject]) as? DBLyrics {
+                                    lyrics.name = dict["name"] as? String
+                                    lyrics.text = dict["text"] as? String
+                                    lyrics.anthem = anthem
+                                }
+                            }
+                            
+                            anthem.titles = NSData(data: NSKeyedArchiver.archivedData(withRootObject: parseAnthemTitles(doc: doc)))
+                            anthem.lyricsWriter = NSData(data: NSKeyedArchiver.archivedData(withRootObject: parseLyricsWriter(doc: doc)))
+                            anthem.musicWriter = NSData(data: NSKeyedArchiver.archivedData(withRootObject: parseMusicWriter(doc: doc)))
+                            anthem.dateAdopted = NSData(data: NSKeyedArchiver.archivedData(withRootObject: parseDateAdopted(doc: doc)))
+                        }
+                    }
+                    
+                    // background
+                    if let url = URL(string: "\(CountriesURL)/geo/en/cc/\(countryCode.lowercased()).html") {
+                        if let doc = readUrl(url: url) {
+                            anthem.background = parseAnthemBackground(doc: doc)
+                        }
+                    }
+                    
+                    // flag info
+                    if let name = country.name {
+                        var tmpName = name.lowercased()
+                        
+                        // transform the name
+                        var lastPaths = [String]()
+                        if tmpName.contains(" ") {
+                            tmpName = tmpName.replacingOccurrences(of: " ", with: "-")
+                        }
+                        
+                        if tmpName == "korea-north" {
+                            lastPaths.append("north-korea")
+                        } else if tmpName == "korea-south" {
+                            lastPaths.append("south-korea")
+                        } else if tmpName == "timor-leste" {
+                            lastPaths.append("east-timor")
+                        } else if tmpName == "congo-democratic-republic" {
+                            lastPaths.append("the-democratic-republic-of-the-congo")
+                        } else if tmpName == "congo-republic" {
+                            lastPaths.append("the-republic-of-the-congo")
+                        } else if tmpName == "holy-see" {
+                            lastPaths.append("the-vatican-city")
+                        } else if tmpName == "china" {
+                            lastPaths.append("the-people-s-republic-of-china")
+                        } else if tmpName == "ivory-coast" {
+                            lastPaths.append("cote-d-ivoire")
+                        } else {
+                            lastPaths.append(tmpName)
+                            lastPaths.append("the-\(tmpName)")
+                        }
+                        
+                        // add flag info
+                        for lp in lastPaths {
+                            if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
+                                if let doc = self.readUrl(url: url) {
+                                    anthem.flagInfo = parseFlagInfo(doc: doc)
+                                } else {
+                                    print("invalid url: \(url)")
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                try! DatabaseManager.sharedInstance.dataStack.mainContext.save()
+            }
+        }
+    }
+    
+    // MARK: Old code
     func getAnthemFiles() {
         ref.child("countries").observeSingleEvent(of: .value, with: { (snapshot) in
             let countries = snapshot.value as? [String: [String: Any]] ?? [:]
@@ -151,203 +299,6 @@ class Scraper : NSObject {
         }
     }
     
-    func getLyrics() {
-        if let path = Bundle.main.path(forResource: "anthems", ofType: "dict", inDirectory: "data") {
-            if FileManager.default.fileExists(atPath: path) {
-                if let dictionary = NSDictionary(contentsOfFile: path) {
-                    let newDict = NSMutableDictionary()
-                    
-                    for (key,value) in dictionary {
-                        let cc = key as! String
-                        
-                        if let value2 = value as? [String: Any] {
-                            var anthemDict = [String: Any]()
-                            
-                            print("lyrics... \(key)")
-                            // copy
-                            for (key3,value3) in value2 {
-                                anthemDict[key3] = value3
-                            }
-                            
-                            // add lyrics and info
-                            if anthemDict[FCAnthem.Keys.Lyrics] == nil ||
-                                anthemDict[FCAnthem.Keys.Info] == nil {
-                                if let url = URL(string: "\(HymnsURL)/\(cc.lowercased()).htm") {
-                                    if let doc = readUrl(url: url) {
-                                        anthemDict[FCAnthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
-                                        anthemDict[FCAnthem.Keys.Info] = parseAnthemInfo(doc: doc)
-                                    }
-                                }
-                            }
-                            
-                            newDict.setObject(anthemDict, forKey: key as! NSCopying)
-                        }
-                    }
-                    
-                    // write to disk
-                    do {
-                        let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                        let localPath = "\(docsPath)/anthems.dict"
-                        let localUrl = URL(fileURLWithPath: localPath)
-                        if FileManager.default.fileExists(atPath: localPath) {
-                            try FileManager.default.removeItem(at: localUrl)
-                        }
-                        newDict.write(to: localUrl, atomically: true)
-                    } catch let error {
-                        print("error: \(error)")
-                    }
-                }
-            }
-        }
-    }
-    
-    func getAnthemInfo() {
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
-            if FileManager.default.fileExists(atPath: path) {
-                
-                do {
-                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    if let dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                        
-                        var newDict = [String: Any]()
-                        for (key,value) in dictionary {
-                            if let value2 = value as? [String: Any] {
-                                var dict = [String: Any]()
-                                
-                                // copy
-                                for (key3,value3) in value2 {
-                                    dict[key3] = value3
-                                    
-                                    if key == "anthems" {
-                                        var anthemDict = [String: Any]()
-                                        for (key4,value4) in value3 as! [String: Any] {
-                                            anthemDict[key4] = value4
-                                        }
-                                        
-                                        // add lyrics
-                                        if anthemDict[FCAnthem.Keys.Lyrics] == nil {
-                                            print("getting lyrics for \(key3)...")
-                                            if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
-                                                if let doc = readUrl(url: url) {
-                                                    anthemDict[FCAnthem.Keys.Lyrics] = parseAnthemLyrics(doc: doc)
-                                                }
-                                            }
-                                        }
-                                        
-                                        // add info
-                                        if anthemDict[FCAnthem.Keys.Info] == nil {
-                                            print("getting info for \(key3)...")
-                                            if let url = URL(string: "\(HymnsURL)/\(key3.lowercased()).htm") {
-                                                if let doc = readUrl(url: url) {
-                                                    anthemDict[FCAnthem.Keys.Info] = parseAnthemInfo(doc: doc)
-                                                }
-                                            }
-                                        }
-                                        
-                                        // add background info
-                                        if let background = anthemDict[FCAnthem.Keys.Background] as? String {
-                                            anthemDict[FCAnthem.Keys.Background] = background.replacingOccurrences(of: "Background : ", with: "")
-                                        
-                                        } else {
-                                            print("getting background for \(key3)...")
-                                            if let url = URL(string: "\(CountriesURL)/geo/en/cc/\(key3.lowercased()).html") {
-                                                if let doc = readUrl(url: url) {
-                                                    anthemDict[FCAnthem.Keys.Background] = parseAnthemBackground(doc: doc)
-                                                }
-                                            }
-                                        }
-                                        
-                                        // add flagInfo
-                                        var willGetFlagInfo = false
-                                        if let flagInfo = anthemDict[FCAnthem.Keys.FlagInfo] as? String {
-                                            if flagInfo.count == 0 {
-                                                willGetFlagInfo = true
-                                            }
-                                        } else {
-                                            willGetFlagInfo = true
-                                        }
-                                        
-                                        if willGetFlagInfo {
-                                            let countriesDict = dictionary["countries"] as! [String : Any]
-                                            if let country = countriesDict[key3] as? [String : Any] {
-                                                var name = country[FCCountry.Keys.Name] as! String
-                                                name = name.lowercased()
-                                                
-                                                // transform the name
-                                                var lastPaths = [String]()
-                                                if name.contains(" ") {
-                                                    name = name.replacingOccurrences(of: " ", with: "-")
-                                                }
-                                                
-                                                if name == "korea-north" {
-                                                    lastPaths.append("north-korea")
-                                                } else if name == "korea-south" {
-                                                    lastPaths.append("south-korea")
-                                                } else if name == "timor-leste" {
-                                                    lastPaths.append("east-timor")
-                                                } else if name == "congo-democratic-republic" {
-                                                    lastPaths.append("the-democratic-republic-of-the-congo")
-                                                } else if name == "congo-republic" {
-                                                    lastPaths.append("the-republic-of-the-congo")
-                                                } else if name == "holy-see" {
-                                                    lastPaths.append("the-vatican-city")
-                                                } else if name == "china" {
-                                                    lastPaths.append("the-people-s-republic-of-china")
-                                                } else if name == "ivory-coast" {
-                                                    lastPaths.append("cote-d-ivoire")
-                                                } else {
-                                                    lastPaths.append(name)
-                                                    lastPaths.append("the-\(name)")
-                                                }
-                                                
-                                                // add flag info
-                                                for lp in lastPaths {
-                                                    if let url = URL(string: "\(FlagpediaURL)/\(lp)") {
-                                                        if let doc = self.readUrl(url: url) {
-                                                            print("getting flag info... \(key3)")
-                                                            anthemDict[FCAnthem.Keys.FlagInfo] = self.parseFlagInfo(doc: doc)
-                                                        } else {
-                                                            print("invalid url: \(url)")
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        
-                                        dict[key3] = anthemDict
-                                    }
-                                }
-                                
-                                newDict[key] = dict
-                            }
-                        }
-                        
-                        // write to disk
-                        do {
-                            let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                            let localPath = "\(docsPath)/flag-ceremony-export.json"
-                            if FileManager.default.fileExists(atPath: localPath) {
-                                try FileManager.default.removeItem(atPath: localPath)
-                            }
-                            
-                            // creating JSON out of the above array
-                            let jsonData = try JSONSerialization.data(withJSONObject: newDict, options: .prettyPrinted)
-                            try jsonData.write(to: URL(fileURLWithPath: localPath))
-                        } catch let error {
-                            print("error: \(error)")
-                        }
-                    }
-                } catch let error {
-                    print("\(error)")
-                }
-            }
-        }
-    }
-    
-//    func countryNameFrom(countries: [String: Any]) -> String {
-//        return ""
-//    }
-    
     // MARK: Parser
     func readUrl(url: URL) -> TFHpple? {
         do {
@@ -393,43 +344,142 @@ class Scraper : NSObject {
     }
     
     func parseAnthemInfo(doc: TFHpple) -> String? {
-        var info:String?
+        var text:String?
         
         if let elements = doc.search(withXPathQuery: "//div[@class='entry fix']") as? [TFHppleElement] {
-            info = ""
+            text = ""
             
             for element in elements {
-                info! += parseElement(element: element)
+//                var specialThanks = false
+//
+//                if element.hasChildren() {
+//                    for child in element.children {
+//                        if let c = child as? TFHppleElement {
+//                            if c.content.hasPrefix("Special thanks") {
+//                                specialThanks = true
+//                                break
+//                            }
+//                        }
+//                    }
+//                }
+                
+                text! += parseElement(element: element)
             }
             
-            info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
-            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
-            info = info!.replacingOccurrences(of: "\t", with: "")
-            info = info!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
+            text = text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            text = text!.replacingOccurrences(of: "\n", with: "\n\n")
+            text = text!.replacingOccurrences(of: "\t", with: "")
+            text = text!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
         }
         
-        return info
+        return text
     }
 
     func parseAnthemBackground(doc: TFHpple) -> String? {
-        var info:String?
+        var text:String?
         
         if let elements = doc.search(withXPathQuery: "//div[@id='Background']") as? [TFHppleElement] {
-            info = ""
+            text = ""
             
             for element in elements {
-                info! += parseElement(element: element)
+                text! += parseElement(element: element)
             }
             
-            info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
-            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
-            info = info!.replacingOccurrences(of: "\t", with: "")
-            info = info!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
+            text = text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            text = text!.replacingOccurrences(of: "\n", with: "\n\n")
+            text = text!.replacingOccurrences(of: "\t", with: "")
+            text = text!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
+            text = text!.replacingOccurrences(of: "Background : \n", with: "")
         }
-        
-        return info
+
+        return text
     }
     
+    func parseAnthemTitles(doc: TFHpple) -> [String] {
+        var array = [String]()
+        
+        if let elements = doc.search(withXPathQuery: "//aside[@id='custom-field-5']") as? [TFHppleElement] {
+            var text = ""
+            
+            for element in elements {
+                text += parseElement(element: element)
+            }
+            text = text.replacingOccurrences(of: "\n Title \n\n", with: "")
+            text = text.replacingOccurrences(of: "\r\n\r\n", with: "\r\n")
+            text = text.replacingOccurrences(of: "\n\n", with: "")
+            
+            for t in text.components(separatedBy: "\r\n") {
+                let title = t.replacingOccurrences(of: "“", with: "").replacingOccurrences(of: "”", with: "")
+                array.append(title)
+            }
+        }
+        
+        return array
+    }
+    
+    func parseLyricsWriter(doc: TFHpple) -> [String] {
+        var array = [String]()
+        
+        if let elements = doc.search(withXPathQuery: "//aside[@id='custom-field-2']") as? [TFHppleElement] {
+            var text = ""
+            
+            for element in elements {
+                text += parseElement(element: element)
+            }
+            text = text.replacingOccurrences(of: "\n Lyricist \n\n", with: "")
+            text = text.replacingOccurrences(of: "\r\n", with: ", ")
+            text = text.replacingOccurrences(of: " and ", with: ", ")
+            text = text.replacingOccurrences(of: "\n\n", with: "")
+            
+            for t in text.components(separatedBy: ", ") {
+                array.append(t)
+            }
+        }
+        
+        return array
+    }
+    
+    func parseMusicWriter(doc: TFHpple) -> [String] {
+        var array = [String]()
+        
+        if let elements = doc.search(withXPathQuery: "//aside[@id='custom-field-10']") as? [TFHppleElement] {
+            var text = ""
+            
+            for element in elements {
+                text += parseElement(element: element)
+            }
+            text = text.replacingOccurrences(of: "\n Composers \n\n", with: "")
+            text = text.replacingOccurrences(of: "\r\n", with: ", ")
+            text = text.replacingOccurrences(of: " and ", with: ", ")
+            text = text.replacingOccurrences(of: "\n\n", with: "")
+            
+            for t in text.components(separatedBy: ", ") {
+                array.append(t)
+            }
+        }
+        
+        return array
+    }
+
+    func parseDateAdopted(doc: TFHpple) -> [String] {
+        var array = [String]()
+        
+        // TODO: Fix this
+//        for element in elements {
+//            text += parseElement(element: element)
+//        }
+//        text = text.replacingOccurrences(of: "\n Date Adopted \n\n", with: "")
+//        text = text.replacingOccurrences(of: "\r\n", with: ", ")
+//        text = text.replacingOccurrences(of: " and ", with: ", ")
+//        text = text.replacingOccurrences(of: "\n\n", with: "")
+//
+//        for t in text.components(separatedBy: ", ") {
+//            array.append(t)
+//        }
+        
+        return array
+    }
+
     func parseFlagInfo(doc: TFHpple) -> String? {
         var info:String?
         
@@ -457,12 +507,52 @@ class Scraper : NSObject {
         
         if element.hasChildren() {
             for child in element.children {
-                let c = child as! TFHppleElement
-                text += parseElement(element: c)
+                if let c = child as? TFHppleElement {
+                    text += parseElement(element: c)
+                }
             }
         }
         
         return text
+    }
+    
+    // MARK: Core Data
+    func findOrCreateObject(_ entityName: String, objectFinder: [String: AnyObject]?) -> NSManagedObject? {
+        var object:NSManagedObject?
+        var predicate:NSPredicate?
+        var fetchRequest:NSFetchRequest<NSFetchRequestResult>?
+        let dataStack = DatabaseManager.sharedInstance.dataStack
+        
+        if let objectFinder = objectFinder {
+            for (key,value) in objectFinder {
+                if predicate != nil {
+                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, NSPredicate(format: "%K == %@", key, value as! NSObject)])
+                } else {
+                    predicate = NSPredicate(format: "%K == %@", key, value as! NSObject)
+                }
+            }
+            
+            fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            fetchRequest!.predicate = predicate
+        }
+        
+        if let fetchRequest = fetchRequest {
+            if let m = try! dataStack.mainContext.fetch(fetchRequest).first as? NSManagedObject {
+                object = m
+            } else {
+                if let desc = NSEntityDescription.entity(forEntityName: entityName, in: dataStack.mainContext) {
+                    object = NSManagedObject(entity: desc, insertInto: dataStack.mainContext)
+                    try! dataStack.mainContext.save()
+                }
+            }
+        } else {
+            if let desc = NSEntityDescription.entity(forEntityName: entityName, in: dataStack.mainContext) {
+                object = NSManagedObject(entity: desc, insertInto: dataStack.mainContext)
+                try! dataStack.mainContext.save()
+            }
+        }
+        
+        return object
     }
     
     // MARK: - Shared Instance

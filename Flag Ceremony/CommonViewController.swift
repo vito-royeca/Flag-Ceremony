@@ -30,7 +30,7 @@ class CommonViewController: UIViewController {
             }
             if menuView == nil {
                 menuView = MenuViewController()
-                navigationVC.addChildViewController(menuView!)
+                navigationVC.addChild(menuView!)
             }
             
             navigationVC.popToViewController(menuView!, animated: true)
@@ -46,7 +46,7 @@ class CommonViewController: UIViewController {
         }
     }
     
-    func showParentalGate(completion: @escaping (Void) -> Void) {
+    func showParentalGate(completion: @escaping () -> Void) {
         let random = NSNumber.randomNumber()
         let roman = random.toRomanNumeral()
         
