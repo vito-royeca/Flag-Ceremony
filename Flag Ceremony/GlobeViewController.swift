@@ -109,6 +109,7 @@ class GlobeViewController: CommonViewController {
         view.addSubview(globeView!.view)
         globeView!.view.frame = view.bounds
         globeView!.heading = DefaultLocationHeading
+        globeView!.keepNorthUp = true
         addChild(globeView!)
         
         // set up the data source
@@ -201,7 +202,8 @@ class GlobeViewController: CommonViewController {
             let lat = UserDefaults.standard.value(forKey: kLocationLatitude) as? Float,
             let height = UserDefaults.standard.value(forKey: kLocationHeight) as? Float {
             
-            var cPosition = MaplyCoordinate(x: 0, y: 0)
+            var cPosition = MaplyCoordinate(x: 0,
+                                            y: 0)
             var cHeight = Float(0)
             
             if let globeView = globeView {
@@ -212,7 +214,8 @@ class GlobeViewController: CommonViewController {
                     lat != cPosition.y ||
                     height != cHeight {
                     
-                    newPosition = MaplyCoordinateMake(lon, lat)
+                    newPosition = MaplyCoordinateMake(lon,
+                                                      lat)
                     newHeight = height
                     willGotoNewPosition = true
                 }
@@ -221,7 +224,8 @@ class GlobeViewController: CommonViewController {
             // set default position
             let lon = (DefaultLocationLongitude * Float.pi)/180
             let lat = (DefaultLocationLatitude * Float.pi)/180
-            newPosition = MaplyCoordinateMake(lon, lat)
+            newPosition = MaplyCoordinateMake(lon,
+                                              lat)
             willGotoNewPosition = true
         }
         
@@ -242,7 +246,8 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
     }
     
     func globeViewController(_ viewC: WhirlyGlobeViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
-        var position = MaplyCoordinate(x: 0, y: 0)
+        var position = MaplyCoordinate(x: 0,
+                                       y: 0)
         var height = Float(0)
         viewC.getPosition(&position,
                           height: &height)

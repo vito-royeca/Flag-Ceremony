@@ -57,6 +57,23 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressTap!.numberOfTouchesRequired = 1
         progressTap!.cancelsTouchesInView = false
         progressSlider.addGestureRecognizer(progressTap!)
+        
+        // remove the thumb image in the slider
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: 1,
+                          height: 1)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1,
+                                                      height: 1),
+                                               false,
+                                               0)
+        UIColor.clear.setFill()
+        UIRectFill(rect)
+        if let blankImg = UIGraphicsGetImageFromCurrentImageContext() {
+            progressSlider.setThumbImage(blankImg,
+                                         for: .normal)
+        }
+        UIGraphicsEndImageContext()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -180,11 +197,12 @@ class AudioPlayerTableViewCell: UITableViewCell {
         let startText = stringFromTimeInterval(currentTime)
         let endText = stringFromTimeInterval(duration-currentTime)
         
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
+        UIView.animate(withDuration: 1, animations: {
             self.progressSlider.value = normalizedTime
             self.startLabel.text = startText
             self.endLabel.text = "-\(endText)"
-        }
+        })
     }
     
     @objc func progressTapAction(_ sender: UITapGestureRecognizer) {
