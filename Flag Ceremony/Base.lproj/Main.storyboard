@@ -27,12 +27,12 @@
                                 <action selector="menuAction:" destination="v19-cJ-vPn" id="AAH-la-F0W"/>
                             </connections>
                         </barButtonItem>
-                        <view key="titleView" contentMode="scaleToFill" misplaced="YES" id="UaB-lB-GQR">
+                        <view key="titleView" contentMode="scaleToFill" id="UaB-lB-GQR">
                             <rect key="frame" x="58" y="5.5" width="259.5" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-S3-gL4">
-                                    <rect key="frame" x="0.0" y="0.0" width="266" height="33"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="259.5" height="33"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -50,8 +50,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showCountry" modalPresentationStyle="fullScreen" id="4mM-aD-pb6"/>
-                        <segue destination="HAu-77-J6t" kind="show" identifier="showCountriesAsPush" id="jN8-r2-9ps"/>
+                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showCountry" modalPresentationStyle="formSheet" id="4mM-aD-pb6"/>
+                        <segue destination="HAu-77-J6t" kind="popoverPresentation" identifier="showCountriesAsPush" popoverAnchorBarButtonItem="MHY-b6-Sbh" id="jN8-r2-9ps">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                         <segue destination="V53-t0-Mb8" kind="popoverPresentation" identifier="showCountriesAsPopup" popoverAnchorBarButtonItem="MHY-b6-Sbh" id="ine-Dg-JAj">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
@@ -81,12 +83,12 @@
                                 <action selector="menuAction:" destination="efe-pB-qzf" id="kmh-1m-aMB"/>
                             </connections>
                         </barButtonItem>
-                        <view key="titleView" contentMode="scaleToFill" misplaced="YES" id="dvk-2w-0WC">
+                        <view key="titleView" contentMode="scaleToFill" id="dvk-2w-0WC">
                             <rect key="frame" x="58" y="5.5" width="259.5" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-4c-zsz">
-                                    <rect key="frame" x="0.0" y="0.0" width="266" height="33"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="259.5" height="33"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -104,7 +106,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showCountry" modalPresentationStyle="fullScreen" id="ZdL-oJ-FYe"/>
+                        <segue destination="i4I-GZ-Xl2" kind="presentation" identifier="showCountry" modalPresentationStyle="formSheet" id="ZdL-oJ-FYe"/>
                         <segue destination="HAu-77-J6t" kind="show" identifier="showCountriesAsPush" id="l87-iQ-vgf"/>
                         <segue destination="V53-t0-Mb8" kind="popoverPresentation" identifier="showCountriesAsPopup" popoverAnchorBarButtonItem="tbb-JY-31h" id="Q6A-TY-pWV">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -124,11 +126,11 @@
                         <viewControllerLayoutGuide type="bottom" id="KlT-bV-QiF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GC9-tx-jgW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zKu-Gy-y4d">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -277,7 +279,7 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="J1S-fI-crL">
-                            <rect key="frame" x="60.5" y="5.5" width="254" height="33"/>
+                            <rect key="frame" x="60.5" y="11.5" width="254" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keo-yh-nGM">
@@ -320,11 +322,11 @@
                         <viewControllerLayoutGuide type="bottom" id="NQN-4c-DU4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dXu-Db-kGm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hXk-iy-kVG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -370,7 +372,7 @@
                     <navigationItem key="navigationItem" id="ePQ-0U-bZJ">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="V8a-sd-gOv">
-                            <rect key="frame" x="35.5" y="11.5" width="304" height="33"/>
+                            <rect key="frame" x="50" y="5.5" width="304" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countries" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQg-E8-QTy">
@@ -402,7 +404,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i4I-GZ-Xl2" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="6VH-GH-DKW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
@@ -1079,9 +1081,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ine-Dg-JAj"/>
-        <segue reference="ZdL-oJ-FYe"/>
-        <segue reference="bvS-e1-g43"/>
+        <segue reference="Q6A-TY-pWV"/>
+        <segue reference="4mM-aD-pb6"/>
+        <segue reference="jN8-r2-9ps"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <resources>

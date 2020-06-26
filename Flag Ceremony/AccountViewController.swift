@@ -38,7 +38,8 @@ class AccountViewController: CommonViewController {
             updateDataDisplay()
         } else {
             showParentalGate {
-                self.performSegue(withIdentifier: "showLoginAsModal", sender: nil)
+                self.performSegue(withIdentifier: "showLoginAsModal",
+                                  sender: nil)
             }
         }
     }
@@ -53,7 +54,9 @@ class AccountViewController: CommonViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.register(UINib(nibName: "DataTableViewCell", bundle: nil), forCellReuseIdentifier: "DataCell")
+        tableView.register(UINib(nibName: "DataTableViewCell",
+                                 bundle: nil),
+                           forCellReuseIdentifier: "DataCell")
         
         FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [FCCountry]) in
             self.countries = countries
@@ -220,7 +223,10 @@ extension AccountViewController : UITableViewDataSource {
                     let activity = activity {
                     
                     if let url = user.photoURL {
-                        dataCell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
+                        dataCell.imageIcon.sd_setImage(with: url,
+                                                       placeholderImage: placeholderImage,
+                                                       options: SDWebImageOptions.lowPriority,
+                                                       completed: nil)
                     }
                     dataCell.nameLabel.text = user.displayName ?? user.email
                     dataCell.statIcon.image = UIImage(named: "view-filled")

@@ -28,7 +28,8 @@ class CountryViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func closeAction(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true,
+                     completion: nil)
     }
     
     
@@ -82,14 +83,17 @@ class CountryViewController: UIViewController {
             }
         }
         activityVC.popoverPresentationController?.sourceView = self.view
-        present(activityVC, animated: true, completion: nil)
+        present(activityVC,
+                animated: true,
+                completion: nil)
     }
     
     @IBAction func playPauseAction(_ sender: UIButton) {
         isPlaying = !isPlaying
 //        updatePlayButton()
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1,
+                                                         section: 0)) as? AudioPlayerTableViewCell {
             if isPlaying {
                 cell.play()
             } else {
@@ -110,12 +114,14 @@ class CountryViewController: UIViewController {
         // Do any additional setup after loading the view.
         nameLabel.text = "\(country!.emojiFlag()) \(country!.name!)"
         
-        tableView.register(UINib(nibName: "AudioPlayerTableViewCell", bundle: nil),
+        tableView.register(UINib(nibName: "AudioPlayerTableViewCell",
+                                 bundle: nil),
                            forCellReuseIdentifier: "AudioPlayerCell")
         tableView.estimatedRowHeight = 88.0
         tableView.rowHeight = UITableView.automaticDimension
 
-        FirebaseManager.sharedInstance.findAnthem(country!.key!, completion: { (anthem) in
+        FirebaseManager.sharedInstance.findAnthem(country!.key!,
+                                                  completion: { (anthem) in
             self.anthem = anthem
             self.tableView.reloadData()
             
@@ -152,7 +158,8 @@ class CountryViewController: UIViewController {
 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: kAudioPlayerStatus), object:nil)
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? AudioPlayerTableViewCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1,
+                                                         section: 0)) as? AudioPlayerTableViewCell {
             cell.stop()
         }
     }

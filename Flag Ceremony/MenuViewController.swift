@@ -34,7 +34,8 @@ class MenuViewController: CommonViewController {
     // MARK: Custom methods
     func showShareActivity(sourceView: UIView) {
         let appIcon = UIImage(named: "AppIcon40x40")
-        let objectsToShare = ["Flag Ceremony is an iOS app that displays flags and plays national anthems from various countries around the world.", appIcon!] as [Any]
+        let objectsToShare = ["Flag Ceremony is an iOS app that displays flags and plays national anthems from various countries around the world.",
+                              appIcon!] as [Any]
         let excludedActivities = [UIActivity.ActivityType.postToWeibo,
                                   UIActivity.ActivityType.print,
                                   UIActivity.ActivityType.copyToPasteboard,
@@ -56,11 +57,14 @@ class MenuViewController: CommonViewController {
                     print("error sharing: \(e)")
                 }
                 
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true,
+                             completion: nil)
             }
         }
         activityVC.popoverPresentationController?.sourceView = sourceView
-        present(activityVC, animated: true, completion: nil)
+        present(activityVC,
+                animated: true,
+                completion: nil)
     }
     
     func openStoreProduct(identifier: String) {
@@ -68,12 +72,15 @@ class MenuViewController: CommonViewController {
         storeViewController.delegate = self
         
         let parameters = [ SKStoreProductParameterITunesItemIdentifier : identifier]
-        storeViewController.loadProduct(withParameters: parameters) { (loaded, error) -> Void in
+        storeViewController.loadProduct(withParameters: parameters)
+                                        { (loaded, error) -> Void in
             if let error = error {
                 print("\(error)")
             }
         }
-        present(storeViewController, animated: true, completion: nil)
+        present(storeViewController,
+                animated: true,
+                completion: nil)
     }
 }
 
@@ -118,7 +125,8 @@ extension MenuViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell",
+                                                 for: indexPath)
         cell.detailTextLabel!.text = nil
         cell.accessoryType = .none
         
@@ -174,7 +182,8 @@ extension MenuViewController : UITableViewDelegate {
                 }
             case 1:
                 showParentalGate {
-                    let cell = self.tableView(tableView, cellForRowAt: indexPath)
+                    let cell = self.tableView(tableView,
+                                              cellForRowAt: indexPath)
                     self.showShareActivity(sourceView: cell)
                 }
             default:
@@ -191,9 +200,12 @@ extension MenuViewController : UITableViewDelegate {
                 showParentalGate {
                     if let url = URL(string: DeveloperWebsite),
                         let navigationController = self.navigationController {
-                        let svc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                        let svc = SFSafariViewController(url: url,
+                                                         entersReaderIfAvailable: true)
                         svc.delegate = self
-                        navigationController.present(svc, animated: true, completion: nil)
+                        navigationController.present(svc,
+                                                     animated: true,
+                                                     completion: nil)
                     }
 
                 }
@@ -213,13 +225,15 @@ extension MenuViewController : UITableViewDelegate {
 // MARK: SKStoreProductViewControllerDelegate
 extension MenuViewController : SKStoreProductViewControllerDelegate {
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: true,
+                               completion: nil)
     }
 }
 
 // MARK: SFSafariViewControllerDelegate
 extension MenuViewController : SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true,
+                           completion: nil)
     }
 }

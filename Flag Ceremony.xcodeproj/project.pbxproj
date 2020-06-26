@@ -254,6 +254,70 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8BD8EDEB24A6891300F54E47 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		8BD8EDEC24A6892C00F54E47 /* Globe */ = {
+			isa = PBXGroup;
+			children = (
+				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
+			);
+			name = Globe;
+			sourceTree = "<group>";
+		};
+		8BD8EDED24A6894700F54E47 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */,
+			);
+			name = Charts;
+			sourceTree = "<group>";
+		};
+		8BD8EDEE24A6895400F54E47 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				11E5B8A61E9692020021ABB5 /* AccountViewController.swift */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		8BD8EDEF24A6896F00F54E47 /* Countries */ = {
+			isa = PBXGroup;
+			children = (
+				5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */,
+			);
+			name = Countries;
+			sourceTree = "<group>";
+		};
+		8BD8EDF024A6898C00F54E47 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		8BD8EDF124A689AC00F54E47 /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
+			);
+			name = Country;
+			sourceTree = "<group>";
+		};
+		8BD8EDF224A689D200F54E47 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1173C9351E07359D00C5DA16 /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		8C4E971C1D88ED50005A685B = {
 			isa = PBXGroup;
 			children = (
@@ -279,11 +343,19 @@
 		8C4E97271D88ED50005A685B /* Flag Ceremony */ = {
 			isa = PBXGroup;
 			children = (
+				11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */,
+				8BD8EDF024A6898C00F54E47 /* Menu */,
+				8BD8EDEB24A6891300F54E47 /* Map */,
+				8BD8EDEC24A6892C00F54E47 /* Globe */,
+				8BD8EDED24A6894700F54E47 /* Charts */,
+				8BD8EDEE24A6895400F54E47 /* Account */,
+				8BD8EDF224A689D200F54E47 /* Login */,
+				8BD8EDEF24A6896F00F54E47 /* Countries */,
+				8BD8EDF124A689AC00F54E47 /* Country */,
 				8CEFB64A1DDC73E700F34B4D /* Flag Ceremony.entitlements */,
 				8C4E97281D88ED50005A685B /* AppDelegate.swift */,
 				8C4E972F1D88ED50005A685B /* Assets.xcassets */,
 				8CBB26AA1DD986BD00660EB9 /* Constants.swift */,
-				8C4E975A1D89151D005A685B /* Controller */,
 				8C4E97561D890900005A685B /* data */,
 				8C4E97341D88ED50005A685B /* Info.plist */,
 				8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */,
@@ -350,22 +422,6 @@
 				8CE297BD1DE5EF1000B47CAA /* SliderTableViewCell.xib */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		8C4E975A1D89151D005A685B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				11E5B8A61E9692020021ABB5 /* AccountViewController.swift */,
-				8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */,
-				11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */,
-				5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */,
-				8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */,
-				8C02966F1D8A471000BE8C02 /* GlobeViewController.swift */,
-				1173C9351E07359D00C5DA16 /* LoginViewController.swift */,
-				8C02966B1D8A46FD00BE8C02 /* MapViewController.swift */,
-				1173C92B1E06EEC400C5DA16 /* MenuViewController.swift */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		8C4E975B1D891525005A685B /* Utilities */ = {

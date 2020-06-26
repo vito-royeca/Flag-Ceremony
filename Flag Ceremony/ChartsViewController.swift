@@ -39,9 +39,12 @@ class ChartsViewController: CommonViewController {
                 navigationVC.addChild(menuView!)
             }
             
-            navigationVC.popToViewController(menuView!, animated: true)
+            navigationVC.popToViewController(menuView!,
+                                             animated: true)
         }
-        mm_drawerController.toggle(.left, animated:true, completion:nil)
+        mm_drawerController.toggle(.left,
+                                   animated:true,
+                                   completion:nil)
     }
     
     @IBAction func dataChanged(_ sender: UISegmentedControl) {
@@ -66,7 +69,9 @@ class ChartsViewController: CommonViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.register(UINib(nibName: "DataTableViewCell", bundle: nil), forCellReuseIdentifier: "DataCell")
+        tableView.register(UINib(nibName: "DataTableViewCell",
+                                 bundle: nil),
+                           forCellReuseIdentifier: "DataCell")
         
         getUsers()
     }
@@ -126,7 +131,8 @@ class ChartsViewController: CommonViewController {
         FirebaseManager.sharedInstance.monitorTopViewed(completion: { (countries) in
             self.topViewedCountries = countries
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
+                MBProgressHUD.hide(for: self.view,
+                                   animated: true)
                 self.tableView.reloadData()
             }
         })
@@ -138,19 +144,22 @@ class ChartsViewController: CommonViewController {
         FirebaseManager.sharedInstance.monitorTopPlayed(completion: { (countries) in
             self.topPlayedCountries = countries
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
+                MBProgressHUD.hide(for: self.view,
+                                   animated: true)
                 self.tableView.reloadData()
             }
         })
     }
     
     func showTopViewers() {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view,
+                                animated: true)
         
         FirebaseManager.sharedInstance.monitorTopViewers(completion: { (activities) in
             self.topViewers = activities
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
+                MBProgressHUD.hide(for: self.view,
+                                   animated: true)
                 self.tableView.reloadData()
             }
         })
@@ -162,7 +171,8 @@ class ChartsViewController: CommonViewController {
         FirebaseManager.sharedInstance.monitorTopPlayers(completion: { (activities) in
             self.topPlayers = activities
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
+                MBProgressHUD.hide(for: self.view,
+                                   animated: true)
                 self.tableView.reloadData()
             }
         })
@@ -254,7 +264,10 @@ class ChartsViewController: CommonViewController {
                             
                             if let photoURL = u.photoURL {
                                 if let url = URL(string: photoURL) {
-                                    cell.imageIcon.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.lowPriority, completed: nil)
+                                    cell.imageIcon.sd_setImage(with: url,
+                                                               placeholderImage: placeholderImage,
+                                                               options: SDWebImageOptions.lowPriority,
+                                                               completed: nil)
                                 }
                             }
                             break
@@ -348,12 +361,14 @@ extension ChartsViewController : UITableViewDelegate {
         case 0:
             if let topViewedCountries = topViewedCountries {
                 let country = topViewedCountries[indexPath.row]
-                self.performSegue(withIdentifier: "showCountry", sender: country)
+                self.performSegue(withIdentifier: "showCountry",
+                                  sender: country)
             }
         case 1:
             if let topPlayedCountries = topPlayedCountries {
                 let country = topPlayedCountries[indexPath.row]
-                self.performSegue(withIdentifier: "showCountry", sender: country)
+                self.performSegue(withIdentifier: "showCountry",
+                                  sender: country)
             }
         default:
             ()

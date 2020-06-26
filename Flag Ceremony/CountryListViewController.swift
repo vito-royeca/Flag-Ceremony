@@ -148,14 +148,18 @@ extension CountryListViewController : UITableViewDelegate {
             tableView.reloadData()
             
             let radians = country.getGeoRadians()
-            UserDefaults.standard.set(radians[0], forKey: kLocationLongitude)
-            UserDefaults.standard.set(radians[1], forKey: kLocationLatitude)
+            UserDefaults.standard.set(radians[0],
+                                      forKey: kLocationLongitude)
+            UserDefaults.standard.set(radians[1],
+                                      forKey: kLocationLatitude)
             UserDefaults.standard.synchronize()
             
             if UIDevice.current.userInterfaceIdiom == .phone {
                 let _ = navigationController?.popToRootViewController(animated: true)
             } else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kCountrySelected), object: nil, userInfo: ["country": country])
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kCountrySelected),
+                                                object: nil,
+                                                userInfo: ["country": country])
                 dismiss(animated: true, completion: nil)
             }
         }

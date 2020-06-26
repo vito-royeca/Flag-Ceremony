@@ -50,7 +50,9 @@ class CommonViewController: UIViewController {
         let random = NSNumber.randomNumber()
         let roman = random.toRomanNumeral()
         
-        let alertController = UIAlertController(title: "Parental Gate", message: "Ask your parent or guardian to help you answer the question below.\n\nThe Roman Numeral \(roman) is equivalent to?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Parental Gate",
+                                                message: "Ask your parent or guardian to help you answer the question below.\n\nThe Roman Numeral \(roman) is equivalent to?",
+                                                preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
             var answer:String?
@@ -62,14 +64,24 @@ class CommonViewController: UIViewController {
             if answer == random.stringValue {
                 completion()
             } else {
-                let ac2 = UIAlertController(title: "Parental Gate", message: "The answer is incorrect answer.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default) { (_) in }
+                let ac2 = UIAlertController(title: "Parental Gate",
+                                            message: "The answer is incorrect answer.",
+                                            preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK",
+                                           style: .default)
+                                           { (_) in
+                                            
+                }
                 ac2.addAction(action)
                 self.present(ac2, animated: true, completion: nil)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel)
+                                         { (_) in
+                                            
+        }
         
         alertController.addTextField { (textField) in
             textField.placeholder = "Answer"
@@ -79,6 +91,8 @@ class CommonViewController: UIViewController {
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         
-        present(alertController, animated: true, completion: nil)
+        present(alertController,
+                animated: true,
+                completion: nil)
     }
 }

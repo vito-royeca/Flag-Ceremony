@@ -69,7 +69,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
     func updatePlayButton() {
         if let image = playButton.imageView!.image {
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
-            playButton.setImage(tintedImage, for: .normal)
+            playButton.setImage(tintedImage,
+                                for: .normal)
             playButton.imageView!.tintColor = kBlueColor
         }
     }
@@ -79,7 +80,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
         updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPause]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus),
+                                        object: nil,
+                                        userInfo: userInfo)
         
         if let player = player {
             player.pause()
@@ -100,7 +103,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
         updatePlayButton()
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus),
+                                        object: nil,
+                                        userInfo: userInfo)
         
         if let player = player {
             setupTracker()
@@ -132,7 +137,9 @@ class AudioPlayerTableViewCell: UITableViewCell {
             play()
             
             let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusPlay]
-            NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus),
+                                            object: nil,
+                                            userInfo: userInfo)
         }
     }
     
@@ -140,7 +147,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
         progressSlider.value = 0.0
         startLabel.text = self.stringFromTimeInterval(0.0)
         endLabel.text = self.stringFromTimeInterval(self.player!.duration)
-        playButton.setImage(UIImage(named: "play"), for: .normal)
+        playButton.setImage(UIImage(named: "play"),
+                            for: .normal)
         updatePlayButton()
     }
     
@@ -149,7 +157,7 @@ class AudioPlayerTableViewCell: UITableViewCell {
         let seconds = ti % 60
         let minutes = (ti / 60) % 60
         
-        return String(format: "%0.2d:%0.2d",minutes,seconds)
+        return String(format: "%0.2d:%0.2d", minutes,seconds)
     }
     
     func setupTracker() {
@@ -157,10 +165,12 @@ class AudioPlayerTableViewCell: UITableViewCell {
             tracker.invalidate()
         }
         
-        tracker = CADisplayLink(target: self, selector: #selector(AudioPlayerTableViewCell.trackAudio))
+        tracker = CADisplayLink(target: self,
+                                selector: #selector(AudioPlayerTableViewCell.trackAudio))
         //tracker!.frameInterval = 1
         tracker!.preferredFramesPerSecond = 1
-        tracker!.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
+        tracker!.add(to: RunLoop.current,
+                     forMode: RunLoop.Mode.common)
     }
     
     @objc  func trackAudio() {
@@ -183,7 +193,8 @@ class AudioPlayerTableViewCell: UITableViewCell {
         let widthOfSlider: CGFloat = progressSlider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(progressSlider.maximumValue) / widthOfSlider)
         
-        progressSlider.setValue(Float(newValue), animated: true)
+        progressSlider.setValue(Float(newValue),
+                                animated: true)
         update()
     }
     
@@ -221,7 +232,9 @@ extension AudioPlayerTableViewCell : AVAudioPlayerDelegate {
         
         let userInfo = [kAudioPlayerStatus: kAudioPlayerStatusFinished,
                         kAudioURL: url!] as [String : Any]
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus), object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kAudioPlayerStatus),
+                                        object: nil,
+                                        userInfo: userInfo)
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {

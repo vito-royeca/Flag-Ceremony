@@ -67,7 +67,7 @@ class GlobeViewController: CommonViewController {
                 if let vc = nav.children.first as? CountryViewController {
                     countryVC = vc
                 }
-            }else  if let vc = segue.destination as? CountryViewController {
+            } else  if let vc = segue.destination as? CountryViewController {
                 countryVC = vc
             }
             
@@ -113,7 +113,8 @@ class GlobeViewController: CommonViewController {
         
         // set up the data source
         if let tileSource = MaplyMBTileSource(mbTiles: "geography-class_medres"),
-            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys, tileSource: tileSource) {
+            let layer = MaplyQuadImageTilesLayer(coordSystem: tileSource.coordSys,
+                                                 tileSource: tileSource) {
             layer.handleEdges = true
             layer.coverPoles = true
             layer.requireElev = false
@@ -147,7 +148,8 @@ class GlobeViewController: CommonViewController {
                         var radians = country.getGeoRadians()
                         
                         label.text = "\(country.emojiFlag())\(country.name!)"
-                        label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                        label.loc = MaplyCoordinate(x: radians[0],
+                                                    y: radians[1])
                         label.selectable = true
                         label.userObject = country
                         label.layoutImportance = 1
@@ -158,7 +160,8 @@ class GlobeViewController: CommonViewController {
                             radians = country.getCapitalGeoRadians()
                             
                             label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
-                            label.loc = MaplyCoordinate(x: radians[0], y: radians[1])
+                            label.loc = MaplyCoordinate(x: radians[0],
+                                                        y: radians[1])
                             label.selectable = false
                             self.capitalLabels.append(label)
                         }
@@ -190,7 +193,7 @@ class GlobeViewController: CommonViewController {
     }
     
     @objc func showCountry(_ notification: Notification?) {
-        var newPosition:MaplyCoordinate?
+        var newPosition: MaplyCoordinate?
         var newHeight = Float(0)
         var willGotoNewPosition = false
         
@@ -241,11 +244,15 @@ extension GlobeViewController : WhirlyGlobeViewControllerDelegate {
     func globeViewController(_ viewC: WhirlyGlobeViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
         var position = MaplyCoordinate(x: 0, y: 0)
         var height = Float(0)
-        viewC.getPosition(&position, height: &height)
+        viewC.getPosition(&position,
+                          height: &height)
         
-        UserDefaults.standard.set(position.x, forKey: kLocationLongitude)
-        UserDefaults.standard.set(position.y, forKey: kLocationLatitude)
-        UserDefaults.standard.set(height, forKey: kLocationHeight)
+        UserDefaults.standard.set(position.x,
+                                  forKey: kLocationLongitude)
+        UserDefaults.standard.set(position.y,
+                                  forKey: kLocationLatitude)
+        UserDefaults.standard.set(height,
+                                  forKey: kLocationHeight)
         UserDefaults.standard.synchronize()
     }
     

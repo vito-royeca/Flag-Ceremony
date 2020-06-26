@@ -20,13 +20,16 @@ class Scraper : NSObject {
         if let url = URL(string: "\(CountriesURL)/api/en/countries/info/all.json?x=100") {
             var rq = URLRequest(url: url)
             rq.httpMethod = "GET"
-            rq.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            rq.addValue("application/json", forHTTPHeaderField: "Accept")
+            rq.addValue("application/json",
+                        forHTTPHeaderField: "Content-Type")
+            rq.addValue("application/json",
+                        forHTTPHeaderField: "Accept")
             
             firstly {
                 URLSession.shared.dataTask(.promise, with: rq)
                 }.compactMap {
-                    try JSONSerialization.jsonObject(with: $0.data, options: .allowFragments)
+                    try JSONSerialization.jsonObject(with: $0.data,
+                                                     options: .allowFragments)
                 }.done { foo in
                     //…
                 }.catch { error in
@@ -62,10 +65,10 @@ class Scraper : NSObject {
     func insertAnthems() {
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
-                
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    if let dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    if let dictionary = try JSONSerialization.jsonObject(with: data,
+                                                                         options: .mutableContainers) as? [String: Any] {
                         for (key,value) in dictionary {
                             
                             if key == "anthems" {
@@ -110,13 +113,16 @@ class Scraper : NSObject {
         if let url = URL(string: "\(CountriesURL)/api/en/countries/info/all.json") {
             var rq = URLRequest(url: url)
             rq.httpMethod = "GET"
-            rq.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            rq.addValue("application/json", forHTTPHeaderField: "Accept")
+            rq.addValue("application/json",
+                        forHTTPHeaderField: "Content-Type")
+            rq.addValue("application/json",
+                        forHTTPHeaderField: "Accept")
             
             firstly {
                 URLSession.shared.dataTask(.promise, with: rq)
                 }.compactMap {
-                    try JSONSerialization.jsonObject(with: $0.data, options: .allowFragments) as? [String: Any]
+                    try JSONSerialization.jsonObject(with: $0.data,
+                                                     options: .allowFragments) as? [String: Any]
                     
                 }.done { json in
                     if let results = json["Results"] as? [String: Any] {
@@ -147,7 +153,8 @@ class Scraper : NSObject {
                             }
                         }
                         
-                        DatabaseManager.sharedInstance.dataStack.sync(countries, inEntityNamed: "DBCountry") { error in
+                        DatabaseManager.sharedInstance.dataStack.sync(countries,
+                                                                      inEntityNamed: "DBCountry") { error in
                             if let error = error {
                                 print("getCountries: \(error)")
                             }
@@ -163,16 +170,19 @@ class Scraper : NSObject {
     func getAnthems(ccFilter: String?) {
         let request: NSFetchRequest<DBCountry> = NSFetchRequest(entityName: "DBCountry")
         
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "name",
+                                                    ascending: true)]
         if let ccFilter = ccFilter {
-            request.predicate = NSPredicate(format: "countryCode == %@", ccFilter)
+            request.predicate = NSPredicate(format: "countryCode == %@",
+                                            ccFilter)
         }
         
         for country in try! DatabaseManager.sharedInstance.dataStack.mainContext.fetch(request) {
             if let countryCode = country.countryCode {
                 print("\(countryCode)...")
                 
-                if let anthem = findOrCreateObject("DBAnthem", objectFinder: ["country.countryCode": countryCode as AnyObject]) as? DBAnthem {
+                if let anthem = findOrCreateObject("DBAnthem",
+                                                   objectFinder: ["country.countryCode": countryCode as AnyObject]) as? DBAnthem {
                     anthem.country = country
 
                     // anthem info and lyrics
@@ -181,7 +191,8 @@ class Scraper : NSObject {
                             anthem.info = parseAnthemInfo(doc: doc)
                             
                             for dict in parseAnthemLyrics(doc: doc) {
-                                if let lyrics = findOrCreateObject("DBLyrics", objectFinder: ["name": dict["name"] as AnyObject]) as? DBLyrics {
+                                if let lyrics = findOrCreateObject("DBLyrics",
+                                                                   objectFinder: ["name": dict["name"] as AnyObject]) as? DBLyrics {
                                     lyrics.name = dict["name"] as? String
                                     lyrics.text = dict["text"] as? String
                                     lyrics.anthem = anthem
@@ -257,7 +268,8 @@ class Scraper : NSObject {
             let countries = snapshot.value as? [String: [String: Any]] ?? [:]
             
             for (key,value) in countries {
-                let country = FCCountry.init(key: key, dict: value)
+                let country = FCCountry.init(key: key,
+                                             dict: value)
                 
                 if let url = URL(string: "\(HymnsURL)/\(key.lowercased()).mp3") {
                     let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -367,9 +379,12 @@ class Scraper : NSObject {
             }
             
             text = text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            text = text!.replacingOccurrences(of: "\n", with: "\n\n")
-            text = text!.replacingOccurrences(of: "\t", with: "")
-            text = text!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
+            text = text!.replacingOccurrences(of: "\n",
+                                              with: "\n\n")
+            text = text!.replacingOccurrences(of: "\t",
+                                              with: "")
+            text = text!.replacingOccurrences(of: "\n\n\n\n",
+                                              with: "\n")
         }
         
         return text
@@ -386,10 +401,14 @@ class Scraper : NSObject {
             }
             
             text = text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            text = text!.replacingOccurrences(of: "\n", with: "\n\n")
-            text = text!.replacingOccurrences(of: "\t", with: "")
-            text = text!.replacingOccurrences(of: "\n\n\n\n", with: "\n")
-            text = text!.replacingOccurrences(of: "Background : \n", with: "")
+            text = text!.replacingOccurrences(of: "\n",
+                                              with: "\n\n")
+            text = text!.replacingOccurrences(of: "\t",
+                                              with: "")
+            text = text!.replacingOccurrences(of: "\n\n\n\n",
+                                              with: "\n")
+            text = text!.replacingOccurrences(of: "Background : \n",
+                                              with: "")
         }
 
         return text
@@ -404,12 +423,17 @@ class Scraper : NSObject {
             for element in elements {
                 text += parseElement(element: element)
             }
-            text = text.replacingOccurrences(of: "\n Title \n\n", with: "")
-            text = text.replacingOccurrences(of: "\r\n\r\n", with: "\r\n")
-            text = text.replacingOccurrences(of: "\n\n", with: "")
+            text = text.replacingOccurrences(of: "\n Title \n\n",
+                                             with: "")
+            text = text.replacingOccurrences(of: "\r\n\r\n",
+                                             with: "\r\n")
+            text = text.replacingOccurrences(of: "\n\n",
+                                             with: "")
             
             for t in text.components(separatedBy: "\r\n") {
-                let title = t.replacingOccurrences(of: "“", with: "").replacingOccurrences(of: "”", with: "")
+                let title = t.replacingOccurrences(of: "“",
+                                                   with: "").replacingOccurrences(of: "”",
+                                                                                  with: "")
                 array.append(title)
             }
         }
@@ -426,10 +450,14 @@ class Scraper : NSObject {
             for element in elements {
                 text += parseElement(element: element)
             }
-            text = text.replacingOccurrences(of: "\n Lyricist \n\n", with: "")
-            text = text.replacingOccurrences(of: "\r\n", with: ", ")
-            text = text.replacingOccurrences(of: " and ", with: ", ")
-            text = text.replacingOccurrences(of: "\n\n", with: "")
+            text = text.replacingOccurrences(of: "\n Lyricist \n\n",
+                                             with: "")
+            text = text.replacingOccurrences(of: "\r\n",
+                                             with: ", ")
+            text = text.replacingOccurrences(of: " and ",
+                                             with: ", ")
+            text = text.replacingOccurrences(of: "\n\n",
+                                             with: "")
             
             for t in text.components(separatedBy: ", ") {
                 array.append(t)
@@ -448,10 +476,14 @@ class Scraper : NSObject {
             for element in elements {
                 text += parseElement(element: element)
             }
-            text = text.replacingOccurrences(of: "\n Composers \n\n", with: "")
-            text = text.replacingOccurrences(of: "\r\n", with: ", ")
-            text = text.replacingOccurrences(of: " and ", with: ", ")
-            text = text.replacingOccurrences(of: "\n\n", with: "")
+            text = text.replacingOccurrences(of: "\n Composers \n\n",
+                                             with: "")
+            text = text.replacingOccurrences(of: "\r\n",
+                                             with: ", ")
+            text = text.replacingOccurrences(of: " and ",
+                                             with: ", ")
+            text = text.replacingOccurrences(of: "\n\n",
+                                             with: "")
             
             for t in text.components(separatedBy: ", ") {
                 array.append(t)
@@ -491,10 +523,12 @@ class Scraper : NSObject {
             }
             
             info = info!.trimmingCharacters(in: .whitespacesAndNewlines)
-            info = info!.replacingOccurrences(of: "\n", with: "\n\n")
+            info = info!.replacingOccurrences(of: "\n",
+                                              with: "\n\n")
         }
         
-        info = info?.replacingOccurrences(of: "(adsbygoogle = window.adsbygoogle || []).push({});\n\n\n\n\t", with: "")
+        info = info?.replacingOccurrences(of: "(adsbygoogle = window.adsbygoogle || []).push({});\n\n\n\n\t",
+                                          with: "")
         return info
     }
     
@@ -526,7 +560,8 @@ class Scraper : NSObject {
         if let objectFinder = objectFinder {
             for (key,value) in objectFinder {
                 if predicate != nil {
-                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!, NSPredicate(format: "%K == %@", key, value as! NSObject)])
+                    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate!,
+                                                                                    NSPredicate(format: "%K == %@", key, value as! NSObject)])
                 } else {
                     predicate = NSPredicate(format: "%K == %@", key, value as! NSObject)
                 }
@@ -540,14 +575,18 @@ class Scraper : NSObject {
             if let m = try! dataStack.mainContext.fetch(fetchRequest).first as? NSManagedObject {
                 object = m
             } else {
-                if let desc = NSEntityDescription.entity(forEntityName: entityName, in: dataStack.mainContext) {
-                    object = NSManagedObject(entity: desc, insertInto: dataStack.mainContext)
+                if let desc = NSEntityDescription.entity(forEntityName: entityName,
+                                                         in: dataStack.mainContext) {
+                    object = NSManagedObject(entity: desc,
+                                             insertInto: dataStack.mainContext)
                     try! dataStack.mainContext.save()
                 }
             }
         } else {
-            if let desc = NSEntityDescription.entity(forEntityName: entityName, in: dataStack.mainContext) {
-                object = NSManagedObject(entity: desc, insertInto: dataStack.mainContext)
+            if let desc = NSEntityDescription.entity(forEntityName: entityName,
+                                                     in: dataStack.mainContext) {
+                object = NSManagedObject(entity: desc,
+                                         insertInto: dataStack.mainContext)
                 try! dataStack.mainContext.save()
             }
         }

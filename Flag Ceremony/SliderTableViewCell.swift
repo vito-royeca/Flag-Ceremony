@@ -85,7 +85,8 @@ class SliderTableViewCell: UITableViewCell {
     @objc func showSlide() {
         if collectionView.indexPathsForVisibleItems.count > 0 {
             let indexPath = collectionView.indexPathsForVisibleItems.first
-            let rows = collectionView(collectionView, numberOfItemsInSection: 0)
+            let rows = collectionView(collectionView,
+                                      numberOfItemsInSection: 0)
             var row = (indexPath! as NSIndexPath).row
             var newIndexPath:IndexPath?
             var bWillSlide = true
@@ -110,11 +111,19 @@ class SliderTableViewCell: UITableViewCell {
     func imageWithBorder(fromImage source: UIImage) -> UIImage? {
         let size = source.size
         UIGraphicsBeginImageContext(size)
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        source.draw(in: rect, blendMode: .normal, alpha: 1.0)
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: size.width,
+                          height: size.height)
+        source.draw(in: rect,
+                    blendMode: .normal,
+                    alpha: 1.0)
         
         if let context = UIGraphicsGetCurrentContext() {
-            context.setStrokeColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            context.setStrokeColor(red: 0.0,
+                                   green: 0.0,
+                                   blue: 0.0,
+                                   alpha: 1.0)
             context.stroke(rect)
             let newImg =  UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -142,7 +151,8 @@ extension SliderTableViewCell : UICollectionViewDataSource {
         let row = (indexPath as NSIndexPath).row
         var cell:UICollectionViewCell?
         
-        if let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SliderCollectionViewCell {
+        if let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell",
+                                                               for: indexPath) as? SliderCollectionViewCell {
             if let countries = countries {
                 let country = countries[row]
                 

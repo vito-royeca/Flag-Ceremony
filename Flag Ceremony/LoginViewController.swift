@@ -23,14 +23,19 @@ class LoginViewController: UIViewController {
     // MARK: Actions
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         let message = "Your view and play counts will not be recorded if you do not login."
-        let alertController = UIAlertController(title: "Login Cancelled", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Login Cancelled",
+                                                message: message,
+                                                preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "OK",
                                                 style: UIAlertAction.Style.default,
                                                 handler: {(action) in
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true,
+                         completion: nil)
         }))
-        self.present(alertController, animated: true, completion: nil)
+        self.present(alertController,
+                     animated: true,
+                     completion: nil)
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
@@ -71,8 +76,11 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
-                MBProgressHUD.showAdded(to: self.view, animated: true)
-                Auth.auth().signIn(withEmail: email, password: password,  completion: {(result: AuthDataResult?, error: Error?) in
+                MBProgressHUD.showAdded(to: self.view,
+                                        animated: true)
+                Auth.auth().signIn(withEmail: email,
+                                   password: password,
+                                   completion: {(result: AuthDataResult?, error: Error?) in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
                     if let error = error {
@@ -91,9 +99,13 @@ class LoginViewController: UIViewController {
             }
             
         case 6: // Sign Up
-            let alertController = UIAlertController(title: "Sign Up", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Sign Up",
+                                                    message: nil,
+                                                    preferredStyle: .alert)
             
-            let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
+            let confirmAction = UIAlertAction(title: "Submit",
+                                              style: .default)
+                                              { (_) in
                 if let fields = alertController.textFields {
                     let name = fields[0].text
                     let email = fields[1].text
@@ -121,9 +133,12 @@ class LoginViewController: UIViewController {
                     }
                     
                     MBProgressHUD.showAdded(to: self.view, animated: true)
-                    Auth.auth().createUser(withEmail: email!, password: password!) { user, error in
+                    Auth.auth().createUser(withEmail: email!,
+                                           password: password!)
+                                           { user, error in
                         if let error = error {
-                            MBProgressHUD.hide(for: self.view, animated: true)
+                            MBProgressHUD.hide(for: self.view,
+                                               animated: true)
                             
                             let alertController = UIAlertController(title: "Error",
                                                                     message: error.localizedDescription,
@@ -131,9 +146,13 @@ class LoginViewController: UIViewController {
                             alertController.addAction(UIAlertAction(title: "OK",
                                                                     style: UIAlertAction.Style.default,
                                                                     handler: nil))
-                            self.present(alertController, animated: true, completion: nil)
+                            self.present(alertController,
+                                         animated: true,
+                                         completion: nil)
                         } else {
-                            Auth.auth().signIn(withEmail: email!, password: password!, completion: {(result: AuthDataResult?, error: Error?) in
+                            Auth.auth().signIn(withEmail: email!,
+                                               password: password!,
+                                               completion: {(result: AuthDataResult?, error: Error?) in
                                 MBProgressHUD.hide(for: self.view, animated: true)
                                 
                                 if let error = error {
@@ -145,9 +164,12 @@ class LoginViewController: UIViewController {
                                     alertController.addAction(UIAlertAction(title: "OK",
                                                                             style: UIAlertAction.Style.default,
                                                                             handler: nil))
-                                    self.present(alertController, animated: true, completion: nil)
+                                    self.present(alertController,
+                                                 animated: true,
+                                                 completion: nil)
                                 } else {
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.dismiss(animated: true,
+                                                 completion: nil)
                                     self.updateUser()
                                 }
                             })
@@ -175,9 +197,12 @@ class LoginViewController: UIViewController {
             
         case 12: // Retrieve Password
             let title = "Retrieve Password"
-            let alertController = UIAlertController(title: title, message: "We will send instructions to the email below on how to retrive your password.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: title,
+                                                    message: "We will send instructions to the email below on how to retrive your password.",
+                                                    preferredStyle: .alert)
             
-            let confirmAction = UIAlertAction(title: "Submit", style: .default) { (_) in
+            let confirmAction = UIAlertAction(title: "Submit",
+                                              style: .default) { (_) in
                 if let fields = alertController.textFields {
                     let email = fields[0].text
                     
@@ -192,13 +217,18 @@ class LoginViewController: UIViewController {
                         alertController.addAction(UIAlertAction(title: "OK",
                                                                 style: UIAlertAction.Style.default,
                                                                 handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                        self.present(alertController,
+                                     animated: true,
+                                     completion: nil)
                         return
                     }
                     
-                    MBProgressHUD.showAdded(to: self.view, animated: true)
-                    Auth.auth().sendPasswordReset(withEmail: email!, completion: { error in
-                        MBProgressHUD.hide(for: self.view, animated: true)
+                    MBProgressHUD.showAdded(to: self.view,
+                                            animated: true)
+                    Auth.auth().sendPasswordReset(withEmail: email!,
+                                                  completion: { error in
+                        MBProgressHUD.hide(for: self.view,
+                                           animated: true)
                         var message:String?
                         
                         if let error = error {
@@ -213,19 +243,27 @@ class LoginViewController: UIViewController {
                         alertController.addAction(UIAlertAction(title: "OK",
                                                                 style: UIAlertAction.Style.default,
                                                                 handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
+                        self.present(alertController,
+                                     animated: true,
+                                     completion: nil)
                     })
                 }
             }
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: .cancel)
+                                             { (_) in
+                                                
+            }
             
             alertController.addTextField { (textField) in
                 textField.placeholder = "Email"
             }
             alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
+            self.present(alertController,
+                         animated: true,
+                         completion: nil)
             
         default:
             ()
@@ -245,15 +283,19 @@ class LoginViewController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK",
                                                         style: UIAlertAction.Style.default,
                                                         handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alertController,
+                             animated: true,
+                             completion: nil)
             } else {
                 if let current = AccessToken.current {
-                    MBProgressHUD.showAdded(to: self.view, animated: true)
+                    MBProgressHUD.showAdded(to: self.view,
+                                            animated: true)
                     
                     let credential = FacebookAuthProvider.credential(withAccessToken: current.tokenString)
                     Auth.auth().signIn(with: credential,
                                        completion: {(result: AuthDataResult?, error: Error?) in
-                        MBProgressHUD.hide(for: self.view, animated: true)
+                        MBProgressHUD.hide(for: self.view,
+                                           animated: true)
                         
                         if let error = error {
                             let alertController = UIAlertController(title: "Error",
@@ -262,9 +304,12 @@ class LoginViewController: UIViewController {
                             alertController.addAction(UIAlertAction(title: "OK",
                                                                     style: UIAlertAction.Style.default,
                                                                     handler: nil))
-                            self.present(alertController, animated: true, completion: nil)
+                            self.present(alertController,
+                                         animated: true,
+                                         completion: nil)
                         } else {
-                            self.dismiss(animated: true, completion: nil)
+                            self.dismiss(animated: true,
+                                         completion: nil)
                             self.updateUser()
                         }
                     })
@@ -341,7 +386,9 @@ class LoginViewController: UIViewController {
     
     func updateUser() {
         if let user = Auth.auth().currentUser {
-            FirebaseManager.sharedInstance.updateUser(email: user.email, photoURL: user.photoURL, displayName: user.displayName)
+            FirebaseManager.sharedInstance.updateUser(email: user.email,
+                                                      photoURL: user.photoURL,
+                                                      displayName: user.displayName)
         }
     }
 }
@@ -357,20 +404,24 @@ extension LoginViewController : UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "LogoCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "LogoCell",
+                                                 for: indexPath)
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell",
+                                                 for: indexPath)
             if let textField = cell!.contentView.viewWithTag(100) as? UITextField {
                 textField.placeholder = "Email"
             }
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell",
+                                                 for: indexPath)
             if let textField = cell!.contentView.viewWithTag(100) as? UITextField {
                 textField.placeholder = "Password"
                 textField.isSecureTextEntry = true
             }
         case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell",
+                                                 for: indexPath)
             if let button = cell!.contentView.viewWithTag(100) as? UIButton {
                 button.setTitle("Login", for: .normal)
                 button.tag = indexPath.row
@@ -380,14 +431,17 @@ extension LoginViewController : UITableViewDataSource {
                 imageLayer.masksToBounds = true
             }
         case 4:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell",
+                                                 for: indexPath)
         case 5:
-            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell",
+                                                 for: indexPath)
             if let label = cell!.contentView.viewWithTag(100) as? UILabel {
                 label.text = "No Account?"
             }
         case 6:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell",
+                                                 for: indexPath)
             if let button = cell!.contentView.viewWithTag(100) as? UIButton {
                 button.setTitle("Sign Up", for: .normal)
                 button.tag = indexPath.row
@@ -397,14 +451,17 @@ extension LoginViewController : UITableViewDataSource {
                 imageLayer.masksToBounds = true
             }
         case 7:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell",
+                                                 for: indexPath)
         case 8:
-            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell",
+                                                 for: indexPath)
             if let label = cell!.contentView.viewWithTag(100) as? UILabel {
                 label.text = "Or Login With Your Other Accounts"
             }
         case 9:
-            cell = tableView.dequeueReusableCell(withIdentifier: "AccountsCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "AccountsCell",
+                                                 for: indexPath)
             for subview in cell!.contentView.subviews {
                 if let button = subview as? UIButton {
                     if let image = button.imageView?.image {
@@ -419,14 +476,17 @@ extension LoginViewController : UITableViewDataSource {
                 }
             }
         case 10:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ClearCell",
+                                                 for: indexPath)
         case 11:
-            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell",
+                                                 for: indexPath)
             if let label = cell!.contentView.viewWithTag(100) as? UILabel {
                 label.text = "Forgot Password?"
             }
         case 12:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell",
+                                                 for: indexPath)
             if let button = cell!.contentView.viewWithTag(100) as? UIButton {
                 button.setTitle("Retrive Password", for: .normal)
                 button.tag = indexPath.row
@@ -468,7 +528,9 @@ extension LoginViewController : UITableViewDelegate {
 
 // MARK: GIDSignInDelegate
 extension LoginViewController : GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    func sign(_ signIn: GIDSignIn!,
+              didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
         if let error = error {
             let alertController = UIAlertController(title: "Error",
                                                     message: error.localizedDescription,
@@ -484,7 +546,7 @@ extension LoginViewController : GIDSignInDelegate {
                 return
             }
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                              accessToken: authentication.accessToken)
+                                                           accessToken: authentication.accessToken)
 
             MBProgressHUD.showAdded(to: self.view, animated: true)
             Auth.auth().signIn(with: credential,

@@ -68,7 +68,13 @@ class FirebaseTests: XCTestCase {
             }
         }
         
-        NetworkingManager.sharedInstance.doOperation(baseURL, path: path, method: method, headers: headers, paramType: paramType, params: params, completionHandler: completionHandler)
+        NetworkingManager.sharedInstance.doOperation(baseURL,
+                                                     path: path,
+                                                     method: method,
+                                                     headers: headers,
+                                                     paramType: paramType,
+                                                     params: params,
+                                                     completionHandler: completionHandler)
         
         repeat {
             RunLoop.current.run(mode: .defaultRunLoopMode, before:Date.distantFuture)

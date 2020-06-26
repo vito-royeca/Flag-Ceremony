@@ -42,7 +42,8 @@ open class Snapshot: NSObject {
 
         do {
             let trimCharacterSet = CharacterSet.whitespacesAndNewlines
-            deviceLanguage = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
+            deviceLanguage = try String(contentsOf: path,
+                                        encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
             app.launchArguments += ["-AppleLanguages", "(\(deviceLanguage))"]
         } catch {
             print("Couldn't detect/set language...")
@@ -58,7 +59,8 @@ open class Snapshot: NSObject {
 
         do {
             let trimCharacterSet = CharacterSet.whitespacesAndNewlines
-            locale = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
+            locale = try String(contentsOf: path,
+                                encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
         } catch {
             print("Couldn't detect/set locale...")
         }
@@ -77,9 +79,13 @@ open class Snapshot: NSObject {
         app.launchArguments += ["-FASTLANE_SNAPSHOT", "YES", "-ui_testing"]
 
         do {
-            let launchArguments = try String(contentsOf: path, encoding: String.Encoding.utf8)
+            let launchArguments = try String(contentsOf: path,
+                                             encoding: String.Encoding.utf8)
             let regex = try NSRegularExpression(pattern: "(\\\".+?\\\"|\\S+)", options: [])
-            let matches = regex.matches(in: launchArguments, options: [], range: NSRange(location:0, length:launchArguments.characters.count))
+            let matches = regex.matches(in: launchArguments,
+                                        options: [],
+                                        range: NSRange(location:0,
+                                                       length: launchArguments.characters.count))
             let results = matches.map { result -> String in
                 (launchArguments as NSString).substring(with: result.range)
             }
@@ -101,7 +107,8 @@ open class Snapshot: NSObject {
         #if os(tvOS)
             XCUIApplication().childrenMatchingType(.Browser).count
         #elseif os(OSX)
-            XCUIApplication().typeKey(XCUIKeyboardKeySecondaryFn, modifierFlags: [])
+            XCUIApplication().typeKey(XCUIKeyboardKeySecondaryFn,
+                                      modifierFlags: [])
         #else
             XCUIDevice.shared().orientation = .unknown
         #endif

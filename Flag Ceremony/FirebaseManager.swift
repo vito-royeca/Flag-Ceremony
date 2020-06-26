@@ -146,13 +146,15 @@ class FirebaseManager : NSObject {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                    if let json = try JSONSerialization.jsonObject(with: data,
+                                                                   options: .allowFragments) as? [String: [String: [String: Any]]] {
                         
                         var a:FCAnthem?
                         
                         if let dict = json["anthems"] {
                             if let anthem = dict[key] {
-                                a = FCAnthem(key: key, dict: anthem)
+                                a = FCAnthem(key: key,
+                                             dict: anthem)
                             }
                         }
                         completion(a)
@@ -185,16 +187,19 @@ class FirebaseManager : NSObject {
         var countries = [FCCountry]()
         
         // read the bundled json instead
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export",
+                                       ofType: "json",
+                                       inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
-                        
+                    if let json = try JSONSerialization.jsonObject(with: data,
+                                                                   options: .allowFragments) as? [String: [String: [String: Any]]] {
                         
                         if let dict = json["countries"] {
                             for (key,value) in dict {
-                                let country = FCCountry(key: key, dict: value)
+                                let country = FCCountry(key: key,
+                                                        dict: value)
                                 countries.append(country)
                             }
                         }
@@ -213,7 +218,8 @@ class FirebaseManager : NSObject {
             connectedRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
                     let ref = Database.database().reference()
-                    ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value, with: { (snapshot) in
+                    ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value,
+                                                                                            with: { (snapshot) in
                         for child in snapshot.children {
                             if let c = child as? DataSnapshot {
                                 countries.append(FCCountry(snapshot: c))
@@ -227,11 +233,14 @@ class FirebaseManager : NSObject {
     }
     
     func findCountry(_ key: String, completion: @escaping (FCCountry?) -> Void) {
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export",
+                                       ofType: "json",
+                                       inDirectory: "data") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: [String: [String: Any]]] {
+                    if let json = try JSONSerialization.jsonObject(with: data,
+                                                                   options: .allowFragments) as? [String: [String: [String: Any]]] {
                         
                         var a:FCCountry?
                         
@@ -253,7 +262,8 @@ class FirebaseManager : NSObject {
             connectedRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
                     let anthem = Database.database().reference().child("countries").child(key)
-                    anthem.observeSingleEvent(of: .value, with: { (snapshot) in
+                    anthem.observeSingleEvent(of: .value,
+                                              with: { (snapshot) in
                         var a:FCCountry?
                         
                         if let _ = snapshot.value as? [String: Any] {
@@ -406,10 +416,13 @@ class FirebaseManager : NSObject {
             
             // create anthems dir if not existing
             if !FileManager.default.fileExists(atPath: anthemsDir) {
-                try! FileManager.default.createDirectory(atPath: anthemsDir, withIntermediateDirectories: true, attributes: nil)
+                try! FileManager.default.createDirectory(atPath: anthemsDir,
+                                                         withIntermediateDirectories: true,
+                                                         attributes: nil)
             }
             
-//            gsReference.write(toFile: URL(fileURLWithPath: localPath), completion: { (url: URL?, error: Error?) in
+//            gsReference.write(toFile: URL(fileURLWithPath: localPath),
+//                              completion: { (url: URL?, error: Error?) in
 //                if let error = error {
 //                    completion(nil, error)
 //                } else {
