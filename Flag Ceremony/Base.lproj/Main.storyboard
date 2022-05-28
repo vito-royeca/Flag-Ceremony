@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xbX-80-daL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xbX-80-daL">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -31,7 +31,7 @@
                             <rect key="frame" x="58" y="5.5" width="259.5" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-S3-gL4">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-S3-gL4">
                                     <rect key="frame" x="0.0" y="0.0" width="259.5" height="33"/>
                                 </imageView>
                             </subviews>
@@ -87,7 +87,7 @@
                             <rect key="frame" x="58" y="5.5" width="259.5" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-4c-zsz">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-4c-zsz">
                                     <rect key="frame" x="0.0" y="0.0" width="259.5" height="33"/>
                                 </imageView>
                             </subviews>
@@ -478,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mw-Ll-GSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1157" y="-485"/>
+            <point key="canvasLocation" x="-1158" y="-449"/>
         </scene>
         <!--Drawer Controller-->
         <scene sceneID="Jfv-Qa-7bE">
@@ -500,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rd0-RO-5fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2784" y="504"/>
+            <point key="canvasLocation" x="-2873" y="503"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="KKx-0r-FKi">
@@ -811,7 +811,7 @@
                             <rect key="frame" x="58" y="5.5" width="259" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-UU-b7F">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-UU-b7F">
                                     <rect key="frame" x="0.0" y="0.0" width="259" height="33"/>
                                 </imageView>
                             </subviews>
@@ -938,7 +938,7 @@
                             <rect key="frame" x="58" y="5.5" width="259" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title bar" translatesAutoresizingMaskIntoConstraints="NO" id="Z5c-wW-LdB">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="Z5c-wW-LdB">
                                     <rect key="frame" x="0.0" y="0.0" width="259" height="33"/>
                                 </imageView>
                             </subviews>
@@ -1038,7 +1038,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC9-dL-MkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2095" y="-484"/>
+            <point key="canvasLocation" x="-2100" y="-449"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TqI-AC-qOV">
@@ -1081,8 +1081,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Q6A-TY-pWV"/>
-        <segue reference="4mM-aD-pb6"/>
+        <segue reference="ine-Dg-JAj"/>
+        <segue reference="b9u-LR-pcX"/>
         <segue reference="jN8-r2-9ps"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1099,7 +1099,6 @@
         <image name="ph.png" width="720" height="360"/>
         <image name="report card" width="25" height="25"/>
         <image name="splash screen" width="170" height="170"/>
-        <image name="title bar" width="307" height="33"/>
         <image name="twitter" width="25" height="25"/>
         <image name="user" width="25" height="25"/>
     </resources>

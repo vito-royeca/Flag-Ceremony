@@ -1,42 +1,44 @@
-# Mac OS X
-*.DS_Store
- 
 # Xcode
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
-*.xcuserstate
-project.xcworkspace/
-xcuserdata/
-.idea
-tmp/
- 
-#Eclipse
-.metadata
-*/bin/dexedLibs/*
-*/bin/*.apk
-*/bin/classes.dex
-*/bin/resources.ap_
-*/bin/jarlist.cache
-*/bin/salesforcesdk.jar
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-# Generated files
-*.o
-*.pyc
-*.hi
- 
-#Python modules
-MANIFEST
-dist/
+## Build generated
 build/
- 
-# Backup files
-*~.nib
-\#*#
-.#*
-*.swp
-*.un~
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+.DS_Store
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+.build/
 
 # CocoaPods
 #
@@ -46,6 +48,30 @@ build/
 #
 Pods/
 
-# Others
-*.ipa
-*.app.dSYM.zip
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+#fastlane/report.xml
+#fastlane/Preview.html
+fastlane/test_output
+xcshareddata
+fastlane/screenshots/en-US/*.png
+5WD3ZMS87D.cer
+5WD3ZMS87D.certSigningRequest
+5WD3ZMS87D.p12
+AppStore_com.jovitoroyeca.ManaGuide.mobileprovision
+ManaGuide/GoogleService-Info.plist
+.idea
+Gemfile.lock
+
