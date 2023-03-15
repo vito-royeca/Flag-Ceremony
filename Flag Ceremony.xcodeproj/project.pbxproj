@@ -37,6 +37,10 @@
 		8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
+		8B556B2529C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
+		8B556B2629C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
+		8B556B2729C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
+		8B556B2829C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +97,7 @@
 		8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "geography-class_medres.mbtiles"; sourceTree = "<group>"; };
 		8B2098FE2844049F00B62A45 /* anthems.dict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = anthems.dict; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
+		8B556B2429C2420100101D46 /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +155,9 @@
 				8B2096A0284400C200B62A45 /* Map */,
 				8B2096972843FF4800B62A45 /* Navigation */,
 				8B2096402842797B00B62A45 /* Flag_CeremonyApp.swift */,
+				8B556B2429C2420100101D46 /* Geodata.swift */,
 				8B2096422842797B00B62A45 /* Persistence.swift */,
 				8B2096432842797D00B62A45 /* Assets.xcassets */,
-				8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -239,9 +244,10 @@
 		8B2096AB2844049D00B62A45 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				8B2098FE2844049F00B62A45 /* anthems.dict */,
+				8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */,
 				8B2098FC2844049F00B62A45 /* flag-ceremony-export.json */,
 				8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */,
-				8B2098FE2844049F00B62A45 /* anthems.dict */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B20966F2842797D00B62A45 /* Persistence.swift in Sources */,
 				8B20966B2842797D00B62A45 /* Flag_CeremonyApp.swift in Sources */,
+				8B556B2529C2420100101D46 /* Geodata.swift in Sources */,
 				8B20966D2842797D00B62A45 /* ContentView.swift in Sources */,
 				8B2096A9284400C200B62A45 /* MapView.swift in Sources */,
 			);
@@ -460,6 +467,7 @@
 				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B2096702842797D00B62A45 /* Persistence.swift in Sources */,
 				8B20966C2842797D00B62A45 /* Flag_CeremonyApp.swift in Sources */,
+				8B556B2629C2420100101D46 /* Geodata.swift in Sources */,
 				8B20966E2842797D00B62A45 /* ContentView.swift in Sources */,
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
 			);
@@ -470,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B20965C2842797D00B62A45 /* Tests_iOSLaunchTests.swift in Sources */,
+				8B556B2729C2420100101D46 /* Geodata.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
+				8B556B2829C2420100101D46 /* Geodata.swift in Sources */,
 				8B2096662842797D00B62A45 /* Tests_macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

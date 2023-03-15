@@ -17,6 +17,7 @@ struct TabNavigationView: View {
     }
     
     @State private var selection: TabItem = .map
+    @StateObject var geodata = Geodata()
     
     var body: some View {
         TabView(selection: $selection) {
@@ -41,6 +42,7 @@ struct TabNavigationView: View {
                 .tag(TabItem.globe)
             
         }
+            .environmentObject(geodata)
     }
 }
 
