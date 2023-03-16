@@ -26,6 +26,9 @@
 		8B209E70284404A100B62A45 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B209E71284404A100B62A45 /* anthems.dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FE2844049F00B62A45 /* anthems.dict */; };
 		8B209E72284404A100B62A45 /* anthems.dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FE2844049F00B62A45 /* anthems.dict */; };
+		8B335B2029C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
+		8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
+		8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
@@ -978,6 +981,7 @@
 		8B2096A2284400C200B62A45 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "geography-class_medres.mbtiles"; sourceTree = "<group>"; };
 		8B2098FE2844049F00B62A45 /* anthems.dict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = anthems.dict; sourceTree = "<group>"; };
+		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
 		8B556B2429C2420100101D46 /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
 		8B556B4229C2AB2600101D46 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -1581,6 +1585,7 @@
 			isa = PBXGroup;
 			children = (
 				8B556BA529C2B4EF00101D46 /* ContentView.swift */,
+				8B335B1F29C2EE9D003D1F01 /* CountryView.swift */,
 				8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */,
 				8B20969E284400C200B62A45 /* GlobeView.swift */,
 				8B2096A2284400C200B62A45 /* MapView.swift */,
@@ -2642,6 +2647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B335B2029C2EE9D003D1F01 /* CountryView.swift in Sources */,
 				8B556B4F29C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7429C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B556BA629C2B4EF00101D46 /* ContentView.swift in Sources */,
@@ -2663,6 +2669,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */,
 				8B556B5029C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7529C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B556BA729C2B4EF00101D46 /* ContentView.swift in Sources */,
@@ -2705,6 +2712,7 @@
 				8B556BAE29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B556B7F29C2AF8600101D46 /* FCUser.swift in Sources */,
+				8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */,
 				8B556B5229C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
@@ -2865,7 +2873,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2897,7 +2905,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
