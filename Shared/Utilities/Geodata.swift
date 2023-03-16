@@ -13,4 +13,13 @@ class Geodata: ObservableObject {
     
     @Published var location = MaplyCoordinateMakeWithDegrees(-3.6704, 40.5023)
     @Published var height = Float(0.8)
+    @Published var countries = [FCCountry]()
+    
+    func fetchAllCountries() {
+        if countries.isEmpty {
+            FirebaseManager.sharedInstance.fetchAllCountries(completion: { [weak self] (countries: [FCCountry]) in
+                self?.countries = countries
+            })
+        }
+    }
 }

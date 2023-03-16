@@ -21,23 +21,8 @@ struct GlobeView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: GlobeVC, context: Context) {
-        guard let globe = uiViewController.globe else {
-            return
-        }
-        
-        var position = MaplyCoordinate(x: 0, y: 0)
-        var height = Float(0)
-        
-        globe.getPosition(&position, height: &height)
-        
-        if position.x != geodata.location.x ||
-           position.y != geodata.location.y ||
-            height != geodata.height - 0.2 {
-            globe.animate(toPosition: geodata.location,
-                          height: geodata.height + 0.2,
-                          heading: globe.heading,
-                          time: 1.0)
-        }
+        uiViewController.relocate(to: geodata.location, height: geodata.height)
+        uiViewController.add(countries: geodata.countries)
     }
     
     func makeCoordinator() -> GlobeView.Coordinator {
@@ -61,25 +46,8 @@ extension GlobeView {
         }
 
         func globeViewController(_ viewC: WhirlyGlobeViewController, didSelect selectedObj: NSObject) {
-            
-        }
 
-        func globeViewController(_ viewC: WhirlyGlobeViewController, didSelect selectedObj: NSObject, atLoc coord: MaplyCoordinate, onScreen screenPt: CGPoint) {
-            
         }
-        
-        func globeViewController(_ viewC: WhirlyGlobeViewController, allSelect selectedObjs: [Any], atLoc coord: MaplyCoordinate, onScreen screenPt: CGPoint) {
-            
-        }
-
-        func globeViewController(_ viewC: WhirlyGlobeViewController, didTapAt coord: MaplyCoordinate) {
-            
-        }
-
-        func globeViewControllerDidStartMoving(_ viewC: WhirlyGlobeViewController, userMotion: Bool) {
-            
-        }
-
 
         func globeViewController(_ viewC: WhirlyGlobeViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
             var position = MaplyCoordinate(x: 0, y: 0)
@@ -87,15 +55,7 @@ extension GlobeView {
 
             viewC.getPosition(&position, height: &height)
             parent.geodata.location = position
-            parent.geodata.height = height + 0.2
-        }
-
-        func globeViewController(_ viewC: WhirlyGlobeViewController, didMove corners: UnsafeMutablePointer<MaplyCoordinate>) {
-            
-        }
-
-        func globeViewController(_ viewC: WhirlyGlobeViewController, didTap annotation: MaplyAnnotation) {
-            
+            parent.geodata.height = height - 0.2
         }
     }
 }
@@ -103,9 +63,13 @@ extension GlobeView {
 // MARK: - GlobeVC
 
 class GlobeVC: UIViewController {
+    var mbTilesFetcher: MaplyMBTileFetcher?
+    
     var globe: WhirlyGlobeViewController?
     var imageLoader : MaplyQuadImageLoader?
-    var mbTilesFetcher: MaplyMBTileFetcher?
+    var countries = [FCCountry]()
+    var countryObjects: MaplyComponentObject?
+    var capitalObjects: MaplyComponentObject?
 
     convenience init(mbTilesFetcher: MaplyMBTileFetcher?) {
         self.init()
@@ -147,5 +111,81 @@ class GlobeVC: UIViewController {
         globe!.clearColor = UIColor.black
         globe!.frameInterval = 2
         globe!.height = 1.0
+    }
+    
+    func relocate(to position: MaplyCoordinate, height: Float) {
+        guard let globe = globe else {
+            return
+        }
+        
+        var cPosition = MaplyCoordinate(x: 0, y: 0)
+        var cHeight = Float(0)
+        
+        globe.getPosition(&cPosition, height: &cHeight)
+        
+        if cPosition.x != position.x ||
+           cPosition.y != position.y ||
+           cHeight != height {
+            globe.animate(toPosition: position,
+                          height: height + 0.2,
+                          heading: globe.heading,
+                          time: 1.0)
+        }
+    }
+    
+    func add(countries: [FCCountry]) {
+        guard let globe = globe,
+           countries.count != self.countries.count else {
+            return
+        }
+
+        self.countries.removeAll()
+        if let countryObjects = countryObjects {
+            globe.remove(countryObjects)
+        }
+        if let capitalObjects = capitalObjects {
+            globe.remove(capitalObjects)
+        }
+        
+        var countryLabels = [MaplyScreenLabel]()
+        var capitalLabels = [MaplyScreenLabel]()
+        
+        for country in countries {
+            // add flags only if there is a flag files
+//            if  let _ = country.getFlagURLForSize(size: .mini) {
+                var label = MaplyScreenLabel()
+                var radians = country.getGeoRadians()
+                
+                label.text = "\(country.emojiFlag())\(country.name!)"
+                label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                            y: Float(radians[1]))
+                label.selectable = true
+                label.userObject = country
+                label.layoutImportance = 1
+                countryLabels.append(label)
+                
+                if let capital = country.capital {
+                    label = MaplyScreenLabel()
+                    radians = country.getCapitalGeoRadians()
+                    
+                    label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
+                    label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                                y: Float(radians[1]))
+                    label.selectable = false
+                    capitalLabels.append(label)
+                }
+                self.countries.append(country)
+//            }
+        }
+                        
+        countryObjects = globe.addScreenLabels(countryLabels,
+                                               desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
+                                                      kMaplyTextOutlineColor: UIColor.black,
+                                                      kMaplyTextOutlineSize: 2.0,
+                                                      kMaplyColor: UIColor.white])
+        
+        capitalObjects = globe.addScreenLabels(capitalLabels,
+                                               desc: [kMaplyFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light),
+                                                      kMaplyTextColor: UIColor.black])
     }
 }

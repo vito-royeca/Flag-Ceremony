@@ -43,6 +43,9 @@ struct TabNavigationView: View {
             
         }
             .environmentObject(geodata)
+            .onAppear {
+                geodata.fetchAllCountries()
+            }
     }
 }
 

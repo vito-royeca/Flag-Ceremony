@@ -13,11 +13,6 @@ struct MapView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = MaplyVC
     @EnvironmentObject var geodata: Geodata
     
-//    var countries = [FCCountry]()
-//    var capitalLabels = [MaplyScreenLabel]()
-
-    public init() {}
-
     func makeUIViewController(context: Context) -> MaplyVC {
         let mapVC = MaplyVC(mapType: .typeFlat, mbTilesFetcher: geodata.mbTilesFetcher)
         mapVC.map?.delegate = context.coordinator
@@ -26,93 +21,13 @@ struct MapView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: MaplyVC, context: Context) {
-        guard let map = uiViewController.map else {
-            return
-        }
-        
-        var position = MaplyCoordinate(x: 0, y: 0)
-        var height = Float(0)
-        
-        map.getPosition(&position, height: &height)
-        
-        if position.x != geodata.location.x ||
-           position.y != geodata.location.y ||
-           height != geodata.height {
-            map.animate(toPosition: geodata.location,
-                        height: geodata.height,
-                        time: 1.0)
-        }
+        uiViewController.relocate(to: geodata.location, height: geodata.height)
+        uiViewController.add(countries: geodata.countries)
     }
     
     func makeCoordinator() -> MapView.Coordinator {
         return Coordinator(self)
     }
-    
-//    func addFlags() {
-//        if countryLabels.count > 0 &&
-//            capitalLabels.count > 0 {
-//            return
-//        }
-//
-//        MBProgressHUD.showAdded(to: view, animated: true)
-//
-//        FirebaseManager.sharedInstance.fetchAllCountries(completion: { (countries: [FCCountry]) in
-//            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-//                self.map.remove(self.countryLabels)
-//                self.map.remove(self.capitalLabels)
-//                self.countries.removeAll()
-//                self.countryLabels.removeAll()
-//                self.capitalLabels.removeAll()
-//
-//                for country in countries {
-//                    // add flags only if there is a flag files
-//                    if  let _ = country.getFlagURLForSize(size: .mini) {
-//                        var label = MaplyScreenLabel()
-//                        var radians = country.getGeoRadians()
-//
-//                        label.text = "\(country.emojiFlag())\(country.name!)"
-//                        label.loc = MaplyCoordinate(x: radians[0],
-//                                                    y: radians[1])
-//                        label.selectable = true
-//                        label.userObject = country
-//                        label.layoutImportance = 1
-//                        self.countryLabels.append(label)
-//
-//                        if let capital = country.capital {
-//                            label = MaplyScreenLabel()
-//                            radians = country.getCapitalGeoRadians()
-//
-//                            label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
-//                            label.loc = MaplyCoordinate(x: radians[0],
-//                                                        y: radians[1])
-//                            label.selectable = false
-//                            self.capitalLabels.append(label)
-//                        }
-//
-//                        self.countries.append(country)
-//
-//                    } else {
-////                        print("anthem not found: \(country.name!)")
-//                    }
-//                }
-//
-//                self.mapView!.addScreenLabels(self.countryLabels,
-//                                              desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: 18.0),
-//                                                     kMaplyTextOutlineColor: UIColor.black,
-//                                                     kMaplyTextOutlineSize: 2.0,
-//                                                     kMaplyColor: UIColor.white])
-//
-//                self.mapView!.addScreenLabels(self.capitalLabels,
-//                                              desc: [kMaplyFont: UIFont.systemFont(ofSize: 14),
-//                                                     kMaplyTextColor: UIColor.white])
-//
-//                DispatchQueue.main.async {
-//                    MBProgressHUD.hide(for: self.view,
-//                                       animated: true)
-//                }
-//            }
-//        })
-//    }
 }
 
 struct MapView_Previews: PreviewProvider {
@@ -133,23 +48,6 @@ extension MapView {
             
         }
 
-        func maplyViewController(_ viewC: MaplyViewController, didSelect selectedObj: NSObject, atLoc coord: MaplyCoordinate, onScreen screenPt: CGPoint) {
-            
-        }
-        
-        func maplyViewController(_ viewC: MaplyViewController, allSelect selectedObjs: [Any], atLoc coord: MaplyCoordinate, onScreen screenPt: CGPoint) {
-            
-        }
-
-        func maplyViewController(_ viewC: MaplyViewController, didTapAt coord: MaplyCoordinate) {
-            
-        }
-
-        func maplyViewControllerDidStartMoving(_ viewC: MaplyViewController, userMotion: Bool) {
-            
-        }
-
-
         func maplyViewController(_ viewC: MaplyViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
             var position = MaplyCoordinate(x: 0, y: 0)
             var height = Float(0)
@@ -158,24 +56,20 @@ extension MapView {
             parent.geodata.location = position
             parent.geodata.height = height
         }
-
-        func maplyViewController(_ viewC: MaplyViewController, didMove corners: UnsafeMutablePointer<MaplyCoordinate>) {
-            
-        }
-
-        func maplyViewController(_ viewC: MaplyViewController, didTap annotation: MaplyAnnotation) {
-            
-        }
     }
 }
 
 // MARK: - MapVC
 
 class MaplyVC: UIViewController {
-    var map: MaplyViewController?
-    var imageLoader : MaplyQuadImageLoader?
     var mapType: MaplyMapType?
     var mbTilesFetcher: MaplyMBTileFetcher?
+    
+    var map: MaplyViewController?
+    var imageLoader : MaplyQuadImageLoader?
+    var countries = [FCCountry]()
+    var countryObjects: MaplyComponentObject?
+    var capitalObjects: MaplyComponentObject?
 
     convenience init(mapType: MaplyMapType, mbTilesFetcher: MaplyMBTileFetcher?) {
         self.init()
@@ -220,7 +114,78 @@ class MaplyVC: UIViewController {
         map!.height = 0.8
     }
     
-    func setView(point: Int) {
+    func relocate(to position: MaplyCoordinate, height: Float) {
+        guard let map = map else {
+            return
+        }
         
+        var cPosition = MaplyCoordinate(x: 0, y: 0)
+        var cHeight = Float(0)
+        
+        map.getPosition(&cPosition, height: &cHeight)
+        
+        if cPosition.x != position.x ||
+           cPosition.y != position.y ||
+           cHeight != height {
+            map.animate(toPosition: position,
+                        height: height,
+                        time: 1.0)
+        }
+    }
+    
+    func add(countries: [FCCountry]) {
+        guard let map = map,
+           countries.count != self.countries.count else {
+            return
+        }
+
+        self.countries.removeAll()
+        if let countryObjects = countryObjects {
+            map.remove(countryObjects)
+        }
+        if let capitalObjects = capitalObjects {
+            map.remove(capitalObjects)
+        }
+        
+        var countryLabels = [MaplyScreenLabel]()
+        var capitalLabels = [MaplyScreenLabel]()
+        
+        for country in countries {
+            // add flags only if there is a flag files
+//            if  let _ = country.getFlagURLForSize(size: .mini) {
+                var label = MaplyScreenLabel()
+                var radians = country.getGeoRadians()
+                
+                label.text = "\(country.emojiFlag())\(country.name!)"
+                label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                            y: Float(radians[1]))
+                label.selectable = true
+                label.userObject = country
+                label.layoutImportance = 1
+                countryLabels.append(label)
+                
+                if let capital = country.capital {
+                    label = MaplyScreenLabel()
+                    radians = country.getCapitalGeoRadians()
+                    
+                    label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
+                    label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                                y: Float(radians[1]))
+                    label.selectable = false
+                    capitalLabels.append(label)
+                }
+                self.countries.append(country)
+//            }
+        }
+                        
+        countryObjects = map.addScreenLabels(countryLabels,
+                                             desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
+                                                    kMaplyTextOutlineColor: UIColor.black,
+                                                    kMaplyTextOutlineSize: 2.0,
+                                                    kMaplyColor: UIColor.white])
+        
+        capitalObjects = map.addScreenLabels(capitalLabels,
+                                             desc: [kMaplyFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light),
+                                                    kMaplyTextColor: UIColor.black])
     }
 }
