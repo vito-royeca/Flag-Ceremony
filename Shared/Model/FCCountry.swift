@@ -94,15 +94,15 @@ struct FCCountry {
     
     // MARK: - Custom methods
 
-//    func getFlagURLForSize(size: FlagSize) -> URL? {
-//        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
-//            if FileManager.default.fileExists(atPath: path) {
-//                return URL(fileURLWithPath: path)
-//            }
-//        }
-//
-//        return nil
-//    }
+    func getFlagURLForSize(size: FlagSize) -> URL? {
+        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
+            if FileManager.default.fileExists(atPath: path) {
+                return URL(fileURLWithPath: path)
+            }
+        }
+
+        return nil
+    }
     
     func getAudioURL() -> URL? {
         if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {

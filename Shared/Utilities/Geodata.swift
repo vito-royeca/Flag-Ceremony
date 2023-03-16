@@ -10,8 +10,8 @@ import WhirlyGlobe
 
 class Geodata: ObservableObject {
     var mbTilesFetcher = MaplyMBTileFetcher(mbTiles: "geography-class_medres")
-    
-    @Published var location = MaplyCoordinateMakeWithDegrees(-3.6704, 40.5023)
+
+    @Published var location = MaplyCoordinateMakeWithDegrees(DefaultLocationLongitude, DefaultLocationLatitude)
     @Published var height = Float(0.8)
     @Published var countries = [FCCountry]()
     
