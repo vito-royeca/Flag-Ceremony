@@ -32,7 +32,7 @@ struct TabNavigationView: View {
                 .tag(TabItem.map)
 
             NavigationView {
-                GlobeView()
+                GlobeViewVC()
             }
                 .navigationViewStyle(.stack)
                 .tabItem {

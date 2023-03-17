@@ -2481,6 +2481,7 @@
 		8B20963D2842797B00B62A45 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8BA7239E29C40EF700FF4859 /* Country */,
 				8B2096AB2844049D00B62A45 /* data */,
 				8B0FF90929C3D3E4007F548A /* MediaPlayer */,
 				8B556B6629C2AF8600101D46 /* Model */,
@@ -2804,13 +2805,20 @@
 			isa = PBXGroup;
 			children = (
 				8B556BA529C2B4EF00101D46 /* ContentView.swift */,
-				8B335B1F29C2EE9D003D1F01 /* CountryView.swift */,
-				8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */,
 				8B20969E284400C200B62A45 /* GlobeView.swift */,
 				8B2096A2284400C200B62A45 /* MapView.swift */,
 				8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8BA7239E29C40EF700FF4859 /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				8B335B1F29C2EE9D003D1F01 /* CountryView.swift */,
+				8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */,
+			);
+			path = Country;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

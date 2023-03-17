@@ -9,9 +9,23 @@
 import SwiftUI
 import WhirlyGlobe
 
+struct GlobeViewVC: View {
+    @State var selectedCountry: FCCountry? = nil
+
+    var body: some View {
+        GlobeView(selectedCountry: $selectedCountry)
+            .sheet(item: $selectedCountry) { selectedCountry in
+                NavigationView {
+                    CountryView(id: selectedCountry.id)
+                }
+            }
+    }
+}
+
 struct GlobeView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = GlobeVC
     @EnvironmentObject var geodata: Geodata
+    @Binding var selectedCountry: FCCountry?
 
     func makeUIViewController(context: Context) -> GlobeVC {
         let globeVC = GlobeVC(mbTilesFetcher: geodata.mbTilesFetcher)
@@ -33,7 +47,8 @@ struct GlobeView: UIViewControllerRepresentable {
 
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
-        GlobeView().environmentObject(Geodata())
+        let country = FCCountry(key: "PH", dict: [:])
+        GlobeView(selectedCountry: .constant(country)).environmentObject(Geodata())
     }
 }
 
@@ -46,7 +61,10 @@ extension GlobeView {
         }
 
         func globeViewController(_ viewC: WhirlyGlobeViewController, didSelect selectedObj: NSObject) {
-
+            if let selectedObject = selectedObj as? MaplyScreenLabel {
+                let country = selectedObject.userObject as? FCCountry
+                parent.selectedCountry = country
+            }
         }
 
         func globeViewController(_ viewC: WhirlyGlobeViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
