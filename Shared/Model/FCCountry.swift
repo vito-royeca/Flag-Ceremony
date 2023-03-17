@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct FCCountry {
+struct FCCountry: Identifiable {
     struct Keys {
         static let Name              = "Name"
         static let Capital           = "Capital"
@@ -39,7 +39,12 @@ struct FCCountry {
     }
 
     // MARK: - Properties
-
+    var id: String {
+        get {
+            return key ?? ""
+        }
+    }
+    
     let key: String?
     let ref: DatabaseReference?
     
@@ -94,21 +99,19 @@ struct FCCountry {
     
     // MARK: - Custom methods
 
-    func getFlagURLForSize(size: FlagSize) -> URL? {
-        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png", inDirectory: "data/flags/\(size.rawValue)") {
-            if FileManager.default.fileExists(atPath: path) {
-                return URL(fileURLWithPath: path)
-            }
+    func getFlagURL() -> URL? {
+        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "png"),
+           FileManager.default.fileExists(atPath: path) {
+            return URL(fileURLWithPath: path)
         }
 
         return nil
     }
     
     func getAudioURL() -> URL? {
-        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "mp3", inDirectory: "data/anthems") {
-            if FileManager.default.fileExists(atPath: path) {
-                return URL(fileURLWithPath: path)
-            }
+        if let path = Bundle.main.path(forResource: key!.lowercased(), ofType: "mp3"),
+           FileManager.default.fileExists(atPath: path) {
+            return URL(fileURLWithPath: path)
         }
         
         return nil
@@ -137,21 +140,33 @@ struct FCCountry {
         return [0.0, 0.0]
     }
     
-    func emojiFlag() -> String {
-        var string = ""
-        
-        if let countryCodes = countryCodes {
-            if let iso2 = countryCodes[Keys.CountryCodesIso2] as? String {
-                let country = iso2.uppercased()
-                for uS in country.unicodeScalars {
-                    string += String(UnicodeScalar(127397 + uS.value)!)
+    var emojiFlag: String {
+        get {
+            var string = ""
+            
+            if let countryCodes = countryCodes {
+                if let iso2 = countryCodes[Keys.CountryCodesIso2] as? String {
+                    let country = iso2.uppercased()
+                    for uS in country.unicodeScalars {
+                        string += String(UnicodeScalar(127397 + uS.value)!)
+                    }
                 }
             }
+            
+            return string
         }
-        
-        return string
     }
     
+    var displayName: String {
+        get {
+            if let name = name {
+                return "\(emojiFlag)\(name)"
+            } else {
+                return ""
+            }
+        }
+    }
+
     var description: String {
         return self.key!
     }

@@ -18,7 +18,7 @@ class Geodata: ObservableObject {
     func fetchAllCountries() {
         if countries.isEmpty {
             FirebaseManager.sharedInstance.fetchAllCountries(completion: { [weak self] (countries: [FCCountry]) in
-                self?.countries = countries
+                self?.countries = countries.filter({ $0.getFlagURL() != nil })
             })
         }
     }

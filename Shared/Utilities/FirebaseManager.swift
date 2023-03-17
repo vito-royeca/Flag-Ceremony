@@ -142,7 +142,7 @@ class FirebaseManager : NSObject {
 
     func findAnthem(_ key: String, completion: @escaping (FCAnthem?) -> Void) {
         // read the bundled json
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json", inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
@@ -187,9 +187,7 @@ class FirebaseManager : NSObject {
         var countries = [FCCountry]()
         
         // read the bundled json instead
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export",
-                                       ofType: "json",
-                                       inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
@@ -233,9 +231,7 @@ class FirebaseManager : NSObject {
     }
     
     func findCountry(_ key: String, completion: @escaping (FCCountry?) -> Void) {
-        if let path = Bundle.main.path(forResource: "flag-ceremony-export",
-                                       ofType: "json",
-                                       inDirectory: "data") {
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))

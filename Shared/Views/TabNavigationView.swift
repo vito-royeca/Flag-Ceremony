@@ -22,7 +22,7 @@ struct TabNavigationView: View {
     var body: some View {
         TabView(selection: $selection) {
             NavigationView {
-                MapView()
+                MapViewVC()
             }
                 .navigationViewStyle(.stack)
                 .tabItem {

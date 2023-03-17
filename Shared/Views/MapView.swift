@@ -9,9 +9,23 @@
 import SwiftUI
 import WhirlyGlobe
 
+struct MapViewVC: View {
+    @State var selectedCountry: FCCountry? = nil
+
+    var body: some View {
+        MapView(selectedCountry: $selectedCountry)
+            .sheet(item: $selectedCountry) { selectedCountry in
+                NavigationView {
+                    CountryView(id: selectedCountry.id)
+                }
+            }
+    }
+}
+
 struct MapView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = MaplyVC
     @EnvironmentObject var geodata: Geodata
+    @Binding var selectedCountry: FCCountry?
     
     func makeUIViewController(context: Context) -> MaplyVC {
         let mapVC = MaplyVC(mapType: .typeFlat, mbTilesFetcher: geodata.mbTilesFetcher)
@@ -32,7 +46,8 @@ struct MapView: UIViewControllerRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView().environmentObject(Geodata())
+        let country = FCCountry(key: "PH", dict: [:])
+        MapView(selectedCountry: .constant(country)).environmentObject(Geodata())
     }
 }
 
@@ -45,7 +60,10 @@ extension MapView {
         }
 
         func maplyViewController(_ viewC: MaplyViewController, didSelect selectedObj: NSObject) {
-            
+            if let selectedObject = selectedObj as? MaplyScreenLabel {
+                let country = selectedObject.userObject as? FCCountry
+                parent.selectedCountry = country
+            }
         }
 
         func maplyViewController(_ viewC: MaplyViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
@@ -151,31 +169,28 @@ class MaplyVC: UIViewController {
         var capitalLabels = [MaplyScreenLabel]()
         
         for country in countries {
-            // add flags only if there is a flag files
-//            if  let _ = country.getFlagURLForSize(size: .mini) {
-                var label = MaplyScreenLabel()
-                var radians = country.getGeoRadians()
+            var label = MaplyScreenLabel()
+            var radians = country.getGeoRadians()
+            
+            label.text = country.displayName
+            label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                        y: Float(radians[1]))
+            label.selectable = true
+            label.userObject = country
+            label.layoutImportance = 1
+            countryLabels.append(label)
+            
+            if let capital = country.capital {
+                label = MaplyScreenLabel()
+                radians = country.getCapitalGeoRadians()
                 
-                label.text = "\(country.emojiFlag())\(country.name!)"
+                label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
                 label.loc = MaplyCoordinate(x: Float(radians[0]),
                                             y: Float(radians[1]))
-                label.selectable = true
-                label.userObject = country
-                label.layoutImportance = 1
-                countryLabels.append(label)
-                
-                if let capital = country.capital {
-                    label = MaplyScreenLabel()
-                    radians = country.getCapitalGeoRadians()
-                    
-                    label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
-                    label.loc = MaplyCoordinate(x: Float(radians[0]),
-                                                y: Float(radians[1]))
-                    label.selectable = false
-                    capitalLabels.append(label)
-                }
-                self.countries.append(country)
-//            }
+                label.selectable = false
+                capitalLabels.append(label)
+            }
+            self.countries.append(country)
         }
                         
         countryObjects = map.addScreenLabels(countryLabels,

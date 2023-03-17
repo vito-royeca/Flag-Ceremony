@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct FCAnthem {
+struct FCAnthem: Identifiable {
     struct Keys {
         static let Wiki         = "wiki"
         static let NativeTitle  = "nativeTitle"
@@ -26,6 +26,11 @@ struct FCAnthem {
     }
     
     // MARK: Properties
+    var id: String {
+        get {
+            return key ?? ""
+        }
+    }
     let key: String?
     let ref: DatabaseReference?
     
@@ -35,7 +40,7 @@ struct FCAnthem {
     let dateAdopted: [String]?
     let lyricsWriter: [String]?
     let musicWriter: [String]?
-    let lyrics: [[String: Any]]?
+    let lyrics: [[String: String]]?
     let info: String?
     let flagInfo: String?
     let background: String?
@@ -51,7 +56,7 @@ struct FCAnthem {
         self.dateAdopted = dict[Keys.DateAdopted] as? [String]
         self.lyricsWriter = dict[Keys.LyricsWriter] as? [String]
         self.musicWriter = dict[Keys.MusicWriter] as? [String]
-        self.lyrics = dict[Keys.Lyrics] as? [[String: Any]]
+        self.lyrics = dict[Keys.Lyrics] as? [[String: String]]
         self.info = dict[Keys.Info] as? String
         self.flagInfo = dict[Keys.FlagInfo] as? String
         self.background = dict[Keys.Background] as? String
@@ -68,7 +73,7 @@ struct FCAnthem {
         self.dateAdopted = value[Keys.DateAdopted] as? [String]
         self.lyricsWriter = value[Keys.LyricsWriter] as? [String]
         self.musicWriter = value[Keys.MusicWriter] as? [String]
-        self.lyrics = value[Keys.Lyrics] as? [[String: Any]]
+        self.lyrics = value[Keys.Lyrics] as? [[String: String]]
         self.info = value[Keys.Info] as? String
         self.flagInfo = value[Keys.FlagInfo] as? String
         self.background = value[Keys.Background] as? String

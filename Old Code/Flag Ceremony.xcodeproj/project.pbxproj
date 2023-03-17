@@ -31,6 +31,12 @@
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4241DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4261DEF2BE000E2D7AD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */; };
+		8B1A0BA729C354730012B2A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A0BA629C354730012B2A8 /* Constants.swift */; };
+		8B1A0BA829C354730012B2A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A0BA629C354730012B2A8 /* Constants.swift */; };
+		8B1A0BA929C354730012B2A8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A0BA629C354730012B2A8 /* Constants.swift */; };
+		8B1A0BAB29C354B80012B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */; };
+		8B1A0BAC29C354B80012B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */; };
+		8B1A0BAD29C354B80012B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */; };
 		8B3FA04224A7C9E400DF7665 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04124A7C9E400DF7665 /* MainView.swift */; };
 		8B3FA04F24A7CCBF00DF7665 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */; };
 		8B3FA05524A7CF2400DF7665 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA05424A7CF2400DF7665 /* ChartsView.swift */; };
@@ -69,9 +75,6 @@
 		8C4E97331D88ED50005A685B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E97311D88ED50005A685B /* LaunchScreen.storyboard */; };
 		8C4E973E1D88ED51005A685B /* Flag_CeremonyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E973D1D88ED51005A685B /* Flag_CeremonyTests.swift */; };
 		8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */; };
-		8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
-		8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
-		8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB26AA1DD986BD00660EB9 /* Constants.swift */; };
 		8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
 		8CBBE75B1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
 		8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */; };
@@ -96,9 +99,6 @@
 		8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */; };
 		8CEFB6441DDBF57100F34B4D /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */; };
 		8CEFB6451DDBF57100F34B4D /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */; };
-		8CEFB6471DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
-		8CEFB6481DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
-		8CEFB6491DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +133,8 @@
 		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8B1A0BA629C354730012B2A8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../Shared/Constants.swift; sourceTree = "<group>"; };
+		8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B3FA04124A7C9E400DF7665 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8B3FA05424A7CF2400DF7665 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
@@ -160,7 +162,6 @@
 		8C4E97441D88ED51005A685B /* Flag CeremonyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flag CeremonyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag_CeremonyUITests.swift; sourceTree = "<group>"; };
 		8C4E974A1D88ED51005A685B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8CBB26AA1DD986BD00660EB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CBBE7581DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8CBBE7591DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		8CC265781DDABD0C001CDCF0 /* CountryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +170,6 @@
 		8CE297C41DE5F17B00B47CAA /* SliderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CE297C51DE5F17B00B47CAA /* SliderCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCollectionViewCell.xib; sourceTree = "<group>"; };
 		8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
-		8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CEFB64A1DDC73E700F34B4D /* Flag Ceremony.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Flag Ceremony.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,9 +314,16 @@
 		8C4E97271D88ED50005A685B /* Flag Ceremony */ = {
 			isa = PBXGroup;
 			children = (
+				8C4E972F1D88ED50005A685B /* Assets.xcassets */,
+				8B1A0BA629C354730012B2A8 /* Constants.swift */,
 				8C4E97281D88ED50005A685B /* AppDelegate.swift */,
-				8CBB26AA1DD986BD00660EB9 /* Constants.swift */,
 				11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */,
+				8CEFB64A1DDC73E700F34B4D /* Flag Ceremony.entitlements */,
+				119AF47B1EACE13E0061C48F /* Flag Ceremony-Bridging-Header.h */,
+				119AF47C1EACE13E0061C48F /* Flag CeremonyTests-Bridging-Header.h */,
+				119AF47D1EACE13F0061C48F /* Flag CeremonyUITests-Bridging-Header.h */,
+				8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */,
+				8C4E97341D88ED50005A685B /* Info.plist */,
 				8B3FA04124A7C9E400DF7665 /* MainView.swift */,
 				8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */,
 				8B3FA04324A7CB3800DF7665 /* Menu */,
@@ -325,17 +332,10 @@
 				8B3FA04C24A7CC0400DF7665 /* Countries */,
 				8B3FA04D24A7CC2300DF7665 /* Country */,
 				8B95FB0329C3505D003CD2AB /* Globe */,
-				8CEFB64A1DDC73E700F34B4D /* Flag Ceremony.entitlements */,
-				8C4E972F1D88ED50005A685B /* Assets.xcassets */,
-				8C4E97341D88ED50005A685B /* Info.plist */,
-				8CEFB6461DDC6A1E00F34B4D /* GoogleService-Info.plist */,
 				8B3FA04924A7CBC000DF7665 /* Login */,
 				8B95FAFE29C34FF6003CD2AB /* Map */,
 				8B95FB0829C350B2003CD2AB /* Model */,
 				8C4E97591D891518005A685B /* View */,
-				119AF47B1EACE13E0061C48F /* Flag Ceremony-Bridging-Header.h */,
-				119AF47C1EACE13E0061C48F /* Flag CeremonyTests-Bridging-Header.h */,
-				119AF47D1EACE13F0061C48F /* Flag CeremonyUITests-Bridging-Header.h */,
 			);
 			path = "Flag Ceremony";
 			sourceTree = "<group>";
@@ -493,11 +493,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4E97331D88ED50005A685B /* LaunchScreen.storyboard in Resources */,
+				8B1A0BAB29C354B80012B2A8 /* GoogleService-Info.plist in Resources */,
 				116FD6FA1E974BDA00178709 /* DataTableViewCell.xib in Resources */,
 				8C4E97301D88ED50005A685B /* Assets.xcassets in Resources */,
 				8CBBE75D1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 				8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */,
-				8CEFB6471DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
 				8CE297C11DE5EF1000B47CAA /* SliderTableViewCell.xib in Resources */,
 				8CE297C91DE5F17B00B47CAA /* SliderCollectionViewCell.xib in Resources */,
 			);
@@ -509,7 +509,7 @@
 			files = (
 				116FD6FB1E974BDA00178709 /* DataTableViewCell.xib in Resources */,
 				8CBBE75E1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
-				8CEFB6481DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
+				8B1A0BAC29C354B80012B2A8 /* GoogleService-Info.plist in Resources */,
 				8CE297C21DE5EF1000B47CAA /* SliderTableViewCell.xib in Resources */,
 				8CE297CA1DE5F17B00B47CAA /* SliderCollectionViewCell.xib in Resources */,
 			);
@@ -521,7 +521,7 @@
 			files = (
 				116FD6FC1E974BDA00178709 /* DataTableViewCell.xib in Resources */,
 				8CBBE75F1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
-				8CEFB6491DDC6A1E00F34B4D /* GoogleService-Info.plist in Resources */,
+				8B1A0BAD29C354B80012B2A8 /* GoogleService-Info.plist in Resources */,
 				8CE297C31DE5EF1000B47CAA /* SliderTableViewCell.xib in Resources */,
 				8CE297CB1DE5F17B00B47CAA /* SliderCollectionViewCell.xib in Resources */,
 			);
@@ -541,6 +541,7 @@
 				11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				8B95FB2129C35119003CD2AB /* DBCountry+CoreDataProperties.swift in Sources */,
+				8B1A0BA729C354730012B2A8 /* Constants.swift in Sources */,
 				5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
 				8B95FB1529C35119003CD2AB /* DBCountry+CoreDataClass.swift in Sources */,
 				8B95FB0029C35040003CD2AB /* MapViewController.swift in Sources */,
@@ -556,7 +557,6 @@
 				8B3FA04F24A7CCBF00DF7665 /* SceneDelegate.swift in Sources */,
 				11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F71E974BDA00178709 /* DataTableViewCell.swift in Sources */,
-				8CBB26AB1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8B95FB1229C35119003CD2AB /* DBLyrics+CoreDataProperties.swift in Sources */,
 				8B3FA04224A7C9E400DF7665 /* MainView.swift in Sources */,
 				8CC265791DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
@@ -573,6 +573,7 @@
 				8B95FB1929C35119003CD2AB /* DBLyrics+CoreDataClass.swift in Sources */,
 				1173C9371E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				11E5B8A81E9692020021ABB5 /* AccountViewController.swift in Sources */,
+				8B1A0BA829C354730012B2A8 /* Constants.swift in Sources */,
 				8CE297C71DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				8CEFB6441DDBF57100F34B4D /* ChartsViewController.swift in Sources */,
 				5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
@@ -584,7 +585,6 @@
 				8CE297BF1DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				8B95FB1C29C35119003CD2AB /* DBAnthem+CoreDataClass.swift in Sources */,
 				1173C92D1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
-				8CBB26AC1DD986BD00660EB9 /* Constants.swift in Sources */,
 				8B95FB1F29C35119003CD2AB /* Flag Ceremony.xcdatamodeld in Sources */,
 				11E5B8AC1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F81E974BDA00178709 /* DataTableViewCell.swift in Sources */,
@@ -603,6 +603,7 @@
 				8B95FB1A29C35119003CD2AB /* DBLyrics+CoreDataClass.swift in Sources */,
 				1173C9381E07359D00C5DA16 /* LoginViewController.swift in Sources */,
 				8CBBE75C1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
+				8B1A0BA929C354730012B2A8 /* Constants.swift in Sources */,
 				11E5B8A91E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CE297C01DE5EF1000B47CAA /* SliderTableViewCell.swift in Sources */,
 				5874E4241DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */,
@@ -613,7 +614,6 @@
 				8C4E97491D88ED51005A685B /* Flag_CeremonyUITests.swift in Sources */,
 				1173C92E1E06EEC400C5DA16 /* MenuViewController.swift in Sources */,
 				8B95FB1D29C35119003CD2AB /* DBAnthem+CoreDataClass.swift in Sources */,
-				8CBB26AD1DD986BD00660EB9 /* Constants.swift in Sources */,
 				11E5B8AD1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				8B95FB2029C35119003CD2AB /* Flag Ceremony.xcdatamodeld in Sources */,
 				116FD6F91E974BDA00178709 /* DataTableViewCell.swift in Sources */,
