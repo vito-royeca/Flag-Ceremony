@@ -8,17 +8,23 @@
 import SwiftUI
 import AVKit
 
+protocol MediaPlayerViewDelegate {
+    func advance(progress: Double)
+}
+
 struct MediaPlayerView: View {
     @StateObject private var sound: MediaPlayer
-    
+    @Binding var playbackProgress: Double
+
     var url: URL?
-    var autoPlay: Bool
+    var isAutoPlay: Bool
     
-    init(url: URL?, autoPlay: Bool) {
+    init(url: URL?, autoPlay: Bool, playbackProgress: Binding<Double>) {
         self.url = url
-        self.autoPlay = autoPlay
-        
+
+        self.isAutoPlay = autoPlay
         _sound = StateObject(wrappedValue: MediaPlayer(url: url))
+        _playbackProgress = playbackProgress
     }
 
     var body: some View {
@@ -82,23 +88,30 @@ struct MediaPlayerView: View {
             }
         }
             .onAppear {
-                if autoPlay {
+                if isAutoPlay {
                     sound.playOrPause()
                 }
             }
             .onDisappear {
                 sound.stop()
             }
+            .onReceive(sound.updatePublisher) {
+                if playbackProgress != sound.progress {
+                    playbackProgress = sound.progress
+                }
+            }
     }
 }
 
 struct MediaPlayerView_Previews: PreviewProvider {
+    @State static var playbackProgress: Double = 0
+
     static var previews: some View {
         if let path = Bundle.main.path(forResource: "ph", ofType: "mp3"),
            FileManager.default.fileExists(atPath: path) {
             let url = URL(fileURLWithPath: path)
             
-            MediaPlayerView(url: url, autoPlay: false)
+            MediaPlayerView(url: url, autoPlay: false, playbackProgress: $playbackProgress)
         } else {
             EmptyView()
         }

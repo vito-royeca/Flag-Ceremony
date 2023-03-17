@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import Combine
 
 public class MediaPlayer: NSObject, ObservableObject {
     let kMediaPlayerVolumeKey = "kMediaPlayerVolumeKey"
@@ -14,12 +15,13 @@ public class MediaPlayer: NSObject, ObservableObject {
     let kDefaultMediaPlayerVolume = 0.5
     
     @Published public var isPlaying = false
-
     @Published public var progress: CGFloat = 0.0
     @Published public var duration: Double = 0.0
     @Published public var formattedDuration: String = "0:00"
     @Published public var formattedProgress: String = "0:00"
-
+    
+    let updatePublisher = PassthroughSubject<Void, Never>()
+    
     private var audioPlayer: AVAudioPlayer?
 
     public var volume: Double {
@@ -31,13 +33,11 @@ public class MediaPlayer: NSObject, ObservableObject {
     }
 
     public var url: URL?
-    public var repeatSound: Bool
     
-    public init(url: URL?, repeatSound: Bool = false) {
+    public init(url: URL?) {
         self.url = url
         self.volume = UserDefaults.standard.bool(forKey: kMediaPlayerHasVolumeKey) ?
             UserDefaults.standard.double(forKey: kMediaPlayerVolumeKey) : kDefaultMediaPlayerVolume
-        self.repeatSound = repeatSound
 
         super.init()
         prepare()
@@ -70,6 +70,8 @@ public class MediaPlayer: NSObject, ObservableObject {
                 
                 self.duration = player.duration - player.currentTime
                 self.formattedDuration = "-\(formatter.string(from: TimeInterval(self.duration))!)"
+                
+                self.updatePublisher.send()
             }
         }
         audioPlayer?.delegate = self
@@ -146,11 +148,11 @@ public class MediaPlayer: NSObject, ObservableObject {
 
 extension MediaPlayer: AVAudioPlayerDelegate {
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if repeatSound  {
-            play()
-        } else {
+//        if repeatSound  {
+//            play()
+//        } else {
             isPlaying = false
-        }
+//        }
     }
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIX
+import Introspect
 import LinkPresentation
 
 struct CountryView: View {
@@ -16,10 +17,13 @@ struct CountryView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var isShowingShareSheet = false
+    @State var progressPlayBack: Double = 0
     @StateObject var viewModel: CountryViewModel
+    var isAutoPlay: Bool
     
-    init(id: String) {
+    init(id: String, isAutoPlay: Bool) {
         _viewModel = StateObject(wrappedValue: CountryViewModel(id: id))
+        self.isAutoPlay = isAutoPlay
     }
     
     var body: some View {
@@ -38,27 +42,53 @@ struct CountryView: View {
     }
     
     var mainView: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                flagView()
-                    .padding()
-                actionsView
-                titlesView
-                if let url = viewModel.country?.getAudioURL() {
-                    MediaPlayerView(url: url, autoPlay: true)
-                        .padding()
+//        ZStack(alignment: .topLeading) {
+//            flagView()
+//                .padding()
+            
+            ZStack(alignment: .bottomTrailing) {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack {
+                            flagView()
+                            .padding()
+                            actionsView
+                            titlesView
+                                .padding()
+                            lyricsView
+                            Spacer(minLength: 200)
+                        }
+                    }
+                    .introspectScrollView(customize: { scrollView in
+                        // TODO: calculate visibleRect vs sound.duration
+                        let contentOffset = scrollView.contentOffset
+                        let y = contentOffset.y + (progressPlayBack * 100)
+                        
+                        if y < scrollView.frame.size.height + 50 {
+                            let scrollPoint = CGPoint(x: 0, y: y)
+                            scrollView.setContentOffset(scrollPoint, animated: true)
+                        }
+                    })
                 }
-                lyricsView
+                
+                VStack {
+                    if let url = viewModel.country?.getAudioURL() {
+                        MediaPlayerView(url: url, autoPlay: isAutoPlay, playbackProgress: $progressPlayBack)
+                            .padding()
+                            .background(Color.systemGroupedBackground .edgesIgnoringSafeArea(.bottom))
+                    }
+                }
             }
-                .navigationBarTitle(Text(viewModel.country?.name ?? ""))
-                .toolbar {
-                    CountryToolbar(presentationMode: presentationMode,
-                                   isShowingShareSheet: $isShowingShareSheet)
-                }
-                .sheet(isPresented: $isShowingShareSheet, content: {
-                    activityView
-                })
-        }
+//        }
+        
+            .navigationBarTitle(Text(viewModel.country?.name ?? ""))
+            .toolbar {
+                CountryToolbar(presentationMode: presentationMode,
+                               isShowingShareSheet: $isShowingShareSheet)
+            }
+            .sheet(isPresented: $isShowingShareSheet, content: {
+                activityView
+            })
     }
     
     func flagView() -> some View {
@@ -114,9 +144,10 @@ struct CountryView: View {
     var lyricsView: some View {
         let lyrics = viewModel.anthem?.lyrics ?? []
 
-        return VStack {
+        return VStack(alignment: .leading) {
             ForEach(lyrics, id: \.self) { lyric in
                 let keys = lyric.map{$0.key}.sorted(by: <)
+
                 ForEach(keys, id: \.self) { key in
                     if let value = lyric[key] {
                         Text(value)
@@ -145,7 +176,7 @@ struct CountryView: View {
 
 struct CountryView_Previews: PreviewProvider {
     static var previews: some View {
-        CountryView(id: "PH")
+        CountryView(id: "PH", isAutoPlay: false)
     }
 }
 

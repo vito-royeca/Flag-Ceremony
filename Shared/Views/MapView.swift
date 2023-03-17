@@ -16,7 +16,7 @@ struct MapViewVC: View {
         MapView(selectedCountry: $selectedCountry)
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
-                    CountryView(id: selectedCountry.id)
+                    CountryView(id: selectedCountry.id, isAutoPlay: true)
                 }
             }
     }

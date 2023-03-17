@@ -1727,6 +1727,7 @@
 		8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
+		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2215,6 +2216,7 @@
 				8B556B6329C2AE0100101D46 /* FirebaseDatabase in Frameworks */,
 				8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */,
 				8B556B6129C2AE0100101D46 /* FirebaseCrashlytics in Frameworks */,
+				8BA723A829C4419500FF4859 /* Introspect in Frameworks */,
 				8B556B5F29C2AE0100101D46 /* FirebaseAuth in Frameworks */,
 				8B20968328427AD200B62A45 /* SDWebImageSwiftUI in Frameworks */,
 			);
@@ -2844,6 +2846,7 @@
 				8B556B6229C2AE0100101D46 /* FirebaseDatabase */,
 				8B556B6429C2AE0100101D46 /* FirebaseDatabaseSwift */,
 				8B1A0BB429C365CF0012B2A8 /* SwiftUIX */,
+				8BA723A729C4419500FF4859 /* Introspect */,
 			);
 			productName = "Flag Ceremony (iOS)";
 			productReference = 8B2096482842797D00B62A45 /* Flag Ceremony.app */;
@@ -2941,6 +2944,7 @@
 				8B20968128427AD200B62A45 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8B556B5D29C2AE0100101D46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 8B2096492842797D00B62A45 /* Products */;
 			projectDirPath = "";
@@ -5150,6 +5154,14 @@
 				kind = branch;
 			};
 		};
+		8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -5182,6 +5194,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B556B5D29C2AE0100101D46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		8BA723A729C4419500FF4859 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 
