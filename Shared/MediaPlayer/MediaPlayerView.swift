@@ -37,8 +37,10 @@ struct MediaPlayerView: View {
                 
                 HStack {
                     Text(sound.formattedProgress)
+                        .font(Font.callout.monospacedDigit())
                     Spacer()
                     Text(sound.formattedDuration)
+                        .font(Font.callout.monospacedDigit())
                 }
                 
                 Button(action: {
@@ -47,7 +49,35 @@ struct MediaPlayerView: View {
                     Image(systemName: sound.isPlaying ? "pause.circle" : "play.circle")
                         .font(Font.largeTitle)
                         .imageScale(.large)
-                        .padding()
+                }
+                
+                HStack {
+                    Button(action: {
+                        sound.volumeDown()
+                    }) {
+                        Image(systemName: sound.volume <= 0 ? "speaker.slash" : "speaker.wave.1")
+                            .imageScale(.medium)
+                    }
+                        .disabled(sound.volume <= 0)
+                    
+                    GeometryReader { gr in
+                        Capsule()
+                            .stroke(Color.systemBlue, lineWidth: 2)
+                            .background(
+                                Capsule()
+                                    .foregroundColor(Color.blue)
+                                    .frame(width: gr.size.width * sound.volume,
+                                           height: 8), alignment: .leading)
+                    }
+                        .frame( height: 8)
+                    
+                    Button(action: {
+                        sound.volumeUp()
+                    }) {
+                        Image(systemName: "speaker.wave.3")
+                            .imageScale(.medium)
+                    }
+                        .disabled(sound.volume >= 1)
                 }
             }
         }

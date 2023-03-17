@@ -39,7 +39,7 @@ struct CountryView: View {
     
     var mainView: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 flagView()
                     .padding()
                 actionsView

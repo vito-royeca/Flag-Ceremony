@@ -9,32 +9,34 @@ import SwiftUI
 import AVKit
 
 public class MediaPlayer: NSObject, ObservableObject {
- /// A Boolean representing whether this sound is currently playing.
+    let kMediaPlayerVolumeKey = "kMediaPlayerVolumeKey"
+    let kMediaPlayerHasVolumeKey = "kMediaPlayerHasVolumeKey"
+    let kDefaultMediaPlayerVolume = 0.5
+    
     @Published public var isPlaying = false
 
-/// These are used in our view
     @Published public var progress: CGFloat = 0.0
     @Published public var duration: Double = 0.0
-    @Published public var formattedDuration: String = "00:00"
-    @Published public var formattedProgress: String = "00:00"
+    @Published public var formattedDuration: String = "0:00"
+    @Published public var formattedProgress: String = "0:00"
 
-  /// The internal audio player being managed by this object.
     private var audioPlayer: AVAudioPlayer?
 
-    /// How loud to play this sound relative to other sounds in your app,
-    /// specified in the range 0 (no volume) to 1 (maximum volume).
     public var volume: Double {
         didSet {
             audioPlayer?.volume = Float(volume)
+            UserDefaults.standard.set(volume, forKey: kMediaPlayerVolumeKey)
+            UserDefaults.standard.set(true, forKey: kMediaPlayerHasVolumeKey)
         }
     }
 
     public var url: URL?
     public var repeatSound: Bool
     
-    public init(url: URL?, volume: Double = 1.0, repeatSound: Bool = false) {
+    public init(url: URL?, repeatSound: Bool = false) {
         self.url = url
-        self.volume = volume
+        self.volume = UserDefaults.standard.bool(forKey: kMediaPlayerHasVolumeKey) ?
+            UserDefaults.standard.double(forKey: kMediaPlayerVolumeKey) : kDefaultMediaPlayerVolume
         self.repeatSound = repeatSound
 
         super.init()
@@ -48,16 +50,15 @@ public class MediaPlayer: NSObject, ObservableObject {
             return
         }
 
-        self.audioPlayer = player
-        self.audioPlayer?.prepareToPlay()
+        audioPlayer = player
+        volume = UserDefaults.standard.bool(forKey: kMediaPlayerHasVolumeKey) ?
+            UserDefaults.standard.double(forKey: kMediaPlayerVolumeKey) : kDefaultMediaPlayerVolume
+        audioPlayer?.prepareToPlay()
 
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = [ .pad ]
-
-        formattedDuration = formatter.string(from: TimeInterval(self.audioPlayer?.duration ?? 0.0))!
-        duration = self.audioPlayer?.duration ?? 0.0
 
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             if let player = self.audioPlayer {
@@ -66,6 +67,9 @@ public class MediaPlayer: NSObject, ObservableObject {
                 }
                 self.progress = CGFloat(player.currentTime / player.duration)
                 self.formattedProgress = formatter.string(from: TimeInterval(player.currentTime))!
+                
+                self.duration = player.duration - player.currentTime
+                self.formattedDuration = "-\(formatter.string(from: TimeInterval(self.duration))!)"
             }
         }
         audioPlayer?.delegate = self
@@ -93,13 +97,35 @@ public class MediaPlayer: NSObject, ObservableObject {
         audioPlayer?.stop()
     }
 
+    public func volumeUp() {
+        var newVolume = volume + 0.1
+        
+        if newVolume >= 1 {
+            newVolume = 1
+        }
+        if volume != newVolume {
+            volume = newVolume
+        }
+    }
+    
+    public func volumeDown() {
+        var newVolume = volume - 0.1
+        
+        if newVolume <= 0 {
+            newVolume = 0
+        }
+        if volume != newVolume {
+            volume = newVolume
+        }
+    }
+
     public func forward() {
         if let player = self.audioPlayer {
             let increase = player.currentTime + 15
+
             if increase < self.duration {
                 player.currentTime = increase
             } else {
-                // give the user the chance to hear the end if he wishes
                 player.currentTime = duration
             }
         }
@@ -108,6 +134,7 @@ public class MediaPlayer: NSObject, ObservableObject {
     public func rewind() {
         if let player = self.audioPlayer {
             let decrease = player.currentTime - 15.0
+
             if decrease < 0.0 {
                 player.currentTime = 0
             } else {
