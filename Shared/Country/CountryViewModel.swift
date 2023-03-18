@@ -15,8 +15,6 @@ class CountryViewModel: NSObject, ObservableObject {
     @Published var anthem: FCAnthem?
     @Published var isBusy = false
     @Published var isFailed = false
-//    @Published var views = 0
-//    @Published var plays = 0
     
     var id: String
     
@@ -28,7 +26,7 @@ class CountryViewModel: NSObject, ObservableObject {
     
     // MARK: - Methods
     
-    func fetchData() {
+    func fetchData(completion: @escaping () -> Void) {
         guard !isBusy else {
             return
         }
@@ -45,34 +43,31 @@ class CountryViewModel: NSObject, ObservableObject {
 
             FirebaseManager.sharedInstance.findAnthem(id) { [weak self] anthem in
                 self?.anthem = anthem
+                completion()
                 self?.isBusy.toggle()
             }
         }
     }
     
     func incrementViews() {
-        DispatchQueue.main.async { [weak self] in
-            guard let id = self?.id else {
-                return
+        FirebaseManager.sharedInstance.incrementCountryViews(id) { [weak self] result in
+            switch result {
+            case .success(let country):
+                self?.country = country
+            case .failure(let error):
+                print(error)
             }
-
-            FirebaseManager.sharedInstance.incrementCountryViews(id)
-            
-            let views = self?.country?.views ?? 0
-            self?.country?.views = views + 1
         }
     }
     
     func incrementPlays() {
-        DispatchQueue.main.async { [weak self] in
-            guard let id = self?.id else {
-                return
+        FirebaseManager.sharedInstance.incrementCountryPlays(id) { [weak self] result in
+            switch result {
+            case .success(let country):
+                self?.country = country
+            case .failure(let error):
+                print(error)
             }
-
-            FirebaseManager.sharedInstance.incrementCountryPlays(id)
-            
-            let plays = self?.country?.plays ?? 0
-            self?.country?.plays = plays + 1
         }
     }
 }

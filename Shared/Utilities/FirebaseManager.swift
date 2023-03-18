@@ -42,7 +42,7 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func incrementCountryViews(_ key: String) {
+    func incrementCountryViews(_ key: String, completion: @escaping (Result<FCCountry?,Error>) -> Void) {
         let ref = Database.database().reference().child("countries").child(key)
         
         ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
@@ -59,7 +59,13 @@ class FirebaseManager : NSObject {
             return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
-                print(error.localizedDescription)
+                completion(.failure(error))
+            } else {
+                if let snapshot = snapshot {
+                    completion(.success(FCCountry(snapshot: snapshot)))
+                } else {
+                    completion(.success(nil))
+                }
             }
         }
         
@@ -91,7 +97,7 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func incrementCountryPlays(_ key: String) {
+    func incrementCountryPlays(_ key: String, completion: @escaping (Result<FCCountry?,Error>) -> Void) {
         let ref = Database.database().reference().child("countries").child(key)
         
         ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
@@ -100,6 +106,7 @@ class FirebaseManager : NSObject {
                 var plays = post[FCCountry.Keys.Plays] as? Int ?? 0
                 plays += 1
                 post[FCCountry.Keys.Plays] = plays
+                print("\(key): \(plays)")
                 
                 // Set value and report transaction success
                 currentData.value = post
@@ -108,7 +115,13 @@ class FirebaseManager : NSObject {
             return TransactionResult.success(withValue: currentData)
         }) { (error, committed, snapshot) in
             if let error = error {
-                print(error.localizedDescription)
+                completion(.failure(error))
+            } else {
+                if let snapshot = snapshot {
+                    completion(.success(FCCountry(snapshot: snapshot)))
+                } else {
+                    completion(.success(nil))
+                }
             }
         }
         

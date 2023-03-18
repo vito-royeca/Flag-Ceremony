@@ -16,17 +16,19 @@ struct MediaPlayerView: View {
     @StateObject private var sound: MediaPlayer
     @Binding var currentTime: Double
     @Binding var durationTime: Double
+    @Binding var isFinished: Bool
 
     var url: URL?
     var isAutoPlay: Bool
     
-    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, durationTime: Binding<Double>) {
+    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, durationTime: Binding<Double>, isFinished: Binding<Bool>) {
         self.url = url
 
         self.isAutoPlay = autoPlay
         _sound = StateObject(wrappedValue: MediaPlayer(url: url))
         _currentTime = currentTime
         _durationTime = durationTime
+        _isFinished = isFinished
     }
 
     var body: some View {
@@ -100,14 +102,12 @@ struct MediaPlayerView: View {
             .onReceive(sound.updatePublisher) {
                 currentTime = sound.currentTime
                 durationTime = sound.durationTime
+                isFinished = sound.isFinished
             }
     }
 }
 
 struct MediaPlayerView_Previews: PreviewProvider {
-    @State static var currentTime: Double = 0
-    @State static var durationTime: Double = 0
-
     static var previews: some View {
         if let path = Bundle.main.path(forResource: "ph", ofType: "mp3"),
            FileManager.default.fileExists(atPath: path) {
@@ -115,8 +115,9 @@ struct MediaPlayerView_Previews: PreviewProvider {
             
             MediaPlayerView(url: url,
                             autoPlay: false,
-                            currentTime: $currentTime,
-                            durationTime: $durationTime)
+                            currentTime: .constant(0),
+                            durationTime: .constant(0),
+                            isFinished: .constant(false))
         } else {
             EmptyView()
         }

@@ -15,6 +15,7 @@ public class MediaPlayer: NSObject, ObservableObject {
     let kDefaultMediaPlayerVolume = 0.5
     
     @Published public var isPlaying = false
+    @Published public var isFinished = false
     @Published public var progress: CGFloat = 0.0
     @Published public var remaining: Double = 0.0
     @Published public var durationTime: Double = 0.0
@@ -91,6 +92,9 @@ public class MediaPlayer: NSObject, ObservableObject {
         } else {
             play()
         }
+
+        isFinished = false
+        updatePublisher.send()
     }
     
     public func play() {
@@ -157,6 +161,8 @@ extension MediaPlayer: AVAudioPlayerDelegate {
 //        } else {
             isPlaying = false
 //        }
+        isFinished = true
+        updatePublisher.send()
     }
 }
 

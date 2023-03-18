@@ -18,12 +18,13 @@ struct CountryView: View {
     @State private var isShowingShareSheet = false
     @State var currentTime: Double = 0
     @State var durationTime: Double = 0
+    @State var isFinished: Bool = false
     @StateObject var viewModel: CountryViewModel
     var isAutoPlay: Bool
     
     init(id: String, isAutoPlay: Bool) {
-        _viewModel = StateObject(wrappedValue: CountryViewModel(id: id))
         self.isAutoPlay = isAutoPlay
+        _viewModel = StateObject(wrappedValue: CountryViewModel(id: id))
     }
     
     var body: some View {
@@ -37,8 +38,9 @@ struct CountryView: View {
             }
         }
             .onAppear {
-//                viewModel.incrementViews()
-                viewModel.fetchData()
+                viewModel.fetchData {
+                    viewModel.incrementViews()
+                }
             }
     }
     
@@ -48,7 +50,7 @@ struct CountryView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack {
-                            flagView()
+                            flagView
                             actionsView
                             Spacer()
                             titlesView
@@ -72,14 +74,12 @@ struct CountryView: View {
                             let scrollPoint = CGPoint(x: 0, y: y)
                             scrollView.setContentOffset(scrollPoint, animated: true)
                         }
-                        
-                        print("\(currentTime)/\(durationTime)")
-                        if currentTime >= durationTime {
-                            print("Bingo!")
-                            viewModel.incrementPlays()
-                            
+
+                        if isFinished {
                             let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
+                            
                             scrollView.setContentOffset(scrollPoint, animated: true)
+                            viewModel.incrementPlays()
                         }
                     })
                 }
@@ -89,7 +89,8 @@ struct CountryView: View {
                         MediaPlayerView(url: url,
                                         autoPlay: isAutoPlay,
                                         currentTime: $currentTime,
-                                        durationTime: $durationTime)
+                                        durationTime: $durationTime,
+                                        isFinished: $isFinished)
                             .padding()
                             .background(Color.systemGroupedBackground .edgesIgnoringSafeArea(.bottom))
                     }
@@ -107,7 +108,7 @@ struct CountryView: View {
             })
     }
     
-    func flagView() -> some View {
+    var flagView: some View {
         AsyncImage(
             url: viewModel.country?.getFlagURL(),
             content: { image in
@@ -117,7 +118,7 @@ struct CountryView: View {
                     .border(.black)
             },
             placeholder: {
-                ProgressView()
+                EmptyView()
             }
         )
     }
