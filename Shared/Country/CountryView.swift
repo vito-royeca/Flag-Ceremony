@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftUIX
 import Introspect
-import LinkPresentation
 
 struct CountryView: View {
     #if os(iOS)
@@ -17,7 +16,8 @@ struct CountryView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var isShowingShareSheet = false
-    @State var progressPlayBack: Double = 0
+    @State var currentTime: Double = 0
+    @State var duration: Double = 0
     @StateObject var viewModel: CountryViewModel
     var isAutoPlay: Bool
     
@@ -42,29 +42,38 @@ struct CountryView: View {
     }
     
     var mainView: some View {
-//        ZStack(alignment: .topLeading) {
-//            flagView()
-//                .padding()
-            
+        GeometryReader { reader in
             ZStack(alignment: .bottomTrailing) {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack {
                             flagView()
-                            .padding()
                             actionsView
+                            Spacer()
                             titlesView
-                                .padding()
+                            Spacer()
                             lyricsView
                             Spacer(minLength: 200)
-                        }
+                        }.padding()
                     }
                     .introspectScrollView(customize: { scrollView in
-                        // TODO: calculate visibleRect vs sound.duration
-                        let contentOffset = scrollView.contentOffset
-                        let y = contentOffset.y + (progressPlayBack * 100)
+                        if currentTime == 0 {
+                            let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
+                            scrollView.setContentOffset(scrollPoint, animated: true)
+                            return
+                        }
                         
-                        if y < scrollView.frame.size.height + 50 {
+                        guard duration > 0 else {
+                            return
+                        }
+
+                        let contentSize = scrollView.contentSize
+                        let visibleSize = scrollView.visibleSize
+                        let diff = contentSize.height - visibleSize.height
+                        let index = currentTime / duration
+                        let y = diff * index
+
+                        if y <= diff {
                             let scrollPoint = CGPoint(x: 0, y: y)
                             scrollView.setContentOffset(scrollPoint, animated: true)
                         }
@@ -73,15 +82,18 @@ struct CountryView: View {
                 
                 VStack {
                     if let url = viewModel.country?.getAudioURL() {
-                        MediaPlayerView(url: url, autoPlay: isAutoPlay, playbackProgress: $progressPlayBack)
+                        MediaPlayerView(url: url,
+                                        autoPlay: isAutoPlay,
+                                        currentTime: $currentTime,
+                                        duration: $duration)
                             .padding()
                             .background(Color.systemGroupedBackground .edgesIgnoringSafeArea(.bottom))
                     }
                 }
             }
-//        }
+        }
         
-            .navigationBarTitle(Text(viewModel.country?.name ?? ""))
+            .navigationBarTitle(Text(viewModel.country?.displayName ?? ""))
             .toolbar {
                 CountryToolbar(presentationMode: presentationMode,
                                isShowingShareSheet: $isShowingShareSheet)
@@ -106,21 +118,6 @@ struct CountryView: View {
         )
     }
 
-    var titlesView: some View {
-        let title = viewModel.anthem?.title
-        let nativeTitle = viewModel.anthem?.nativeTitle
-
-        return VStack {
-            Text(nativeTitle ?? "")
-                .font(Font.title)
-            
-            if title != nativeTitle {
-                Text(title ?? "")
-                    .font(Font.title2)
-            }
-        }
-    }
-
     var actionsView: some View {
         HStack {
             Button(action: {
@@ -141,10 +138,47 @@ struct CountryView: View {
         }
     }
 
+    var titlesView: some View {
+        let title = viewModel.anthem?.title
+        let nativeTitle = viewModel.anthem?.nativeTitle
+        let lyricsWriter = (viewModel.anthem?.lyricsWriter ?? []).joined(separator: ",")
+        let musicWriter = (viewModel.anthem?.musicWriter ?? []).joined(separator: ",")
+        
+        return VStack(alignment: .leading) {
+            Text(nativeTitle ?? "")
+                .font(Font.title2)
+            
+            if title != nativeTitle {
+                Spacer()
+                Text(title ?? "")
+                    .font(Font.title3)
+            }
+            
+            if !lyricsWriter.isEmpty {
+                Spacer()
+                Text("Lyrics: \(lyricsWriter)")
+                    .font(.footnote)
+            }
+                
+            if !lyricsWriter.isEmpty {
+                Spacer()
+                Text("Music: \(musicWriter)")
+                    .font(.footnote)
+            }
+        }
+            .frame(
+                  minWidth: 0,
+                  maxWidth: .infinity,
+                  minHeight: 0,
+                  maxHeight: .infinity,
+                  alignment: .topLeading
+                )
+    }
+
     var lyricsView: some View {
         let lyrics = viewModel.anthem?.lyrics ?? []
 
-        return VStack(alignment: .leading) {
+        return VStack {
             ForEach(lyrics, id: \.self) { lyric in
                 let keys = lyric.map{$0.key}.sorted(by: <)
 
@@ -153,9 +187,15 @@ struct CountryView: View {
                         Text(value)
                     }
                 }
-                
             }
         }
+            .frame(
+                  minWidth: 0,
+                  maxWidth: .infinity,
+                  minHeight: 0,
+                  maxHeight: .infinity,
+                  alignment: .top
+                )
     }
         
     var activityView: some View {
@@ -211,53 +251,3 @@ struct CountryToolbar: ToolbarContent {
     }
 }
 
-// MARK: - UIActivityItemSource
-
-class CountryViewItemSource: NSObject, UIActivityItemSource {
-    let country: FCCountry
-    
-    init(country: FCCountry) {
-        self.country = country
-        super.init()
-    }
-    
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return country.displayName
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        
-        guard let url = country.getFlagURL(),
-           let image = UIImage(contentsOfFile: url.path) else {
-            return nil
-        }
-        
-        return image
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return country.displayName
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, thumbnailImageForActivityType activityType: UIActivity.ActivityType?, suggestedSize size: CGSize) -> UIImage? {
-        guard let url = country.getFlagURL(),
-           let image = UIImage(contentsOfFile: url.path) else {
-            return nil
-        }
-        
-        return image
-    }
-    
-    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        let metadata = LPLinkMetadata()
-        
-        guard let url = country.getFlagURL(),
-           let image = UIImage(contentsOfFile: url.path) else {
-            return metadata
-        }
-        
-        metadata.iconProvider = NSItemProvider(object: image)
-        metadata.title = country.displayName
-        return metadata
-    }
-}

@@ -17,6 +17,7 @@ public class MediaPlayer: NSObject, ObservableObject {
     @Published public var isPlaying = false
     @Published public var progress: CGFloat = 0.0
     @Published public var duration: Double = 0.0
+    @Published public var currentTime: Double = 0.0
     @Published public var formattedDuration: String = "0:00"
     @Published public var formattedProgress: String = "0:00"
     
@@ -71,6 +72,7 @@ public class MediaPlayer: NSObject, ObservableObject {
                 self.duration = player.duration - player.currentTime
                 self.formattedDuration = "-\(formatter.string(from: TimeInterval(self.duration))!)"
                 
+                self.currentTime = player.currentTime
                 self.updatePublisher.send()
             }
         }

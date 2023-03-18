@@ -1728,6 +1728,7 @@
 		8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
+		8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2204,6 +2205,7 @@
 		8B9A2F2229C2DC3F0034EBC5 /* us.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = us.mp3; sourceTree = "<group>"; };
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewItemSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2818,6 +2820,7 @@
 			isa = PBXGroup;
 			children = (
 				8B335B1F29C2EE9D003D1F01 /* CountryView.swift */,
+				8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */,
 				8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */,
 			);
 			path = Country;
@@ -4674,6 +4677,7 @@
 				8B20969B2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
 				8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B0FF8FD29C38842007F548A /* MediaPlayerView.swift in Sources */,
+				8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */,
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,

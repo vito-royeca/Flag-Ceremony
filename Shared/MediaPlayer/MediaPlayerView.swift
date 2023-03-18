@@ -14,17 +14,19 @@ protocol MediaPlayerViewDelegate {
 
 struct MediaPlayerView: View {
     @StateObject private var sound: MediaPlayer
-    @Binding var playbackProgress: Double
+    @Binding var currentTime: Double
+    @Binding var duration: Double
 
     var url: URL?
     var isAutoPlay: Bool
     
-    init(url: URL?, autoPlay: Bool, playbackProgress: Binding<Double>) {
+    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, duration: Binding<Double>) {
         self.url = url
 
         self.isAutoPlay = autoPlay
         _sound = StateObject(wrappedValue: MediaPlayer(url: url))
-        _playbackProgress = playbackProgress
+        _currentTime = currentTime
+        _duration = duration
     }
 
     var body: some View {
@@ -96,22 +98,25 @@ struct MediaPlayerView: View {
                 sound.stop()
             }
             .onReceive(sound.updatePublisher) {
-                if playbackProgress != sound.progress {
-                    playbackProgress = sound.progress
-                }
+                currentTime = sound.currentTime
+                duration = sound.duration
             }
     }
 }
 
 struct MediaPlayerView_Previews: PreviewProvider {
-    @State static var playbackProgress: Double = 0
+    @State static var currentTime: Double = 0
+    @State static var duration: Double = 0
 
     static var previews: some View {
         if let path = Bundle.main.path(forResource: "ph", ofType: "mp3"),
            FileManager.default.fileExists(atPath: path) {
             let url = URL(fileURLWithPath: path)
             
-            MediaPlayerView(url: url, autoPlay: false, playbackProgress: $playbackProgress)
+            MediaPlayerView(url: url,
+                            autoPlay: false,
+                            currentTime: $currentTime,
+                            duration: $duration)
         } else {
             EmptyView()
         }
