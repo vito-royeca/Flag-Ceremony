@@ -11,7 +11,9 @@ import SwiftUI
 enum TopCharts: String, CaseIterable, Identifiable {
     case topViewed, topPlayed, topViewers, topPlayers
     
-    var id: String { return self.rawValue }
+    var id: String {
+        return self.rawValue
+    }
     
     var description: String {
         switch self {
@@ -26,6 +28,8 @@ enum TopCharts: String, CaseIterable, Identifiable {
         }
     }
 }
+
+// MARK: - ChartsView
 
 struct ChartsView: View {
     @StateObject var viewModel = ChartsViewModel()
@@ -79,14 +83,10 @@ struct ChartsView: View {
     var topViewed: some View {
         List {
             ForEach(Array(viewModel.topViewedCountries.enumerated()), id: \.element) { index, country in
-                HStack {
-                    Text("#\(index+1)")
-                    Text(country.displayName)
-                    Spacer()
-                    Text("\(country.views ?? 0)")
-                    Image(systemName: "eye.fill")
-                        .imageScale(.small)
-                }
+                ChartCountryRowView(index: index+1,
+                                    name: country.displayName,
+                                    count: country.views ?? 0,
+                                    countIcon: Image(systemName: "eye.fill"))
             }
         }
             .listStyle(.plain)
@@ -95,14 +95,10 @@ struct ChartsView: View {
     var topPlayed: some View {
         List {
             ForEach(Array(viewModel.topPlayedCountries.enumerated()), id: \.element) { index, country in
-                HStack {
-                    Text("#\(index+1)")
-                    Text(country.displayName)
-                    Spacer()
-                    Text("\(country.plays ?? 0)")
-                    Image(systemName: "play.fill")
-                        .imageScale(.small)
-                }
+                ChartCountryRowView(index: index+1,
+                                    name: country.displayName,
+                                    count: country.plays ?? 0,
+                                    countIcon: Image(systemName: "play.fill"))
             }
         }
             .listStyle(.plain)
@@ -112,25 +108,11 @@ struct ChartsView: View {
         List {
             ForEach(Array(viewModel.topViewers.enumerated()), id: \.element) { index, activity in
                 if let user = viewModel.users.first(where: { $0.id == activity.id}) {
-                    HStack {
-                        Text("#\(index+1)")
-//                        AsyncImage(
-//                            url: URL(string: user.photoURL ?? ""),
-//                            content: { image in
-//                                image
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fit)
-//                            },
-//                            placeholder: {
-//                                ProgressView()
-//                            }
-//                        )
-                        Text(user.displayName ?? "")
-                        Spacer()
-                        Text("\(activity.viewCount ?? 0)")
-                        Image(systemName: "eye.fill")
-                            .imageScale(.small)
-                    }
+                    ChartUserRowView(index: index+1,
+                                     photoUrl: URL(string: user.photoURL ?? ""),
+                                     name: user.displayName ?? "",
+                                     count: activity.viewCount ?? 0,
+                                     countIcon: Image(systemName: "eye.fill"))
                 } else {
                     EmptyView()
                 }
@@ -143,14 +125,11 @@ struct ChartsView: View {
         List {
             ForEach(Array(viewModel.topPlayers.enumerated()), id: \.element) { index, activity in
                 if let user = viewModel.users.first(where: { $0.id == activity.id}) {
-                    HStack {
-                        Text("#\(index+1)")
-                        Text(user.displayName ?? "")
-                        Spacer()
-                        Text("\(activity.playCount ?? 0)")
-                        Image(systemName: "play.fill")
-                            .imageScale(.small)
-                    }
+                    ChartUserRowView(index: index+1,
+                                     photoUrl: URL(string: user.photoURL ?? ""),
+                                     name: user.displayName ?? "",
+                                     count: activity.playCount ?? 0,
+                                     countIcon: Image(systemName: "play.fill"))
                 } else {
                     EmptyView()
                 }
@@ -163,5 +142,61 @@ struct ChartsView: View {
 struct ChartsView_Previews: PreviewProvider {
     static var previews: some View {
         ChartsView()
+    }
+}
+
+// MARK: - ChartCountryRowView
+
+struct ChartCountryRowView: View {
+    @State var index: Int
+    @State var name: String
+    @State var count: Int
+    @State var countIcon: Image
+    
+    var body: some View {
+        HStack {
+            Text("#\(index+1)")
+            Text(name)
+            Spacer()
+            Text("\(count)")
+            countIcon
+                .imageScale(.small)
+        }
+    }
+}
+
+// MARK: - ChartUserRowView
+
+struct ChartUserRowView: View {
+    @State var index: Int
+    @State var photoUrl: URL?
+    @State var name: String
+    @State var count: Int
+    @State var countIcon: Image
+
+    var body: some View {
+        HStack {
+            Text("#\(index)")
+            AsyncImage(
+                url: photoUrl,
+                content: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 25, height: 25)
+                        .clipShape(Circle())
+                },
+                placeholder: {
+                    Image(systemName: "person.circle")
+                        .imageScale(.large)
+                }
+            )
+                
+            Text(name)
+            Spacer()
+            Text("\(count)")
+            countIcon
+                .imageScale(.small)
+        }
     }
 }
