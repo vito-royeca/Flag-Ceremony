@@ -39,7 +39,6 @@
 		8B1A0BAD29C354B80012B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */; };
 		8B3FA04224A7C9E400DF7665 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04124A7C9E400DF7665 /* MainView.swift */; };
 		8B3FA04F24A7CCBF00DF7665 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */; };
-		8B3FA05524A7CF2400DF7665 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA05424A7CF2400DF7665 /* ChartsView.swift */; };
 		8B3FA05724A7CF3B00DF7665 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA05624A7CF3B00DF7665 /* AccountView.swift */; };
 		8B95FB0029C35040003CD2AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FAFF29C35040003CD2AB /* MapViewController.swift */; };
 		8B95FB0129C35040003CD2AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FAFF29C35040003CD2AB /* MapViewController.swift */; };
@@ -68,6 +67,7 @@
 		8B95FB2429C35119003CD2AB /* DBAnthem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FB1129C35119003CD2AB /* DBAnthem+CoreDataProperties.swift */; };
 		8B95FB2529C35119003CD2AB /* DBAnthem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FB1129C35119003CD2AB /* DBAnthem+CoreDataProperties.swift */; };
 		8B95FB2629C35119003CD2AB /* DBAnthem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FB1129C35119003CD2AB /* DBAnthem+CoreDataProperties.swift */; };
+		8BF8E27F29C5850800929089 /* anthems.dict in Resources */ = {isa = PBXBuildFile; fileRef = 8BF8E27E29C5850800929089 /* anthems.dict */; };
 		8C2370431DDD56FB00F30712 /* FirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2370421DDD56FB00F30712 /* FirebaseTests.swift */; };
 		8C4E97291D88ED50005A685B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E97281D88ED50005A685B /* AppDelegate.swift */; };
 		8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E972C1D88ED50005A685B /* Main.storyboard */; };
@@ -137,7 +137,6 @@
 		8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B3FA04124A7C9E400DF7665 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8B3FA05424A7CF2400DF7665 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		8B3FA05624A7CF3B00DF7665 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8B95FAFF29C35040003CD2AB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8B95FB0429C35087003CD2AB /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +148,7 @@
 		8B95FB0F29C35119003CD2AB /* Flag Ceremony.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Flag Ceremony.xcdatamodel"; sourceTree = "<group>"; };
 		8B95FB1029C35119003CD2AB /* DBCountry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBCountry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8B95FB1129C35119003CD2AB /* DBAnthem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBAnthem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8BF8E27E29C5850800929089 /* anthems.dict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = anthems.dict; sourceTree = "<group>"; };
 		8C2370421DDD56FB00F30712 /* FirebaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseTests.swift; sourceTree = "<group>"; };
 		8C4E97251D88ED50005A685B /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4E97281D88ED50005A685B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -222,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				8CEFB6421DDBF57100F34B4D /* ChartsViewController.swift */,
-				8B3FA05424A7CF2400DF7665 /* ChartsView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -290,6 +289,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8BF8E27D29C5842000929089 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				8BF8E27E29C5850800929089 /* anthems.dict */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		8C4E971C1D88ED50005A685B = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +333,7 @@
 				8C4E97341D88ED50005A685B /* Info.plist */,
 				8B3FA04124A7C9E400DF7665 /* MainView.swift */,
 				8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */,
+				8BF8E27D29C5842000929089 /* data */,
 				8B3FA04324A7CB3800DF7665 /* Menu */,
 				8B3FA04624A7CB8200DF7665 /* Charts */,
 				8B3FA04824A7CBA700DF7665 /* Account */,
@@ -495,6 +503,7 @@
 				8C4E97331D88ED50005A685B /* LaunchScreen.storyboard in Resources */,
 				8B1A0BAB29C354B80012B2A8 /* GoogleService-Info.plist in Resources */,
 				116FD6FA1E974BDA00178709 /* DataTableViewCell.xib in Resources */,
+				8BF8E27F29C5850800929089 /* anthems.dict in Resources */,
 				8C4E97301D88ED50005A685B /* Assets.xcassets in Resources */,
 				8CBBE75D1DDB0FC200557DE5 /* AudioPlayerTableViewCell.xib in Resources */,
 				8C4E972E1D88ED50005A685B /* Main.storyboard in Resources */,
@@ -536,7 +545,6 @@
 			files = (
 				8CBBE75A1DDB0FC200557DE5 /* AudioPlayerTableViewCell.swift in Sources */,
 				1173C9361E07359D00C5DA16 /* LoginViewController.swift in Sources */,
-				8B3FA05524A7CF2400DF7665 /* ChartsView.swift in Sources */,
 				8CE297C61DE5F17B00B47CAA /* SliderCollectionViewCell.swift in Sources */,
 				11E5B8A71E9692020021ABB5 /* AccountViewController.swift in Sources */,
 				8CEFB6431DDBF57100F34B4D /* ChartsViewController.swift in Sources */,

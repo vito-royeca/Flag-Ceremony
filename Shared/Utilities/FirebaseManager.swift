@@ -165,9 +165,7 @@ class FirebaseManager : NSObject {
             }
             
         } else { // look it up in Firebase
-            let connectedRef = Database.database().reference(withPath: ".info/connected")
-            
-            connectedRef.observe(.value, with: { snapshot in
+            connectionRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
                     let anthem = Database.database().reference().child("anthems").child(key)
                     anthem.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -231,15 +229,53 @@ class FirebaseManager : NSObject {
     }
     
     func findCountry(_ key: String, completion: @escaping (FCCountry?) -> Void) {
+//        connectionRef.observe(.value, with: { snapshot in
+//            if let connected = snapshot.value as? Bool, connected {
+//                let country = Database.database().reference().child("countries").child(key)
+//                country.observeSingleEvent(of: .value, with: { (snapshot) in
+//                    var a:FCCountry?
+//
+//                    if let _ = snapshot.value as? [String: Any] {
+//                        a = FCCountry(snapshot: snapshot)
+//                    }
+//                    if let a = a {
+//                        completion(a)
+//                    } else {
+//                        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
+//                            if FileManager.default.fileExists(atPath: path) {
+//                                do {
+//                                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+//                                    if let json = try JSONSerialization.jsonObject(with: data,
+//                                                                                   options: .allowFragments) as? [String: [String: [String: Any]]] {
+//
+//                                        var a:FCCountry?
+//
+//                                        if let dict = json["countries"] {
+//                                            if let country = dict[key] {
+//                                                a = FCCountry(key: key, dict: country)
+//                                            }
+//                                        }
+//                                        completion(a)
+//                                    }
+//                                } catch let error {
+//                                    print(error.localizedDescription)
+//                                }
+//                            }
+//                        }
+//                    }
+//                })
+//            }
+//        })
+        
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
             if FileManager.default.fileExists(atPath: path) {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path))
                     if let json = try JSONSerialization.jsonObject(with: data,
                                                                    options: .allowFragments) as? [String: [String: [String: Any]]] {
-                        
+
                         var a:FCCountry?
-                        
+
                         if let dict = json["countries"] {
                             if let country = dict[key] {
                                 a = FCCountry(key: key, dict: country)
@@ -251,21 +287,19 @@ class FirebaseManager : NSObject {
                     print(error.localizedDescription)
                 }
             }
-        
         } else {
-            let connectedRef = Database.database().reference(withPath: ".info/connected")
-            
-            connectedRef.observe(.value, with: { snapshot in
+            connectionRef.observe(.value, with: { snapshot in
                 if let connected = snapshot.value as? Bool, connected {
-                    let anthem = Database.database().reference().child("countries").child(key)
-                    anthem.observeSingleEvent(of: .value,
-                                              with: { (snapshot) in
+                    let country = Database.database().reference().child("countries").child(key)
+                    country.observeSingleEvent(of: .value, with: { (snapshot) in
                         var a:FCCountry?
                         
                         if let _ = snapshot.value as? [String: Any] {
                             a = FCCountry(snapshot: snapshot)
                         }
-                        completion(a)
+                        if let a = a {
+                            completion(a)
+                        }
                     })
                 }
             })

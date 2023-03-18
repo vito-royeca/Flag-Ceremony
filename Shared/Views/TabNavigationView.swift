@@ -41,6 +41,15 @@ struct TabNavigationView: View {
                 }
                 .tag(TabItem.globe)
             
+            NavigationView {
+                ChartsView()
+            }
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "chart.bar.doc.horizontal")
+                    Text("Charts")
+                }
+                .tag(TabItem.globe)
         }
             .environmentObject(geodata)
             .onAppear {

@@ -10,7 +10,7 @@ import Foundation
 
 import Firebase
 
-struct FCActivity {
+struct FCActivity: Identifiable, Hashable {
     struct Keys {
         static let PlayCount    = "PlayCount"
         static let Plays        = "Plays"
@@ -18,7 +18,13 @@ struct FCActivity {
         static let Views        = "Views"
     }
     
-    // MARK: Properties
+    // MARK: - Properties
+
+    var id: String {
+        get {
+            return key ?? ""
+        }
+    }
     let key: String?
     let ref: DatabaseReference?
     
@@ -27,7 +33,8 @@ struct FCActivity {
     let viewCount: Int?
     let views: [String: Int]?
     
-    // MARK: Initialization
+    // MARK: - Initialization
+
     init(key: String, dict: [String: Any]) {
         self.key = key
         self.ref = nil
@@ -48,4 +55,14 @@ struct FCActivity {
         self.viewCount = value[Keys.ViewCount] as? Int
         self.views = value[Keys.Views] as? [String: Int]
     }
+    
+    // MARK: - Hashable
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(key)
+    }
+    
+    // MARK: - Methods
+    
+    
 }

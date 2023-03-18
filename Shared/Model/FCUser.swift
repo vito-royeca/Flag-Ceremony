@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct FCUser {
+struct FCUser: Identifiable, Hashable {
 
     struct Keys {
         static let Email        = "email"
@@ -19,6 +19,11 @@ struct FCUser {
     }
     
     // MARK: Properties
+    var id: String {
+        get {
+            return key ?? ""
+        }
+    }
     let key: String?
     let ref: DatabaseReference?
     
@@ -47,5 +52,11 @@ struct FCUser {
         self.photoURL = value[Keys.PhotoURL] as? String
         self.displayName = value[Keys.DisplayName] as? String
         self.providerData = value[Keys.ProviderData] as? [String]
+    }
+
+    // MARK: - Hashable
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(key)
     }
 }

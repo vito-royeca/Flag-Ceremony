@@ -17,7 +17,7 @@ struct CountryView: View {
     
     @State private var isShowingShareSheet = false
     @State var currentTime: Double = 0
-    @State var duration: Double = 0
+    @State var durationTime: Double = 0
     @StateObject var viewModel: CountryViewModel
     var isAutoPlay: Bool
     
@@ -37,6 +37,7 @@ struct CountryView: View {
             }
         }
             .onAppear {
+//                viewModel.incrementViews()
                 viewModel.fetchData()
             }
     }
@@ -57,24 +58,27 @@ struct CountryView: View {
                         }.padding()
                     }
                     .introspectScrollView(customize: { scrollView in
-                        if currentTime == 0 {
-                            let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
-                            scrollView.setContentOffset(scrollPoint, animated: true)
+                        guard currentTime > 0 && durationTime > 0 else {
                             return
                         }
                         
-                        guard duration > 0 else {
-                            return
-                        }
-
                         let contentSize = scrollView.contentSize
                         let visibleSize = scrollView.visibleSize
                         let diff = contentSize.height - visibleSize.height
-                        let index = currentTime / duration
+                        let index = currentTime / durationTime
                         let y = diff * index
-
+                        
                         if y <= diff {
                             let scrollPoint = CGPoint(x: 0, y: y)
+                            scrollView.setContentOffset(scrollPoint, animated: true)
+                        }
+                        
+                        print("\(currentTime)/\(durationTime)")
+                        if currentTime >= durationTime {
+                            print("Bingo!")
+                            viewModel.incrementPlays()
+                            
+                            let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
                             scrollView.setContentOffset(scrollPoint, animated: true)
                         }
                     })
@@ -85,7 +89,7 @@ struct CountryView: View {
                         MediaPlayerView(url: url,
                                         autoPlay: isAutoPlay,
                                         currentTime: $currentTime,
-                                        duration: $duration)
+                                        durationTime: $durationTime)
                             .padding()
                             .background(Color.systemGroupedBackground .edgesIgnoringSafeArea(.bottom))
                     }
@@ -120,6 +124,13 @@ struct CountryView: View {
 
     var actionsView: some View {
         HStack {
+            Image(systemName: "eye.fill")
+                .imageScale(.small)
+            Text("\(viewModel.country?.views ?? 0)")
+            Image(systemName: "play.fill")
+                .imageScale(.small)
+            Text("\(viewModel.country?.plays ?? 0)")
+            Spacer()
             Button(action: {
                 
             }) {
@@ -127,7 +138,6 @@ struct CountryView: View {
                     .imageScale(.large)
                     .padding()
             }
-            Spacer()
             Button(action: {
                 
             }) {
@@ -237,7 +247,6 @@ struct CountryToolbar: ToolbarContent {
                 isShowingShareSheet.toggle()
             }) {
                 Image(systemName: "square.and.arrow.up")
-//                    .renderingMode(.original)
             }
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -245,7 +254,6 @@ struct CountryToolbar: ToolbarContent {
                 $presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "xmark")
-//                    .renderingMode(.original)
             }
         }
     }

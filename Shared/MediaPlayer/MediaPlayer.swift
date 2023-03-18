@@ -16,10 +16,11 @@ public class MediaPlayer: NSObject, ObservableObject {
     
     @Published public var isPlaying = false
     @Published public var progress: CGFloat = 0.0
-    @Published public var duration: Double = 0.0
+    @Published public var remaining: Double = 0.0
+    @Published public var durationTime: Double = 0.0
     @Published public var currentTime: Double = 0.0
-    @Published public var formattedDuration: String = "0:00"
     @Published public var formattedProgress: String = "0:00"
+    @Published public var formattedRemaining: String = "0:00"
     
     let updatePublisher = PassthroughSubject<Void, Never>()
     
@@ -69,10 +70,11 @@ public class MediaPlayer: NSObject, ObservableObject {
                 self.progress = CGFloat(player.currentTime / player.duration)
                 self.formattedProgress = formatter.string(from: TimeInterval(player.currentTime))!
                 
-                self.duration = player.duration - player.currentTime
-                self.formattedDuration = "-\(formatter.string(from: TimeInterval(self.duration))!)"
+                self.remaining = player.duration - player.currentTime
+                self.formattedRemaining = "-\(formatter.string(from: TimeInterval(self.remaining))!)"
                 
                 self.currentTime = player.currentTime
+                self.durationTime = player.duration
                 self.updatePublisher.send()
             }
         }
@@ -127,10 +129,10 @@ public class MediaPlayer: NSObject, ObservableObject {
         if let player = self.audioPlayer {
             let increase = player.currentTime + 15
 
-            if increase < self.duration {
+            if increase < remaining {
                 player.currentTime = increase
             } else {
-                player.currentTime = duration
+                player.currentTime = remaining
             }
         }
     }

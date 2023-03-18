@@ -15,18 +15,18 @@ protocol MediaPlayerViewDelegate {
 struct MediaPlayerView: View {
     @StateObject private var sound: MediaPlayer
     @Binding var currentTime: Double
-    @Binding var duration: Double
+    @Binding var durationTime: Double
 
     var url: URL?
     var isAutoPlay: Bool
     
-    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, duration: Binding<Double>) {
+    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, durationTime: Binding<Double>) {
         self.url = url
 
         self.isAutoPlay = autoPlay
         _sound = StateObject(wrappedValue: MediaPlayer(url: url))
         _currentTime = currentTime
-        _duration = duration
+        _durationTime = durationTime
     }
 
     var body: some View {
@@ -47,7 +47,7 @@ struct MediaPlayerView: View {
                     Text(sound.formattedProgress)
                         .font(Font.callout.monospacedDigit())
                     Spacer()
-                    Text(sound.formattedDuration)
+                    Text(sound.formattedRemaining)
                         .font(Font.callout.monospacedDigit())
                 }
                 
@@ -99,14 +99,14 @@ struct MediaPlayerView: View {
             }
             .onReceive(sound.updatePublisher) {
                 currentTime = sound.currentTime
-                duration = sound.duration
+                durationTime = sound.durationTime
             }
     }
 }
 
 struct MediaPlayerView_Previews: PreviewProvider {
     @State static var currentTime: Double = 0
-    @State static var duration: Double = 0
+    @State static var durationTime: Double = 0
 
     static var previews: some View {
         if let path = Bundle.main.path(forResource: "ph", ofType: "mp3"),
@@ -116,7 +116,7 @@ struct MediaPlayerView_Previews: PreviewProvider {
             MediaPlayerView(url: url,
                             autoPlay: false,
                             currentTime: $currentTime,
-                            duration: $duration)
+                            durationTime: $durationTime)
         } else {
             EmptyView()
         }

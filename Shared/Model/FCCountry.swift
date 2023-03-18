@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct FCCountry: Identifiable {
+struct FCCountry: Identifiable, Hashable {
     struct Keys {
         static let Name              = "Name"
         static let Capital           = "Capital"
@@ -39,6 +39,7 @@ struct FCCountry: Identifiable {
     }
 
     // MARK: - Properties
+
     var id: String {
         get {
             return key ?? ""
@@ -56,8 +57,8 @@ struct FCCountry: Identifiable {
     let telPref: String?
     let countryCodes: [String: Any]?
     let countryInfo: String?
-    let views: Int?
-    let plays: Int?
+    var views: Int?
+    var plays: Int?
     let hasAnthemFile: Int?
     
     // MARK: - Initialization
@@ -167,17 +168,13 @@ struct FCCountry: Identifiable {
         }
     }
 
-    var description: String {
-        return self.key!
-    }
-    
-    var hashValue: Int {
-        return self.key!.hashValue
-    }
-
-
     static func == (lhs: FCCountry, rhs: FCCountry) -> Bool {
         return lhs.key == rhs.key
     }
+    
+    // MARK: - Hashable
 
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(key)
+    }
 }
