@@ -53,7 +53,7 @@ struct TabNavigationView: View {
                 .tag(TabItem.charts)
             
             NavigationView {
-                ParentalGateView()
+                AccountView()
             }
                 .navigationViewStyle(.stack)
                 .tabItem {

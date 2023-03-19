@@ -39,7 +39,6 @@
 		8B1A0BAD29C354B80012B2A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */; };
 		8B3FA04224A7C9E400DF7665 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04124A7C9E400DF7665 /* MainView.swift */; };
 		8B3FA04F24A7CCBF00DF7665 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */; };
-		8B3FA05724A7CF3B00DF7665 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FA05624A7CF3B00DF7665 /* AccountView.swift */; };
 		8B95FB0029C35040003CD2AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FAFF29C35040003CD2AB /* MapViewController.swift */; };
 		8B95FB0129C35040003CD2AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FAFF29C35040003CD2AB /* MapViewController.swift */; };
 		8B95FB0229C35040003CD2AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FAFF29C35040003CD2AB /* MapViewController.swift */; };
@@ -137,7 +136,6 @@
 		8B1A0BAA29C354B80012B2A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B3FA04124A7C9E400DF7665 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8B3FA04E24A7CCBF00DF7665 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8B3FA05624A7CF3B00DF7665 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8B95FAFF29C35040003CD2AB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8B95FB0429C35087003CD2AB /* GlobeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeViewController.swift; sourceTree = "<group>"; };
 		8B95FB0929C35119003CD2AB /* DBLyrics+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBLyrics+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				11E5B8A61E9692020021ABB5 /* AccountViewController.swift */,
-				8B3FA05624A7CF3B00DF7665 /* AccountView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -561,7 +558,6 @@
 				8B95FB1E29C35119003CD2AB /* Flag Ceremony.xcdatamodeld in Sources */,
 				8B95FB2429C35119003CD2AB /* DBAnthem+CoreDataProperties.swift in Sources */,
 				8B95FB0529C35087003CD2AB /* GlobeViewController.swift in Sources */,
-				8B3FA05724A7CF3B00DF7665 /* AccountView.swift in Sources */,
 				8B3FA04F24A7CCBF00DF7665 /* SceneDelegate.swift in Sources */,
 				11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */,
 				116FD6F71E974BDA00178709 /* DataTableViewCell.swift in Sources */,

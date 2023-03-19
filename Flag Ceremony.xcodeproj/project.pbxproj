@@ -824,6 +824,10 @@
 		8B335B2029C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
+		8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
+		8B4A2C9029C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
+		8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
+		8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
@@ -1728,6 +1732,20 @@
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
 		8BF69F6129C62CE500E0C00B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6029C62CE500E0C00B /* TestView.swift */; };
 		8BF69F6229C62CE500E0C00B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6029C62CE500E0C00B /* TestView.swift */; };
+		8BF69F6A29C6549800E0C00B /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
+		8BF69F6B29C6549800E0C00B /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
+		8BF69F6D29C6589F00E0C00B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BF69F6C29C6589F00E0C00B /* Localizable.strings */; };
+		8BF69F6E29C6589F00E0C00B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BF69F6C29C6589F00E0C00B /* Localizable.strings */; };
+		8BF69F6F29C6589F00E0C00B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BF69F6C29C6589F00E0C00B /* Localizable.strings */; };
+		8BF69F7029C6589F00E0C00B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BF69F6C29C6589F00E0C00B /* Localizable.strings */; };
+		8BF69F7329C65C0900E0C00B /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */; };
+		8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */; };
+		8BF69F7529C65C0900E0C00B /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */; };
+		8BF69F7629C65C0900E0C00B /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */; };
+		8BF69F8229C6693F00E0C00B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F8129C6693F00E0C00B /* AccountView.swift */; };
+		8BF69F8329C6693F00E0C00B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F8129C6693F00E0C00B /* AccountView.swift */; };
+		8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F8129C6693F00E0C00B /* AccountView.swift */; };
+		8BF69F8529C6693F00E0C00B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F8129C6693F00E0C00B /* AccountView.swift */; };
 		8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */; };
 		8BF8E28129C5897100929089 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E28029C5897100929089 /* ChartsView.swift */; };
 		8BF8E28229C5897100929089 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E28029C5897100929089 /* ChartsView.swift */; };
@@ -1988,6 +2006,7 @@
 		8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "geography-class_medres.mbtiles"; sourceTree = "<group>"; };
 		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
+		8B4A2C8E29C7821500B87840 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
 		8B556B2429C2420100101D46 /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
 		8B556B4229C2AB2600101D46 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8B556B5329C2AB8A00101D46 /* flag-ceremony-export.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "flag-ceremony-export.json"; sourceTree = "<group>"; };
@@ -2213,6 +2232,10 @@
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8BF69F6029C62CE500E0C00B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		8BF69F6929C6549800E0C00B /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		8BF69F6C29C6589F00E0C00B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateView.swift; sourceTree = "<group>"; };
+		8BF69F8129C6693F00E0C00B /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewItemSource.swift; sourceTree = "<group>"; };
 		8BF8E28029C5897100929089 /* ChartsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		8BF8E28529C58ABE00929089 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
@@ -2495,6 +2518,8 @@
 		8B20963D2842797B00B62A45 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8BF69F6329C6534C00E0C00B /* Account */,
+				8BF69F7129C659D300E0C00B /* Authentication */,
 				8BF8E28A29C58AC400929089 /* Charts */,
 				8BA7239E29C40EF700FF4859 /* Country */,
 				8B2096AB2844049D00B62A45 /* data */,
@@ -2505,6 +2530,7 @@
 				8B2096432842797D00B62A45 /* Assets.xcassets */,
 				8B9A327929C2DEE90034EBC5 /* Constants.swift */,
 				8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */,
+				8BF69F6C29C6589F00E0C00B /* Localizable.strings */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -2578,6 +2604,7 @@
 		8B556B3E29C2AB2600101D46 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
 				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
 				8B556B4229C2AB2600101D46 /* FirebaseManager.swift */,
 				8B556B2429C2420100101D46 /* Geodata.swift */,
@@ -2835,6 +2862,23 @@
 				8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */,
 			);
 			path = Country;
+			sourceTree = "<group>";
+		};
+		8BF69F6329C6534C00E0C00B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				8BF69F8129C6693F00E0C00B /* AccountView.swift */,
+				8BF69F6929C6549800E0C00B /* AccountViewModel.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		8BF69F7129C659D300E0C00B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		8BF8E28A29C58AC400929089 /* Charts */ = {
@@ -3201,6 +3245,7 @@
 				8B9A2F2C29C2DC3F0034EBC5 /* tz.mp3 in Resources */,
 				8B1A1D6829C37B630012B2A8 /* es.png in Resources */,
 				8B9A316C29C2DC400034EBC5 /* pk.mp3 in Resources */,
+				8BF69F6D29C6589F00E0C00B /* Localizable.strings in Resources */,
 				8B556B5429C2AB8A00101D46 /* flag-ceremony-export.json in Resources */,
 				8B9A315829C2DC400034EBC5 /* kw.mp3 in Resources */,
 				8B1A1C7429C37B630012B2A8 /* tw.png in Resources */,
@@ -3620,6 +3665,7 @@
 				8B9A2F2D29C2DC3F0034EBC5 /* tz.mp3 in Resources */,
 				8B1A1D6929C37B630012B2A8 /* es.png in Resources */,
 				8B9A316D29C2DC400034EBC5 /* pk.mp3 in Resources */,
+				8BF69F6E29C6589F00E0C00B /* Localizable.strings in Resources */,
 				8B556B5529C2AB8A00101D46 /* flag-ceremony-export.json in Resources */,
 				8B9A315929C2DC400034EBC5 /* kw.mp3 in Resources */,
 				8B1A1C7529C37B630012B2A8 /* tw.png in Resources */,
@@ -4224,6 +4270,7 @@
 				8B1A1BE229C37B630012B2A8 /* ni.png in Resources */,
 				8B9A313A29C2DC400034EBC5 /* dm.mp3 in Resources */,
 				8B9A319E29C2DC400034EBC5 /* as.mp3 in Resources */,
+				8BF69F6F29C6589F00E0C00B /* Localizable.strings in Resources */,
 				8B556B5B29C2ACF900101D46 /* GoogleService-Info.plist in Resources */,
 				8B9A317229C2DC400034EBC5 /* sg.mp3 in Resources */,
 				8B1A1CF629C37B630012B2A8 /* dk.png in Resources */,
@@ -4642,6 +4689,7 @@
 				8B1A1BE329C37B630012B2A8 /* ni.png in Resources */,
 				8B9A313B29C2DC400034EBC5 /* dm.mp3 in Resources */,
 				8B9A319F29C2DC400034EBC5 /* as.mp3 in Resources */,
+				8BF69F7029C6589F00E0C00B /* Localizable.strings in Resources */,
 				8B556B5C29C2ACF900101D46 /* GoogleService-Info.plist in Resources */,
 				8B9A317329C2DC400034EBC5 /* sg.mp3 in Resources */,
 				8B1A1CF729C37B630012B2A8 /* dk.png in Resources */,
@@ -4692,9 +4740,13 @@
 				8B556B4F29C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7429C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8BF8E28629C58ABE00929089 /* ChartsViewModel.swift in Sources */,
+				8BF69F8229C6693F00E0C00B /* AccountView.swift in Sources */,
 				8B556BA629C2B4EF00101D46 /* ContentView.swift in Sources */,
 				8B2096A3284400C200B62A45 /* GlobeView.swift in Sources */,
+				8BF69F7329C65C0900E0C00B /* AuthenticateView.swift in Sources */,
+				8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B20969B2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
+				8BF69F6A29C6549800E0C00B /* AccountViewModel.swift in Sources */,
 				8BF8E28129C5897100929089 /* ChartsView.swift in Sources */,
 				8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B0FF8FD29C38842007F548A /* MediaPlayerView.swift in Sources */,
@@ -4717,6 +4769,7 @@
 			files = (
 				8BF69F6229C62CE500E0C00B /* TestView.swift in Sources */,
 				8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */,
+				8B4A2C9029C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B1A0BB029C35C770012B2A8 /* CountryViewModel.swift in Sources */,
 				8B556B5029C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7529C2AF8600101D46 /* FCActivity.swift in Sources */,
@@ -4725,6 +4778,8 @@
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
 				8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
 				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
+				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
+				8BF69F6B29C6549800E0C00B /* AccountViewModel.swift in Sources */,
 				8B0FF8FE29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B556B9129C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
@@ -4735,6 +4790,7 @@
 				8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7D29C2AF8600101D46 /* FCUser.swift in Sources */,
+				8BF69F8329C6693F00E0C00B /* AccountView.swift in Sources */,
 				8B0FF90C29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4746,7 +4802,9 @@
 				8B556BAD29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8BF8E28829C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B0FF90D29C3D418007F548A /* MediaPlayer.swift in Sources */,
+				8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */,
 				8BF8E28329C5897100929089 /* ChartsView.swift in Sources */,
+				8BF69F7529C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B556B7E29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B556B5129C2AB2600101D46 /* FirebaseManager.swift in Sources */,
@@ -4757,6 +4815,7 @@
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
 				8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B1A0BB129C35C770012B2A8 /* CountryViewModel.swift in Sources */,
+				8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9229C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BA329C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 			);
@@ -4778,10 +4837,13 @@
 				8B556B8B29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B2096662842797D00B62A45 /* Tests_macOS.swift in Sources */,
 				8BF8E28429C5897100929089 /* ChartsView.swift in Sources */,
+				8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9329C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B0FF90029C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8BF8E28929C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B556BA429C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
+				8BF69F8529C6693F00E0C00B /* AccountView.swift in Sources */,
+				8BF69F7629C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B0FF90E29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

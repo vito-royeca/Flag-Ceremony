@@ -46,4 +46,8 @@ class ChartsViewModel: NSObject, ObservableObject {
             self?.users = users
         })
     }
+    
+    func muteData() {
+        FirebaseManager.sharedInstance.demonitorTopCharts()
+    }
 }

@@ -52,6 +52,9 @@ struct ChartsView: View {
             .onAppear() {
                 fetchData()
             }
+            .onDisappear {
+                viewModel.muteData()
+            }
     }
     
     func fetchData() {
@@ -77,11 +80,7 @@ struct ChartsView: View {
             }
         }
             .pickerStyle(.segmented)
-//            .padding()
-//            .onChange(of: tab) { _ in
-//                print(tab)
-//                fetchData()
-//            }
+            .listRowSeparator(.hidden)
             .onAppear() {
                 fetchData()
             }
