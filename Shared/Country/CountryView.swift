@@ -125,12 +125,13 @@ struct CountryView: View {
 
     var actionsView: some View {
         HStack {
+            Text("\(viewModel.country?.views ?? 0)")
             Image(systemName: "eye.fill")
                 .imageScale(.small)
-            Text("\(viewModel.country?.views ?? 0)")
+            Text("\(viewModel.country?.plays ?? 0)")
             Image(systemName: "play.fill")
                 .imageScale(.small)
-            Text("\(viewModel.country?.plays ?? 0)")
+            
             Spacer()
             Button(action: {
                 

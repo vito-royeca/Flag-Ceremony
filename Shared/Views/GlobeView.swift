@@ -14,6 +14,7 @@ struct GlobeViewVC: View {
 
     var body: some View {
         GlobeView(selectedCountry: $selectedCountry)
+            .navigationTitle("Globe")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     CountryView(id: selectedCountry.id, isAutoPlay: true)

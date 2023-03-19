@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-enum TopCharts: String, CaseIterable, Identifiable {
+enum ChartsTab: String, CaseIterable, Identifiable {
     case topViewed, topPlayed, topViewers, topPlayers
     
     var id: String {
@@ -33,26 +33,11 @@ enum TopCharts: String, CaseIterable, Identifiable {
 
 struct ChartsView: View {
     @StateObject var viewModel = ChartsViewModel()
-    @State var topChart: TopCharts = .topViewed
+    @State var tab: ChartsTab = .topViewed
     
     var body: some View {
         VStack {
-            Picker("Top", selection: $topChart) {
-                ForEach(TopCharts.allCases, id: \.id) { index in
-                    Text(index.description)
-                        .tag(index)
-                }
-            }
-                .pickerStyle(.segmented)
-                .padding()
-                .onChange(of: topChart) { _ in
-                    fetchData()
-                }
-                .onAppear() {
-                    fetchData()
-                }
-            
-            switch topChart {
+            switch tab {
             case .topViewed:
                 topViewed
             case .topPlayed:
@@ -63,10 +48,14 @@ struct ChartsView: View {
                 topPlayers
             }
         }
+            .navigationTitle("Charts")
+            .onAppear() {
+                fetchData()
+            }
     }
     
     func fetchData() {
-        switch topChart {
+        switch tab {
         case .topViewed:
             viewModel.fetchTopViewedCountries()
         case .topPlayed:
@@ -80,8 +69,27 @@ struct ChartsView: View {
         }
     }
     
+    var tabView: some View {
+        Picker("", selection: $tab) {
+            ForEach(ChartsTab.allCases, id: \.id) { index in
+                Text(index.description)
+                    .tag(index)
+            }
+        }
+            .pickerStyle(.segmented)
+//            .padding()
+//            .onChange(of: tab) { _ in
+//                print(tab)
+//                fetchData()
+//            }
+            .onAppear() {
+                fetchData()
+            }
+    }
+
     var topViewed: some View {
         List {
+            tabView
             ForEach(Array(viewModel.topViewedCountries.enumerated()), id: \.element) { index, country in
                 ChartCountryRowView(index: index+1,
                                     name: country.displayName,
@@ -94,6 +102,7 @@ struct ChartsView: View {
     
     var topPlayed: some View {
         List {
+            tabView
             ForEach(Array(viewModel.topPlayedCountries.enumerated()), id: \.element) { index, country in
                 ChartCountryRowView(index: index+1,
                                     name: country.displayName,
@@ -106,6 +115,7 @@ struct ChartsView: View {
     
     var topViewers: some View {
         List {
+            tabView
             ForEach(Array(viewModel.topViewers.enumerated()), id: \.element) { index, activity in
                 if let user = viewModel.users.first(where: { $0.id == activity.id}) {
                     ChartUserRowView(index: index+1,
@@ -123,6 +133,7 @@ struct ChartsView: View {
     
     var topPlayers: some View {
         List {
+            tabView
             ForEach(Array(viewModel.topPlayers.enumerated()), id: \.element) { index, activity in
                 if let user = viewModel.users.first(where: { $0.id == activity.id}) {
                     ChartUserRowView(index: index+1,
@@ -155,7 +166,7 @@ struct ChartCountryRowView: View {
     
     var body: some View {
         HStack {
-            Text("#\(index+1)")
+            Text("#\(index)")
             Text(name)
             Spacer()
             Text("\(count)")

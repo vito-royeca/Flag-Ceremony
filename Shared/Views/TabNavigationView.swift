@@ -13,7 +13,8 @@ struct TabNavigationView: View {
     enum TabItem {
         case map
         case globe
-        case cards
+        case charts
+        case account
     }
     
     @State private var selection: TabItem = .map
@@ -49,7 +50,17 @@ struct TabNavigationView: View {
                     Image(systemName: "chart.bar.doc.horizontal")
                     Text("Charts")
                 }
-                .tag(TabItem.globe)
+                .tag(TabItem.charts)
+            
+            NavigationView {
+                ParentalGateView()
+            }
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Account")
+                }
+                .tag(TabItem.account)
         }
             .environmentObject(geodata)
             .onAppear {
