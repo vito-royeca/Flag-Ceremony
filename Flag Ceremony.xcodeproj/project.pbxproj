@@ -2528,7 +2528,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF69F6329C6534C00E0C00B /* Account */,
-				8BF69F7129C659D300E0C00B /* Authentication */,
+				8BF69F7129C659D300E0C00B /* Authenticate */,
 				8BF8E28A29C58AC400929089 /* Charts */,
 				8BA7239E29C40EF700FF4859 /* Country */,
 				8B2096AB2844049D00B62A45 /* data */,
@@ -2882,13 +2882,13 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
-		8BF69F7129C659D300E0C00B /* Authentication */ = {
+		8BF69F7129C659D300E0C00B /* Authenticate */ = {
 			isa = PBXGroup;
 			children = (
 				8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */,
 				8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */,
 			);
-			path = Authentication;
+			path = Authenticate;
 			sourceTree = "<group>";
 		};
 		8BF8E28A29C58AC400929089 /* Charts */ = {

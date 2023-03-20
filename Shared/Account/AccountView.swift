@@ -46,6 +46,8 @@ struct AccountView: View {
                     }
                 } else {
                     ParentalGateView(parentalGateApproved: $parentalGateApproved)
+                        .background(Color(uiColor: kBlueColor))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
@@ -72,6 +74,9 @@ struct AccountView: View {
                         EmptyView()
                     }
                 }
+            }
+            .onAppear {
+                accountViewModel.fetchUserData()
             }
     }
 
@@ -159,19 +164,21 @@ struct AccountView: View {
                 .padding()
             tabView
             ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
-                HStack {
-                    Text(country.displayName)
-                    Spacer()
-                    Button(action: {
-                        
-                    }) {
-                        Image(systemName: "star")
-                            .imageScale(.large)
-                    }
-                }
+                Text(country.displayName)
             }
+                .onDelete(perform: removeFavorites)
         }
             .listStyle(.plain)
+    }
+    
+    func removeFavorites(at offsets: IndexSet) {
+        let keysToDelete = offsets.map { accountViewModel.favoriteCountries[$0].key }
+
+        _ = keysToDelete.compactMap { key in
+            if let key = key {
+                accountViewModel.toggleFavorite(key: key)
+            }
+        }
     }
 }
 
@@ -195,13 +202,15 @@ struct ParentalGateView: View {
 
     var body: some View {
         VStack {
-            Text("Signin with your account to get access to advance features.")
+            Image("splash screen")
+            Text("Sign In with your account to get access to advance features.")
+                .foregroundColor(.white)
             Button(action: {
                 showChallenge = true
                 randomNumber = NSNumber.randomNumber()
             }) {
                 Image(systemName: "arrow.right.circle")
-                    .font(Font.largeTitle)
+                    .foregroundColor(.white)
                     .imageScale(.large)
             }
                 .alert("Parental Gate", isPresented: $showChallenge, actions: {

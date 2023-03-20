@@ -14,6 +14,7 @@ struct CountryView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var accountViewModel: AccountViewModel
     
     @State private var isShowingShareSheet = false
     @State var currentTime: Double = 0
@@ -134,12 +135,22 @@ struct CountryView: View {
             
             Spacer()
             Button(action: {
+                guard let key = viewModel.country?.key else {
+                    return
+                }
                 
+                accountViewModel.toggleFavorite(key: key)
             }) {
-                Image(systemName: "star")
-                    .imageScale(.large)
-                    .padding()
+                if let country = viewModel.country {
+                    Image(systemName: accountViewModel.favoriteCountries.contains(country) ? "star.fill" : "star")
+                        .imageScale(.large)
+                        .padding()
+                } else {
+                    EmptyView()
+                }
             }
+                .disabled(accountViewModel.account == nil)
+            
             Button(action: {
                 
             }) {

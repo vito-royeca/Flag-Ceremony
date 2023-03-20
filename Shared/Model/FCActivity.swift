@@ -16,6 +16,7 @@ struct FCActivity: Identifiable, Hashable {
         static let Plays        = "Plays"
         static let ViewCount    = "ViewCount"
         static let Views        = "Views"
+        static let Favorites    = "Favorites"
     }
     
     // MARK: - Properties
@@ -32,6 +33,7 @@ struct FCActivity: Identifiable, Hashable {
     let plays: [String: Int]?
     let viewCount: Int?
     let views: [String: Int]?
+    let favorites: [String]?
     
     // MARK: - Initialization
 
@@ -43,6 +45,7 @@ struct FCActivity: Identifiable, Hashable {
         self.plays = dict[Keys.Plays] as? [String: Int]
         self.viewCount = dict[Keys.ViewCount] as? Int
         self.views = dict[Keys.Views] as? [String: Int]
+        self.favorites = dict[Keys.Favorites] as? [String]
     }
     
     init(snapshot: DataSnapshot) {
@@ -54,6 +57,7 @@ struct FCActivity: Identifiable, Hashable {
         self.plays = value[Keys.Plays] as? [String: Int]
         self.viewCount = value[Keys.ViewCount] as? Int
         self.views = value[Keys.Views] as? [String: Int]
+        self.favorites = value[Keys.Favorites] as? [String]
     }
     
     // MARK: - Hashable

@@ -8,12 +8,6 @@
 import SwiftUI
 import Firebase
 
-//protocol AuthenticateViewDelegate: NSObjectProtocol {
-//    func authenticated(with: ) {
-//
-//    }
-//}
-
 struct AuthenticateView: View {
     @StateObject var viewModel: AuthenticateViewModel
     @State private var email: String = ""
@@ -38,7 +32,7 @@ struct AuthenticateView: View {
                 Button {
                     
                 } label: {
-                    Text("Sign in")
+                    Text("Sign In")
                         .frame(maxWidth: .infinity)
                         .background(.white)
                         .foregroundColor(Color(uiColor: kBlueColor))
@@ -50,25 +44,25 @@ struct AuthenticateView: View {
             
             Group {
                 Spacer()
-                Text("Or Sign in with your other accounts")
+                Text("Or Sign In with your other accounts")
                     .foregroundColor(.white)
                 HStack {
-                    Spacer()
-                    Button(action: {
-                        
-                    }) {
-                        Image("facebook")
-                            .renderingMode(.template)
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    Button(action: {
-                        
-                    }) {
-                        Image("twitter")
-                            .renderingMode(.template)
-                            .foregroundColor(.white)
-                    }
+//                    Spacer()
+//                    Button(action: {
+//
+//                    }) {
+//                        Image("facebook")
+//                            .renderingMode(.template)
+//                            .foregroundColor(.white)
+//                    }
+//                    Spacer()
+//                    Button(action: {
+//
+//                    }) {
+//                        Image("twitter")
+//                            .renderingMode(.template)
+//                            .foregroundColor(.white)
+//                    }
                     Spacer()
                     Button(action: {
                         viewModel.signInWithGoogle { result in
@@ -96,7 +90,7 @@ struct AuthenticateView: View {
                 Button {
                     
                 } label: {
-                    Text("Sign up")
+                    Text("Sign Up")
                         .frame(maxWidth: .infinity)
                         .background(.white)
                         .foregroundColor(Color(uiColor: kBlueColor))
@@ -128,10 +122,8 @@ struct AuthenticateView: View {
                 
             Spacer()
         }
-        .padding()
-        .background(Color(uiColor: kBlueColor))
-        
-        
+            .padding()
+            .background(Color(uiColor: kBlueColor))
     }
 }
 

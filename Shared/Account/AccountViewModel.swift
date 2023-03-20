@@ -23,6 +23,9 @@ class AccountViewModel: NSObject, ObservableObject {
     func signOut() {
         do {
             muteData()
+            viewedCountries.removeAll()
+            playedCountries.removeAll()
+            favoriteCountries.removeAll()
             activity = nil
             try Auth.auth().signOut()
         } catch {
@@ -41,7 +44,8 @@ class AccountViewModel: NSObject, ObservableObject {
             if let views = activity?.views {
                 let keys = Array(views.keys)
                 FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                    self?.viewedCountries = [FCCountry]()
+                    self?.viewedCountries.removeAll()
+
                     for var country in countries {
                         if let key = country.key {
                             country.userViews = views[key] ?? 0
@@ -55,7 +59,8 @@ class AccountViewModel: NSObject, ObservableObject {
             if let plays = activity?.plays {
                 let keys = Array(plays.keys)
                 FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                    self?.playedCountries = [FCCountry]()
+                    self?.playedCountries.removeAll()
+
                     for var country in countries {
                         if let key = country.key {
                             country.userPlays = plays[key] ?? 0
@@ -65,7 +70,21 @@ class AccountViewModel: NSObject, ObservableObject {
                 })
 
             }
+            
+            if let favorites = activity?.favorites {
+                FirebaseManager.sharedInstance.findCountries(keys: favorites, completion: { countries in
+                    self?.favoriteCountries = countries
+                })
+            } else {
+                self?.favoriteCountries.removeAll()
+            }
         })
+    }
+    
+    func toggleFavorite(key: String) {
+        FirebaseManager.sharedInstance.toggleFavorite(key) { [weak self] result in
+            self?.fetchUserData()
+        }
     }
     
     func muteData() {

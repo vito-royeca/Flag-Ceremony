@@ -9,6 +9,10 @@
 import Foundation
 import Firebase
 
+enum FirebaseError : Error {
+    case notLoggedIn
+}
+
 class FirebaseManager : NSObject {
     var queries = [String: DatabaseQuery]()
     var online = false
@@ -153,6 +157,43 @@ class FirebaseManager : NSObject {
         }
     }
 
+    func toggleFavorite(_ key: String, completion: @escaping (Result<Void,Error>) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(FirebaseError.notLoggedIn))
+            return
+        }
+        
+        
+        let ref = Database.database().reference().child("activities").child(user.uid)
+        
+        ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            var post = currentData.value as? [String : Any] ?? [String : Any]()
+            var favorites = post[FCActivity.Keys.Favorites] as? [String] ?? [String]()
+
+            if !favorites.contains(key) {
+                favorites.append(key)
+            } else {
+                if let index = favorites.firstIndex(of: key) {
+                    favorites.remove(at: index)
+                }
+            }
+
+            post[FCActivity.Keys.Favorites] = favorites
+            
+            // Set value and report transaction success
+            currentData.value = post
+            return TransactionResult.success(withValue: currentData)
+            
+        }) { (error, committed, snapshot) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+        
+    }
+    
     func findAnthem(_ key: String, completion: @escaping (FCAnthem?) -> Void) {
         // read the bundled json
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
