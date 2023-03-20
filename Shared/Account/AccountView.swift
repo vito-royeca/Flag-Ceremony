@@ -28,17 +28,22 @@ enum AccountTab: String, CaseIterable, Identifiable {
 }
 
 struct AccountView: View {
-    @StateObject var viewModel = AccountViewModel()
+    @EnvironmentObject var accountViewModel: AccountViewModel
     @State var tab: AccountTab = .viewed
     @State var parentalGateApproved = false
+    @State var authenticated = false
 
     var body: some View {
         VStack {
-            if viewModel.isLoggedIn {
-                mainView
+            if accountViewModel.account != nil {
+                dataView
             } else {
                 if parentalGateApproved {
-                    AuthenticateView()
+                    if authenticated {
+                        dataView
+                    } else {
+                        AuthenticateView(authenticated: $authenticated)
+                    }
                 } else {
                     ParentalGateView(parentalGateApproved: $parentalGateApproved)
                 }
@@ -46,19 +51,8 @@ struct AccountView: View {
         }
     }
     
-    func fetchData() {
-        switch tab {
-        case .viewed:
-            viewModel.fetchViewedCountries()
-        case .played:
-            viewModel.fetchPlayedCountries()
-        case .favorites:
-            ()
-        }
-    }
-    
-    var mainView: some View {
-        VStack {
+    var dataView: some View {
+        VStack(alignment: .leading) {
             switch tab {
             case .viewed:
                 viewed
@@ -68,13 +62,48 @@ struct AccountView: View {
                 favorites
             }
         }
-            .navigationTitle("Charts")
-            .onAppear() {
-                fetchData()
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    if accountViewModel.account != nil {
+                        Button("Sign Out") {
+                            accountViewModel.signOut()
+                        }
+                    } else {
+                        EmptyView()
+                    }
+                }
             }
-            .onDisappear {
-                viewModel.muteData()
+    }
+
+    var headerView: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                AsyncImage(
+                    url: accountViewModel.account?.photoURL,
+                    content: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 120, height: 120)
+                            .clipShape(Circle())
+                    },
+                    placeholder: {
+                        Image(systemName: "person.circle")
+                            .imageScale(.large)
+                    }
+                )
+                Text(accountViewModel.account?.displayName ?? "")
             }
+            HStack {
+                Text("\(accountViewModel.activity?.viewCount ?? 0)")
+                Image(systemName: "eye.fill")
+                    .imageScale(.small)
+                Text("\(accountViewModel.activity?.playCount ?? 0)")
+                Image(systemName: "play.fill")
+                    .imageScale(.small)
+            }
+        }
+            .listRowSeparator(.hidden)
     }
 
     var tabView: some View {
@@ -86,19 +115,21 @@ struct AccountView: View {
         }
             .pickerStyle(.segmented)
             .listRowSeparator(.hidden)
-            .onAppear() {
-                fetchData()
-            }
     }
 
     var viewed: some View {
         List {
+            headerView
+                .padding()
             tabView
-            ForEach(Array(viewModel.viewedCountries.enumerated()), id: \.element) { index, country in
-                ChartCountryRowView(index: index+1,
-                                    name: country.displayName,
-                                    count: country.views ?? 0,
-                                    countIcon: Image(systemName: "eye.fill"))
+            ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
+                HStack {
+                    Text(country.displayName)
+                    Spacer()
+                    Text("\(country.userViews)")
+                    Image(systemName: "eye.fill")
+                        .imageScale(.small)
+                }
             }
         }
             .listStyle(.plain)
@@ -106,12 +137,17 @@ struct AccountView: View {
     
     var played: some View {
         List {
+            headerView
+                .padding()
             tabView
-            ForEach(Array(viewModel.playedCountries.enumerated()), id: \.element) { index, country in
-                ChartCountryRowView(index: index+1,
-                                    name: country.displayName,
-                                    count: country.plays ?? 0,
-                                    countIcon: Image(systemName: "play.fill"))
+            ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
+                HStack {
+                    Text(country.displayName)
+                    Spacer()
+                    Text("\(country.userPlays)")
+                    Image(systemName: "play.fill")
+                        .imageScale(.small)
+                }
             }
         }
             .listStyle(.plain)
@@ -119,12 +155,20 @@ struct AccountView: View {
     
     var favorites: some View {
         List {
+            headerView
+                .padding()
             tabView
-            ForEach(Array(viewModel.playedCountries.enumerated()), id: \.element) { index, country in
-                ChartCountryRowView(index: index+1,
-                                    name: country.displayName,
-                                    count: country.plays ?? 0,
-                                    countIcon: Image(systemName: "play.fill"))
+            ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
+                HStack {
+                    Text(country.displayName)
+                    Spacer()
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "star")
+                            .imageScale(.large)
+                    }
+                }
             }
         }
             .listStyle(.plain)
@@ -133,7 +177,12 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
+        let accountViewModel = AccountViewModel()
         AccountView()
+            .environmentObject(accountViewModel)
+            .onAppear {
+                accountViewModel.fetchUserData()
+            }
     }
 }
 
@@ -173,5 +222,6 @@ struct ParentalGateView: View {
     func checkAnswer() {
         parentalGateApproved = answer == randomNumber.stringValue
         showFailure = !parentalGateApproved
+        answer = ""
     }
 }

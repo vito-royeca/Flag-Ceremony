@@ -11,26 +11,64 @@ import Firebase
 class AccountViewModel: NSObject, ObservableObject {
     @Published var viewedCountries = [FCCountry]()
     @Published var playedCountries = [FCCountry]()
-    
-    var isLoggedIn: Bool {
+    @Published var favoriteCountries = [FCCountry]()
+    @Published var activity: FCActivity?
+
+    var account: User? {
         get {
-            Auth.auth().currentUser != nil
+            Auth.auth().currentUser
         }
     }
 
-    func fetchViewedCountries() {
-        FirebaseManager.sharedInstance.monitorTopViewed(completion: { [weak self] countries in
-            self?.viewedCountries = countries
-        })
+    func signOut() {
+        do {
+            muteData()
+            activity = nil
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
     }
     
-    func fetchPlayedCountries() {
-        FirebaseManager.sharedInstance.monitorTopPlayed(completion: { [weak self] countries in
-            self?.playedCountries = countries
+    func fetchUserData() {
+        guard account != nil else {
+            return
+        }
+
+        FirebaseManager.sharedInstance.monitorUserActivity(completion: { [weak self] activity in
+            self?.activity = activity
+
+            if let views = activity?.views {
+                let keys = Array(views.keys)
+                FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
+                    self?.viewedCountries = [FCCountry]()
+                    for var country in countries {
+                        if let key = country.key {
+                            country.userViews = views[key] ?? 0
+                            self?.viewedCountries.append(country)
+                        }
+                    }
+                })
+
+            }
+            
+            if let plays = activity?.plays {
+                let keys = Array(plays.keys)
+                FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
+                    self?.playedCountries = [FCCountry]()
+                    for var country in countries {
+                        if let key = country.key {
+                            country.userPlays = plays[key] ?? 0
+                            self?.playedCountries.append(country)
+                        }
+                    }
+                })
+
+            }
         })
     }
     
     func muteData() {
-        FirebaseManager.sharedInstance.demonitorUserData()
+        FirebaseManager.sharedInstance.demonitorUserActivity()
     }
 }

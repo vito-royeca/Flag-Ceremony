@@ -828,6 +828,12 @@
 		8B4A2C9029C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
+		8B4A2C9429C7917B00B87840 /* AuthenticateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */; };
+		8B4A2C9529C7917B00B87840 /* AuthenticateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */; };
+		8B4A2C9629C7917B00B87840 /* AuthenticateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */; };
+		8B4A2C9729C7917B00B87840 /* AuthenticateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */; };
+		8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4A2C9929C7B0A600B87840 /* GoogleSignIn */; };
+		8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4A2C9B29C7B0A600B87840 /* GoogleSignInSwift */; };
 		8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
@@ -2007,6 +2013,7 @@
 		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
 		8B4A2C8E29C7821500B87840 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
+		8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateViewModel.swift; sourceTree = "<group>"; };
 		8B556B2429C2420100101D46 /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
 		8B556B4229C2AB2600101D46 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8B556B5329C2AB8A00101D46 /* flag-ceremony-export.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "flag-ceremony-export.json"; sourceTree = "<group>"; };
@@ -2251,9 +2258,11 @@
 				8B556B6329C2AE0100101D46 /* FirebaseDatabase in Frameworks */,
 				8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */,
 				8B556B6129C2AE0100101D46 /* FirebaseCrashlytics in Frameworks */,
+				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
 				8BA723A829C4419500FF4859 /* Introspect in Frameworks */,
 				8B556B5F29C2AE0100101D46 /* FirebaseAuth in Frameworks */,
 				8B20968328427AD200B62A45 /* SDWebImageSwiftUI in Frameworks */,
+				8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2877,6 +2886,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */,
+				8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -2914,6 +2924,8 @@
 				8B556B6429C2AE0100101D46 /* FirebaseDatabaseSwift */,
 				8B1A0BB429C365CF0012B2A8 /* SwiftUIX */,
 				8BA723A729C4419500FF4859 /* Introspect */,
+				8B4A2C9929C7B0A600B87840 /* GoogleSignIn */,
+				8B4A2C9B29C7B0A600B87840 /* GoogleSignInSwift */,
 			);
 			productName = "Flag Ceremony (iOS)";
 			productReference = 8B2096482842797D00B62A45 /* Flag Ceremony.app */;
@@ -3012,6 +3024,7 @@
 				8B556B5D29C2AE0100101D46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 8B2096492842797D00B62A45 /* Products */;
 			projectDirPath = "";
@@ -4759,6 +4772,7 @@
 				8B9A327A29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B2096A9284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7C29C2AF8600101D46 /* FCUser.swift in Sources */,
+				8B4A2C9429C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8B0FF90B29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4780,6 +4794,7 @@
 				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8BF69F6B29C6549800E0C00B /* AccountViewModel.swift in Sources */,
+				8B4A2C9529C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8B0FF8FE29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B556B9129C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
@@ -4800,6 +4815,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B556BAD29C2B88B00101D46 /* Persistence.swift in Sources */,
+				8B4A2C9629C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8BF8E28829C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B0FF90D29C3D418007F548A /* MediaPlayer.swift in Sources */,
 				8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */,
@@ -4829,6 +4845,7 @@
 				8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B556B7F29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */,
+				8B4A2C9729C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8B556B5229C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B1A0BB229C35C770012B2A8 /* CountryViewModel.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
@@ -5240,6 +5257,14 @@
 				kind = branch;
 			};
 		};
+		8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		8B556B5D29C2AE0100101D46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -5268,6 +5293,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B20968128427AD200B62A45 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		8B4A2C9929C7B0A600B87840 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		8B4A2C9B29C7B0A600B87840 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		8B556B5E29C2AE0100101D46 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

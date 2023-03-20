@@ -60,6 +60,8 @@ struct FCCountry: Identifiable, Hashable {
     var views: Int?
     var plays: Int?
     let hasAnthemFile: Int?
+    var userViews = 0
+    var userPlays = 0
     
     // MARK: - Initialization
 

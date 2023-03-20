@@ -241,6 +241,53 @@ class FirebaseManager : NSObject {
         }
     }
     
+    func findCountries(keys: [String], completion: @escaping ([FCCountry]) -> Void) {
+        var countries = [FCCountry]()
+        
+        // read the bundled json instead
+        if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    if let json = try JSONSerialization.jsonObject(with: data,
+                                                                   options: .allowFragments) as? [String: [String: [String: Any]]] {
+                        
+                        if let dict = json["countries"] {
+                            for (key,value) in dict.filter({ keys.contains($0.key) }) {
+                                let country = FCCountry(key: key,
+                                                        dict: value)
+                                countries.append(country)
+                            }
+                        }
+                        
+                        countries.sort { $0.name! < $1.name! }
+                        completion(countries)
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }
+            
+        } else {
+            let connectedRef = Database.database().reference(withPath: ".info/connected")
+            
+            connectedRef.observe(.value, with: { snapshot in
+                if let connected = snapshot.value as? Bool, connected {
+                    let ref = Database.database().reference()
+                    ref.child("countries").queryOrdered(byChild: "Name").observeSingleEvent(of: .value,
+                                                                                            with: { (snapshot) in
+                        for child in snapshot.children {
+                            if let c = child as? DataSnapshot,
+                               keys.contains(c.key) {
+                                countries.append(FCCountry(snapshot: c))
+                            }
+                        }
+                        completion(countries)
+                    })
+                }
+            })
+        }
+    }
     func findCountry(_ key: String, completion: @escaping (FCCountry?) -> Void) {
         if let path = Bundle.main.path(forResource: "flag-ceremony-export", ofType: "json") {
             if FileManager.default.fileExists(atPath: path) {
@@ -364,13 +411,12 @@ class FirebaseManager : NSObject {
         })
     }
     
-    func monitorUserData(completion: @escaping (FCActivity?) -> Void) {
+    func monitorUserActivity(completion: @escaping (FCActivity?) -> Void) {
         if let user = Auth.auth().currentUser {
             let ref = Database.database().reference().child("activities").child(user.uid)
             let query = ref.queryOrderedByKey()
             query.observe(.value, with: { snapshot in
-                let activity = FCActivity(snapshot: snapshot)
-                completion(activity)
+                completion(FCActivity(snapshot: snapshot))
             })
             
             queries["userData"] = query
@@ -404,7 +450,7 @@ class FirebaseManager : NSObject {
         }
     }
     
-    func demonitorUserData() {
+    func demonitorUserActivity() {
         if let query = queries["userData"] {
             query.removeAllObservers()
             queries["userData"] = nil

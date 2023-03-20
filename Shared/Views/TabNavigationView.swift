@@ -19,6 +19,7 @@ struct TabNavigationView: View {
     
     @State private var selection: TabItem = .map
     @StateObject var geodata = Geodata()
+    @StateObject var accountViewModel = AccountViewModel()
     
     var body: some View {
         TabView(selection: $selection) {
@@ -63,8 +64,10 @@ struct TabNavigationView: View {
                 .tag(TabItem.account)
         }
             .environmentObject(geodata)
+            .environmentObject(accountViewModel)
             .onAppear {
                 geodata.fetchAllCountries()
+                accountViewModel.fetchUserData()
             }
     }
 }
