@@ -22,53 +22,57 @@ struct TabNavigationView: View {
     @StateObject var accountViewModel = AccountViewModel()
     
     var body: some View {
-        TabView(selection: $selection) {
-            NavigationView {
-                MapViewVC()
-            }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "map")
-                    Text("Map")
-                }
-                .tag(TabItem.map)
-
-            NavigationView {
-                GlobeViewVC()
-            }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "globe")
-                    Text("Globe")
-                }
-                .tag(TabItem.globe)
-            
-            NavigationView {
-                ChartsView()
-            }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "chart.bar.doc.horizontal")
-                    Text("Charts")
-                }
-                .tag(TabItem.charts)
-            
-            NavigationView {
-                AccountView()
-            }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("Account")
-                }
-                .tag(TabItem.account)
-        }
+        tabView
             .environmentObject(geodata)
             .environmentObject(accountViewModel)
             .onAppear {
                 geodata.fetchAllCountries()
                 accountViewModel.fetchUserData()
             }
+    }
+    
+    var tabView: some View {
+        TabView(selection: $selection) {
+            NavigationView {
+                MapViewVC()
+            }
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "map")
+                Text("Map")
+            }
+            .tag(TabItem.map)
+            
+            NavigationView {
+                GlobeViewVC()
+            }
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "globe")
+                Text("Globe")
+            }
+            .tag(TabItem.globe)
+            
+            NavigationView {
+                ChartsView()
+            }
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "chart.bar.doc.horizontal")
+                Text("Charts")
+            }
+            .tag(TabItem.charts)
+            
+            NavigationView {
+                AccountView()
+            }
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "person.circle")
+                Text("Account")
+            }
+            .tag(TabItem.account)
+        }
     }
 }
 

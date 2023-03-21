@@ -32,65 +32,69 @@ struct MediaPlayerView: View {
     }
 
     var body: some View {
-        VStack {
-            VStack {
+        VStack(spacing: 0) {
+            GeometryReader { gr in
+                Capsule()
+                    .stroke(Color.white, lineWidth: 2)
+                    .background(
+                        Capsule()
+                            .foregroundColor(Color.white)
+                            .frame(width: gr.size.width * sound.progress,
+                                      height: 8), alignment: .leading)
+            }
+                .frame( height: 8)
+            
+            HStack {
+                Text(sound.formattedProgress)
+                    .font(Font.callout.monospacedDigit())
+                    .foregroundColor(.white)
+                Spacer()
+                Text(sound.formattedRemaining)
+                    .font(Font.callout.monospacedDigit())
+                    .foregroundColor(.white)
+            }
+            
+            Button(action: {
+                sound.playOrPause()
+            }) {
+                Image(systemName: sound.isPlaying ? "pause.circle" : "play.circle")
+                    .font(Font.largeTitle)
+                    .imageScale(.large)
+                    .foregroundColor(.white)
+            }
+            
+            HStack {
+                Button(action: {
+                    sound.volumeDown()
+                }) {
+                    Image(systemName: sound.volume <= 0 ? "speaker.slash" : "speaker.wave.1")
+                        .imageScale(.medium)
+                }
+                    .disabled(sound.volume <= 0)
+                    .foregroundColor(.white)
+                
                 GeometryReader { gr in
                     Capsule()
-                        .stroke(Color.systemBlue, lineWidth: 2)
+                        .stroke(Color.white, lineWidth: 2)
                         .background(
                             Capsule()
-                                .foregroundColor(Color.blue)
-                                .frame(width: gr.size.width * sound.progress,
-                                          height: 8), alignment: .leading)
+                                .foregroundColor(Color.white)
+                                .frame(width: gr.size.width * sound.volume,
+                                       height: 8), alignment: .leading)
                 }
                     .frame( height: 8)
                 
-                HStack {
-                    Text(sound.formattedProgress)
-                        .font(Font.callout.monospacedDigit())
-                    Spacer()
-                    Text(sound.formattedRemaining)
-                        .font(Font.callout.monospacedDigit())
-                }
-                
                 Button(action: {
-                    sound.playOrPause()
+                    sound.volumeUp()
                 }) {
-                    Image(systemName: sound.isPlaying ? "pause.circle" : "play.circle")
-                        .font(Font.largeTitle)
-                        .imageScale(.large)
+                    Image(systemName: "speaker.wave.3")
+                        .imageScale(.medium)
+                        .foregroundColor(.white)
                 }
-                
-                HStack {
-                    Button(action: {
-                        sound.volumeDown()
-                    }) {
-                        Image(systemName: sound.volume <= 0 ? "speaker.slash" : "speaker.wave.1")
-                            .imageScale(.medium)
-                    }
-                        .disabled(sound.volume <= 0)
-                    
-                    GeometryReader { gr in
-                        Capsule()
-                            .stroke(Color.systemBlue, lineWidth: 2)
-                            .background(
-                                Capsule()
-                                    .foregroundColor(Color.blue)
-                                    .frame(width: gr.size.width * sound.volume,
-                                           height: 8), alignment: .leading)
-                    }
-                        .frame( height: 8)
-                    
-                    Button(action: {
-                        sound.volumeUp()
-                    }) {
-                        Image(systemName: "speaker.wave.3")
-                            .imageScale(.medium)
-                    }
-                        .disabled(sound.volume >= 1)
-                }
+                    .disabled(sound.volume >= 1)
             }
         }
+            .background(Color(uiColor: kBlueColor))
             .onAppear {
                 if isAutoPlay {
                     sound.playOrPause()

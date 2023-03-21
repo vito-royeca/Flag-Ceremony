@@ -93,7 +93,8 @@ struct CountryView: View {
                                         durationTime: $durationTime,
                                         isFinished: $isFinished)
                             .padding()
-                            .background(Color.systemGroupedBackground .edgesIgnoringSafeArea(.bottom))
+                            .background(Color(uiColor: kBlueColor)
+                            .edgesIgnoringSafeArea(.bottom))
                     }
                 }
             }
@@ -144,6 +145,7 @@ struct CountryView: View {
                 if let country = viewModel.country {
                     Image(systemName: accountViewModel.favoriteCountries.contains(country) ? "star.fill" : "star")
                         .imageScale(.large)
+                        .foregroundColor(accountViewModel.account == nil ? .gray : Color(uiColor: kBlueColor))
                         .padding()
                 } else {
                     EmptyView()
@@ -156,6 +158,7 @@ struct CountryView: View {
             }) {
                 Image(systemName: "info.circle")
                     .imageScale(.large)
+                    .foregroundColor(Color(uiColor: kBlueColor))
                     .padding()
             }
         }
@@ -240,6 +243,7 @@ struct CountryView: View {
 struct CountryView_Previews: PreviewProvider {
     static var previews: some View {
         CountryView(id: "PH", isAutoPlay: false)
+            .environmentObject(AccountViewModel())
     }
 }
 
@@ -260,6 +264,7 @@ struct CountryToolbar: ToolbarContent {
                 isShowingShareSheet.toggle()
             }) {
                 Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(Color(uiColor: kBlueColor))
             }
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -267,6 +272,7 @@ struct CountryToolbar: ToolbarContent {
                 $presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "xmark")
+                    .foregroundColor(Color(uiColor: kBlueColor))
             }
         }
     }

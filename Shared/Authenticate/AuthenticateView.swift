@@ -103,7 +103,6 @@ struct AuthenticateView: View {
             
             
             Group {
-                
                 Spacer()
                 Text("Forgot your password?")
                     .foregroundColor(.white)

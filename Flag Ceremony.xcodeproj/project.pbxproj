@@ -812,7 +812,6 @@
 		8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */; };
 		8B2096712842797D00B62A45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8B2096722842797D00B62A45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
-		8B20968328427AD200B62A45 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B20968228427AD200B62A45 /* SDWebImageSwiftUI */; };
 		8B20969B2843FF7B00B62A45 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */; };
 		8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */; };
 		8B2096A3284400C200B62A45 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969E284400C200B62A45 /* GlobeView.swift */; };
@@ -2261,7 +2260,6 @@
 				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
 				8BA723A829C4419500FF4859 /* Introspect in Frameworks */,
 				8B556B5F29C2AE0100101D46 /* FirebaseAuth in Frameworks */,
-				8B20968328427AD200B62A45 /* SDWebImageSwiftUI in Frameworks */,
 				8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2613,10 +2611,10 @@
 		8B556B3E29C2AB2600101D46 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
-				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
 				8B556B4229C2AB2600101D46 /* FirebaseManager.swift */,
 				8B556B2429C2420100101D46 /* Geodata.swift */,
+				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
+				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2917,7 +2915,6 @@
 			);
 			name = "Flag Ceremony (iOS)";
 			packageProductDependencies = (
-				8B20968228427AD200B62A45 /* SDWebImageSwiftUI */,
 				8B556B5E29C2AE0100101D46 /* FirebaseAuth */,
 				8B556B6029C2AE0100101D46 /* FirebaseCrashlytics */,
 				8B556B6229C2AE0100101D46 /* FirebaseDatabase */,
@@ -3020,7 +3017,6 @@
 			);
 			mainGroup = 8B2096382842797B00B62A45;
 			packageReferences = (
-				8B20968128427AD200B62A45 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8B556B5D29C2AE0100101D46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
@@ -5003,6 +4999,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -5035,6 +5032,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -5249,14 +5247,6 @@
 				minimumVersion = 0.1.4;
 			};
 		};
-		8B20968128427AD200B62A45 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -5288,11 +5278,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
-		};
-		8B20968228427AD200B62A45 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B20968128427AD200B62A45 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		8B4A2C9929C7B0A600B87840 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
