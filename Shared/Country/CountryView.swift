@@ -17,6 +17,7 @@ struct CountryView: View {
     @EnvironmentObject var accountViewModel: AccountViewModel
     
     @State private var isShowingShareSheet = false
+    @State private var isShowingCountryInfo = false
     @State var currentTime: Double = 0
     @State var durationTime: Double = 0
     @State var isFinished: Bool = false
@@ -108,6 +109,11 @@ struct CountryView: View {
             .sheet(isPresented: $isShowingShareSheet, content: {
                 activityView
             })
+            .sheet(isPresented: $isShowingCountryInfo, content: {
+                NavigationView {
+                    CountryInfoView().environmentObject(viewModel)
+                }
+            })
     }
     
     var flagView: some View {
@@ -154,7 +160,7 @@ struct CountryView: View {
                 .disabled(accountViewModel.account == nil)
             
             Button(action: {
-                
+                isShowingCountryInfo.toggle()
             }) {
                 Image(systemName: "info.circle")
                     .imageScale(.large)
@@ -169,7 +175,8 @@ struct CountryView: View {
         let nativeTitle = viewModel.anthem?.nativeTitle
         let lyricsWriter = (viewModel.anthem?.lyricsWriter ?? []).joined(separator: ",")
         let musicWriter = (viewModel.anthem?.musicWriter ?? []).joined(separator: ",")
-        
+        let dateAdopted = (viewModel.anthem?.dateAdopted ?? []).joined(separator: ",")
+
         return VStack(alignment: .leading) {
             Text(nativeTitle ?? "")
                 .font(Font.title2)
@@ -189,6 +196,12 @@ struct CountryView: View {
             if !lyricsWriter.isEmpty {
                 Spacer()
                 Text("Music: \(musicWriter)")
+                    .font(.footnote)
+            }
+            
+            if !dateAdopted.isEmpty {
+                Spacer()
+                Text("Date adopted: \(dateAdopted)")
                     .font(.footnote)
             }
         }
@@ -211,6 +224,7 @@ struct CountryView: View {
                 ForEach(keys, id: \.self) { key in
                     if let value = lyric[key] {
                         Text(value)
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -242,8 +256,10 @@ struct CountryView: View {
 
 struct CountryView_Previews: PreviewProvider {
     static var previews: some View {
-        CountryView(id: "PH", isAutoPlay: false)
-            .environmentObject(AccountViewModel())
+        NavigationView {
+            CountryView(id: "PH", isAutoPlay: false)
+                .environmentObject(AccountViewModel())
+        }
     }
 }
 

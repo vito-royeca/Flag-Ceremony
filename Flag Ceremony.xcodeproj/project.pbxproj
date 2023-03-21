@@ -820,6 +820,14 @@
 		8B2096AA284400C200B62A45 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2096A2284400C200B62A45 /* MapView.swift */; };
 		8B209E6F284404A100B62A45 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B209E70284404A100B62A45 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
+		8B2E1C8C29CA1076009B0E89 /* CountryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */; };
+		8B2E1C8D29CA1076009B0E89 /* CountryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */; };
+		8B2E1C8E29CA1076009B0E89 /* CountryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */; };
+		8B2E1C8F29CA1076009B0E89 /* CountryInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */; };
+		8B2E1C9629CA6E84009B0E89 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */; };
+		8B2E1C9729CA6E84009B0E89 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */; };
+		8B2E1C9829CA6E84009B0E89 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */; };
+		8B2E1C9929CA6E84009B0E89 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */; };
 		8B335B2029C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
@@ -2011,6 +2019,8 @@
 		8B20969E284400C200B62A45 /* GlobeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeView.swift; sourceTree = "<group>"; };
 		8B2096A2284400C200B62A45 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = "geography-class_medres.mbtiles"; sourceTree = "<group>"; };
+		8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoView.swift; sourceTree = "<group>"; };
+		8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
 		8B4A2C8E29C7821500B87840 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
@@ -2617,6 +2627,7 @@
 				8B556B2429C2420100101D46 /* Geodata.swift */,
 				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
 				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
+				8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2866,6 +2877,7 @@
 		8BA7239E29C40EF700FF4859 /* Country */ = {
 			isa = PBXGroup;
 			children = (
+				8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */,
 				8B335B1F29C2EE9D003D1F01 /* CountryView.swift */,
 				8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */,
 				8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */,
@@ -4764,12 +4776,14 @@
 				8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B0FF8FD29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */,
+				8B2E1C9629CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B556B2529C2420100101D46 /* Geodata.swift in Sources */,
 				8B556BA129C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8B9A327A29C2DEE90034EBC5 /* Constants.swift in Sources */,
+				8B2E1C8C29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B2096A9284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7C29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B4A2C9429C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
@@ -4797,6 +4811,7 @@
 				8B4A2C9529C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8B0FF8FE29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B556B9129C2AF8600101D46 /* FCCountry.swift in Sources */,
+				8B2E1C8D29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8929C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8BF8E28729C58ABE00929089 /* ChartsViewModel.swift in Sources */,
@@ -4806,6 +4821,7 @@
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7D29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8BF69F8329C6693F00E0C00B /* AccountView.swift in Sources */,
+				8B2E1C9729CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B0FF90C29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4830,9 +4846,11 @@
 				8B556B8A29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
 				8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */,
+				8B2E1C8E29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B1A0BB129C35C770012B2A8 /* CountryViewModel.swift in Sources */,
 				8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9229C2AF8600101D46 /* FCCountry.swift in Sources */,
+				8B2E1C9829CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B556BA329C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4843,9 +4861,11 @@
 			files = (
 				8B556BAE29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */,
+				8B2E1C9929CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B556B7F29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */,
 				8B4A2C9729C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
+				8B2E1C8F29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B556B5229C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B1A0BB229C35C770012B2A8 /* CountryViewModel.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
