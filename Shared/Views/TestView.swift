@@ -9,11 +9,11 @@ import SwiftUI
 
 struct TestView: View {
     init() {
-//        UITabBar.appearance().isTranslucent = false
+//        UITabBar.appearance().isTranslucent = true
 //        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.primary)
-//        UITabBar.appearance().barTintColor = kBlueColor
-        UITabBar.appearance().tintColor = .white
-        UITabBar.appearance().backgroundColor = kBlueColor
+//        UITabBar.appearance().barTintColor = .white
+//        UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().backgroundColor = .white
     }
 
     var body: some View {
@@ -22,7 +22,7 @@ struct TestView: View {
                 Group {
                     Text("Home")
                         .tabItem {
-                            Image(systemName: "home")
+                            Image(systemName: "house")
                             Text("Home")
                         }
                     Text("Search")

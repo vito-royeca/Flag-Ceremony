@@ -1735,6 +1735,8 @@
 		8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
+		8BA81DF829C9D6CB006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
+		8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8BF69F6129C62CE500E0C00B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6029C62CE500E0C00B /* TestView.swift */; };
 		8BF69F6229C62CE500E0C00B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6029C62CE500E0C00B /* TestView.swift */; };
 		8BF69F6A29C6549800E0C00B /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
@@ -4235,6 +4237,7 @@
 				8B1A1DEA29C37B640012B2A8 /* sl.png in Resources */,
 				8B1A1EDA29C37B640012B2A8 /* vu.png in Resources */,
 				8B1A1BFA29C37B630012B2A8 /* cn.png in Resources */,
+				8BA81DF829C9D6CB006D940C /* Assets.xcassets in Resources */,
 				8B9A300A29C2DC3F0034EBC5 /* is.mp3 in Resources */,
 				8B1A1E4E29C37B640012B2A8 /* lk.png in Resources */,
 				8B1A1D3629C37B630012B2A8 /* eh.png in Resources */,
@@ -4654,6 +4657,7 @@
 				8B1A1DEB29C37B640012B2A8 /* sl.png in Resources */,
 				8B1A1EDB29C37B640012B2A8 /* vu.png in Resources */,
 				8B1A1BFB29C37B630012B2A8 /* cn.png in Resources */,
+				8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */,
 				8B9A300B29C2DC3F0034EBC5 /* is.mp3 in Resources */,
 				8B1A1E4F29C37B640012B2A8 /* lk.png in Resources */,
 				8B1A1D3729C37B630012B2A8 /* eh.png in Resources */,

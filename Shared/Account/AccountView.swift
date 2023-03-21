@@ -201,19 +201,23 @@ struct ParentalGateView: View {
     var body: some View {
         VStack {
             Image("splash screen")
-            Group {
+
+//            Group {
                 Spacer()
-                
                 Text("Sign In with your account to get access to advance features.")
                     .foregroundColor(.white)
                 Button(action: {
                     showChallenge = true
                     randomNumber = NSNumber.randomNumber()
                 }) {
-                    Image(systemName: "arrow.right.circle")
-                        .foregroundColor(.white)
-                        .imageScale(.large)
+                    Text("Sign In")
+                        .frame(maxWidth: .infinity)
+                        .background(.white)
+                        .foregroundColor(Color(uiColor: kBlueColor))
+                        .clipShape(Capsule())
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(.white)
                 .alert("Parental Gate", isPresented: $showChallenge, actions: {
                     TextField("Answer", text: $answer)
                         .keyboardType(.numberPad)
@@ -227,10 +231,11 @@ struct ParentalGateView: View {
                     Button("OK", role: .cancel) {}
                 }
                 Spacer()
-            }
+//            }
         }
             .padding()
             .background(Color(uiColor: kBlueColor))
+            
     }
     
     func checkAnswer() {

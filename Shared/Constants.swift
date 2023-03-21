@@ -40,33 +40,4 @@ let FlagCeremony_AppID       = "1180086391"
 let FunWithTTS_AppID         = "570754434"
 let WTHRM8_AppID             = "1122411144"
 
-// Developer
-let DeveloperName    = "Jovito Royeca"
-let DeveloperWebsite = "http://jovitoroyeca.com"
-let DeveloperTwitter = "@JovitoRoyeca"
 
-struct ImageUtil {
-    static func imageWithBorder(fromImage source: UIImage) -> UIImage? {
-        let size = source.size
-        UIGraphicsBeginImageContext(size)
-        let rect = CGRect(x: 0,
-                          y: 0,
-                          width: size.width,
-                          height: size.height)
-        source.draw(in: rect,
-                    blendMode: .normal,
-                    alpha: 1.0)
-        
-        if let context = UIGraphicsGetCurrentContext() {
-            context.setStrokeColor(red: 0.0,
-                                   green: 0.0,
-                                   blue: 0.0,
-                                   alpha: 1.0)
-            context.stroke(rect)
-            let newImg =  UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return newImg
-        }
-        return nil
-    }
-}

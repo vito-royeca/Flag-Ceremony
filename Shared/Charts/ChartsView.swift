@@ -165,7 +165,7 @@ struct ChartCountryRowView: View {
     
     var body: some View {
         HStack {
-            Text("#\(index)")
+            Text("\(index)")
             Text(name)
             Spacer()
             Text("\(count)")
@@ -186,7 +186,7 @@ struct ChartUserRowView: View {
 
     var body: some View {
         HStack {
-            Text("#\(index)")
+            Text("\(index)")
             AsyncImage(
                 url: photoUrl,
                 content: { image in

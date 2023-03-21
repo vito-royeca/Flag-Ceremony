@@ -21,6 +21,10 @@ struct TabNavigationView: View {
     @StateObject var geodata = Geodata()
     @StateObject var accountViewModel = AccountViewModel()
     
+    init() {
+        UITabBar.appearance().backgroundColor = .white
+    }
+
     var body: some View {
         tabView
             .environmentObject(geodata)
