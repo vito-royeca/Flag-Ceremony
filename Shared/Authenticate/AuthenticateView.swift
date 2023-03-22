@@ -46,41 +46,7 @@ struct AuthenticateView: View {
                 Spacer()
                 Text("Or Sign In with your other accounts")
                     .foregroundColor(.white)
-                HStack {
-//                    Spacer()
-//                    Button(action: {
-//
-//                    }) {
-//                        Image("facebook")
-//                            .renderingMode(.template)
-//                            .foregroundColor(.white)
-//                    }
-//                    Spacer()
-//                    Button(action: {
-//
-//                    }) {
-//                        Image("twitter")
-//                            .renderingMode(.template)
-//                            .foregroundColor(.white)
-//                    }
-                    Spacer()
-                    Button(action: {
-                        viewModel.signInWithGoogle { result in
-                            switch result {
-                            case .failure(let error):
-                                print(error)
-                            case.success(let authenticated):
-                                self.authenticated = authenticated
-                            }
-                            
-                        }
-                    }) {
-                        Image("google+")
-                            .renderingMode(.template)
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                }
+                accountButtons
             }
             
             Group {
@@ -123,6 +89,44 @@ struct AuthenticateView: View {
         }
             .padding()
             .background(Color(uiColor: kBlueColor))
+    }
+    
+    var accountButtons: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+
+            }) {
+                Image("facebook")
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
+            }
+//                    Spacer()
+//                    Button(action: {
+//
+//                    }) {
+//                        Image("twitter")
+//                            .renderingMode(.template)
+//                            .foregroundColor(.white)
+//                    }
+            Spacer()
+            Button(action: {
+                viewModel.signInWithGoogle { result in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case.success(let authenticated):
+                        self.authenticated = authenticated
+                    }
+                    
+                }
+            }) {
+                Image("google+")
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
+            }
+            Spacer()
+        }
     }
 }
 
