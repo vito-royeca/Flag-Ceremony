@@ -67,7 +67,7 @@ class AuthenticateViewModel: NSObject, ObservableObject {
                                                   idToken: idTokenString!,
                                                   rawNonce: currentNonce)
 
-        
+
 //        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
 //        authWithFirebase(with: credential, completion: completion)
     }

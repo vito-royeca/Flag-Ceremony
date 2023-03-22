@@ -32,7 +32,31 @@ struct MediaPlayerView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
+            durationView
+            playView
+            volumeView
+//            actionsView
+//                .padding()
+        }
+            .background(Color(uiColor: kBlueColor))
+            .onAppear {
+                if isAutoPlay {
+                    sound.playOrPause()
+                }
+            }
+            .onDisappear {
+                sound.stop()
+            }
+            .onReceive(sound.updatePublisher) {
+                currentTime = sound.currentTime
+                durationTime = sound.durationTime
+                isFinished = sound.isFinished
+            }
+    }
+    
+    var durationView: some View {
+        VStack {
             GeometryReader { gr in
                 Capsule()
                     .stroke(Color.white, lineWidth: 2)
@@ -40,9 +64,9 @@ struct MediaPlayerView: View {
                         Capsule()
                             .foregroundColor(Color.white)
                             .frame(width: gr.size.width * sound.progress,
-                                      height: 8), alignment: .leading)
+                                   height: 8), alignment: .leading)
             }
-                .frame( height: 8)
+            .frame( height: 8)
             
             HStack {
                 Text(sound.formattedProgress)
@@ -53,16 +77,22 @@ struct MediaPlayerView: View {
                     .font(Font.callout.monospacedDigit())
                     .foregroundColor(.white)
             }
-            
-            Button(action: {
-                sound.playOrPause()
-            }) {
-                Image(systemName: sound.isPlaying ? "pause.circle" : "play.circle")
-                    .font(Font.largeTitle)
-                    .imageScale(.large)
-                    .foregroundColor(.white)
-            }
-            
+        }
+    }
+    
+    var playView: some View {
+        Button(action: {
+            sound.playOrPause()
+        }) {
+            Image(systemName: sound.isPlaying ? "pause.circle" : "play.circle")
+                .font(Font.largeTitle)
+                .imageScale(.large)
+                .foregroundColor(.white)
+        }
+    }
+
+    var volumeView: some View {
+        VStack {
             HStack {
                 Button(action: {
                     sound.volumeDown()
@@ -94,20 +124,28 @@ struct MediaPlayerView: View {
                     .disabled(sound.volume >= 1)
             }
         }
-            .background(Color(uiColor: kBlueColor))
-            .onAppear {
-                if isAutoPlay {
-                    sound.playOrPause()
-                }
+    }
+    
+    var actionsView: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                sound.volumeUp()
+            }) {
+                Image(systemName: "repeat")
+                    .imageScale(.medium)
+                    .foregroundColor(.white)
             }
-            .onDisappear {
-                sound.stop()
+            Spacer()
+            Button(action: {
+                sound.volumeUp()
+            }) {
+                Image(systemName: "airplayaudio")
+                    .imageScale(.medium)
+                    .foregroundColor(.white)
             }
-            .onReceive(sound.updatePublisher) {
-                currentTime = sound.currentTime
-                durationTime = sound.durationTime
-                isFinished = sound.isFinished
-            }
+            Spacer()
+        }
     }
 }
 

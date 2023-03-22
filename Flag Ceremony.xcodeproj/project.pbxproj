@@ -831,6 +831,12 @@
 		8B335B2029C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2129C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
 		8B335B2229C2EE9D003D1F01 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
+		8B337DFF29CB794C00F844B9 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
+		8B337E0029CB794C00F844B9 /* WhirlyGlobe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
+		8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
+		8B337E0529CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
+		8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
 		8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9029C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
@@ -841,7 +847,6 @@
 		8B4A2C9729C7917B00B87840 /* AuthenticateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */; };
 		8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4A2C9929C7B0A600B87840 /* GoogleSignIn */; };
 		8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4A2C9B29C7B0A600B87840 /* GoogleSignInSwift */; };
-		8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556B2529C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
@@ -1806,6 +1811,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8B337E0129CB794C00F844B9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8B337E0029CB794C00F844B9 /* WhirlyGlobe.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
 		8B0FF90A29C3D418007F548A /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
@@ -2025,6 +2044,7 @@
 		8B2E1C8B29CA1076009B0E89 /* CountryInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoView.swift; sourceTree = "<group>"; };
 		8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
 		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
+		8B337E0229CB8C1000F844B9 /* AirPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
 		8B4A2C8E29C7821500B87840 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
 		8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateViewModel.swift; sourceTree = "<group>"; };
@@ -2272,11 +2292,11 @@
 				8B9AA44929CA91C500E483EA /* FacebookShare in Frameworks */,
 				8B556B6529C2AE0100101D46 /* FirebaseDatabaseSwift in Frameworks */,
 				8B556B6329C2AE0100101D46 /* FirebaseDatabase in Frameworks */,
-				8B556AEE29C0EC7E00101D46 /* WhirlyGlobe.framework in Frameworks */,
 				8B9AA44729CA91C500E483EA /* FacebookLogin in Frameworks */,
 				8B556B6129C2AE0100101D46 /* FirebaseCrashlytics in Frameworks */,
 				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
 				8BA723A829C4419500FF4859 /* Introspect in Frameworks */,
+				8B337DFF29CB794C00F844B9 /* WhirlyGlobe.framework in Frameworks */,
 				8B556B5F29C2AE0100101D46 /* FirebaseAuth in Frameworks */,
 				8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */,
 			);
@@ -2311,6 +2331,7 @@
 			children = (
 				8B0FF90A29C3D418007F548A /* MediaPlayer.swift */,
 				8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */,
+				8B337E0229CB8C1000F844B9 /* AirPlayView.swift */,
 			);
 			path = MediaPlayer;
 			sourceTree = "<group>";
@@ -2928,6 +2949,7 @@
 				8B2096442842797D00B62A45 /* Sources */,
 				8B2096452842797D00B62A45 /* Frameworks */,
 				8B2096462842797D00B62A45 /* Resources */,
+				8B337E0129CB794C00F844B9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4790,6 +4812,7 @@
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
+				8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B556B2529C2420100101D46 /* Geodata.swift in Sources */,
 				8B556BA129C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8B9A327A29C2DEE90034EBC5 /* Constants.swift in Sources */,
@@ -4813,6 +4836,7 @@
 				8B556B7529C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B556BA729C2B4EF00101D46 /* ContentView.swift in Sources */,
 				8BF8E28229C5897100929089 /* ChartsView.swift in Sources */,
+				8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
 				8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
 				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
@@ -4845,6 +4869,7 @@
 				8BF8E28829C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B0FF90D29C3D418007F548A /* MediaPlayer.swift in Sources */,
 				8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */,
+				8B337E0529CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8BF8E28329C5897100929089 /* ChartsView.swift in Sources */,
 				8BF69F7529C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */,
@@ -4878,6 +4903,7 @@
 				8B2E1C8F29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B556B5229C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B1A0BB229C35C770012B2A8 /* CountryViewModel.swift in Sources */,
+				8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
 				8B556B2829C2420100101D46 /* Geodata.swift in Sources */,
@@ -5029,6 +5055,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
@@ -5062,6 +5089,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43CD66539H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
