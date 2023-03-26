@@ -192,13 +192,16 @@ struct ChartUserRowView: View {
                 content: { image in
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
                         .frame(width: 25, height: 25)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                 },
                 placeholder: {
                     Image(systemName: "person.circle")
-                        .imageScale(.large)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
                 }
             )
                 

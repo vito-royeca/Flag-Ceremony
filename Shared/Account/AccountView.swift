@@ -28,14 +28,16 @@ enum AccountTab: String, CaseIterable, Identifiable {
 }
 
 struct AccountView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var accountViewModel: AccountViewModel
     @State var tab: AccountTab = .viewed
     @State var parentalGateApproved = false
     @State var authenticated = false
+    @State private var isShowingEdit = false
 
     var body: some View {
         VStack {
-            if accountViewModel.account != nil {
+            if accountViewModel.isLoggedIn {
                 dataView
             } else {
                 if parentalGateApproved {
@@ -53,26 +55,59 @@ struct AccountView: View {
     
     var dataView: some View {
         VStack(alignment: .leading) {
-            switch tab {
-            case .viewed:
-                viewed
-            case .played:
-                played
-            case .favorites:
-                favorites
-            }
-        }
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    if accountViewModel.account != nil {
-                        Button("Sign Out") {
-                            accountViewModel.signOut()
+//            switch tab {
+//            case .viewed:
+//                viewed
+//            case .played:
+//                played
+//            case .favorites:
+//                favorites
+//            }
+            List {
+                headerView
+                    .padding()
+                tabView
+                
+                switch tab {
+                case .viewed:
+                    ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
+                        HStack {
+                            Text(country.displayName)
+                            Spacer()
+                            Text("\(country.userViews)")
+                            Image(systemName: "eye.fill")
+                                .imageScale(.small)
                         }
-                    } else {
-                        EmptyView()
                     }
+                case .played:
+                    ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
+                        HStack {
+                            Text(country.displayName)
+                            Spacer()
+                            Text("\(country.userPlays)")
+                            Image(systemName: "play.fill")
+                                .imageScale(.small)
+                        }
+                    }
+                case .favorites:
+                    ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
+                        Text(country.displayName)
+                    }
+                        .onDelete(perform: removeFavorites)
                 }
             }
+                .listStyle(.plain)
+        }
+            .toolbar {
+                AccountViewToolbar(presentationMode: presentationMode,
+                                   isShowingEdit: $isShowingEdit)
+            }
+            .sheet(isPresented: $isShowingEdit, content: {
+                NavigationView {
+                    EditAccountView()
+                        .environmentObject(accountViewModel)
+                }
+            })
             .onAppear {
                 accountViewModel.fetchUserData()
             }
@@ -81,31 +116,28 @@ struct AccountView: View {
     var headerView: some View {
         VStack(alignment: .leading) {
             HStack {
-                AsyncImage(
-                    url: accountViewModel.account?.photoURL,
-                    content: { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 120, height: 120)
-                            .clipShape(Circle())
-                    },
-                    placeholder: {
-                        Image(systemName: "person.circle")
-                            .imageScale(.large)
-                    }
-                )
+                AccountImageView(photoURL: .constant(URL(string: accountViewModel.account?.photoURL ?? "")))
                 Text(accountViewModel.account?.displayName ?? "")
+                    .font(Font.title)
             }
-            HStack {
+            HStack(alignment: .center) {
                 Text("\(accountViewModel.activity?.viewCount ?? 0)")
                 Image(systemName: "eye.fill")
                     .imageScale(.small)
+                Text("\u{2022}")
+                
                 Text("\(accountViewModel.activity?.playCount ?? 0)")
                 Image(systemName: "play.fill")
                     .imageScale(.small)
+                Text("\u{2022}")
+                
+                Text("\(accountViewModel.favoriteCountries.count)")
+                Image(systemName: "star.fill")
+                    .imageScale(.small)
+                Spacer()
             }
         }
+            .frame(maxWidth: .infinity)
             .listRowSeparator(.hidden)
     }
 
@@ -191,6 +223,35 @@ struct AccountView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - AccountViewToolbar
+
+struct AccountViewToolbar: ToolbarContent {
+    @EnvironmentObject var viewModel: AccountViewModel
+    @Binding var presentationMode: PresentationMode
+    @Binding var isShowingEdit: Bool
+
+    init(presentationMode: Binding<PresentationMode>, isShowingEdit: Binding<Bool>) {
+        _presentationMode = presentationMode
+        _isShowingEdit = isShowingEdit
+    }
+    
+    var body: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarLeading) {
+            Button("Sign Out") {
+                viewModel.signOut()
+            }
+        }
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button("Edit") {
+                isShowingEdit.toggle()
+            }
+        }
+    }
+}
+
+
+// MARK: - ParentalGateView
+
 struct ParentalGateView: View {
     @State private var showChallenge = false
     @State private var showFailure = false
@@ -239,5 +300,35 @@ struct ParentalGateView: View {
         parentalGateApproved = answer == randomNumber.stringValue
         showFailure = !parentalGateApproved
         answer = ""
+    }
+}
+
+// MARK: - AccountImageView
+
+struct AccountImageView: View {
+    @Binding var photoURL: URL?
+
+    var body: some View {
+        AsyncImage(
+            url: photoURL,
+            content: { image in
+                image
+                    .resizable()
+                    .cornerRadius(50)
+                    .padding(.all, 4)
+                    .frame(width: 100, height: 100)
+                    .background(Color.black.opacity(0.2))
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+            },
+            placeholder: {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .cornerRadius(50)
+                    .frame(width: 100, height: 100)
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+            }
+        )
     }
 }

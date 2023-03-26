@@ -41,7 +41,7 @@ struct CountryView: View {
         }
             .onAppear {
                 viewModel.fetchData {
-                    viewModel.incrementViews()
+//                    viewModel.incrementViews()
                 }
             }
     }
@@ -78,10 +78,13 @@ struct CountryView: View {
                         }
 
                         if isFinished {
+                            // WARNING: this is called multiple times
                             let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
                             
-                            scrollView.setContentOffset(scrollPoint, animated: true)
-                            viewModel.incrementPlays()
+                            if scrollView.contentOffset != scrollPoint {
+                                scrollView.setContentOffset(scrollPoint, animated: true)
+                                viewModel.incrementPlays()
+                            }
                         }
                     })
                 }
@@ -151,13 +154,13 @@ struct CountryView: View {
                 if let country = viewModel.country {
                     Image(systemName: accountViewModel.favoriteCountries.contains(country) ? "star.fill" : "star")
                         .imageScale(.large)
-                        .foregroundColor(accountViewModel.account == nil ? .gray : Color(uiColor: kBlueColor))
+                        .foregroundColor(accountViewModel.isLoggedIn ? Color(uiColor: kBlueColor) : .gray)
                         .padding()
                 } else {
                     EmptyView()
                 }
             }
-                .disabled(accountViewModel.account == nil)
+                .disabled(!accountViewModel.isLoggedIn)
             
             Button(action: {
                 isShowingCountryInfo.toggle()

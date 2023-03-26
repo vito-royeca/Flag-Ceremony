@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 
 enum FirebaseError : Error {
     case notLoggedIn
@@ -18,34 +19,106 @@ class FirebaseManager : NSObject {
     var online = false
     let connectionRef = Database.database().reference(withPath: ".info/connected")
     
-    func updateUser(email: String?, photoURL: URL?, displayName: String?) {
+    func fetchUser(completion: @escaping (FCUser?) -> Void) {
         if let user = Auth.auth().currentUser {
             let ref = Database.database().reference().child("users").child(user.uid)
-            
-            ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
-                var post = currentData.value as? [String : Any] ?? [String : Any]()
-                var providerData = [String]()
-                for pd in user.providerData {
-                    providerData.append(pd.providerID)
-                }
+
+            ref.observe(.value, with: { snapshot in
+                completion(FCUser(snapshot: snapshot))
+            })
+        }
+    }
+
+    func updateUser(photoURL: URL?, photoDirty: Bool, displayName: String?, completion: @escaping (Result<Void,Error>) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(FirebaseError.notLoggedIn))
+            return
+        }
+
+        updatePhoto(photoURL: photoURL, photoDirty: photoDirty) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let url):
+                let ref = Database.database().reference().child("users").child(user.uid)
                 
-                post[FCUser.Keys.Email] = email ?? ""
-                post[FCUser.Keys.PhotoURL] = photoURL?.absoluteString ?? ""
-                post[FCUser.Keys.DisplayName] = displayName ?? ""
-                post[FCUser.Keys.ProviderData] = providerData
-                
-                // Set value and report transaction success
-                currentData.value = post
-                return TransactionResult.success(withValue: currentData)
-                
-            }) { (error, committed, snapshot) in
-                if let error = error {
-                    print(error.localizedDescription)
+                ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+                    var post = currentData.value as? [String : Any] ?? [String : Any]()
+                    var providerData = [String]()
+                    for pd in user.providerData {
+                        providerData.append(pd.providerID)
+                    }
+                    
+                    if photoDirty {
+                        if let url = url {
+                            post[FCUser.Keys.PhotoURL] = url.absoluteString
+                        } else {
+                            post[FCUser.Keys.PhotoURL] = nil
+                        }
+                    }
+                    post[FCUser.Keys.DisplayName] = displayName ?? ""
+                    post[FCUser.Keys.ProviderData] = providerData
+                    
+                    // Set value and report transaction success
+                    currentData.value = post
+                    return TransactionResult.success(withValue: currentData)
+                    
+                }) { (error, committed, snapshot) in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
                 }
             }
         }
     }
     
+    func updatePhoto(photoURL: URL?, photoDirty: Bool, completion: @escaping (Result<URL?,Error>) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(FirebaseError.notLoggedIn))
+            return
+        }
+
+        if photoDirty {
+            let ref = Storage.storage().reference().child("avatars/\(user.uid).png")
+            
+            if let photoURL = photoURL,
+               let image = UIImage(contentsOfFile: photoURL.path),
+               let resizedImage = image.resize(to: CGSize(width: 256, height: 256)),
+               let data = resizedImage.pngData() {
+                
+                let meta = StorageMetadata()
+                meta.contentType = "image/png"
+                
+                
+                ref.putData(data, metadata: meta) { (metadata, error) in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        ref.downloadURL(completion: { (url, error) in
+                            if let error = error {
+                                completion(.failure(error))
+                            } else {
+                                completion(.success(url))
+                            }
+                        })
+                    }
+                }
+            } else {
+                ref.delete() { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(nil))
+                    }
+                }
+            }
+        } else {
+            completion(.success(nil))
+        }
+    }
+
     func incrementCountryViews(_ key: String, completion: @escaping (Result<FCCountry?,Error>) -> Void) {
         let ref = Database.database().reference().child("countries").child(key)
         

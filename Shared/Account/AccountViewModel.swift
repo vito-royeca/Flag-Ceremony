@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 
 class AccountViewModel: NSObject, ObservableObject {
@@ -13,10 +14,11 @@ class AccountViewModel: NSObject, ObservableObject {
     @Published var playedCountries = [FCCountry]()
     @Published var favoriteCountries = [FCCountry]()
     @Published var activity: FCActivity?
+    @Published var account: FCUser?
 
-    var account: User? {
+    var isLoggedIn: Bool {
         get {
-            Auth.auth().currentUser
+            Auth.auth().currentUser != nil
         }
     }
 
@@ -27,6 +29,7 @@ class AccountViewModel: NSObject, ObservableObject {
             playedCountries.removeAll()
             favoriteCountries.removeAll()
             activity = nil
+            account = nil
             try Auth.auth().signOut()
         } catch {
             print(error)
@@ -34,9 +37,13 @@ class AccountViewModel: NSObject, ObservableObject {
     }
     
     func fetchUserData() {
-        guard account != nil else {
+        guard isLoggedIn else {
             return
         }
+
+        FirebaseManager.sharedInstance.fetchUser(completion: { [weak self] account in
+            self?.account = account
+        })
 
         FirebaseManager.sharedInstance.monitorUserActivity(completion: { [weak self] activity in
             self?.activity = activity
@@ -87,6 +94,12 @@ class AccountViewModel: NSObject, ObservableObject {
         }
     }
     
+    func update(photoURL: URL?, photoDirty: Bool, displayName: String?) {
+        FirebaseManager.sharedInstance.updateUser(photoURL: photoURL, photoDirty: photoDirty, displayName: displayName) { [weak self] _ in
+            self?.fetchUserData()
+        }
+    }
+
     func muteData() {
         FirebaseManager.sharedInstance.demonitorUserActivity()
     }
