@@ -25,19 +25,19 @@ struct MapViewVC: View {
 
 struct MapView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = MaplyVC
-    @EnvironmentObject var geodata: Geodata
+    @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
     
     func makeUIViewController(context: Context) -> MaplyVC {
-        let mapVC = MaplyVC(mapType: .typeFlat, mbTilesFetcher: geodata.mbTilesFetcher)
+        let mapVC = MaplyVC(mapType: .typeFlat, mbTilesFetcher: viewModel.mbTilesFetcher)
         mapVC.map?.delegate = context.coordinator
         
         return mapVC
     }
 
     func updateUIViewController(_ uiViewController: MaplyVC, context: Context) {
-        uiViewController.relocate(to: geodata.location, height: geodata.height)
-        uiViewController.add(countries: geodata.countries)
+        uiViewController.relocate(to: viewModel.location, height: viewModel.height)
+        uiViewController.add(countries: viewModel.countries)
     }
     
     func makeCoordinator() -> MapView.Coordinator {
@@ -48,7 +48,7 @@ struct MapView: UIViewControllerRepresentable {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         let country = FCCountry(key: "PH", dict: [:])
-        MapView(selectedCountry: .constant(country)).environmentObject(Geodata())
+        MapView(selectedCountry: .constant(country)).environmentObject(MapViewModel())
     }
 }
 
@@ -72,8 +72,8 @@ extension MapView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.geodata.location = position
-            parent.geodata.height = height
+            parent.viewModel.location = position
+            parent.viewModel.height = height
         }
     }
 }

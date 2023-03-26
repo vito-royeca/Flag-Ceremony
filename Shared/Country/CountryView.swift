@@ -41,7 +41,7 @@ struct CountryView: View {
         }
             .onAppear {
                 viewModel.fetchData {
-//                    viewModel.incrementViews()
+                    viewModel.incrementViews()
                 }
             }
     }

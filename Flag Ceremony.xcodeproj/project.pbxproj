@@ -884,10 +884,8 @@
 		8B53305229CFE25B0011476D /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53304E29CFE25B0011476D /* UIImage+Resize.swift */; };
 		8B556AEF29C11AFD00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
 		8B556AF029C11AFE00101D46 /* geography-class_medres.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */; };
-		8B556B2529C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
-		8B556B2629C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
-		8B556B2729C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
-		8B556B2829C2420100101D46 /* Geodata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* Geodata.swift */; };
+		8B556B2529C2420100101D46 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* MapViewModel.swift */; };
+		8B556B2629C2420100101D46 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* MapViewModel.swift */; };
 		8B556B4F29C2AB2600101D46 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B4229C2AB2600101D46 /* FirebaseManager.swift */; };
 		8B556B5029C2AB2600101D46 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B4229C2AB2600101D46 /* FirebaseManager.swift */; };
 		8B556B5129C2AB2600101D46 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B4229C2AB2600101D46 /* FirebaseManager.swift */; };
@@ -2085,7 +2083,7 @@
 		8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateViewModel.swift; sourceTree = "<group>"; };
 		8B53301129CFB4A70011476D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		8B53304E29CFE25B0011476D /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
-		8B556B2429C2420100101D46 /* Geodata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geodata.swift; sourceTree = "<group>"; };
+		8B556B2429C2420100101D46 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8B556B4229C2AB2600101D46 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8B556B5329C2AB8A00101D46 /* flag-ceremony-export.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "flag-ceremony-export.json"; sourceTree = "<group>"; };
 		8B556B5829C2ACF900101D46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -2630,6 +2628,7 @@
 				8BF8E28A29C58AC400929089 /* Charts */,
 				8BA7239E29C40EF700FF4859 /* Country */,
 				8B2096AB2844049D00B62A45 /* data */,
+				8B53305329D009850011476D /* Maps */,
 				8B0FF90929C3D3E4007F548A /* MediaPlayer */,
 				8B556B6629C2AF8600101D46 /* Model */,
 				8B556B3E29C2AB2600101D46 /* Utilities */,
@@ -2708,11 +2707,20 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		8B53305329D009850011476D /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				8B556B2429C2420100101D46 /* MapViewModel.swift */,
+				8B20969E284400C200B62A45 /* GlobeView.swift */,
+				8B2096A2284400C200B62A45 /* MapView.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
 		8B556B3E29C2AB2600101D46 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				8B556B4229C2AB2600101D46 /* FirebaseManager.swift */,
-				8B556B2429C2420100101D46 /* Geodata.swift */,
 				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
 				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
 				8B2E1C9529CA6E84009B0E89 /* String+Subscript.swift */,
@@ -2955,9 +2963,7 @@
 			isa = PBXGroup;
 			children = (
 				8B556BA529C2B4EF00101D46 /* ContentView.swift */,
-				8B20969E284400C200B62A45 /* GlobeView.swift */,
 				8B53301129CFB4A70011476D /* ImagePickerView.swift */,
-				8B2096A2284400C200B62A45 /* MapView.swift */,
 				8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */,
 				8BF69F6029C62CE500E0C00B /* TestView.swift */,
 			);
@@ -4901,7 +4907,7 @@
 				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */,
-				8B556B2529C2420100101D46 /* Geodata.swift in Sources */,
+				8B556B2529C2420100101D46 /* MapViewModel.swift in Sources */,
 				8B556BA129C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8B9A327A29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B53304F29CFE25B0011476D /* UIImage+Resize.swift in Sources */,
@@ -4942,7 +4948,7 @@
 				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8929C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8BF8E28729C58ABE00929089 /* ChartsViewModel.swift in Sources */,
-				8B556B2629C2420100101D46 /* Geodata.swift in Sources */,
+				8B556B2629C2420100101D46 /* MapViewModel.swift in Sources */,
 				8B556BA229C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
@@ -4972,7 +4978,6 @@
 				8B556B5129C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7629C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B20965C2842797D00B62A45 /* Tests_iOSLaunchTests.swift in Sources */,
-				8B556B2729C2420100101D46 /* Geodata.swift in Sources */,
 				8B556B8A29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
 				8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */,
@@ -5002,7 +5007,6 @@
 				8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
-				8B556B2829C2420100101D46 /* Geodata.swift in Sources */,
 				8BD64DAA29CE98FE001E8657 /* EditAccountView.swift in Sources */,
 				8B53305229CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8B556B8B29C2AF8600101D46 /* FCAnthem.swift in Sources */,

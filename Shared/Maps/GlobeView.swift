@@ -25,19 +25,19 @@ struct GlobeViewVC: View {
 
 struct GlobeView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = GlobeVC
-    @EnvironmentObject var geodata: Geodata
+    @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
 
     func makeUIViewController(context: Context) -> GlobeVC {
-        let globeVC = GlobeVC(mbTilesFetcher: geodata.mbTilesFetcher)
+        let globeVC = GlobeVC(mbTilesFetcher: viewModel.mbTilesFetcher)
         globeVC.globe?.delegate = context.coordinator
         
         return globeVC
     }
 
     func updateUIViewController(_ uiViewController: GlobeVC, context: Context) {
-        uiViewController.relocate(to: geodata.location, height: geodata.height)
-        uiViewController.add(countries: geodata.countries)
+        uiViewController.relocate(to: viewModel.location, height: viewModel.height)
+        uiViewController.add(countries: viewModel.countries)
     }
     
     func makeCoordinator() -> GlobeView.Coordinator {
@@ -49,7 +49,7 @@ struct GlobeView: UIViewControllerRepresentable {
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
         let country = FCCountry(key: "PH", dict: [:])
-        GlobeView(selectedCountry: .constant(country)).environmentObject(Geodata())
+        GlobeView(selectedCountry: .constant(country)).environmentObject(MapViewModel())
     }
 }
 
@@ -73,8 +73,8 @@ extension GlobeView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.geodata.location = position
-            parent.geodata.height = height - 0.2
+            parent.viewModel.location = position
+            parent.viewModel.height = height - 0.2
         }
     }
 }
