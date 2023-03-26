@@ -37,16 +37,20 @@ struct ChartsView: View {
     
     var body: some View {
         VStack {
-            switch tab {
-            case .topViewed:
-                topViewed
-            case .topPlayed:
-                topPlayed
-            case .topViewers:
-                topViewers
-            case .topPlayers:
-                topPlayers
+            List {
+                tabView
+                switch tab {
+                case .topViewed:
+                    topViewed
+                case .topPlayed:
+                    topPlayed
+                case .topViewers:
+                    topViewers
+                case .topPlayers:
+                    topPlayers
+                }
             }
+                .listStyle(.plain)
         }
             .navigationTitle("Charts")
             .onAppear() {
@@ -79,73 +83,57 @@ struct ChartsView: View {
                     .tag(index)
             }
         }
-            .pickerStyle(.segmented)
-            .listRowSeparator(.hidden)
-            .onAppear() {
+            .onChange(of: tab) { _ in
                 fetchData()
             }
+            .pickerStyle(.segmented)
+            .listRowSeparator(.hidden)
     }
 
     var topViewed: some View {
-        List {
-            tabView
-            ForEach(Array(viewModel.topViewedCountries.enumerated()), id: \.element) { index, country in
-                ChartCountryRowView(index: index+1,
-                                    name: country.displayName,
-                                    count: country.views ?? 0,
-                                    countIcon: Image(systemName: "eye.fill"))
-            }
+        ForEach(Array(viewModel.topViewedCountries.enumerated()), id: \.element) { index, country in
+            ChartCountryRowView(index: index+1,
+                                name: country.displayName,
+                                count: country.views ?? 0,
+                                countIcon: Image(systemName: "eye.fill"))
         }
-            .listStyle(.plain)
     }
     
     var topPlayed: some View {
-        List {
-            tabView
-            ForEach(Array(viewModel.topPlayedCountries.enumerated()), id: \.element) { index, country in
-                ChartCountryRowView(index: index+1,
-                                    name: country.displayName,
-                                    count: country.plays ?? 0,
-                                    countIcon: Image(systemName: "play.fill"))
-            }
+        ForEach(Array(viewModel.topPlayedCountries.enumerated()), id: \.element) { index, country in
+            ChartCountryRowView(index: index+1,
+                                name: country.displayName,
+                                count: country.plays ?? 0,
+                                countIcon: Image(systemName: "play.fill"))
         }
-            .listStyle(.plain)
     }
     
     var topViewers: some View {
-        List {
-            tabView
-            ForEach(Array(viewModel.topViewers.enumerated()), id: \.element) { index, activity in
-                if let user = viewModel.users.first(where: { $0.id == activity.id}) {
-                    ChartUserRowView(index: index+1,
-                                     photoUrl: URL(string: user.photoURL ?? ""),
-                                     name: user.displayName ?? "",
-                                     count: activity.viewCount ?? 0,
-                                     countIcon: Image(systemName: "eye.fill"))
-                } else {
-                    EmptyView()
-                }
+        ForEach(Array(viewModel.topViewers.enumerated()), id: \.element) { index, activity in
+            if let user = viewModel.users.first(where: { $0.id == activity.id}) {
+                ChartUserRowView(index: index+1,
+                                 photoUrl: URL(string: user.photoURL ?? ""),
+                                 name: user.displayName ?? "",
+                                 count: activity.viewCount ?? 0,
+                                 countIcon: Image(systemName: "eye.fill"))
+            } else {
+                EmptyView()
             }
         }
-            .listStyle(.plain)
     }
     
     var topPlayers: some View {
-        List {
-            tabView
-            ForEach(Array(viewModel.topPlayers.enumerated()), id: \.element) { index, activity in
-                if let user = viewModel.users.first(where: { $0.id == activity.id}) {
-                    ChartUserRowView(index: index+1,
-                                     photoUrl: URL(string: user.photoURL ?? ""),
-                                     name: user.displayName ?? "",
-                                     count: activity.playCount ?? 0,
-                                     countIcon: Image(systemName: "play.fill"))
-                } else {
-                    EmptyView()
-                }
+        ForEach(Array(viewModel.topPlayers.enumerated()), id: \.element) { index, activity in
+            if let user = viewModel.users.first(where: { $0.id == activity.id}) {
+                ChartUserRowView(index: index+1,
+                                 photoUrl: URL(string: user.photoURL ?? ""),
+                                 name: user.displayName ?? "",
+                                 count: activity.playCount ?? 0,
+                                 countIcon: Image(systemName: "play.fill"))
+            } else {
+                EmptyView()
             }
         }
-            .listStyle(.plain)
     }
 }
 

@@ -55,45 +55,17 @@ struct AccountView: View {
     
     var dataView: some View {
         VStack(alignment: .leading) {
-//            switch tab {
-//            case .viewed:
-//                viewed
-//            case .played:
-//                played
-//            case .favorites:
-//                favorites
-//            }
             List {
                 headerView
                     .padding()
                 tabView
-                
                 switch tab {
                 case .viewed:
-                    ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
-                        HStack {
-                            Text(country.displayName)
-                            Spacer()
-                            Text("\(country.userViews)")
-                            Image(systemName: "eye.fill")
-                                .imageScale(.small)
-                        }
-                    }
+                    viewed
                 case .played:
-                    ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
-                        HStack {
-                            Text(country.displayName)
-                            Spacer()
-                            Text("\(country.userPlays)")
-                            Image(systemName: "play.fill")
-                                .imageScale(.small)
-                        }
-                    }
+                    played
                 case .favorites:
-                    ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
-                        Text(country.displayName)
-                    }
-                        .onDelete(perform: removeFavorites)
+                    favorites
                 }
             }
                 .listStyle(.plain)
@@ -153,52 +125,37 @@ struct AccountView: View {
     }
 
     var viewed: some View {
-        List {
-            headerView
-                .padding()
-            tabView
-            ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
-                HStack {
-                    Text(country.displayName)
-                    Spacer()
-                    Text("\(country.userViews)")
-                    Image(systemName: "eye.fill")
-                        .imageScale(.small)
-                }
+        ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
+            HStack {
+                Text(country.displayName)
+                Spacer()
+                Text("\(country.userViews)")
+                Image(systemName: "eye.fill")
+                    .imageScale(.small)
             }
         }
-            .listStyle(.plain)
     }
     
     var played: some View {
-        List {
-            headerView
-                .padding()
-            tabView
-            ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
-                HStack {
-                    Text(country.displayName)
-                    Spacer()
-                    Text("\(country.userPlays)")
-                    Image(systemName: "play.fill")
-                        .imageScale(.small)
-                }
+        ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
+            HStack {
+                Text(country.displayName)
+                Spacer()
+                Text("\(country.userPlays)")
+                Image(systemName: "play.fill")
+                    .imageScale(.small)
             }
         }
-            .listStyle(.plain)
     }
     
     var favorites: some View {
-        List {
-            headerView
-                .padding()
-            tabView
-            ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
+        ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
+            HStack {
                 Text(country.displayName)
+                Spacer()
             }
-                .onDelete(perform: removeFavorites)
         }
-            .listStyle(.plain)
+            .onDelete(perform: removeFavorites)
     }
     
     func removeFavorites(at offsets: IndexSet) {
