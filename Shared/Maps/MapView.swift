@@ -10,6 +10,7 @@ import SwiftUI
 import WhirlyGlobe
 
 struct MapViewVC: View {
+    @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
 
     var body: some View {
@@ -19,6 +20,9 @@ struct MapViewVC: View {
                 NavigationView {
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
                 }
+            }
+            .onAppear {
+                viewModel.requestLocation()
             }
     }
 }
