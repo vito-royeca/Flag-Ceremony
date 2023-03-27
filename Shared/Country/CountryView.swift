@@ -16,14 +16,14 @@ struct CountryView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var accountViewModel: AccountViewModel
     
+    @StateObject var viewModel: CountryViewModel
     @State private var isShowingShareSheet = false
     @State private var isShowingCountryInfo = false
     @State var currentTime: Double = 0
     @State var durationTime: Double = 0
     @State var isFinished: Bool = false
-    @StateObject var viewModel: CountryViewModel
     var isAutoPlay: Bool
-    
+
     init(id: String, isAutoPlay: Bool) {
         self.isAutoPlay = isAutoPlay
         _viewModel = StateObject(wrappedValue: CountryViewModel(id: id))
@@ -61,6 +61,7 @@ struct CountryView: View {
                             Spacer(minLength: 200)
                         }.padding()
                     }
+                    
                     .introspectScrollView(customize: { scrollView in
                         guard currentTime > 0 && durationTime > 0 else {
                             return
@@ -78,13 +79,11 @@ struct CountryView: View {
                         }
 
                         if isFinished {
-                            // WARNING: this is called multiple times
-                            let scrollPoint = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
+                            let topOffset = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
                             
-                            if scrollView.contentOffset != scrollPoint {
-                                scrollView.setContentOffset(scrollPoint, animated: true)
-                                viewModel.incrementPlays()
-                            }
+                            scrollView.setContentOffset(topOffset, animated: true)
+                            viewModel.incrementPlays()
+                            isFinished = false
                         }
                     })
                 }
@@ -154,7 +153,6 @@ struct CountryView: View {
                 if let country = viewModel.country {
                     Image(systemName: accountViewModel.favoriteCountries.contains(country) ? "star.fill" : "star")
                         .imageScale(.large)
-                        .foregroundColor(accountViewModel.isLoggedIn ? Color(uiColor: kBlueColor) : .gray)
                         .padding()
                 } else {
                     EmptyView()
@@ -167,7 +165,6 @@ struct CountryView: View {
             }) {
                 Image(systemName: "info.circle")
                     .imageScale(.large)
-                    .foregroundColor(Color(uiColor: kBlueColor))
                     .padding()
             }
         }
@@ -283,7 +280,6 @@ struct CountryToolbar: ToolbarContent {
                 isShowingShareSheet.toggle()
             }) {
                 Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(Color(uiColor: kBlueColor))
             }
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -291,7 +287,6 @@ struct CountryToolbar: ToolbarContent {
                 $presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "xmark")
-                    .foregroundColor(Color(uiColor: kBlueColor))
             }
         }
     }

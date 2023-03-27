@@ -49,7 +49,6 @@ struct CountryInfoView: View {
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "xmark")
-                            .foregroundColor(Color(uiColor: kBlueColor))
                     }
                 }
         }

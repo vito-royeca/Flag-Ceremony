@@ -93,14 +93,14 @@ struct AuthenticateView: View {
     
     var accountButtons: some View {
         HStack {
-            Spacer()
-            Button(action: {
-
-            }) {
-                Image("facebook")
-                    .renderingMode(.template)
-                    .foregroundColor(.white)
-            }
+//            Spacer()
+//            Button(action: {
+//
+//            }) {
+//                Image("facebook")
+//                    .renderingMode(.template)
+//                    .foregroundColor(.white)
+//            }
 //                    Spacer()
 //                    Button(action: {
 //

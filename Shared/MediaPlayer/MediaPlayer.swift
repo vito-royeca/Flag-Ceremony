@@ -26,6 +26,7 @@ public class MediaPlayer: NSObject, ObservableObject {
     let updatePublisher = PassthroughSubject<Void, Never>()
     
     private var audioPlayer: AVAudioPlayer?
+    private var timer: Timer?
 
     public var volume: Double {
         didSet {
@@ -57,17 +58,21 @@ public class MediaPlayer: NSObject, ObservableObject {
         volume = UserDefaults.standard.bool(forKey: kMediaPlayerHasVolumeKey) ?
             UserDefaults.standard.double(forKey: kMediaPlayerVolumeKey) : kDefaultMediaPlayerVolume
         audioPlayer?.prepareToPlay()
-
+        audioPlayer?.delegate = self
+    }
+    
+    private func enableTimer() {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = [ .pad ]
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             if let player = self.audioPlayer {
                 if !player.isPlaying {
                     self.isPlaying = false
                 }
+                
                 self.progress = CGFloat(player.currentTime / player.duration)
                 self.formattedProgress = formatter.string(from: TimeInterval(player.currentTime))!
                 
@@ -79,7 +84,11 @@ public class MediaPlayer: NSObject, ObservableObject {
                 self.updatePublisher.send()
             }
         }
-        audioPlayer?.delegate = self
+    }
+    
+    private func disableTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 
     deinit {
@@ -99,11 +108,13 @@ public class MediaPlayer: NSObject, ObservableObject {
     
     public func play() {
         isPlaying = true
+        enableTimer()
         audioPlayer?.play()
     }
 
     public func stop() {
         isPlaying = false
+        disableTimer()
         audioPlayer?.stop()
     }
 
@@ -161,6 +172,8 @@ extension MediaPlayer: AVAudioPlayerDelegate {
 //        } else {
             isPlaying = false
 //        }
+
+        disableTimer()
         isFinished = true
         updatePublisher.send()
     }

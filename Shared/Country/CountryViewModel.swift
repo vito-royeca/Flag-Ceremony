@@ -31,20 +31,16 @@ class CountryViewModel: NSObject, ObservableObject {
             return
         }
 
+        let id = id
         isBusy.toggle()
         isFailed = false
 
         FirebaseManager.sharedInstance.findCountry(id) { [weak self] country in
-            self?.country = country
-            
-            guard let id = self?.id else {
-                return
-            }
-
             FirebaseManager.sharedInstance.findAnthem(id) { [weak self] anthem in
+                self?.country = country
                 self?.anthem = anthem
-                completion()
                 self?.isBusy.toggle()
+                completion()
             }
         }
     }
@@ -53,6 +49,8 @@ class CountryViewModel: NSObject, ObservableObject {
         FirebaseManager.sharedInstance.incrementCountryViews(id) { [weak self] result in
             switch result {
             case .success(let country):
+//                self?.country?.views = country?.views
+//                self?.country?.plays = country?.plays
                 self?.country = country
             case .failure(let error):
                 print(error)
@@ -64,6 +62,8 @@ class CountryViewModel: NSObject, ObservableObject {
         FirebaseManager.sharedInstance.incrementCountryPlays(id) { [weak self] result in
             switch result {
             case .success(let country):
+//                self?.country?.views = country?.views
+//                self?.country?.plays = country?.plays
                 self?.country = country
             case .failure(let error):
                 print(error)
