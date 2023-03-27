@@ -5127,9 +5127,7 @@
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) needs access to your Camera for profile avatar.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "${PRODUCT_NAME} likes to use your location for Map and Globe positioning.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs access to your Photo Library for profile avatar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -5168,9 +5166,7 @@
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) needs access to your Camera for profile avatar.";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) likes to use your location for Map and Globe positioning.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "${PRODUCT_NAME} likes to use your location for Map and Globe positioning.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) needs access to your Photo Library for profile avatar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

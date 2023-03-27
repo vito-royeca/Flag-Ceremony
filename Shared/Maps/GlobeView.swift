@@ -10,23 +10,37 @@ import SwiftUI
 import WhirlyGlobe
 
 struct GlobeViewVC: View {
+    @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
+    @State var location = MapViewModel.defaultLocation
+    @State var height = MapViewModel.defaultMapViewHeight
 
     var body: some View {
-        GlobeView(selectedCountry: $selectedCountry)
+        GlobeView(selectedCountry: $selectedCountry, location: $location, height: $height)
             .navigationTitle("Globe")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
                 }
             }
+            .onAppear {
+                location = viewModel.location
+                height = viewModel.height
+            }
+            .onDisappear {
+                viewModel.location = location
+                viewModel.height = height
+            }
     }
 }
 
 struct GlobeView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = GlobeVC
+
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
+    @Binding var location: MaplyCoordinate
+    @Binding var height: Float
 
     func makeUIViewController(context: Context) -> GlobeVC {
         let globeVC = GlobeVC(mbTilesFetcher: viewModel.mbTilesFetcher)
@@ -49,7 +63,10 @@ struct GlobeView: UIViewControllerRepresentable {
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
         let country = FCCountry(key: "PH", dict: [:])
-        GlobeView(selectedCountry: .constant(country)).environmentObject(MapViewModel())
+        GlobeView(selectedCountry: .constant(country),
+                  location: .constant(MapViewModel.defaultLocation),
+                  height: .constant(MapViewModel.defaultGlobeViewHeight))
+           .environmentObject(MapViewModel())
     }
 }
 
@@ -73,8 +90,8 @@ extension GlobeView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.viewModel.location = position
-            parent.viewModel.height = height - 0.2
+            parent.location = position
+            parent.height = height
         }
     }
 }
@@ -129,7 +146,7 @@ class GlobeVC: UIViewController {
 
         globe!.clearColor = UIColor.black
         globe!.frameInterval = 2
-        globe!.height = 1.0
+        globe!.height = MapViewModel.defaultGlobeViewHeight
     }
     
     func relocate(to position: MaplyCoordinate, height: Float) {

@@ -21,17 +21,14 @@ struct TabNavigationView: View {
     @StateObject var mapViewModel = MapViewModel()
     @StateObject var accountViewModel = AccountViewModel()
     
-    init() {
-        UITabBar.appearance().backgroundColor = .white
-    }
-
     var body: some View {
         tabView
             .environmentObject(mapViewModel)
             .environmentObject(accountViewModel)
             .onAppear {
-                mapViewModel.fetchAllCountries()
                 accountViewModel.fetchUserData()
+                mapViewModel.fetchAllCountries()
+                mapViewModel.requestLocation()
             }
     }
     
@@ -40,42 +37,42 @@ struct TabNavigationView: View {
             NavigationView {
                 MapViewVC()
             }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Image(systemName: "map")
-                Text("Map")
-            }
-            .tag(TabItem.map)
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "map")
+                    Text("Map")
+                }
+                .tag(TabItem.map)
             
             NavigationView {
                 GlobeViewVC()
             }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Image(systemName: "globe")
-                Text("Globe")
-            }
-            .tag(TabItem.globe)
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "globe")
+                    Text("Globe")
+                }
+                .tag(TabItem.globe)
             
             NavigationView {
                 ChartsView()
             }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Image(systemName: "chart.bar.doc.horizontal")
-                Text("Charts")
-            }
-            .tag(TabItem.charts)
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "chart.bar.doc.horizontal")
+                    Text("Charts")
+                }
+                .tag(TabItem.charts)
             
             NavigationView {
                 AccountView()
             }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Image(systemName: "person.circle")
-                Text("Account")
-            }
-            .tag(TabItem.account)
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Account")
+                }
+                .tag(TabItem.account)
         }
     }
 }

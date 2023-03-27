@@ -11,19 +11,21 @@ import WhirlyGlobe
 
 class MapViewModel: NSObject, ObservableObject {
     static let defaultLocation = MaplyCoordinateMakeWithDegrees(DefaultLocationLongitude, DefaultLocationLatitude)
+    static let defaultMapViewHeight = Float(0.8)
+    static let defaultGlobeViewHeight = Float(1.0)
+    
     var mbTilesFetcher = MaplyMBTileFetcher(mbTiles: "geography-class_medres")
     private let locationManager = CLLocationManager()
     
     @Published var location = defaultLocation
-    @Published var height = Float(0.8)
+    @Published var height = defaultMapViewHeight
     @Published var countries = [FCCountry]()
     
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager.requestAlwaysAuthorization()
-//        locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
     }
     
     func fetchAllCountries() {
@@ -35,17 +37,6 @@ class MapViewModel: NSObject, ObservableObject {
     }
     
     func requestLocation() {
-//        if location.distance(from: MapViewModel.defaultLocation) {
-//            locationManager.requestAlwaysAuthorization()
-//            locationManager.requestWhenInUseAuthorization()
-//
-//            if CLLocationManager.locationServicesEnabled() {
-//                locationManager.delegate = self
-//                locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-//                locationManager.startUpdatingLocation()
-//            }
-//        }
-
         locationManager.startUpdatingLocation()
     }
 }
@@ -55,8 +46,10 @@ extension MapViewModel: CLLocationManagerDelegate {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else {
             return
         }
+        
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         location = MaplyCoordinateMakeWithDegrees(Float(locValue.longitude), Float(locValue.latitude))
+        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

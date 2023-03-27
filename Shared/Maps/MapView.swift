@@ -12,9 +12,11 @@ import WhirlyGlobe
 struct MapViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
+    @State var location = MapViewModel.defaultLocation
+    @State var height = MapViewModel.defaultMapViewHeight
 
     var body: some View {
-        MapView(selectedCountry: $selectedCountry)
+        MapView(selectedCountry: $selectedCountry, location: $location, height: $height)
             .navigationTitle("Map")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
@@ -22,16 +24,24 @@ struct MapViewVC: View {
                 }
             }
             .onAppear {
-                viewModel.requestLocation()
+                location = viewModel.location
+                height = viewModel.height
+            }
+            .onDisappear {
+                viewModel.location = location
+                viewModel.height = height
             }
     }
 }
 
 struct MapView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = MaplyVC
+
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
-    
+    @Binding var location: MaplyCoordinate
+    @Binding var height: Float
+
     func makeUIViewController(context: Context) -> MaplyVC {
         let mapVC = MaplyVC(mapType: .typeFlat, mbTilesFetcher: viewModel.mbTilesFetcher)
         mapVC.map?.delegate = context.coordinator
@@ -52,7 +62,11 @@ struct MapView: UIViewControllerRepresentable {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         let country = FCCountry(key: "PH", dict: [:])
-        MapView(selectedCountry: .constant(country)).environmentObject(MapViewModel())
+
+        MapView(selectedCountry: .constant(country),
+                location: .constant(MapViewModel.defaultLocation),
+                height: .constant(MapViewModel.defaultMapViewHeight))
+           .environmentObject(MapViewModel())
     }
 }
 
@@ -76,8 +90,8 @@ extension MapView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.viewModel.location = position
-            parent.viewModel.height = height
+            parent.location = position
+            parent.height = height
         }
     }
 }
@@ -134,7 +148,7 @@ class MaplyVC: UIViewController {
         
         map!.clearColor = UIColor.white
         map!.frameInterval = 2
-        map!.height = 0.8
+        map!.height = MapViewModel.defaultMapViewHeight
     }
     
     func relocate(to position: MaplyCoordinate, height: Float) {
