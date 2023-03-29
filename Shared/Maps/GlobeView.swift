@@ -12,24 +12,46 @@ import WhirlyGlobe
 struct GlobeViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
+    @State var highlightedCountry: FCCountry? = nil
     @State var location = MapViewModel.defaultLocation
-    @State var height = MapViewModel.defaultMapViewHeight
+    @State var height = MapViewModel.defaultGlobeViewHeight
+    @State private var isShowingSearch = false
 
     var body: some View {
-        GlobeView(selectedCountry: $selectedCountry, location: $location, height: $height)
+        GlobeView(selectedCountry: $selectedCountry,
+                  highlightedCountry: $highlightedCountry,
+                  location: $location,
+                  height: $height)
             .navigationTitle("Globe")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
                 }
             }
+            .sheet(isPresented: $isShowingSearch, content: {
+                NavigationView {
+                    MapSearchView(height: height, highlightedCountry: $highlightedCountry)
+                        .environmentObject(viewModel)
+                }
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowingSearch.toggle()
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
             .onAppear {
                 location = viewModel.location
                 height = viewModel.height
+                highlightedCountry = viewModel.highleightedCountry
             }
             .onDisappear {
                 viewModel.location = location
                 viewModel.height = height
+                viewModel.highleightedCountry = highlightedCountry
             }
     }
 }
@@ -39,6 +61,7 @@ struct GlobeView: UIViewControllerRepresentable {
 
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
+    @Binding var highlightedCountry: FCCountry?
     @Binding var location: MaplyCoordinate
     @Binding var height: Float
 
@@ -51,7 +74,8 @@ struct GlobeView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: GlobeVC, context: Context) {
         uiViewController.relocate(to: viewModel.location, height: viewModel.height)
-        uiViewController.add(countries: viewModel.countries)
+        uiViewController.add(highlitedCountry: highlightedCountry)
+        uiViewController.add(countries: viewModel.countries.filter({ $0.id != highlightedCountry?.id }))
     }
     
     func makeCoordinator() -> GlobeView.Coordinator {
@@ -64,6 +88,7 @@ struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
         let country = FCCountry(key: "PH", dict: [:])
         GlobeView(selectedCountry: .constant(country),
+                  highlightedCountry: .constant(nil),
                   location: .constant(MapViewModel.defaultLocation),
                   height: .constant(MapViewModel.defaultGlobeViewHeight))
            .environmentObject(MapViewModel())
@@ -91,7 +116,7 @@ extension GlobeView {
 
             viewC.getPosition(&position, height: &height)
             parent.location = position
-            parent.height = height
+            parent.height = height - 0.2
         }
     }
 }
@@ -104,8 +129,12 @@ class GlobeVC: UIViewController {
     var globe: WhirlyGlobeViewController?
     var imageLoader : MaplyQuadImageLoader?
     var countries = [FCCountry]()
+    var highlightedCountry: FCCountry?
     var countryObjects: MaplyComponentObject?
     var capitalObjects: MaplyComponentObject?
+    var highlightedObject: MaplyComponentObject?
+    var countryLabels = [MaplyScreenLabel]()
+    var capitalLabels = [MaplyScreenLabel]()
 
     convenience init(mbTilesFetcher: MaplyMBTileFetcher?) {
         self.init()
@@ -169,13 +198,38 @@ class GlobeVC: UIViewController {
         }
     }
     
+    func add(highlitedCountry: FCCountry?) {
+        guard let globe = globe,
+           self.highlightedCountry?.id != highlitedCountry?.id else {
+            return
+        }
+
+        self.highlightedCountry = highlitedCountry
+        if let highlightedObject = highlightedObject {
+            globe.remove(highlightedObject)
+        }
+        
+        if let highlitedCountry = highlitedCountry {
+            let label = label(for: highlitedCountry)
+            
+            highlightedObject = globe.addScreenLabels([label],
+                                                      desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
+                                                             kMaplyTextOutlineColor: UIColor.lightGray,
+                                                             kMaplyTextOutlineSize: 2.0,
+                                                             kMaplyTextColor: UIColor.red])
+        }
+    }
+
     func add(countries: [FCCountry]) {
         guard let globe = globe,
-           countries.count != self.countries.count else {
+           self.countries != countries else {
             return
         }
 
         self.countries.removeAll()
+        countryLabels.removeAll()
+        capitalLabels.removeAll()
+
         if let countryObjects = countryObjects {
             globe.remove(countryObjects)
         }
@@ -183,24 +237,13 @@ class GlobeVC: UIViewController {
             globe.remove(capitalObjects)
         }
         
-        var countryLabels = [MaplyScreenLabel]()
-        var capitalLabels = [MaplyScreenLabel]()
-        
         for country in countries {
-            var label = MaplyScreenLabel()
-            var radians = country.getGeoRadians()
-            
-            label.text = country.displayName
-            label.loc = MaplyCoordinate(x: Float(radians[0]),
-                                        y: Float(radians[1]))
-            label.selectable = true
-            label.userObject = country
-            label.layoutImportance = 1
+            var label = label(for: country)
             countryLabels.append(label)
             
             if let capital = country.capital {
                 label = MaplyScreenLabel()
-                radians = country.getCapitalGeoRadians()
+                let radians = country.getCapitalGeoRadians()
                 
                 label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
                 label.loc = MaplyCoordinate(x: Float(radians[0]),
@@ -215,10 +258,24 @@ class GlobeVC: UIViewController {
                                                desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
                                                       kMaplyTextOutlineColor: UIColor.black,
                                                       kMaplyTextOutlineSize: 2.0,
-                                                      kMaplyColor: UIColor.white])
+                                                      kMaplyTextColor: UIColor.white])
         
         capitalObjects = globe.addScreenLabels(capitalLabels,
                                                desc: [kMaplyFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light),
                                                       kMaplyTextColor: UIColor.black])
+    }
+
+    func label(for country: FCCountry) -> MaplyScreenLabel {
+        let label = MaplyScreenLabel()
+        let radians = country.getGeoRadians()
+        
+        label.text = country.displayName
+        label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                    y: Float(radians[1]))
+        label.selectable = true
+        label.userObject = country
+        label.layoutImportance = 1
+        
+        return label
     }
 }

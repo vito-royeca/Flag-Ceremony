@@ -12,24 +12,46 @@ import WhirlyGlobe
 struct MapViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
+    @State var highlightedCountry: FCCountry? = nil
     @State var location = MapViewModel.defaultLocation
     @State var height = MapViewModel.defaultMapViewHeight
+    @State private var isShowingSearch = false
 
     var body: some View {
-        MapView(selectedCountry: $selectedCountry, location: $location, height: $height)
+        MapView(selectedCountry: $selectedCountry,
+                highlightedCountry: $highlightedCountry,
+                location: $location,
+                height: $height)
             .navigationTitle("Map")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
                 }
             }
+            .sheet(isPresented: $isShowingSearch, content: {
+                NavigationView {
+                    MapSearchView(height: height, highlightedCountry: $highlightedCountry)
+                        .environmentObject(viewModel)
+                }
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowingSearch.toggle()
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
             .onAppear {
                 location = viewModel.location
                 height = viewModel.height
+                highlightedCountry = viewModel.highleightedCountry
             }
             .onDisappear {
                 viewModel.location = location
                 viewModel.height = height
+                viewModel.highleightedCountry = highlightedCountry
             }
     }
 }
@@ -39,6 +61,7 @@ struct MapView: UIViewControllerRepresentable {
 
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
+    @Binding var highlightedCountry: FCCountry?
     @Binding var location: MaplyCoordinate
     @Binding var height: Float
 
@@ -51,7 +74,8 @@ struct MapView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: MaplyVC, context: Context) {
         uiViewController.relocate(to: viewModel.location, height: viewModel.height)
-        uiViewController.add(countries: viewModel.countries)
+        uiViewController.add(highlitedCountry: highlightedCountry)
+        uiViewController.add(countries: viewModel.countries.filter({ $0.id != highlightedCountry?.id }))
     }
     
     func makeCoordinator() -> MapView.Coordinator {
@@ -64,6 +88,7 @@ struct MapView_Previews: PreviewProvider {
         let country = FCCountry(key: "PH", dict: [:])
 
         MapView(selectedCountry: .constant(country),
+                highlightedCountry: .constant(nil),
                 location: .constant(MapViewModel.defaultLocation),
                 height: .constant(MapViewModel.defaultMapViewHeight))
            .environmentObject(MapViewModel())
@@ -105,8 +130,12 @@ class MaplyVC: UIViewController {
     var map: MaplyViewController?
     var imageLoader : MaplyQuadImageLoader?
     var countries = [FCCountry]()
+    var highlightedCountry: FCCountry?
     var countryObjects: MaplyComponentObject?
     var capitalObjects: MaplyComponentObject?
+    var highlightedObject: MaplyComponentObject?
+    var countryLabels = [MaplyScreenLabel]()
+    var capitalLabels = [MaplyScreenLabel]()
 
     convenience init(mapType: MaplyMapType, mbTilesFetcher: MaplyMBTileFetcher?) {
         self.init()
@@ -170,13 +199,38 @@ class MaplyVC: UIViewController {
         }
     }
     
+    func add(highlitedCountry: FCCountry?) {
+        guard let map = map,
+           self.highlightedCountry?.id != highlitedCountry?.id else {
+            return
+        }
+
+        self.highlightedCountry = highlitedCountry
+        if let highlightedObject = highlightedObject {
+            map.remove(highlightedObject)
+        }
+        
+        if let highlitedCountry = highlitedCountry {
+            let label = label(for: highlitedCountry)
+            
+            highlightedObject = map.addScreenLabels([label],
+                                                    desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
+                                                           kMaplyTextOutlineColor: UIColor.lightGray,
+                                                           kMaplyTextOutlineSize: 2.0,
+                                                           kMaplyTextColor: UIColor.red])
+        }
+    }
+
     func add(countries: [FCCountry]) {
         guard let map = map,
-           countries.count != self.countries.count else {
+           self.countries != countries else {
             return
         }
 
         self.countries.removeAll()
+        countryLabels.removeAll()
+        capitalLabels.removeAll()
+
         if let countryObjects = countryObjects {
             map.remove(countryObjects)
         }
@@ -184,24 +238,13 @@ class MaplyVC: UIViewController {
             map.remove(capitalObjects)
         }
         
-        var countryLabels = [MaplyScreenLabel]()
-        var capitalLabels = [MaplyScreenLabel]()
-        
         for country in countries {
-            var label = MaplyScreenLabel()
-            var radians = country.getGeoRadians()
-            
-            label.text = country.displayName
-            label.loc = MaplyCoordinate(x: Float(radians[0]),
-                                        y: Float(radians[1]))
-            label.selectable = true
-            label.userObject = country
-            label.layoutImportance = 1
+            var label = label(for: country)
             countryLabels.append(label)
             
             if let capital = country.capital {
                 label = MaplyScreenLabel()
-                radians = country.getCapitalGeoRadians()
+                let radians = country.getCapitalGeoRadians()
                 
                 label.text = "\u{272A} \(capital[FCCountry.Keys.CapitalName]!)"
                 label.loc = MaplyCoordinate(x: Float(radians[0]),
@@ -216,10 +259,24 @@ class MaplyVC: UIViewController {
                                              desc: [kMaplyFont: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize),
                                                     kMaplyTextOutlineColor: UIColor.black,
                                                     kMaplyTextOutlineSize: 2.0,
-                                                    kMaplyColor: UIColor.white])
+                                                    kMaplyTextColor: UIColor.white])
         
         capitalObjects = map.addScreenLabels(capitalLabels,
                                              desc: [kMaplyFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light),
                                                     kMaplyTextColor: UIColor.black])
+    }
+
+    func label(for country: FCCountry) -> MaplyScreenLabel {
+        let label = MaplyScreenLabel()
+        let radians = country.getGeoRadians()
+        
+        label.text = country.displayName
+        label.loc = MaplyCoordinate(x: Float(radians[0]),
+                                    y: Float(radians[1]))
+        label.selectable = true
+        label.userObject = country
+        label.layoutImportance = 1
+        
+        return label
     }
 }

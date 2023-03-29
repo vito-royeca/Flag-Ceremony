@@ -17,10 +17,11 @@ class MapViewModel: NSObject, ObservableObject {
     var mbTilesFetcher = MaplyMBTileFetcher(mbTiles: "geography-class_medres")
     private let locationManager = CLLocationManager()
     
+    @Published var countries = [FCCountry]()
     @Published var location = defaultLocation
     @Published var height = defaultMapViewHeight
-    @Published var countries = [FCCountry]()
-    
+    @Published var highleightedCountry: FCCountry?
+
     override init() {
         super.init()
         locationManager.delegate = self
@@ -47,7 +48,6 @@ extension MapViewModel: CLLocationManagerDelegate {
             return
         }
         
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
         location = MaplyCoordinateMakeWithDegrees(Float(locValue.longitude), Float(locValue.latitude))
         locationManager.stopUpdatingLocation()
     }
