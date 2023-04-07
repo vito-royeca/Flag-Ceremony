@@ -1773,6 +1773,8 @@
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
 		8BA81DF829C9D6CB006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
+		8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
+		8BC7BD3D29DF873400C34A74 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
 		8BD64DA729CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA829CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA929CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
@@ -2299,6 +2301,7 @@
 		8B9A2F2229C2DC3F0034EBC5 /* us.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = us.mp3; sourceTree = "<group>"; };
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicViewController.swift; sourceTree = "<group>"; };
 		8BD64DA629CE98FE001E8657 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		8BF69F6029C62CE500E0C00B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		8BF69F6929C6549800E0C00B /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -2693,6 +2696,7 @@
 				8B1E282429D1F7BF00E606E5 /* MapSearchView.swift */,
 				8B2096A2284400C200B62A45 /* MapView.swift */,
 				8B556B2429C2420100101D46 /* MapViewModel.swift */,
+				8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -4872,6 +4876,7 @@
 				8B2E1C9629CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
+				8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B1E282529D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
@@ -4905,6 +4910,7 @@
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
 				8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
 				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
+				8BC7BD3D29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B53305029CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8BF69F6B29C6549800E0C00B /* AccountViewModel.swift in Sources */,

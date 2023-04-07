@@ -19,7 +19,6 @@ class MapViewModel: NSObject, ObservableObject {
     
     @Published var countries = [FCCountry]()
     @Published var location = defaultLocation
-    @Published var height = defaultMapViewHeight
     @Published var highleightedCountry: FCCountry?
 
     override init() {

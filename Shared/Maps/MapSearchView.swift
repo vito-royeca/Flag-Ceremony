@@ -11,7 +11,6 @@ struct MapSearchView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: MapViewModel
     @State private var searchText = ""
-    @State var height = MapViewModel.defaultMapViewHeight
     @Binding var highlightedCountry: FCCountry?
 
     var body: some View {
@@ -34,6 +33,7 @@ struct MapSearchView: View {
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "location.circle")
+                            .renderingMode(.original)
                     }
                 }
             }
