@@ -1775,6 +1775,13 @@
 		8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
 		8BC7BD3D29DF873400C34A74 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
+		8BC7BD4029DFA3C300C34A74 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC7BD3F29DFA3C300C34A74 /* Collections */; };
+		8BC7BD4229DFA3C300C34A74 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC7BD4129DFA3C300C34A74 /* DequeModule */; };
+		8BC7BD4429DFA3C300C34A74 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC7BD4329DFA3C300C34A74 /* OrderedCollections */; };
+		8BC7BD4629DFD32400C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
+		8BC7BD4729DFD32400C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
+		8BC7BD4829DFD32400C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
+		8BC7BD4929DFD32500C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
 		8BD64DA729CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA829CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA929CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
@@ -2302,6 +2309,7 @@
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicViewController.swift; sourceTree = "<group>"; };
+		8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedText.swift; sourceTree = "<group>"; };
 		8BD64DA629CE98FE001E8657 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		8BF69F6029C62CE500E0C00B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		8BF69F6929C6549800E0C00B /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -2319,13 +2327,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B53307029D01A7C0011476D /* FirebaseStorageCombine-Community in Frameworks */,
+				8BC7BD4029DFA3C300C34A74 /* Collections in Frameworks */,
 				8B53306A29D01A7C0011476D /* FirebaseFirestoreCombine-Community in Frameworks */,
 				8B1A0BB529C365CF0012B2A8 /* SwiftUIX in Frameworks */,
 				8B9AA44529CA91C500E483EA /* FacebookCore in Frameworks */,
+				8BC7BD4229DFA3C300C34A74 /* DequeModule in Frameworks */,
 				8B9AA44929CA91C500E483EA /* FacebookShare in Frameworks */,
 				8B53305A29D01A7C0011476D /* FirebaseAnalyticsSwift in Frameworks */,
 				8B9AA44729CA91C500E483EA /* FacebookLogin in Frameworks */,
 				8B53306829D01A7C0011476D /* FirebaseFirestore in Frameworks */,
+				8BC7BD4429DFA3C300C34A74 /* OrderedCollections in Frameworks */,
 				8B53306029D01A7C0011476D /* FirebaseAuthCombine-Community in Frameworks */,
 				8B53306429D01A7C0011476D /* FirebaseDatabase in Frameworks */,
 				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
@@ -2947,6 +2958,7 @@
 			isa = PBXGroup;
 			children = (
 				8B556BA529C2B4EF00101D46 /* ContentView.swift */,
+				8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */,
 				8B53301129CFB4A70011476D /* ImagePickerView.swift */,
 				8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */,
 				8BF69F6029C62CE500E0C00B /* TestView.swift */,
@@ -3032,6 +3044,9 @@
 				8B53306B29D01A7C0011476D /* FirebaseFirestoreSwift */,
 				8B53306D29D01A7C0011476D /* FirebaseStorage */,
 				8B53306F29D01A7C0011476D /* FirebaseStorageCombine-Community */,
+				8BC7BD3F29DFA3C300C34A74 /* Collections */,
+				8BC7BD4129DFA3C300C34A74 /* DequeModule */,
+				8BC7BD4329DFA3C300C34A74 /* OrderedCollections */,
 			);
 			productName = "Flag Ceremony (iOS)";
 			productReference = 8B2096482842797D00B62A45 /* Flag Ceremony.app */;
@@ -3131,6 +3146,7 @@
 				8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				8B53305429D01A7C0011476D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 8B2096492842797D00B62A45 /* Products */;
 			projectDirPath = "";
@@ -4889,6 +4905,7 @@
 				8B556B7C29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B4A2C9429C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8BD64DA729CE98FE001E8657 /* EditAccountView.swift in Sources */,
+				8BC7BD4629DFD32400C34A74 /* HighlightedText.swift in Sources */,
 				8B0FF90B29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4915,6 +4932,7 @@
 				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8BF69F6B29C6549800E0C00B /* AccountViewModel.swift in Sources */,
 				8B4A2C9529C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
+				8BC7BD4729DFD32400C34A74 /* HighlightedText.swift in Sources */,
 				8B0FF8FE29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B556B9129C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B2E1C8D29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
@@ -4963,6 +4981,7 @@
 				8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9229C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B2E1C9829CA6E84009B0E89 /* String+Subscript.swift in Sources */,
+				8BC7BD4829DFD32400C34A74 /* HighlightedText.swift in Sources */,
 				8B556BA329C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4989,6 +5008,7 @@
 				8B556B8B29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B2096662842797D00B62A45 /* Tests_macOS.swift in Sources */,
 				8BF8E28429C5897100929089 /* ChartsView.swift in Sources */,
+				8BC7BD4929DFD32500C34A74 /* HighlightedText.swift in Sources */,
 				8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9329C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B0FF90029C38842007F548A /* MediaPlayerView.swift in Sources */,
@@ -5431,6 +5451,14 @@
 				kind = branch;
 			};
 		};
+		8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -5538,6 +5566,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		8BC7BD3F29DFA3C300C34A74 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		8BC7BD4129DFA3C300C34A74 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		8BC7BD4329DFA3C300C34A74 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 
