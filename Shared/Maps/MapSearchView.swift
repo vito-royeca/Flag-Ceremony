@@ -25,29 +25,13 @@ struct MapSearchView: View {
                         ForEach(keys, id:\.self) { key in
                             Section(header: Text(key)) {
                                 ForEach(dictionary[key] ?? [], id: \.self) { country in
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            HStack {
-                                                Text("\(country.emojiFlag)")
-                                                HighlightedText(country.name ?? "", matching: searchText)
-                                            }
-                                            HStack {
-                                                Text("Capital:")
-                                                    .font(Font.footnote)
-                                                HighlightedText("\(country.capital?[FCCountry.Keys.CapitalName] as? String ?? "")", matching: searchText)
-                                                    .font(Font.footnote)
-                                            }
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        Button(action: {
-                                            select(country: country)
-                                        }) {
-                                            Image(systemName: "location.circle")
-                                                .renderingMode(.original)
-                                        }
-                                    }
+                                    MapSearchRowView(flag: country.emojiFlag,
+                                                     country: country.name ?? "",
+                                                     capital: country.capital?[FCCountry.Keys.CapitalName] as? String ?? "",
+                                                     matching: searchText,
+                                                     action: {
+                                                        select(country: country)
+                                                    })
                                 }
                             }
                         }
@@ -59,7 +43,6 @@ struct MapSearchView: View {
                             HStack {
                                 Spacer()
                                 Button(action: {
-                                    print("letter = \(letter)")
                                     withAnimation {
                                         scrollProxy.scrollTo(letter, anchor: .top)
                                     }
@@ -129,6 +112,8 @@ struct MapSearchView: View {
     }
 }
 
+// MARK: - Previews
+
 struct MapSearchView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -138,15 +123,22 @@ struct MapSearchView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - MapSearchRowView
+
 struct MapSearchRowView: View {
+    let flag: String
     let country: String
     let capital: String
     let matching: String
-
+    let action: () -> Void
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                HighlightedText(country, matching: matching)
+                HStack {
+                    Text(flag)
+                    HighlightedText(country, matching: matching)
+                }
                 HStack {
                     Text("Capital:")
                         .font(Font.footnote)
@@ -154,16 +146,10 @@ struct MapSearchRowView: View {
                         .font(Font.footnote)
                 }
             }
-            
+
             Spacer()
-            
-            Button(action: {
-//                let radians = country.getGeoRadians()
-//
-//                viewModel.location = MaplyCoordinateMake(Float(radians[0]), Float(radians[1]))
-//                highlightedCountry = country
-//                presentationMode.wrappedValue.dismiss()
-            }) {
+
+            Button(action: action) {
                 Image(systemName: "location.circle")
                     .renderingMode(.original)
             }
