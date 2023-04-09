@@ -10,11 +10,9 @@ import Firebase
 
 struct AuthenticateView: View {
     @StateObject var viewModel: AuthenticateViewModel
-    @Binding var authenticated: Bool
     
     init(authenticated: Binding<Bool>) {
-        _authenticated = authenticated
-        _viewModel = StateObject(wrappedValue: AuthenticateViewModel())
+        _viewModel = StateObject(wrappedValue: AuthenticateViewModel(authenticated: authenticated))
     }
 
     var body: some View {
@@ -58,8 +56,8 @@ struct AuthenticateView: View {
                     Spacer()
                 }
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.white)
+                .buttonStyle(.borderedProminent)
+                .tint(.white)
             
             // Facebook
 //            Button(action: {
@@ -77,19 +75,19 @@ struct AuthenticateView: View {
 //            .tint(.white)
             
             // Apple
-//            Button(action: {
-//                signWithApple()
-//            }) {
-//                HStack {
-//                    Image("apple")
-//                    Spacer()
-//                    Text("Sign in with Apple")
-//                        .foregroundColor(Color(uiColor: kBlueColor))
-//                    Spacer()
-//                }
-//            }
-//            .buttonStyle(.borderedProminent)
-//            .tint(.white)
+            Button(action: {
+                signWithApple()
+            }) {
+                HStack {
+                    Image("apple")
+                    Spacer()
+                    Text("Sign in with Apple")
+                        .foregroundColor(Color(uiColor: kBlueColor))
+                    Spacer()
+                }
+            }
+                .buttonStyle(.borderedProminent)
+                .tint(.white)
             
             // Phone
 //            Button(action: {
@@ -135,25 +133,25 @@ struct AuthenticateView: View {
             switch result {
             case .failure(let error):
                 print(error)
-            case.success(let authenticated):
-                self.authenticated = authenticated
+            case.success:
+                ()
             }
         }
     }
     
     func signWithFacebook() {
-        viewModel.signInWithFacebook { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case.success(let authenticated):
-                self.authenticated = authenticated
-            }
-        }
+//        viewModel.signInWithFacebook { result in
+//            switch result {
+//            case .failure(let error):
+//                print(error)
+//            case.success:
+//                ()
+//            }
+//        }
     }
     
     func signWithApple() {
-        
+        viewModel.signInWithApple()
     }
     
     func signWithPhone() {
@@ -170,3 +168,4 @@ struct AuthenticateView_Previews: PreviewProvider {
         AuthenticateView(authenticated: .constant(false))
     }
 }
+

@@ -72,7 +72,8 @@ struct AccountView: View {
         }
             .toolbar {
                 AccountViewToolbar(presentationMode: presentationMode,
-                                   isShowingEdit: $isShowingEdit)
+                                   isShowingEdit: $isShowingEdit,
+                                   isAuthenticated: $authenticated)
             }
             .sheet(isPresented: $isShowingEdit, content: {
                 NavigationView {
@@ -197,16 +198,21 @@ struct AccountViewToolbar: ToolbarContent {
     @EnvironmentObject var viewModel: AccountViewModel
     @Binding var presentationMode: PresentationMode
     @Binding var isShowingEdit: Bool
+    @Binding var isAuthenticated: Bool
 
-    init(presentationMode: Binding<PresentationMode>, isShowingEdit: Binding<Bool>) {
+    init(presentationMode: Binding<PresentationMode>,
+         isShowingEdit: Binding<Bool>,
+         isAuthenticated: Binding<Bool>) {
         _presentationMode = presentationMode
         _isShowingEdit = isShowingEdit
+        _isAuthenticated = isAuthenticated
     }
     
     var body: some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarLeading) {
             Button("Sign Out") {
                 viewModel.signOut()
+                isAuthenticated = false
             }
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {

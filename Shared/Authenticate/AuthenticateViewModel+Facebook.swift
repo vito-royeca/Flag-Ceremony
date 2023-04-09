@@ -10,7 +10,7 @@ import FirebaseAuth
 import FacebookLogin
 
 extension AuthenticateViewModel {
-    func signInWithFacebook(completion: @escaping (Result<Bool,Error>) -> Void) {
+    func signInWithFacebook(completion: @escaping (Result<Void,Error>) -> Void) {
         /*
          let nonce = randomNonceString()
          currentNonce = nonce
@@ -42,7 +42,7 @@ extension AuthenticateViewModel {
                             let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                             self.authWithFirebase(with: credential, completion: completion)
                         } else {
-                            completion(.failure(error ?? AuthenticateError.general))
+                            completion(.failure(AuthenticateError.general))
                         }
                     }
                 }

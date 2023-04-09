@@ -87,28 +87,31 @@ class FirebaseManager : NSObject {
         if photoDirty {
             let ref = Storage.storage().reference().child("avatars/\(user.uid).png")
             
-            if let photoURL = photoURL,
-               let image = UIImage(contentsOfFile: photoURL.path),
-               let resizedImage = image.resize(to: CGSize(width: 256, height: 256)),
-               let data = resizedImage.pngData() {
-                
-                let meta = StorageMetadata()
-                meta.contentType = "image/png"
-                
-                
-                ref.putData(data, metadata: meta) { (metadata, error) in
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        ref.downloadURL(completion: { (url, error) in
-                            if let error = error {
-                                completion(.failure(error))
-                            } else {
-                                completion(.success(url))
-                            }
-                        })
-                    }
-                }
+            if let photoURL = photoURL {
+               if FileManager.default.fileExists(atPath: photoURL.path),
+                  let image = UIImage(contentsOfFile: photoURL.path),
+                  let resizedImage = image.resize(to: CGSize(width: 256, height: 256)),
+                  let data = resizedImage.pngData() {
+                   
+                   let meta = StorageMetadata()
+                   meta.contentType = "image/png"
+                   
+                   ref.putData(data, metadata: meta) { (metadata, error) in
+                       if let error = error {
+                           completion(.failure(error))
+                       } else {
+                           ref.downloadURL(completion: { (url, error) in
+                               if let error = error {
+                                   completion(.failure(error))
+                               } else {
+                                   completion(.success(url))
+                               }
+                           })
+                       }
+                   }
+               } else {
+                   completion(.success(photoURL))
+               }
             } else {
                 ref.delete() { error in
                     if let error = error {

@@ -70,4 +70,4 @@ fastlane/screenshots/en-US/*.png
 .idea
 Gemfile.lock
 tmp
-
+firebase/.firebase

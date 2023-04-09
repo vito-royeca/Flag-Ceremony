@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0FA36D29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */; };
+		8B0FA36E29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */; };
+		8B0FA36F29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */; };
+		8B0FA37029E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */; };
 		8B0FF8FD29C38842007F548A /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */; };
 		8B0FF8FE29C38842007F548A /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */; };
 		8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */; };
@@ -1865,6 +1869,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Apple.swift"; sourceTree = "<group>"; };
+		8B0FA37129E27E0D00B055E4 /* Flag Ceremony (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Flag Ceremony (iOS).entitlements"; sourceTree = "<group>"; };
 		8B0FF8FC29C38842007F548A /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
 		8B0FF90A29C3D418007F548A /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
 		8B1A0BAE29C35C770012B2A8 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
@@ -2605,6 +2611,7 @@
 		8B2096382842797B00B62A45 = {
 			isa = PBXGroup;
 			children = (
+				8B0FA37129E27E0D00B055E4 /* Flag Ceremony (iOS).entitlements */,
 				8B556B5829C2ACF900101D46 /* GoogleService-Info.plist */,
 				8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */,
 				8B20963D2842797B00B62A45 /* Shared */,
@@ -2995,6 +3002,7 @@
 			children = (
 				8BF69F7229C65C0900E0C00B /* AuthenticateView.swift */,
 				8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */,
+				8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */,
 				8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */,
 				8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */,
 				8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */,
@@ -4883,6 +4891,7 @@
 				8BF69F7329C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B20969B2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
+				8B0FA36D29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8B53301229CFB4A70011476D /* ImagePickerView.swift in Sources */,
 				8BF69F6A29C6549800E0C00B /* AccountViewModel.swift in Sources */,
 				8BF8E28129C5897100929089 /* ChartsView.swift in Sources */,
@@ -4925,6 +4934,7 @@
 				8B556B5029C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7529C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B556BA729C2B4EF00101D46 /* ContentView.swift in Sources */,
+				8B0FA36E29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8BF8E28229C5897100929089 /* ChartsView.swift in Sources */,
 				8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
@@ -4980,6 +4990,7 @@
 				8B556B7629C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B20965C2842797D00B62A45 /* Tests_iOSLaunchTests.swift in Sources */,
 				8B1E282729D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
+				8B0FA36F29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8BABAF4E29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
 				8B556B8A29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
@@ -5011,6 +5022,7 @@
 				8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B1E282829D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
+				8B0FA37029E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
 				8BD64DAA29CE98FE001E8657 /* EditAccountView.swift in Sources */,
 				8B53305229CFE25B0011476D /* UIImage+Resize.swift in Sources */,
@@ -5165,6 +5177,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5203,6 +5216,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

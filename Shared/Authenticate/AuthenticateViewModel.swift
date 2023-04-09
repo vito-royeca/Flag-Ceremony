@@ -15,16 +15,30 @@ enum AuthenticateError : Error {
 }
 
 class AuthenticateViewModel: NSObject, ObservableObject {
-    @Published var authenticated = false
-    var currentNonce = ""
+    @Binding var authenticated: Bool
+    var currentNonce: String? = nil
 
-    func authWithFirebase(with credential: AuthCredential, completion: @escaping (Result<Bool,Error>) -> Void) {
+    init(authenticated: Binding<Bool>) {
+        _authenticated = authenticated
+    }
+
+    func authWithFirebase(with credential: AuthCredential, completion: @escaping (Result<Void,Error>) -> Void) {
         Auth.auth().signIn(with: credential) { result, error in
             if let error = error {
+                self.authenticated = false
                 completion(.failure(error))
             } else {
-                self.authenticated = true
-                completion(.success(true))
+                if let displayName = result?.user.displayName {
+                    let url = result?.user.photoURL
+
+                    FirebaseManager.sharedInstance.updateUser(photoURL: url, photoDirty: url != nil, displayName: displayName) { result in
+                        self.authenticated = true
+                        completion(.success(()))
+                    }
+                } else {
+                    self.authenticated = true
+                    completion(.success(()))
+                }
             }
         }
     }
@@ -61,7 +75,7 @@ class AuthenticateViewModel: NSObject, ObservableObject {
         return result
     }
     
-    private func sha256(_ input: String) -> String {
+    func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
         let hashString = hashedData.compactMap {

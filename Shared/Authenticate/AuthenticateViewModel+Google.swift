@@ -10,7 +10,7 @@ import FirebaseAuth
 import GoogleSignIn
 
 extension AuthenticateViewModel {
-    func signInWithGoogle(completion: @escaping (Result<Bool,Error>) -> Void) {
+    func signInWithGoogle(completion: @escaping (Result<Void,Error>) -> Void) {
         guard let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
             completion(.failure(AuthenticateError.general))
             return
