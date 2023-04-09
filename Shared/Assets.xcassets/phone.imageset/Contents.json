@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-facebook-creatype-glyph-16.png",
+      "filename" : "icons8-phone-ios-16-filled-16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-facebook-creatype-glyph-32.png",
+      "filename" : "icons8-phone-ios-16-filled-32.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-facebook-creatype-glyph-96.png",
+      "filename" : "icons8-phone-ios-16-filled-96.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

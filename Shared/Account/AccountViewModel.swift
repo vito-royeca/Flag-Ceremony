@@ -36,55 +36,63 @@ class AccountViewModel: NSObject, ObservableObject {
         }
     }
     
-    func fetchUserData() {
+    func fetchUserData(completion: (() -> Void)? = nil) {
         guard isLoggedIn else {
+            completion?()
             return
         }
 
         FirebaseManager.sharedInstance.fetchUser(completion: { [weak self] account in
             self?.account = account
-        })
-
-        FirebaseManager.sharedInstance.monitorUserActivity(completion: { [weak self] activity in
-            self?.activity = activity
-
-            if let views = activity?.views {
-                let keys = Array(views.keys)
-                FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                    self?.viewedCountries.removeAll()
-
-                    for var country in countries {
-                        if let key = country.key {
-                            country.userViews = views[key] ?? 0
-                            self?.viewedCountries.append(country)
-                        }
-                    }
-                })
-
-            }
             
-            if let plays = activity?.plays {
-                let keys = Array(plays.keys)
-                FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                    self?.playedCountries.removeAll()
+            if account == nil {
+                completion?()
+                return
+            }
 
-                    for var country in countries {
-                        if let key = country.key {
-                            country.userPlays = plays[key] ?? 0
-                            self?.playedCountries.append(country)
+            FirebaseManager.sharedInstance.monitorUserActivity(completion: { [weak self] activity in
+                self?.activity = activity
+                
+                if let views = activity?.views {
+                    let keys = Array(views.keys)
+                    FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
+                        self?.viewedCountries.removeAll()
+                        
+                        for var country in countries {
+                            if let key = country.key {
+                                country.userViews = views[key] ?? 0
+                                self?.viewedCountries.append(country)
+                            }
                         }
-                    }
-                })
-
-            }
-            
-            if let favorites = activity?.favorites {
-                FirebaseManager.sharedInstance.findCountries(keys: favorites, completion: { countries in
-                    self?.favoriteCountries = countries
-                })
-            } else {
-                self?.favoriteCountries.removeAll()
-            }
+                    })
+                    
+                }
+                
+                if let plays = activity?.plays {
+                    let keys = Array(plays.keys)
+                    FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
+                        self?.playedCountries.removeAll()
+                        
+                        for var country in countries {
+                            if let key = country.key {
+                                country.userPlays = plays[key] ?? 0
+                                self?.playedCountries.append(country)
+                            }
+                        }
+                    })
+                    
+                }
+                
+                if let favorites = activity?.favorites {
+                    FirebaseManager.sharedInstance.findCountries(keys: favorites, completion: { countries in
+                        self?.favoriteCountries = countries
+                    })
+                } else {
+                    self?.favoriteCountries.removeAll()
+                }
+                
+                completion?()
+            })
         })
     }
     

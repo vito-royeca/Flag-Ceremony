@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Twitter_000000_25.png",
+      "filename" : "icons8-person-pastel-glyph-16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Twitter_000000_50.png",
+      "filename" : "icons8-person-pastel-glyph-32.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Twitter_000000_75.png",
+      "filename" : "icons8-person-pastel-glyph-96.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

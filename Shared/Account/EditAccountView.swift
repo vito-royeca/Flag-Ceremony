@@ -51,8 +51,10 @@ struct EditAccountView: View {
                             .imageScale(.large)
                     }
                         .buttonStyle(.borderless)
+                        .disabled(photoURL == nil)
                 }
             }
+
             Section(header: Text("Display Name")) {
                 TextField("Enter your Display Name", text: $displayName)
             }
@@ -78,8 +80,10 @@ struct EditAccountView: View {
 
 struct EditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        EditAccountView()
-            .environmentObject(AccountViewModel())
+        NavigationView {
+            EditAccountView()
+                .environmentObject(AccountViewModel())
+        }
     }
 }
 
@@ -113,6 +117,16 @@ struct EditAccountToolbar: ToolbarContent {
                 viewModel.update(photoURL: photoURL, photoDirty: photoDirty, displayName: displayName)
                 $presentationMode.wrappedValue.dismiss()
             }
+                .disabled(validateForm)
         }
+    }
+    
+    var validateForm: Bool {
+        guard let displayName = displayName,
+           !displayName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return true
+        }
+        
+        return false
     }
 }

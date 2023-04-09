@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Google Plus_000000_25.png",
+      "filename" : "icons8-mail-ios-16-filled-16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Google Plus_000000_50.png",
+      "filename" : "icons8-mail-ios-16-filled-32.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Google Plus_000000_75.png",
+      "filename" : "icons8-mail-ios-16-filled-96.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

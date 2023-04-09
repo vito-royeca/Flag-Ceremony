@@ -24,7 +24,11 @@ class FirebaseManager : NSObject {
             let ref = Database.database().reference().child("users").child(user.uid)
 
             ref.observe(.value, with: { snapshot in
-                completion(FCUser(snapshot: snapshot))
+                if let _ = snapshot.value as? [String: Any] {
+                    completion(FCUser(snapshot: snapshot))
+                } else {
+                    completion(nil)
+                }
             })
         }
     }
@@ -264,7 +268,6 @@ class FirebaseManager : NSObject {
                 completion(.success(()))
             }
         }
-        
     }
     
     func findAnthem(_ key: String, completion: @escaping (FCAnthem?) -> Void) {
@@ -433,9 +436,7 @@ class FirebaseManager : NSObject {
                         if let _ = snapshot.value as? [String: Any] {
                             a = FCCountry(snapshot: snapshot)
                         }
-                        if let a = a {
-                            completion(a)
-                        }
+                        completion(a)
                     })
                 }
             })
@@ -449,7 +450,8 @@ class FirebaseManager : NSObject {
             var countries = [FCCountry]()
             
             for child in snapshot.children {
-                if let c = child as? DataSnapshot {
+                if let c = child as? DataSnapshot,
+                   let _ = snapshot.value as? [String: Any] {
                     countries.append(FCCountry(snapshot: c))
                 }
             }
@@ -466,7 +468,8 @@ class FirebaseManager : NSObject {
             var activities = [FCActivity]()
             
             for child in snapshot.children {
-                if let c = child as? DataSnapshot {
+                if let c = child as? DataSnapshot,
+                   let _ = snapshot.value as? [String: Any] {
                     activities.append(FCActivity(snapshot: c))
                 }
             }
@@ -483,7 +486,8 @@ class FirebaseManager : NSObject {
             var countries = [FCCountry]()
             
             for child in snapshot.children {
-                if let c = child as? DataSnapshot {
+                if let c = child as? DataSnapshot,
+                   let _ = snapshot.value as? [String: Any] {
                     countries.append(FCCountry(snapshot: c))
                 }
             }
@@ -500,7 +504,8 @@ class FirebaseManager : NSObject {
             var activities = [FCActivity]()
             
             for child in snapshot.children {
-                if let c = child as? DataSnapshot {
+                if let c = child as? DataSnapshot,
+                   let _ = snapshot.value as? [String: Any] {
                     activities.append(FCActivity(snapshot: c))
                 }
             }
@@ -517,7 +522,8 @@ class FirebaseManager : NSObject {
             var users = [FCUser]()
             
             for child in snapshot.children {
-                if let c = child as? DataSnapshot {
+                if let c = child as? DataSnapshot,
+                   let _ = snapshot.value as? [String: Any] {
                     users.append(FCUser(snapshot: c))
                 }
             }
@@ -530,7 +536,11 @@ class FirebaseManager : NSObject {
             let ref = Database.database().reference().child("activities").child(user.uid)
             let query = ref.queryOrderedByKey()
             query.observe(.value, with: { snapshot in
-                completion(FCActivity(snapshot: snapshot))
+                if let _ = snapshot.value as? [String: Any] {
+                    completion(FCActivity(snapshot: snapshot))
+                } else {
+                    completion(nil)
+                }
             })
             
             queries["userData"] = query

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FacebookCore
 import Firebase
 import GoogleSignIn
 
@@ -14,13 +15,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         print("Flag Ceremony application is starting up. ApplicationDelegate didFinishLaunchingWithOptions.")
         FirebaseApp.configure()
+        ApplicationDelegate.shared.application(application,
+                                               didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
+    
+        ApplicationDelegate.shared.application(app,
+                                               open: url,
+                                               sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                               annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
 }

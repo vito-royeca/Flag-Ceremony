@@ -10,8 +10,6 @@ import Firebase
 
 struct AuthenticateView: View {
     @StateObject var viewModel: AuthenticateViewModel
-    @State private var email: String = ""
-    @State private var password: String = ""
     @Binding var authenticated: Bool
     
     init(authenticated: Binding<Bool>) {
@@ -21,112 +19,149 @@ struct AuthenticateView: View {
 
     var body: some View {
         VStack {
-            Image("splash screen")
-            
-            Group {
-                Spacer()
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                TextField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button {
-                    
-                } label: {
-                    Text("Sign In")
-                        .frame(maxWidth: .infinity)
-                        .background(.white)
-                        .foregroundColor(Color(uiColor: kBlueColor))
-                        .clipShape(Capsule())
-                }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.white)
-            }
-            
-            Group {
-                Spacer()
-                Text("Or Sign In with your other accounts")
-                    .foregroundColor(.white)
-                accountButtons
-            }
-            
-            Group {
-                Spacer()
-                Text("No account yet?")
-                    .foregroundColor(.white)
-                Button {
-                    
-                } label: {
-                    Text("Sign Up")
-                        .frame(maxWidth: .infinity)
-                        .background(.white)
-                        .foregroundColor(Color(uiColor: kBlueColor))
-                        .clipShape(Capsule())
-                }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.white)
-            }
-            
-            
-            
-            Group {
-                Spacer()
-                Text("Forgot your password?")
-                    .foregroundColor(.white)
-                Button {
-                    
-                } label: {
-                    Text("Retrieve password")
-                        .frame(maxWidth: .infinity)
-                        .background(.white)
-                        .foregroundColor(Color(uiColor: kBlueColor))
-                        .clipShape(Capsule())
-                }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.white)
-            }
-                
+            Spacer()
+            Image("logo")
+            buttons
+                .padding()
             Spacer()
         }
             .padding()
             .background(Color(uiColor: kBlueColor))
     }
     
-    var accountButtons: some View {
-        HStack {
-//            Spacer()
+    var buttons: some View {
+        VStack {
+            // Mail
 //            Button(action: {
-//
+//                signWithEmail()
 //            }) {
-//                Image("facebook")
-//                    .renderingMode(.template)
-//                    .foregroundColor(.white)
-//            }
+//                HStack {
+//                    Image("mail")
 //                    Spacer()
-//                    Button(action: {
-//
-//                    }) {
-//                        Image("twitter")
-//                            .renderingMode(.template)
-//                            .foregroundColor(.white)
-//                    }
-            Spacer()
+//                    Text("Sign in with email")
+//                        .foregroundColor(Color(uiColor: kBlueColor))
+//                    Spacer()
+//                }
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .tint(.white)
+            
+            // Google
             Button(action: {
-                viewModel.signInWithGoogle { result in
-                    switch result {
-                    case .failure(let error):
-                        print(error)
-                    case.success(let authenticated):
-                        self.authenticated = authenticated
-                    }
-                    
-                }
+                signWithGoogle()
             }) {
-                Image("google+")
-                    .renderingMode(.template)
-                    .foregroundColor(.white)
+                HStack {
+                    Image("google")
+                    Spacer()
+                    Text("Sign in with Google")
+                        .foregroundColor(Color(uiColor: kBlueColor))
+                    Spacer()
+                }
             }
-            Spacer()
+            .buttonStyle(.borderedProminent)
+            .tint(.white)
+            
+            // Facebook
+//            Button(action: {
+//                signWithFacebook()
+//            }) {
+//                HStack {
+//                    Image("facebook")
+//                    Spacer()
+//                    Text("Sign in with Facebook")
+//                        .foregroundColor(Color(uiColor: kBlueColor))
+//                    Spacer()
+//                }
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .tint(.white)
+            
+            // Apple
+//            Button(action: {
+//                signWithApple()
+//            }) {
+//                HStack {
+//                    Image("apple")
+//                    Spacer()
+//                    Text("Sign in with Apple")
+//                        .foregroundColor(Color(uiColor: kBlueColor))
+//                    Spacer()
+//                }
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .tint(.white)
+            
+            // Phone
+//            Button(action: {
+//                signWithPhone()
+//            }) {
+//                HStack {
+//                    Image("phone")
+//                    Spacer()
+//                    Text("Sign in with phone")
+//                        .foregroundColor(Color(uiColor: kBlueColor))
+//                    Spacer()
+//                }
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .tint(.white)
+
+            // Anonymous
+//            Button(action: {
+//                signAnonymously()
+//            }) {
+//                HStack {
+//                    Image("anonymous")
+//                    Spacer()
+//                    Text("Sign in anonymously")
+//                        .foregroundColor(Color(uiColor: kBlueColor))
+//                    Spacer()
+//                }
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .tint(.white)
         }
+            .padding()
+    }
+
+    // MARK: - Actions
+
+    func signWithEmail() {
+        
+    }
+
+    func signWithGoogle() {
+        viewModel.signInWithGoogle { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case.success(let authenticated):
+                self.authenticated = authenticated
+            }
+        }
+    }
+    
+    func signWithFacebook() {
+        viewModel.signInWithFacebook { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case.success(let authenticated):
+                self.authenticated = authenticated
+            }
+        }
+    }
+    
+    func signWithApple() {
+        
+    }
+    
+    func signWithPhone() {
+        
+    }
+    
+    func signAnonymously() {
+        
     }
 }
 

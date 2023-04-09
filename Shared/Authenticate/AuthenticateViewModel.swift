@@ -9,70 +9,16 @@ import CryptoKit
 import SwiftUI
 import FirebaseCore
 import FirebaseAuth
-import GoogleSignIn
-import FacebookLogin
 
 enum AuthenticateError : Error {
-    case clientID, user, general
+    case clientID, user, general, cancelled
 }
 
 class AuthenticateViewModel: NSObject, ObservableObject {
     @Published var authenticated = false
-    private var currentNonce = ""
+    var currentNonce = ""
 
-    func signInWithGoogle(completion: @escaping (Result<Bool,Error>) -> Void) {
-        guard let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
-            completion(.failure(AuthenticateError.general))
-            return
-        }
-
-        guard let clientID = FirebaseApp.app()?.options.clientID else {
-            completion(.failure(AuthenticateError.clientID))
-            return
-        }
-
-        // Create Google Sign In configuration object.
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-
-        // Start the sign in flow!
-        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [unowned self] result, error in
-            guard error == nil else {
-                completion(.failure(AuthenticateError.general))
-                return
-            }
-
-            guard let user = result?.user,
-               let idToken = user.idToken?.tokenString else {
-                completion(.failure(AuthenticateError.user))
-                return
-            }
-
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                           accessToken: user.accessToken.tokenString)
-            authWithFirebase(with: credential, completion: completion)
-        }
-    }
-    
-    func signInWithFacebook(completion: @escaping (Result<Bool,Error>) -> Void) {
-        let nonce = randomNonceString()
-        currentNonce = nonce
-//        loginButton.delegate = self
-//        loginButton.loginTracking = .limited
-//        loginButton.nonce = sha256(nonce)
-
-        
-        let idTokenString = AuthenticationToken.current?.tokenString
-        let credential = OAuthProvider.credential(withProviderID: "facebook.com",
-                                                  idToken: idTokenString!,
-                                                  rawNonce: currentNonce)
-
-
-//        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-//        authWithFirebase(with: credential, completion: completion)
-    }
-    
-    private func authWithFirebase(with credential: AuthCredential, completion: @escaping (Result<Bool,Error>) -> Void) {
+    func authWithFirebase(with credential: AuthCredential, completion: @escaping (Result<Bool,Error>) -> Void) {
         Auth.auth().signIn(with: credential) { result, error in
             if let error = error {
                 completion(.failure(error))
@@ -84,7 +30,7 @@ class AuthenticateViewModel: NSObject, ObservableObject {
     }
     
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-    private func randomNonceString(length: Int = 32) -> String {
+    func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
         var result = ""
@@ -124,5 +70,4 @@ class AuthenticateViewModel: NSObject, ObservableObject {
 
         return hashString
     }
-
 }
