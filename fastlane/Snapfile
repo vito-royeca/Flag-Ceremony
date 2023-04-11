@@ -2,12 +2,11 @@
 
 # A list of devices you want to take the screenshots from
 devices([
-   "iPhone 6",
-   "iPhone 6 Plus",
-   "iPhone 5",
-   "iPad Pro (12.9 inch)",
-   "iPad Pro (9.7 inch)"
-#   "Apple TV 1080p"
+  "iPhone 14 Plus",
+  "iPhone Xs Max",
+  "iPhone 8 Plus",
+  "iPad Pro (12.9-inch) (6th generation)",
+  "iPad Pro (12.9-inch) (2nd generation)",
 ])
 
 languages([
@@ -18,7 +17,7 @@ languages([
 ])
 
 # The name of the scheme which contains the UI Tests
-scheme "Flag CeremonyUITests"
+scheme "Flag Ceremony (iOS)"
 
 # Where should the resulting screenshots be stored?
 # output_directory "./screenshots"
@@ -35,3 +34,6 @@ launch_arguments(["-DEBUG"])
 
 # For more information about all available options run
 # snapshot --help
+
+override_status_bar true
+dark_mode false

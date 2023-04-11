@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Collections
+import WhirlyGlobe
 
 struct MapSearchView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -48,7 +49,7 @@ struct MapSearchView: View {
                                     }
                                 }, label: {
                                     Text(letter)
-                                        .font(Font.footnote)
+                                        .font(Font.footnote.monospacedDigit())
                                         .padding(.trailing, 7)
                                 })
                             }

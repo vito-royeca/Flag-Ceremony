@@ -1,2 +1,9 @@
-* Account creation and login
-* Numerous enhancements and bug fixes
+- Cleaned and redesigned user interface
+
+- Added Apple Sign In
+
+- You can now edit your display name and upload your avatar
+
+- You can now add Star to your favorite flags/countries
+
+- Anthem automatically plays when you tap on a country

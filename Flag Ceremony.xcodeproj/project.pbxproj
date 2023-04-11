@@ -1757,9 +1757,6 @@
 		8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
-		8B9AA44529CA91C500E483EA /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9AA44429CA91C500E483EA /* FacebookCore */; };
-		8B9AA44729CA91C500E483EA /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9AA44629CA91C500E483EA /* FacebookLogin */; };
-		8B9AA44929CA91C500E483EA /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9AA44829CA91C500E483EA /* FacebookShare */; };
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
 		8BA81DF829C9D6CB006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
@@ -1775,10 +1772,6 @@
 		8BABAF4329E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */; };
 		8BABAF4429E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */; };
 		8BABAF4529E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */; };
-		8BABAF4729E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */; };
-		8BABAF4829E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */; };
-		8BABAF4929E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */; };
-		8BABAF4A29E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */; };
 		8BABAF4C29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */; };
 		8BABAF4D29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */; };
 		8BABAF4E29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */; };
@@ -1792,6 +1785,41 @@
 		8BC7BD4729DFD32400C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
 		8BC7BD4829DFD32400C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
 		8BC7BD4929DFD32500C34A74 /* HighlightedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */; };
+		8BCE3ADE29E3161200E69F99 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3ADD29E3161200E69F99 /* SwiftUIX */; };
+		8BCE3AE029E3161200E69F99 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3ADF29E3161200E69F99 /* Introspect */; };
+		8BCE3AE229E3161200E69F99 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AE129E3161200E69F99 /* GoogleSignIn */; };
+		8BCE3AE429E3161200E69F99 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AE329E3161200E69F99 /* GoogleSignInSwift */; };
+		8BCE3AEC29E3161200E69F99 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AEB29E3161200E69F99 /* Collections */; };
+		8BCE3AEE29E3161200E69F99 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AED29E3161200E69F99 /* DequeModule */; };
+		8BCE3AF029E3161200E69F99 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AEF29E3161200E69F99 /* OrderedCollections */; };
+		8BCE3AF229E3161200E69F99 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AF129E3161200E69F99 /* FirebaseAnalytics */; };
+		8BCE3AF429E3161200E69F99 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AF329E3161200E69F99 /* FirebaseAuth */; };
+		8BCE3AF629E3161200E69F99 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AF529E3161200E69F99 /* FirebaseAuthCombine-Community */; };
+		8BCE3AF829E3161200E69F99 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AF729E3161200E69F99 /* FirebaseCrashlytics */; };
+		8BCE3AFA29E3161200E69F99 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AF929E3161200E69F99 /* FirebaseDatabase */; };
+		8BCE3AFC29E3161200E69F99 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AFB29E3161200E69F99 /* FirebaseDatabaseSwift */; };
+		8BCE3AFE29E3161200E69F99 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AFD29E3161200E69F99 /* FirebaseFirestoreCombine-Community */; };
+		8BCE3B0029E3161200E69F99 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AFF29E3161200E69F99 /* FirebaseStorage */; };
+		8BCE3B0129E3161200E69F99 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
+		8BCE3B0229E316C100E69F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
+		8BCE3B0329E316C200E69F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
+		8BCE3B0429E3174200E69F99 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
+		8BCE3B0529E3174200E69F99 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
+		8BCE3B0629E3176400E69F99 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* MapViewModel.swift */; };
+		8BCE3B0729E3176400E69F99 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* MapViewModel.swift */; };
+		8BCE3B0829E3178B00E69F99 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */; };
+		8BCE3B0929E3178B00E69F99 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */; };
+		8BCE3B0A29E317F700E69F99 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2096A2284400C200B62A45 /* MapView.swift */; };
+		8BCE3B0B29E317F800E69F99 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2096A2284400C200B62A45 /* MapView.swift */; };
+		8BCE3B0C29E317FB00E69F99 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969E284400C200B62A45 /* GlobeView.swift */; };
+		8BCE3B0D29E317FC00E69F99 /* GlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969E284400C200B62A45 /* GlobeView.swift */; };
+		8BCE3B0E29E3183F00E69F99 /* CountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B335B1F29C2EE9D003D1F01 /* CountryView.swift */; };
+		8BCE3B0F29E3184200E69F99 /* CountryViewItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */; };
+		8BCE3B1029E3184300E69F99 /* CountryViewItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */; };
+		8BCE3B1129E3184400E69F99 /* CountryViewItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8E27629C4D9A200929089 /* CountryViewItemSource.swift */; };
+		8BCE3B1229E3185200E69F99 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
+		8BCE3B1329E3185300E69F99 /* GeographicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */; };
+		8BCE3B1529E323C800E69F99 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCE3B1429E323C800E69F99 /* SnapshotHelper.swift */; };
 		8BD64DA729CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA829CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
 		8BD64DA929CE98FE001E8657 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD64DA629CE98FE001E8657 /* EditAccountView.swift */; };
@@ -2321,10 +2349,10 @@
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Google.swift"; sourceTree = "<group>"; };
-		8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Facebook.swift"; sourceTree = "<group>"; };
 		8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Email.swift"; sourceTree = "<group>"; };
 		8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographicViewController.swift; sourceTree = "<group>"; };
 		8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightedText.swift; sourceTree = "<group>"; };
+		8BCE3B1429E323C800E69F99 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		8BD64DA629CE98FE001E8657 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		8BF69F6029C62CE500E0C00B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		8BF69F6929C6549800E0C00B /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -2344,13 +2372,10 @@
 				8BC7BD4029DFA3C300C34A74 /* Collections in Frameworks */,
 				8B1A0BB529C365CF0012B2A8 /* SwiftUIX in Frameworks */,
 				8BABAF3129E1C92C006CF08B /* FirebaseAnalytics in Frameworks */,
-				8B9AA44529CA91C500E483EA /* FacebookCore in Frameworks */,
 				8BC7BD4229DFA3C300C34A74 /* DequeModule in Frameworks */,
 				8BABAF3529E1C92C006CF08B /* FirebaseAuthCombine-Community in Frameworks */,
 				8BABAF3F29E1C92C006CF08B /* FirebaseStorageCombine-Community in Frameworks */,
 				8BABAF3929E1C92C006CF08B /* FirebaseDatabase in Frameworks */,
-				8B9AA44929CA91C500E483EA /* FacebookShare in Frameworks */,
-				8B9AA44729CA91C500E483EA /* FacebookLogin in Frameworks */,
 				8BC7BD4429DFA3C300C34A74 /* OrderedCollections in Frameworks */,
 				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
 				8BABAF3D29E1C92C006CF08B /* FirebaseStorage in Frameworks */,
@@ -2374,6 +2399,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BCE3B0129E3161200E69F99 /* WhirlyGlobe.framework in Frameworks */,
+				8BCE3AFA29E3161200E69F99 /* FirebaseDatabase in Frameworks */,
+				8BCE3AF029E3161200E69F99 /* OrderedCollections in Frameworks */,
+				8BCE3ADE29E3161200E69F99 /* SwiftUIX in Frameworks */,
+				8BCE3AF829E3161200E69F99 /* FirebaseCrashlytics in Frameworks */,
+				8BCE3AEC29E3161200E69F99 /* Collections in Frameworks */,
+				8BCE3AF629E3161200E69F99 /* FirebaseAuthCombine-Community in Frameworks */,
+				8BCE3AFC29E3161200E69F99 /* FirebaseDatabaseSwift in Frameworks */,
+				8BCE3AE029E3161200E69F99 /* Introspect in Frameworks */,
+				8BCE3AF229E3161200E69F99 /* FirebaseAnalytics in Frameworks */,
+				8BCE3B0029E3161200E69F99 /* FirebaseStorage in Frameworks */,
+				8BCE3AFE29E3161200E69F99 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				8BCE3AF429E3161200E69F99 /* FirebaseAuth in Frameworks */,
+				8BCE3AEE29E3161200E69F99 /* DequeModule in Frameworks */,
+				8BCE3AE229E3161200E69F99 /* GoogleSignIn in Frameworks */,
+				8BCE3AE429E3161200E69F99 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2666,6 +2707,7 @@
 		8B2096582842797D00B62A45 /* Tests iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8BCE3B1429E323C800E69F99 /* SnapshotHelper.swift */,
 				8B2096592842797D00B62A45 /* Tests_iOS.swift */,
 				8B20965B2842797D00B62A45 /* Tests_iOSLaunchTests.swift */,
 			);
@@ -3004,7 +3046,6 @@
 				8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */,
 				8B0FA36C29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift */,
 				8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */,
-				8BABAF4629E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift */,
 				8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */,
 			);
 			path = Authenticate;
@@ -3041,9 +3082,6 @@
 				8BA723A729C4419500FF4859 /* Introspect */,
 				8B4A2C9929C7B0A600B87840 /* GoogleSignIn */,
 				8B4A2C9B29C7B0A600B87840 /* GoogleSignInSwift */,
-				8B9AA44429CA91C500E483EA /* FacebookCore */,
-				8B9AA44629CA91C500E483EA /* FacebookLogin */,
-				8B9AA44829CA91C500E483EA /* FacebookShare */,
 				8BC7BD3F29DFA3C300C34A74 /* Collections */,
 				8BC7BD4129DFA3C300C34A74 /* DequeModule */,
 				8BC7BD4329DFA3C300C34A74 /* OrderedCollections */,
@@ -3091,6 +3129,23 @@
 				8B2096572842797D00B62A45 /* PBXTargetDependency */,
 			);
 			name = "Tests iOS";
+			packageProductDependencies = (
+				8BCE3ADD29E3161200E69F99 /* SwiftUIX */,
+				8BCE3ADF29E3161200E69F99 /* Introspect */,
+				8BCE3AE129E3161200E69F99 /* GoogleSignIn */,
+				8BCE3AE329E3161200E69F99 /* GoogleSignInSwift */,
+				8BCE3AEB29E3161200E69F99 /* Collections */,
+				8BCE3AED29E3161200E69F99 /* DequeModule */,
+				8BCE3AEF29E3161200E69F99 /* OrderedCollections */,
+				8BCE3AF129E3161200E69F99 /* FirebaseAnalytics */,
+				8BCE3AF329E3161200E69F99 /* FirebaseAuth */,
+				8BCE3AF529E3161200E69F99 /* FirebaseAuthCombine-Community */,
+				8BCE3AF729E3161200E69F99 /* FirebaseCrashlytics */,
+				8BCE3AF929E3161200E69F99 /* FirebaseDatabase */,
+				8BCE3AFB29E3161200E69F99 /* FirebaseDatabaseSwift */,
+				8BCE3AFD29E3161200E69F99 /* FirebaseFirestoreCombine-Community */,
+				8BCE3AFF29E3161200E69F99 /* FirebaseStorage */,
+			);
 			productName = "Tests iOS";
 			productReference = 8B2096552842797D00B62A45 /* Tests iOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -3152,7 +3207,6 @@
 				8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
@@ -4906,7 +4960,6 @@
 				8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */,
-				8BABAF4729E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */,
 				8B1E282529D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
 				8B556B2529C2420100101D46 /* MapViewModel.swift in Sources */,
 				8B556BA129C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
@@ -4953,7 +5006,6 @@
 				8BD64DA829CE98FE001E8657 /* EditAccountView.swift in Sources */,
 				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8929C2AF8600101D46 /* FCAnthem.swift in Sources */,
-				8BABAF4829E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */,
 				8BF8E28729C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B556B2629C2420100101D46 /* MapViewModel.swift in Sources */,
 				8B556BA229C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
@@ -4963,6 +5015,7 @@
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7D29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8BF69F8329C6693F00E0C00B /* AccountView.swift in Sources */,
+				8BCE3B0F29E3184200E69F99 /* CountryViewItemSource.swift in Sources */,
 				8B2E1C9729CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B0FF90C29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
@@ -4973,31 +5026,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B556BAD29C2B88B00101D46 /* Persistence.swift in Sources */,
+				8BCE3B1229E3185200E69F99 /* GeographicViewController.swift in Sources */,
 				8B4A2C9629C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
+				8BCE3B0229E316C100E69F99 /* ContentView.swift in Sources */,
 				8BF8E28829C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B0FF90D29C3D418007F548A /* MediaPlayer.swift in Sources */,
 				8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */,
 				8B53305129CFE25B0011476D /* UIImage+Resize.swift in Sources */,
-				8BABAF4929E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */,
+				8BCE3B1529E323C800E69F99 /* SnapshotHelper.swift in Sources */,
 				8B337E0529CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8BF8E28329C5897100929089 /* ChartsView.swift in Sources */,
+				8BCE3B0829E3178B00E69F99 /* TabNavigationView.swift in Sources */,
 				8BF69F7529C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B53301429CFB4A70011476D /* ImagePickerView.swift in Sources */,
+				8BCE3B0629E3176400E69F99 /* MapViewModel.swift in Sources */,
 				8B556B7E29C2AF8600101D46 /* FCUser.swift in Sources */,
+				8BCE3B1029E3184300E69F99 /* CountryViewItemSource.swift in Sources */,
 				8BABAF4429E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */,
 				8B556B5129C2AB2600101D46 /* FirebaseManager.swift in Sources */,
+				8BCE3B0429E3174200E69F99 /* AccountViewModel.swift in Sources */,
 				8B556B7629C2AF8600101D46 /* FCActivity.swift in Sources */,
 				8B20965C2842797D00B62A45 /* Tests_iOSLaunchTests.swift in Sources */,
 				8B1E282729D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
 				8B0FA36F29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8BABAF4E29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
 				8B556B8A29C2AF8600101D46 /* FCAnthem.swift in Sources */,
+				8BCE3B0A29E317F700E69F99 /* MapView.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
 				8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B2E1C8E29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8BD64DA929CE98FE001E8657 /* EditAccountView.swift in Sources */,
 				8B1A0BB129C35C770012B2A8 /* CountryViewModel.swift in Sources */,
+				8BCE3B0E29E3183F00E69F99 /* CountryView.swift in Sources */,
+				8BCE3B0C29E317FB00E69F99 /* GlobeView.swift in Sources */,
 				8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9229C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B2E1C9829CA6E84009B0E89 /* String+Subscript.swift in Sources */,
@@ -5011,6 +5073,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B556BAE29C2B88B00101D46 /* Persistence.swift in Sources */,
+				8BCE3B1329E3185300E69F99 /* GeographicViewController.swift in Sources */,
 				8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B2E1C9929CA6E84009B0E89 /* String+Subscript.swift in Sources */,
 				8B556B7F29C2AF8600101D46 /* FCUser.swift in Sources */,
@@ -5018,29 +5081,35 @@
 				8B4A2C9729C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
 				8B2E1C8F29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8B556B5229C2AB2600101D46 /* FirebaseManager.swift in Sources */,
+				8BCE3B0D29E317FC00E69F99 /* GlobeView.swift in Sources */,
+				8BCE3B0B29E317F800E69F99 /* MapView.swift in Sources */,
 				8B1A0BB229C35C770012B2A8 /* CountryViewModel.swift in Sources */,
 				8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B556B7729C2AF8600101D46 /* FCActivity.swift in Sources */,
+				8BCE3B0729E3176400E69F99 /* MapViewModel.swift in Sources */,
 				8B1E282829D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
 				8B0FA37029E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
+				8BCE3B1129E3184400E69F99 /* CountryViewItemSource.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
 				8BD64DAA29CE98FE001E8657 /* EditAccountView.swift in Sources */,
 				8B53305229CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8BABAF4F29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
 				8B556B8B29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B2096662842797D00B62A45 /* Tests_macOS.swift in Sources */,
+				8BCE3B0929E3178B00E69F99 /* TabNavigationView.swift in Sources */,
 				8BF8E28429C5897100929089 /* ChartsView.swift in Sources */,
 				8BC7BD4929DFD32500C34A74 /* HighlightedText.swift in Sources */,
 				8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9329C2AF8600101D46 /* FCCountry.swift in Sources */,
+				8BCE3B0329E316C200E69F99 /* ContentView.swift in Sources */,
 				8B0FF90029C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8BF8E28929C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B556BA429C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8BABAF4529E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */,
-				8BABAF4A29E1CBAB006CF08B /* AuthenticateViewModel+Facebook.swift in Sources */,
 				8B53301529CFB4A70011476D /* ImagePickerView.swift in Sources */,
 				8BF69F8529C6693F00E0C00B /* AccountView.swift in Sources */,
 				8BF69F7629C65C0900E0C00B /* AuthenticateView.swift in Sources */,
+				8BCE3B0529E3174200E69F99 /* AccountViewModel.swift in Sources */,
 				8B0FF90E29C3D418007F548A /* MediaPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5180,26 +5249,27 @@
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Flag Ceremony needs access to your Camera for profile avatar.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Flag Ceremony likes to use your location for Map and Globe positioning.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Flag Ceremony needs access to your Photo Library for profile avatar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5219,26 +5289,27 @@
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
 				INFOPLIST_FILE = "Flag-Ceremony--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Flag Ceremony needs access to your Camera for profile avatar.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Flag Ceremony likes to use your location for Map and Globe positioning.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Flag Ceremony needs access to your Photo Library for profile avatar.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca.Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5258,10 +5329,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -5273,6 +5345,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -5286,10 +5359,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -5301,6 +5375,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Flag-Ceremony";
 				PRODUCT_NAME = "Flag Ceremony";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -5311,13 +5386,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -5330,13 +5407,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -5350,14 +5429,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -5369,14 +5450,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jovitoroyeca..Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -5451,14 +5534,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 		8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
@@ -5500,21 +5575,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
-		};
-		8B9AA44429CA91C500E483EA /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		8B9AA44629CA91C500E483EA /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
-		};
-		8B9AA44829CA91C500E483EA /* FacebookShare */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9AA44329CA91C500E483EA /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookShare;
 		};
 		8BA723A729C4419500FF4859 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -5575,6 +5635,81 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		8BCE3ADD29E3161200E69F99 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+		8BCE3ADF29E3161200E69F99 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA723A629C4419500FF4859 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		8BCE3AE129E3161200E69F99 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		8BCE3AE329E3161200E69F99 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		8BCE3AEB29E3161200E69F99 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		8BCE3AED29E3161200E69F99 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		8BCE3AEF29E3161200E69F99 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		8BCE3AF129E3161200E69F99 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		8BCE3AF329E3161200E69F99 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		8BCE3AF529E3161200E69F99 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		8BCE3AF729E3161200E69F99 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		8BCE3AF929E3161200E69F99 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		8BCE3AFB29E3161200E69F99 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		8BCE3AFD29E3161200E69F99 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		8BCE3AFF29E3161200E69F99 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -26,7 +26,6 @@
 		11E5B8AB1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
 		11E5B8AC1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
 		11E5B8AD1E9699520021ABB5 /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */; };
-		582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582D904B1DEE16260030DA46 /* SnapshotHelper.swift */; };
 		5874E4221DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4231DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
 		5874E4241DEE6AF000E2D7AD /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */; };
@@ -129,7 +128,6 @@
 		11B0CD0E2091CB1F001B06A7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		11E5B8A61E9692020021ABB5 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		11E5B8AA1E9699520021ABB5 /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
-		582D904B1DEE16260030DA46 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		5874E4211DEE6AF000E2D7AD /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		5874E4251DEF2BE000E2D7AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8B1A0BA629C354730012B2A8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../Shared/Constants.swift; sourceTree = "<group>"; };
@@ -358,7 +356,6 @@
 		8C4E97471D88ED51005A685B /* Flag CeremonyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				582D904B1DEE16260030DA46 /* SnapshotHelper.swift */,
 				8C4E97481D88ED51005A685B /* Flag_CeremonyUITests.swift */,
 				8C4E974A1D88ED51005A685B /* Info.plist */,
 			);
@@ -623,7 +620,6 @@
 				116FD6F91E974BDA00178709 /* DataTableViewCell.swift in Sources */,
 				8CC2657B1DDABD0C001CDCF0 /* CountryViewController.swift in Sources */,
 				8B95FB2329C35119003CD2AB /* DBCountry+CoreDataProperties.swift in Sources */,
-				582D904C1DEE16260030DA46 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

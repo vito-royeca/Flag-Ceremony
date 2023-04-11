@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import WhirlyGlobe
 
 struct TabNavigationView: View {
     enum TabItem {

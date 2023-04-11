@@ -41,7 +41,9 @@ struct CountryView: View {
         }
             .onAppear {
                 viewModel.fetchData {
+                    #if !targetEnvironment(simulator)
                     viewModel.incrementViews()
+                    #endif
                 }
             }
     }
@@ -82,7 +84,9 @@ struct CountryView: View {
                             let topOffset = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
                             
                             scrollView.setContentOffset(topOffset, animated: true)
+                            #if !targetEnvironment(simulator)
                             viewModel.incrementPlays()
+                            #endif
                             isFinished = false
                         }
                     })
@@ -136,9 +140,14 @@ struct CountryView: View {
     var actionsView: some View {
         HStack {
             Text("\(viewModel.country?.views ?? 0)")
+                .font(Font.callout.monospacedDigit())
             Image(systemName: "eye.fill")
                 .imageScale(.small)
+
+            Text("\u{2022}")
+
             Text("\(viewModel.country?.plays ?? 0)")
+                .font(Font.callout.monospacedDigit())
             Image(systemName: "play.fill")
                 .imageScale(.small)
             

@@ -13,13 +13,14 @@ class MapViewModel: NSObject, ObservableObject {
     static let defaultLocation = MaplyCoordinateMakeWithDegrees(DefaultLocationLongitude, DefaultLocationLatitude)
     static let defaultMapViewHeight = Float(0.8)
     static let defaultGlobeViewHeight = Float(1.0)
-    
+    static let defaultCountryID = "PH"
+
     var mbTilesFetcher = MaplyMBTileFetcher(mbTiles: "geography-class_medres")
     private let locationManager = CLLocationManager()
     
     @Published var countries = [FCCountry]()
     @Published var location = defaultLocation
-    @Published var highleightedCountry: FCCountry?
+    @Published var highlightedCountry: FCCountry?
 
     override init() {
         super.init()
@@ -37,7 +38,11 @@ class MapViewModel: NSObject, ObservableObject {
     }
     
     func requestLocation() {
+        #if targetEnvironment(simulator)
+        location = MapViewModel.defaultLocation
+        #else
         locationManager.startUpdatingLocation()
+        #endif
     }
 }
 

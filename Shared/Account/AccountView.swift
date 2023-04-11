@@ -106,16 +106,19 @@ struct AccountView: View {
             }
             HStack(alignment: .center) {
                 Text("\(accountViewModel.activity?.viewCount ?? 0)")
+                    .font(Font.callout.monospacedDigit())
                 Image(systemName: "eye.fill")
                     .imageScale(.small)
                 Text("\u{2022}")
                 
                 Text("\(accountViewModel.activity?.playCount ?? 0)")
+                    .font(Font.callout.monospacedDigit())
                 Image(systemName: "play.fill")
                     .imageScale(.small)
                 Text("\u{2022}")
                 
                 Text("\(accountViewModel.favoriteCountries.count)")
+                    .font(Font.callout.monospacedDigit())
                 Image(systemName: "star.fill")
                     .imageScale(.small)
                 Spacer()

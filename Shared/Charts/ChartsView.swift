@@ -154,9 +154,11 @@ struct ChartCountryRowView: View {
     var body: some View {
         HStack {
             Text("\(index)")
+                .font(Font.callout.monospacedDigit())
             Text(name)
             Spacer()
             Text("\(count)")
+                .font(Font.callout.monospacedDigit())
             countIcon
                 .imageScale(.small)
         }
@@ -175,6 +177,7 @@ struct ChartUserRowView: View {
     var body: some View {
         HStack {
             Text("\(index)")
+                .font(Font.callout.monospacedDigit())
             AsyncImage(
                 url: photoUrl,
                 content: { image in
@@ -196,6 +199,7 @@ struct ChartUserRowView: View {
             Text(name)
             Spacer()
             Text("\(count)")
+                .font(Font.callout.monospacedDigit())
             countIcon
                 .imageScale(.small)
         }

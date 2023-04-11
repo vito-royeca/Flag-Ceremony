@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WhirlyGlobe
 
 enum GeographicViewControllerType {
     case map, globe
@@ -46,15 +47,10 @@ class GeographicViewController: UIViewController {
         case .globe:
             globe = WhirlyGlobeViewController()
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-
+        
         configure()
     }
-    
+
     private func configure() {
         guard let mbTilesFetcher = mbTilesFetcher else {
             return

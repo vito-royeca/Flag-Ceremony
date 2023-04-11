@@ -23,7 +23,11 @@ struct MapViewVC: View {
             .navigationTitle("Map")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
+                    #if targetEnvironment(simulator)
+                    CountryView(id: selectedCountry.id, isAutoPlay: false)
+                    #else
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
+                    #endif
                 }
             }
             .sheet(isPresented: $isShowingSearch, content: {
@@ -43,11 +47,21 @@ struct MapViewVC: View {
             }
             .onAppear {
                 location = viewModel.location
-                highlightedCountry = viewModel.highleightedCountry
+                highlightedCountry = viewModel.highlightedCountry
+                
+                // This is used for screenshots
+                #if targetEnvironment(simulator)
+                let environment = ProcessInfo.processInfo.environment
+                if environment["isUITest"] != nil {
+                    if selectedCountry == nil {
+                        selectedCountry = FCCountry(key: MapViewModel.defaultCountryID, dict: [:])
+                    }
+                }
+                #endif
             }
             .onDisappear {
                 viewModel.location = location
-                viewModel.highleightedCountry = highlightedCountry
+                viewModel.highlightedCountry = highlightedCountry
             }
     }
 }
@@ -80,7 +94,7 @@ struct MapView: UIViewControllerRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        let country = FCCountry(key: "PH", dict: [:])
+        let country = FCCountry(key: MapViewModel.defaultCountryID, dict: [:])
 
         MapView(selectedCountry: .constant(country),
                 highlightedCountry: .constant(nil),

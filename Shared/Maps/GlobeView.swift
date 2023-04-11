@@ -23,7 +23,11 @@ struct GlobeViewVC: View {
             .navigationTitle("Globe")
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
+                    #if targetEnvironment(simulator)
+                    CountryView(id: selectedCountry.id, isAutoPlay: false)
+                    #else
                     CountryView(id: selectedCountry.id, isAutoPlay: true)
+                    #endif
                 }
             }
             .sheet(isPresented: $isShowingSearch, content: {
@@ -43,11 +47,11 @@ struct GlobeViewVC: View {
             }
             .onAppear {
                 location = viewModel.location
-                highlightedCountry = viewModel.highleightedCountry
+                highlightedCountry = viewModel.highlightedCountry
             }
             .onDisappear {
                 viewModel.location = location
-                viewModel.highleightedCountry = highlightedCountry
+                viewModel.highlightedCountry = highlightedCountry
             }
     }
 }
@@ -81,7 +85,7 @@ struct GlobeView: UIViewControllerRepresentable {
 
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
-        let country = FCCountry(key: "PH", dict: [:])
+        let country = FCCountry(key: MapViewModel.defaultCountryID, dict: [:])
 
         GlobeView(selectedCountry: .constant(country),
                   highlightedCountry: .constant(nil),
