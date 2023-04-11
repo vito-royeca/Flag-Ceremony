@@ -24,9 +24,11 @@ class MapViewModel: NSObject, ObservableObject {
 
     override init() {
         super.init()
+        #if !targetEnvironment(simulator)
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
+        #endif
     }
     
     func fetchAllCountries() {
