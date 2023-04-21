@@ -31,7 +31,6 @@ struct AccountView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: AccountViewModel
     @State var tab: AccountTab = .viewed
-    @State var parentalGateApproved = false
     @State var authenticated = false
     @State private var isShowingEdit = false
 
@@ -40,14 +39,10 @@ struct AccountView: View {
             if viewModel.isLoggedIn {
                 dataView
             } else {
-                if parentalGateApproved {
-                    if authenticated {
-                        dataView
-                    } else {
-                        AuthenticateView(authenticated: $authenticated)
-                    }
+                if authenticated {
+                    dataView
                 } else {
-                    ParentalGateView(parentalGateApproved: $parentalGateApproved)
+                    AuthenticateView(authenticated: $authenticated)
                 }
             }
         }
