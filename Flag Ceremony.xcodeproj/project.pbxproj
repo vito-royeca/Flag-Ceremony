@@ -816,8 +816,6 @@
 		8B20965C2842797D00B62A45 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20965B2842797D00B62A45 /* Tests_iOSLaunchTests.swift */; };
 		8B2096662842797D00B62A45 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2096652842797D00B62A45 /* Tests_macOS.swift */; };
 		8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2096672842797D00B62A45 /* Tests_macOSLaunchTests.swift */; };
-		8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */; };
-		8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */; };
 		8B2096712842797D00B62A45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8B2096722842797D00B62A45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8B20969B2843FF7B00B62A45 /* TabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */; };
@@ -899,12 +897,6 @@
 		8B556BA229C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */; };
 		8B556BA329C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */; };
 		8B556BA429C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */; };
-		8B556BA629C2B4EF00101D46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
-		8B556BA729C2B4EF00101D46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
-		8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BAA29C2B88B00101D46 /* Persistence.swift */; };
-		8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BAA29C2B88B00101D46 /* Persistence.swift */; };
-		8B556BAD29C2B88B00101D46 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BAA29C2B88B00101D46 /* Persistence.swift */; };
-		8B556BAE29C2B88B00101D46 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BAA29C2B88B00101D46 /* Persistence.swift */; };
 		8B9A2F2429C2DC3F0034EBC5 /* tm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A2E4F29C2DC3F0034EBC5 /* tm.mp3 */; };
 		8B9A2F2529C2DC3F0034EBC5 /* tm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A2E4F29C2DC3F0034EBC5 /* tm.mp3 */; };
 		8B9A2F2629C2DC3F0034EBC5 /* tm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A2E4F29C2DC3F0034EBC5 /* tm.mp3 */; };
@@ -1809,8 +1801,6 @@
 		8BCE3AFE29E3161200E69F99 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AFD29E3161200E69F99 /* FirebaseFirestoreCombine-Community */; };
 		8BCE3B0029E3161200E69F99 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8BCE3AFF29E3161200E69F99 /* FirebaseStorage */; };
 		8BCE3B0129E3161200E69F99 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B20968F28427E9400B62A45 /* WhirlyGlobe.framework */; };
-		8BCE3B0229E316C100E69F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
-		8BCE3B0329E316C200E69F99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556BA529C2B4EF00101D46 /* ContentView.swift */; };
 		8BCE3B0429E3174200E69F99 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
 		8BCE3B0529E3174200E69F99 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF69F6929C6549800E0C00B /* AccountViewModel.swift */; };
 		8BCE3B0629E3176400E69F99 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B556B2429C2420100101D46 /* MapViewModel.swift */; };
@@ -2107,7 +2097,6 @@
 		8B1A1BCE29C37B620012B2A8 /* vu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vu.png; sourceTree = "<group>"; };
 		8B1A1BCF29C37B620012B2A8 /* tj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tj.png; sourceTree = "<group>"; };
 		8B1E282429D1F7BF00E606E5 /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
-		8B20963F2842797B00B62A45 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		8B2096432842797D00B62A45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B2096482842797D00B62A45 /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B20964E2842797D00B62A45 /* Flag Ceremony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flag Ceremony.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2141,8 +2130,6 @@
 		8B556B6E29C2AF8600101D46 /* FCAnthem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAnthem.swift; sourceTree = "<group>"; };
 		8B556B7029C2AF8600101D46 /* FCCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCCountry.swift; sourceTree = "<group>"; };
 		8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flag_CeremonyApp.swift; sourceTree = "<group>"; };
-		8B556BA529C2B4EF00101D46 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		8B556BAA29C2B88B00101D46 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8B9A2E4F29C2DC3F0034EBC5 /* tm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tm.mp3; sourceTree = "<group>"; };
 		8B9A2E5029C2DC3F0034EBC5 /* ve.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ve.mp3; sourceTree = "<group>"; };
 		8B9A2E5129C2DC3F0034EBC5 /* tz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tz.mp3; sourceTree = "<group>"; };
@@ -2756,7 +2743,6 @@
 				8B9A2E4E29C2DC3F0034EBC5 /* anthems */,
 				8B1A0BB629C374A00012B2A8 /* flags */,
 				8B556B5329C2AB8A00101D46 /* flag-ceremony-export.json */,
-				8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */,
 				8B2098FD2844049F00B62A45 /* geography-class_medres.mbtiles */,
 			);
 			path = data;
@@ -2778,7 +2764,6 @@
 			isa = PBXGroup;
 			children = (
 				8B556B4229C2AB2600101D46 /* FirebaseManager.swift */,
-				8B556BAA29C2B88B00101D46 /* Persistence.swift */,
 				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
 				8BAEC89429F1F331003A39FE /* String+localized.swift */,
 				8B2E1C9529CA6E84009B0E89 /* String+subscript.swift */,
@@ -3020,7 +3005,6 @@
 		8B9A327829C2DCFD0034EBC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8B556BA529C2B4EF00101D46 /* ContentView.swift */,
 				8BC7BD4529DFD32400C34A74 /* HighlightedText.swift */,
 				8B53301129CFB4A70011476D /* ImagePickerView.swift */,
 				8B20969A2843FF7B00B62A45 /* TabNavigationView.swift */,
@@ -4954,7 +4938,6 @@
 				8BAEC89A29F204C6003A39FE /* ParentalGateView.swift in Sources */,
 				8BF8E28629C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8BF69F8229C6693F00E0C00B /* AccountView.swift in Sources */,
-				8B556BA629C2B4EF00101D46 /* ContentView.swift in Sources */,
 				8B2096A3284400C200B62A45 /* GlobeView.swift in Sources */,
 				8BF69F7329C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */,
@@ -4963,14 +4946,12 @@
 				8B53301229CFB4A70011476D /* ImagePickerView.swift in Sources */,
 				8BF69F6A29C6549800E0C00B /* AccountViewModel.swift in Sources */,
 				8BF8E28129C5897100929089 /* ChartsView.swift in Sources */,
-				8B2096692842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8B0FF8FD29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */,
 				8B2E1C9629CA6E84009B0E89 /* String+subscript.swift in Sources */,
 				8BABAF4229E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */,
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8BABAF4C29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
-				8B556BAB29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B556B8829C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8B337E0329CB8C1000F844B9 /* AirPlayView.swift in Sources */,
@@ -5002,13 +4983,11 @@
 				8BAEC89B29F204C6003A39FE /* ParentalGateView.swift in Sources */,
 				8B556B5029C2AB2600101D46 /* FirebaseManager.swift in Sources */,
 				8B556B7529C2AF8600101D46 /* FCActivity.swift in Sources */,
-				8B556BA729C2B4EF00101D46 /* ContentView.swift in Sources */,
 				8B0FA36E29E27CF400B055E4 /* AuthenticateViewModel+Apple.swift in Sources */,
 				8BF8E28229C5897100929089 /* ChartsView.swift in Sources */,
 				8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
 				8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
-				8B20966A2842797D00B62A45 /* Flag_Ceremony.xcdatamodeld in Sources */,
 				8BC7BD3D29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B53305029CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
@@ -5020,7 +4999,6 @@
 				8B556B9129C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8B2E1C8D29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8BD64DA829CE98FE001E8657 /* EditAccountView.swift in Sources */,
-				8B556BAC29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8B556B8929C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8BF8E28729C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B556B2629C2420100101D46 /* MapViewModel.swift in Sources */,
@@ -5041,10 +5019,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B556BAD29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8BCE3B1229E3185200E69F99 /* GeographicViewController.swift in Sources */,
 				8B4A2C9629C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
-				8BCE3B0229E316C100E69F99 /* ContentView.swift in Sources */,
 				8BF8E28829C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B0FF90D29C3D418007F548A /* MediaPlayer.swift in Sources */,
 				8BF69F8429C6693F00E0C00B /* AccountView.swift in Sources */,
@@ -5090,7 +5066,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B556BAE29C2B88B00101D46 /* Persistence.swift in Sources */,
 				8BCE3B1329E3185300E69F99 /* GeographicViewController.swift in Sources */,
 				8BAEC89829F1F331003A39FE /* String+localized.swift in Sources */,
 				8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */,
@@ -5121,7 +5096,6 @@
 				8BC7BD4929DFD32500C34A74 /* HighlightedText.swift in Sources */,
 				8B4A2C9229C7821500B87840 /* RomanNumber.swift in Sources */,
 				8B556B9329C2AF8600101D46 /* FCCountry.swift in Sources */,
-				8BCE3B0329E316C200E69F99 /* ContentView.swift in Sources */,
 				8B0FF90029C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8BF8E28929C58ABE00929089 /* ChartsViewModel.swift in Sources */,
 				8B556BA429C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
@@ -5732,19 +5706,6 @@
 			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		8B20963E2842797B00B62A45 /* Flag_Ceremony.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8B20963F2842797B00B62A45 /* Shared.xcdatamodel */,
-			);
-			currentVersion = 8B20963F2842797B00B62A45 /* Shared.xcdatamodel */;
-			path = Flag_Ceremony.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8B2096392842797B00B62A45 /* Project object */;
 }
