@@ -17,11 +17,11 @@ enum CountryInfoTab: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .anthem:
-            return "Anthem"
+            return "CountryInfoView_anthem".localized
         case .flag:
-            return "Flag"
+            return "CountryInfoView_flag".localized
         case .country:
-            return "Country"
+            return "CountryInfoView_country".localized
         }
     }
 }
@@ -87,40 +87,40 @@ struct CountryInfoView: View {
         List {
             tabView
             HStack {
-                Text("Capital")
+                Text("CountryInfoView_capital".localized)
                 Spacer()
                 Text("\(viewModel.country?.capital?["Name"] as? String ?? "")")
             }
             HStack {
-                Text("Telephone Prefix")
+                Text("CountryInfoView_telephone_prefix".localized)
                 Spacer()
                 Text("\(viewModel.country?.telPref ?? "")")
             }
-            Section(header: Text("Country Codes")) {
+            Section(header: Text("CountryInfoView_country_codes".localized)) {
                 HStack {
-                    Text("FIFS")
+                    Text("CountryInfoView_fifs".localized)
                     Spacer()
                     Text("\(viewModel.country?.countryCodes?["fips"] as? String ?? "")")
                 }
                 HStack {
-                    Text("ISO 2")
+                    Text("CountryInfoView_iso2".localized)
                     Spacer()
                     Text("\(viewModel.country?.countryCodes?["iso2"] as? String ?? "")")
                 }
                 HStack {
-                    Text("ISO 3")
+                    Text("CountryInfoView_iso3".localized)
                     Spacer()
                     Text("\(viewModel.country?.countryCodes?["iso3"] as? String ?? "")")
                 }
                 HStack {
-                    Text("ISO N")
+                    Text("CountryInfoView_ison".localized)
                     if let ison = viewModel.country?.countryCodes?["isoN"] as? Int {
                         Spacer()
                         Text("\(ison)")
                     }
                 }
                 HStack {
-                    Text("TLD")
+                    Text("CountryInfoView_tld".localized)
                     Spacer()
                     Text("\(viewModel.country?.countryCodes?["tld"] as? String ?? "")")
                 }

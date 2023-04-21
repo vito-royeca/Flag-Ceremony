@@ -39,7 +39,7 @@ struct TabNavigationView: View {
                 .navigationViewStyle(.stack)
                 .tabItem {
                     Image(systemName: "map")
-                    Text("Map")
+                    Text("TabNavigationView_map".localized)
                 }
                 .tag(TabItem.map)
             
@@ -49,7 +49,7 @@ struct TabNavigationView: View {
                 .navigationViewStyle(.stack)
                 .tabItem {
                     Image(systemName: "globe")
-                    Text("Globe")
+                    Text("TabNavigationView_globe".localized)
                 }
                 .tag(TabItem.globe)
             
@@ -59,7 +59,7 @@ struct TabNavigationView: View {
                 .navigationViewStyle(.stack)
                 .tabItem {
                     Image(systemName: "chart.bar.doc.horizontal")
-                    Text("Charts")
+                    Text("TabNavigationView_charts".localized)
                 }
                 .tag(TabItem.charts)
             
@@ -69,7 +69,7 @@ struct TabNavigationView: View {
                 .navigationViewStyle(.stack)
                 .tabItem {
                     Image(systemName: "person.circle")
-                    Text("Account")
+                    Text("TabNavigationView_account".localized)
                 }
                 .tag(TabItem.account)
         }

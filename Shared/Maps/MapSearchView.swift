@@ -59,7 +59,7 @@ struct MapSearchView: View {
                 }
             }
         }
-            .navigationTitle(Text("Search"))
+        .navigationTitle(Text("MapSearchView_search".localized))
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -69,7 +69,7 @@ struct MapSearchView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "Country or Capital")
+            .searchable(text: $searchText, prompt: "MapSearchView_country_or_capital".localized)
             .onAppear {
                 viewModel.fetchAllCountries()
             }
@@ -141,7 +141,7 @@ struct MapSearchRowView: View {
                     HighlightedText(country, matching: matching)
                 }
                 HStack {
-                    Text("Capital:")
+                    Text("\("MapSearchView_capital".localized):")
                         .font(Font.footnote)
                     HighlightedText(capital, matching: matching)
                         .font(Font.footnote)
@@ -152,7 +152,7 @@ struct MapSearchRowView: View {
 
             Button(action: action) {
                 Image(systemName: "location.circle")
-                    .renderingMode(.original)
+//                    .renderingMode(.original)
             }
         }
     }

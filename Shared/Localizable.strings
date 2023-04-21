@@ -5,3 +5,62 @@
   Created by Vito Royeca on 3/18/23.
   
 */
+
+/* TabNavigationView */
+"TabNavigationView_map" = "Map";
+"TabNavigationView_globe" = "Globe";
+"TabNavigationView_charts" = "Charts";
+"TabNavigationView_account" = "Account";
+
+/* MapViewVC */
+"MapViewVC_map" = "Map";
+
+/* GlobeViewVC */
+"GlobeViewVC_globe" = "Globe";
+
+/* MapSearchView */
+"MapSearchView_search" = "Search";
+"MapSearchView_country_or_capital" = "Country or Capital";
+"MapSearchView_capital" = "Capital";
+
+/* CountryInfoView */
+"CountryInfoView_anthem" = "Anthem";
+"CountryInfoView_flag" = "Flag";
+"CountryInfoView_country" = "Country";
+"CountryInfoView_capital" = "Capital";
+"CountryInfoView_telephone_prefix" = "Telephone Prefix";
+"CountryInfoView_country_codes" = "Country Codes";
+"CountryInfoView_fifs" = "FIFS";
+"CountryInfoView_iso2" = "ISO 2";
+"CountryInfoView_iso3" = "ISO 3";
+"CountryInfoView_ison" = "ISO N";
+"CountryInfoView_tld" = "TLD";
+
+/* ChartsView */
+"ChartsView_charts" = "Charts";
+"ChartsView_top_viewed" = "Top Viewed";
+"ChartsView_top_played" = "Top Played";
+"ChartsView_top_viewers" = "Top Viewers";
+"ChartsView_top_players" = "Top Players";
+
+/* ParentalGateView */
+"ParentalGateView_body_text" = "Sign In with your account to get access to advance features.";
+"ParentalGateView_sign_in" = "Sign In";
+"ParentalGateView_parental_gate" = "Parental Gate";
+"ParentalGateView_answer" = "Answer";
+"ParentalGateView_submit" = "Submit";
+"ParentalGateView_cancel" = "Cancel";
+"ParentalGateView_question" = "Ask your parent or guardian to help you answer the question below.\n\nThe Roman Numeral %@ is equivalent to?";
+"ParentalGateView_incorrect" = "The answer is incorrect.";
+"ParentalGateView_ok" = "OK";
+
+/* AuthenticateView */
+"AuthenticateView_sign_in_google" = "Sign in with Google";
+"AuthenticateView_sign_in_apple" = "Sign in with Apple";
+
+/* AccountView */
+"AccountView_viewed" = "Viewed";
+"AccountView_played" = "Played";
+"AccountView_favorites" = "Favorites";
+"AccountView_sign_out" = "Sign out";
+"AccountView_edit" = "Edit";

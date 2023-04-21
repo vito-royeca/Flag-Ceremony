@@ -20,7 +20,7 @@ struct MapViewVC: View {
         MapView(selectedCountry: $selectedCountry,
                 highlightedCountry: $highlightedCountry,
                 location: $location)
-            .navigationTitle("Map")
+        .navigationTitle("MapViewVC_map".localized)
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     #if targetEnvironment(simulator)
@@ -118,7 +118,9 @@ extension MapView {
             }
         }
 
-        func maplyViewController(_ viewC: MaplyViewController, didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>, userMotion: Bool) {
+        func maplyViewController(_ viewC: MaplyViewController,
+                                 didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>,
+                                 userMotion: Bool) {
             var position = MaplyCoordinate(x: 0, y: 0)
             var height = Float(0)
 

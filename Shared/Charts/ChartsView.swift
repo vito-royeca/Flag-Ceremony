@@ -18,13 +18,13 @@ enum ChartsTab: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .topViewed:
-            return "Top Viewed"
+            return "ChartsView_top_viewed".localized
         case .topPlayed:
-            return "Top Played"
+            return "ChartsView_top_played".localized
         case .topViewers:
-            return "Top Viewers"
+            return "ChartsView_top_viewers".localized
         case .topPlayers:
-            return "Top Players"
+            return "ChartsView_top_players".localized
         }
     }
 }
@@ -52,7 +52,7 @@ struct ChartsView: View {
             }
                 .listStyle(.plain)
         }
-            .navigationTitle("Charts")
+        .navigationTitle("ChartsView_charts".localized)
             .onAppear() {
                 fetchData()
             }

@@ -1,5 +1,5 @@
 //
-//  String+Subscript.swift
+//  String+subscript.swift
 //  Flag Ceremony
 //
 //  Created by Vito Royeca on 3/21/23.

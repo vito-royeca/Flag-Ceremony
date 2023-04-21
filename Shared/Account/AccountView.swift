@@ -18,11 +18,11 @@ enum AccountTab: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .viewed:
-            return "Viewed"
+            return "AccountView_viewed".localized
         case .played:
-            return "Played"
+            return "AccountView_played".localized
         case .favorites:
-            return "Favorites"
+            return "AccountView_favorites".localized
         }
     }
 }
@@ -213,80 +213,19 @@ struct AccountViewToolbar: ToolbarContent {
     
     var body: some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarLeading) {
-            Button("Sign Out") {
+            Button("AccountView_sign_out".localized) {
                 viewModel.signOut()
                 isAuthenticated = false
             }
         }
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-            Button("Edit") {
+            Button("AccountView_edit".localized) {
                 isShowingEdit.toggle()
             }
         }
     }
 }
 
-
-// MARK: - ParentalGateView
-
-struct ParentalGateView: View {
-    @State private var showChallenge = false
-    @State private var showFailure = false
-    @State private var answer: String = ""
-    @State private var randomNumber = NSNumber.randomNumber()
-    @Binding var parentalGateApproved: Bool
-
-    var body: some View {
-        VStack {
-            Spacer()
-            Image("logo")
-            Spacer()
-            Text("Sign In with your account to get access to advance features.")
-                .foregroundColor(.white)
-            buttonView
-            Spacer()
-        }
-            .padding()
-            .background(Color(uiColor: kBlueColor))
-    }
-    
-    var buttonView: some View {
-        VStack {
-            Button(action: {
-                randomNumber = NSNumber.randomNumber()
-                showChallenge = true
-            }) {
-                HStack {
-                    Spacer()
-                    Text("Sign In")
-                        .foregroundColor(Color(uiColor: kBlueColor))
-                    Spacer()
-                }
-            }
-                .buttonStyle(.borderedProminent)
-                .tint(.white)
-                .alert("Parental Gate", isPresented: $showChallenge, actions: {
-                    TextField("Answer", text: $answer)
-                        .keyboardType(.numberPad)
-                    
-                    Button("Submit", action: checkAnswer)
-                    Button("Cancel", role: .cancel) {}
-                }, message: {
-                    Text("Ask your parent or guardian to help you answer the question below.\n\nThe Roman Numeral \(randomNumber.toRomanNumeral()) is equivalent to?")
-                })
-                .alert("The answer is incorrect.", isPresented: $showFailure) {
-                    Button("OK", role: .cancel) {}
-                }
-        }
-            .padding()
-    }
-
-    func checkAnswer() {
-        parentalGateApproved = answer == randomNumber.stringValue
-        showFailure = !parentalGateApproved
-        answer = ""
-    }
-}
 
 // MARK: - AccountImageView
 

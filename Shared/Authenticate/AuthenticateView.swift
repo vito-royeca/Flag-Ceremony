@@ -29,21 +29,6 @@ struct AuthenticateView: View {
     
     var buttons: some View {
         VStack {
-            // Mail
-//            Button(action: {
-//                signWithEmail()
-//            }) {
-//                HStack {
-//                    Image("mail")
-//                    Spacer()
-//                    Text("Sign in with email")
-//                        .foregroundColor(Color(uiColor: kBlueColor))
-//                    Spacer()
-//                }
-//            }
-//            .buttonStyle(.borderedProminent)
-//            .tint(.white)
-            
             // Google
             Button(action: {
                 signWithGoogle()
@@ -51,28 +36,13 @@ struct AuthenticateView: View {
                 HStack {
                     Image("google")
                     Spacer()
-                    Text("Sign in with Google")
+                    Text("AuthenticateView_sign_in_google".localized)
                         .foregroundColor(Color(uiColor: kBlueColor))
                     Spacer()
                 }
             }
                 .buttonStyle(.borderedProminent)
                 .tint(.white)
-            
-            // Facebook
-//            Button(action: {
-//                signWithFacebook()
-//            }) {
-//                HStack {
-//                    Image("facebook")
-//                    Spacer()
-//                    Text("Sign in with Facebook")
-//                        .foregroundColor(Color(uiColor: kBlueColor))
-//                    Spacer()
-//                }
-//            }
-//            .buttonStyle(.borderedProminent)
-//            .tint(.white)
             
             // Apple
             Button(action: {
@@ -81,52 +51,18 @@ struct AuthenticateView: View {
                 HStack {
                     Image("apple")
                     Spacer()
-                    Text("Sign in with Apple")
+                    Text("AuthenticateView_sign_in_apple".localized)
                         .foregroundColor(Color(uiColor: kBlueColor))
                     Spacer()
                 }
             }
                 .buttonStyle(.borderedProminent)
                 .tint(.white)
-            
-            // Phone
-//            Button(action: {
-//                signWithPhone()
-//            }) {
-//                HStack {
-//                    Image("phone")
-//                    Spacer()
-//                    Text("Sign in with phone")
-//                        .foregroundColor(Color(uiColor: kBlueColor))
-//                    Spacer()
-//                }
-//            }
-//            .buttonStyle(.borderedProminent)
-//            .tint(.white)
-
-            // Anonymous
-//            Button(action: {
-//                signAnonymously()
-//            }) {
-//                HStack {
-//                    Image("anonymous")
-//                    Spacer()
-//                    Text("Sign in anonymously")
-//                        .foregroundColor(Color(uiColor: kBlueColor))
-//                    Spacer()
-//                }
-//            }
-//            .buttonStyle(.borderedProminent)
-//            .tint(.white)
         }
             .padding()
     }
 
     // MARK: - Actions
-
-    func signWithEmail() {
-        
-    }
 
     func signWithGoogle() {
         viewModel.signInWithGoogle { result in
@@ -139,27 +75,8 @@ struct AuthenticateView: View {
         }
     }
     
-    func signWithFacebook() {
-//        viewModel.signInWithFacebook { result in
-//            switch result {
-//            case .failure(let error):
-//                print(error)
-//            case.success:
-//                ()
-//            }
-//        }
-    }
-    
     func signWithApple() {
         viewModel.signInWithApple()
-    }
-    
-    func signWithPhone() {
-        
-    }
-    
-    func signAnonymously() {
-        
     }
 }
 

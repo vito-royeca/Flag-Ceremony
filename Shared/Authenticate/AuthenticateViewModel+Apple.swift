@@ -11,12 +11,12 @@ import AuthenticationServices
 
 extension AuthenticateViewModel: ASAuthorizationControllerDelegate {
     func signInWithApple() {
-        guard let viewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
+        guard let _ = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
 //            completion(.failure(AuthenticateError.general))
             return
         }
 
-        guard let clientID = FirebaseApp.app()?.options.clientID else {
+        guard let _ = FirebaseApp.app()?.options.clientID else {
 //            completion(.failure(AuthenticateError.clientID))
             return
         }
