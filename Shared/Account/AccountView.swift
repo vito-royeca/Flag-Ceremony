@@ -29,7 +29,7 @@ enum AccountTab: String, CaseIterable, Identifiable {
 
 struct AccountView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var accountViewModel: AccountViewModel
+    @EnvironmentObject var viewModel: AccountViewModel
     @State var tab: AccountTab = .viewed
     @State var parentalGateApproved = false
     @State var authenticated = false
@@ -37,7 +37,7 @@ struct AccountView: View {
 
     var body: some View {
         VStack {
-            if accountViewModel.isLoggedIn {
+            if viewModel.isLoggedIn {
                 dataView
             } else {
                 if parentalGateApproved {
@@ -78,12 +78,12 @@ struct AccountView: View {
             .sheet(isPresented: $isShowingEdit, content: {
                 NavigationView {
                     EditAccountView()
-                        .environmentObject(accountViewModel)
+                        .environmentObject(viewModel)
                 }
             })
             .onAppear {
-                accountViewModel.fetchUserData {
-                    guard let account = accountViewModel.account else {
+                viewModel.fetchUserData {
+                    guard let account = viewModel.account else {
                         isShowingEdit = true
                         return
                     }
@@ -100,28 +100,32 @@ struct AccountView: View {
     var headerView: some View {
         VStack(alignment: .leading) {
             HStack {
-                AccountImageView(photoURL: .constant(URL(string: accountViewModel.account?.photoURL ?? "")))
-                Text(accountViewModel.account?.displayName ?? "")
+                AccountImageView(photoURL: .constant(URL(string: viewModel.account?.photoURL ?? "")))
+                Text(viewModel.account?.displayName ?? "")
                     .font(Font.title)
             }
             HStack(alignment: .center) {
-                Text("\(accountViewModel.activity?.viewCount ?? 0)")
-                    .font(Font.callout.monospacedDigit())
-                Image(systemName: "eye.fill")
-                    .imageScale(.small)
-                Text("\u{2022}")
-                
-                Text("\(accountViewModel.activity?.playCount ?? 0)")
-                    .font(Font.callout.monospacedDigit())
-                Image(systemName: "play.fill")
-                    .imageScale(.small)
-                Text("\u{2022}")
-                
-                Text("\(accountViewModel.favoriteCountries.count)")
-                    .font(Font.callout.monospacedDigit())
-                Image(systemName: "star.fill")
-                    .imageScale(.small)
+                VStack {
+                    Image(systemName: "eye.fill")
+                        .imageScale(.large)
+                    Text("AccountView_viewed_count".localized(viewModel.activity?.viewCount ?? 0))
+                        .font(Font.callout.monospacedDigit())
+                }
                 Spacer()
+                VStack {
+                    Image(systemName: "play.fill")
+                        .imageScale(.large)
+                    Text("AccountView_played_count".localized(viewModel.activity?.playCount ?? 0))
+                        .font(Font.callout.monospacedDigit())
+                }
+                Spacer()
+                VStack {
+                    Image(systemName: "star.fill")
+                        .imageScale(.large)
+                    Text("AccountView_favorites_count".localized(viewModel.favoriteCountries.count))
+                        .font(Font.callout.monospacedDigit())
+                    
+                }
             }
         }
             .frame(maxWidth: .infinity)
@@ -140,7 +144,7 @@ struct AccountView: View {
     }
 
     var viewed: some View {
-        ForEach(Array(accountViewModel.viewedCountries.enumerated()), id: \.element) { index, country in
+        ForEach(Array(viewModel.viewedCountries.enumerated()), id: \.element) { index, country in
             HStack {
                 Text(country.displayName)
                 Spacer()
@@ -152,7 +156,7 @@ struct AccountView: View {
     }
     
     var played: some View {
-        ForEach(Array(accountViewModel.playedCountries.enumerated()), id: \.element) { index, country in
+        ForEach(Array(viewModel.playedCountries.enumerated()), id: \.element) { index, country in
             HStack {
                 Text(country.displayName)
                 Spacer()
@@ -164,7 +168,7 @@ struct AccountView: View {
     }
     
     var favorites: some View {
-        ForEach(Array(accountViewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
+        ForEach(Array(viewModel.favoriteCountries.enumerated()), id: \.element) { index, country in
             HStack {
                 Text(country.displayName)
                 Spacer()
@@ -174,11 +178,11 @@ struct AccountView: View {
     }
     
     func removeFavorites(at offsets: IndexSet) {
-        let keysToDelete = offsets.map { accountViewModel.favoriteCountries[$0].key }
+        let keysToDelete = offsets.map { viewModel.favoriteCountries[$0].key }
 
         _ = keysToDelete.compactMap { key in
             if let key = key {
-                accountViewModel.toggleFavorite(key: key)
+                viewModel.toggleFavorite(key: key)
             }
         }
     }
@@ -186,11 +190,11 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        let accountViewModel = AccountViewModel()
+        let viewModel = AccountViewModel()
         AccountView()
-            .environmentObject(accountViewModel)
+            .environmentObject(viewModel)
             .onAppear {
-                accountViewModel.fetchUserData()
+                viewModel.fetchUserData()
             }
     }
 }

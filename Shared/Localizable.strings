@@ -23,6 +23,10 @@
 "MapSearchView_country_or_capital" = "Country or Capital";
 "MapSearchView_capital" = "Capital";
 
+/* CountryView */
+"CountryView_views_count" = "%d views";
+"CountryView_plays_count" = "%d plays";
+
 /* CountryInfoView */
 "CountryInfoView_anthem" = "Anthem";
 "CountryInfoView_flag" = "Flag";
@@ -62,5 +66,8 @@
 "AccountView_viewed" = "Viewed";
 "AccountView_played" = "Played";
 "AccountView_favorites" = "Favorites";
+"AccountView_viewed_count" = "%d viewed";
+"AccountView_played_count" = "%d played";
+"AccountView_favorites_count" = "%d favorites";
 "AccountView_sign_out" = "Sign out";
 "AccountView_edit" = "Edit";

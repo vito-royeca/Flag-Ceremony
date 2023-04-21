@@ -65,30 +65,7 @@ struct CountryView: View {
                     }
                     
                     .introspectScrollView(customize: { scrollView in
-                        guard currentTime > 0 && durationTime > 0 else {
-                            return
-                        }
-                        
-                        let contentSize = scrollView.contentSize
-                        let visibleSize = scrollView.visibleSize
-                        let diff = contentSize.height - visibleSize.height
-                        let index = currentTime / durationTime
-                        let y = diff * index
-                        
-                        if y <= diff {
-                            let scrollPoint = CGPoint(x: 0, y: y)
-                            scrollView.setContentOffset(scrollPoint, animated: true)
-                        }
-
-                        if isFinished {
-                            let topOffset = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
-                            
-                            scrollView.setContentOffset(topOffset, animated: true)
-                            #if !targetEnvironment(simulator)
-                            viewModel.incrementPlays()
-                            #endif
-                            isFinished = false
-                        }
+                        autoScroll(scrollView: scrollView, reader: reader)
                     })
                 }
                 
@@ -122,6 +99,33 @@ struct CountryView: View {
             })
     }
     
+    func autoScroll(scrollView: UIScrollView, reader: GeometryProxy) {
+        guard currentTime > 0 && durationTime > 0 else {
+            return
+        }
+        
+        let contentSize = scrollView.contentSize
+        let visibleSize = scrollView.visibleSize
+        let diff = contentSize.height - visibleSize.height
+        let index = currentTime / durationTime
+        let y = diff * index
+        
+        if y <= diff {
+            let scrollPoint = CGPoint(x: 0, y: y)
+            scrollView.setContentOffset(scrollPoint, animated: true)
+        }
+
+        if isFinished {
+            let topOffset = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
+            
+            scrollView.setContentOffset(topOffset, animated: true)
+            #if !targetEnvironment(simulator)
+            viewModel.incrementPlays()
+            #endif
+            isFinished = false
+        }
+    }
+
     var flagView: some View {
         AsyncImage(
             url: viewModel.country?.getFlagURL(),
@@ -139,19 +143,25 @@ struct CountryView: View {
 
     var actionsView: some View {
         HStack {
-            Text("\(viewModel.country?.views ?? 0)")
-                .font(Font.callout.monospacedDigit())
-            Image(systemName: "eye.fill")
-                .imageScale(.small)
-
-            Text("\u{2022}")
-
-            Text("\(viewModel.country?.plays ?? 0)")
-                .font(Font.callout.monospacedDigit())
-            Image(systemName: "play.fill")
-                .imageScale(.small)
+            VStack {
+                HStack {
+                    Image(systemName: "eye.fill")
+                        .frame(maxWidth: 30)
+                    Text("CountryView_views_count".localized(viewModel.country?.views ?? 0))
+                        .font(Font.callout.monospacedDigit())
+                    Spacer()
+                }
+                HStack {
+                    Image(systemName: "play.fill")
+                        .frame(maxWidth: 30)
+                    Text("CountryView_plays_count".localized(viewModel.country?.plays ?? 0))
+                        .font(Font.callout.monospacedDigit())
+                    Spacer()
+                }
+            }
             
             Spacer()
+            
             Button(action: {
                 guard let key = viewModel.country?.key else {
                     return
