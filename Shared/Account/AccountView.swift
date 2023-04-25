@@ -3,7 +3,6 @@
 //  Flag Ceremony
 //
 //  Created by Vito Royeca on 6/27/20.
-//  Copyright © 2020 Jovit Royeca. All rights reserved.
 //
 
 import SwiftUI
@@ -77,16 +76,22 @@ struct AccountView: View {
                 }
             })
             .onAppear {
-                viewModel.fetchUserData {
-                    guard let account = viewModel.account else {
-                        isShowingEdit = true
-                        return
-                    }
-                    
-                    if let name = account.displayName {
-                        isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
-                    } else {
-                        isShowingEdit = true
+                Task {
+                    do {
+                        try await viewModel.fetchUserData()
+
+                        guard let account = viewModel.account else {
+                            isShowingEdit = true
+                            return
+                        }
+                        
+                        if let name = account.displayName {
+                            isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
+                        } else {
+                            isShowingEdit = true
+                        }
+                    } catch let error {
+                        
                     }
                 }
             }
@@ -186,10 +191,17 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = AccountViewModel()
+
         AccountView()
             .environmentObject(viewModel)
             .onAppear {
-                viewModel.fetchUserData()
+                Task {
+                    do {
+                        try await viewModel.fetchUserData()
+                    } catch let error {
+                        
+                    }
+                }
             }
     }
 }

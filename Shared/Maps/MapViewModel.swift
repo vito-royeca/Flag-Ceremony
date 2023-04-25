@@ -30,12 +30,17 @@ class MapViewModel: NSObject, ObservableObject {
         locationManager.requestWhenInUseAuthorization()
         #endif
     }
-    
+
+    @MainActor
     func fetchAllCountries() {
-        if countries.isEmpty {
-            FirebaseManager.sharedInstance.fetchAllCountries(completion: { [weak self] (countries: [FCCountry]) in
-                self?.countries = countries.filter({ $0.getFlagURL() != nil })
-            })
+        Task {
+            do {
+                if countries.isEmpty {
+                    countries = try await FirebaseManager.sharedInstance.fetchAllCountries().filter({ $0.getFlagURL() != nil })
+                }
+            } catch let error {
+                
+            }
         }
     }
     

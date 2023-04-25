@@ -40,10 +40,15 @@ struct CountryView: View {
             }
         }
             .onAppear {
-                viewModel.fetchData {
-                    #if !targetEnvironment(simulator)
-                    viewModel.incrementViews()
-                    #endif
+                Task {
+                    do {
+                        try await viewModel.fetchData()
+                        #if !targetEnvironment(simulator)
+                        viewModel.incrementViews()
+                        #endif
+                    } catch let error {
+                        
+                    }
                 }
             }
     }
@@ -83,7 +88,6 @@ struct CountryView: View {
                 }
             }
         }
-        
             .navigationBarTitle(Text(viewModel.country?.displayName ?? ""))
             .toolbar {
                 CountryToolbar(presentationMode: presentationMode,

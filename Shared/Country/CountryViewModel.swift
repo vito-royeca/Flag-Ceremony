@@ -26,7 +26,8 @@ class CountryViewModel: NSObject, ObservableObject {
     
     // MARK: - Methods
     
-    func fetchData(completion: @escaping () -> Void) {
+    @MainActor
+    func fetchData() async throws {
         guard !isBusy else {
             return
         }
@@ -35,38 +36,35 @@ class CountryViewModel: NSObject, ObservableObject {
         isBusy.toggle()
         isFailed = false
 
-        FirebaseManager.sharedInstance.findCountry(id) { [weak self] country in
-            FirebaseManager.sharedInstance.findAnthem(id) { [weak self] anthem in
-                self?.country = country
-                self?.anthem = anthem
-                self?.isBusy.toggle()
-                completion()
+        Task {
+            do {
+                country = try await FirebaseManager.sharedInstance.findCountry(id)
+                anthem = try await FirebaseManager.sharedInstance.findAnthem(id)
+                isBusy.toggle()
+            } catch let error {
+                throw error
             }
         }
     }
     
+    @MainActor
     func incrementViews() {
-        FirebaseManager.sharedInstance.incrementCountryViews(id) { [weak self] result in
-            switch result {
-            case .success(let country):
-//                self?.country?.views = country?.views
-//                self?.country?.plays = country?.plays
-                self?.country = country
-            case .failure(let error):
-                print(error)
+        Task {
+            do {
+                country = try await FirebaseManager.sharedInstance.incrementCountryViews(id)
+            } catch let error {
+                
             }
         }
     }
     
+    @MainActor
     func incrementPlays() {
-        FirebaseManager.sharedInstance.incrementCountryPlays(id) { [weak self] result in
-            switch result {
-            case .success(let country):
-//                self?.country?.views = country?.views
-//                self?.country?.plays = country?.plays
-                self?.country = country
-            case .failure(let error):
-                print(error)
+        Task {
+            do {
+                country = try await FirebaseManager.sharedInstance.incrementCountryPlays(id)
+            } catch let error {
+                
             }
         }
     }

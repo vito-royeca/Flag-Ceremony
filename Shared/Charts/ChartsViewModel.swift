@@ -17,34 +17,39 @@ class ChartsViewModel: NSObject, ObservableObject {
     @Published var topPlayers = [FCActivity]()
     @Published var users = [FCUser]()
     
+    @MainActor
     func fetchTopViewedCountries() {
-        FirebaseManager.sharedInstance.monitorTopViewed(completion: { [weak self] countries in
-            self?.topViewedCountries = countries
-        })
+        Task {
+            topViewedCountries = await FirebaseManager.sharedInstance.monitorTopViewed()
+        }
     }
     
+    @MainActor
     func fetchTopPlayedCountries() {
-        FirebaseManager.sharedInstance.monitorTopPlayed(completion: { [weak self] countries in
-            self?.topPlayedCountries = countries
-        })
+        Task {
+            topPlayedCountries = await FirebaseManager.sharedInstance.monitorTopPlayed()
+        }
     }
     
+    @MainActor
     func fetchTopViewers() {
-        FirebaseManager.sharedInstance.monitorTopViewers(completion: { [weak self] activities in
-            self?.topViewers = activities
-        })
+        Task {
+            topViewers = await FirebaseManager.sharedInstance.monitorTopViewers()
+        }
     }
     
+    @MainActor
     func fetchTopPlayers() {
-        FirebaseManager.sharedInstance.monitorTopPlayers(completion: { [weak self] activities in
-            self?.topPlayers = activities
-        })
+        Task {
+            topPlayers = await FirebaseManager.sharedInstance.monitorTopPlayers()
+        }
     }
     
+    @MainActor
     func fetchUsers() {
-        FirebaseManager.sharedInstance.monitorUsers(completion: { [weak self] users in
-            self?.users = users
-        })
+        Task {
+            users = await FirebaseManager.sharedInstance.monitorUsers()
+        }
     }
     
     func muteData() {

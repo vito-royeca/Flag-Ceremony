@@ -1749,6 +1749,10 @@
 		8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
 		8B9A327D29C2DEE90034EBC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A327929C2DEE90034EBC5 /* Constants.swift */; };
+		8BA0F1BE29F310B000D0C12C /* FirebaseManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */; };
+		8BA0F1BF29F310B000D0C12C /* FirebaseManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */; };
+		8BA0F1C029F310B000D0C12C /* FirebaseManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */; };
+		8BA0F1C129F310B000D0C12C /* FirebaseManager+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */; };
 		8BA723A829C4419500FF4859 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA723A729C4419500FF4859 /* Introspect */; };
 		8BA81DF829C9D6CB006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
 		8BA81DF929C9D6CC006D940C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2096432842797D00B62A45 /* Assets.xcassets */; };
@@ -2343,6 +2347,7 @@
 		8B9A2F2229C2DC3F0034EBC5 /* us.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = us.mp3; sourceTree = "<group>"; };
 		8B9A2F2329C2DC3F0034EBC5 /* tw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tw.mp3; sourceTree = "<group>"; };
 		8B9A327929C2DEE90034EBC5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Async.swift"; sourceTree = "<group>"; };
 		8BABAF4129E1CAFF006CF08B /* AuthenticateViewModel+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Google.swift"; sourceTree = "<group>"; };
 		8BABAF4B29E26FB3006CF08B /* AuthenticateViewModel+Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthenticateViewModel+Email.swift"; sourceTree = "<group>"; };
 		8BAEC89429F1F331003A39FE /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
@@ -2764,6 +2769,7 @@
 			isa = PBXGroup;
 			children = (
 				8B556B4229C2AB2600101D46 /* FirebaseManager.swift */,
+				8BA0F1BD29F310B000D0C12C /* FirebaseManager+Async.swift */,
 				8B4A2C8E29C7821500B87840 /* RomanNumber.swift */,
 				8BAEC89429F1F331003A39FE /* String+localized.swift */,
 				8B2E1C9529CA6E84009B0E89 /* String+subscript.swift */,
@@ -4961,6 +4967,7 @@
 				8B9A327A29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8B53304F29CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8B2E1C8C29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
+				8BA0F1BE29F310B000D0C12C /* FirebaseManager+Async.swift in Sources */,
 				8B2096A9284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7C29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8B4A2C9429C7917B00B87840 /* AuthenticateViewModel.swift in Sources */,
@@ -5006,6 +5013,7 @@
 				8B1E282629D1F7BF00E606E5 /* MapSearchView.swift in Sources */,
 				8B9A327B29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8BABAF4D29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
+				8BA0F1BF29F310B000D0C12C /* FirebaseManager+Async.swift in Sources */,
 				8B2096AA284400C200B62A45 /* MapView.swift in Sources */,
 				8B556B7D29C2AF8600101D46 /* FCUser.swift in Sources */,
 				8BF69F8329C6693F00E0C00B /* AccountView.swift in Sources */,
@@ -5030,6 +5038,7 @@
 				8BF8E28329C5897100929089 /* ChartsView.swift in Sources */,
 				8BCE3B0829E3178B00E69F99 /* TabNavigationView.swift in Sources */,
 				8BF69F7529C65C0900E0C00B /* AuthenticateView.swift in Sources */,
+				8BA0F1C029F310B000D0C12C /* FirebaseManager+Async.swift in Sources */,
 				8B9A327C29C2DEE90034EBC5 /* Constants.swift in Sources */,
 				8BAEC89729F1F331003A39FE /* String+localized.swift in Sources */,
 				8B53301429CFB4A70011476D /* ImagePickerView.swift in Sources */,
@@ -5101,6 +5110,7 @@
 				8B556BA429C2B49800101D46 /* Flag_CeremonyApp.swift in Sources */,
 				8BABAF4529E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */,
 				8B53301529CFB4A70011476D /* ImagePickerView.swift in Sources */,
+				8BA0F1C129F310B000D0C12C /* FirebaseManager+Async.swift in Sources */,
 				8BF69F8529C6693F00E0C00B /* AccountView.swift in Sources */,
 				8BF69F7629C65C0900E0C00B /* AuthenticateView.swift in Sources */,
 				8BCE3B0529E3174200E69F99 /* AccountViewModel.swift in Sources */,

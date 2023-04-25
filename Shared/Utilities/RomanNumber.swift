@@ -2,8 +2,7 @@
 //  RomanNumber.swift
 //  Flag Ceremony
 //
-//  Created by Jovito Royeca on 26/04/2017.
-//  Copyright © 2017 Jovit Royeca. All rights reserved.
+//  Created by Vito Royeca on 26/04/2017.
 //
 
 import UIKit

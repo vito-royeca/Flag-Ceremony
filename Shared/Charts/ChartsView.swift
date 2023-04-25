@@ -3,7 +3,6 @@
 //  Flag Ceremony
 //
 //  Created by Vito Royeca on 6/27/20.
-//  Copyright © 2020 Jovit Royeca. All rights reserved.
 //
 
 import SwiftUI

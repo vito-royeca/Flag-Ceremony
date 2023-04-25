@@ -68,7 +68,7 @@ struct CountryInfoView: View {
     var anthemView: some View {
         List {
             tabView
-            Text(viewModel.anthem?.info ?? "")
+            Text(viewModel.formatLong(text: viewModel.anthem?.info ?? ""))
                 .listRowSeparator(.hidden)
         }
             .listStyle(.plain)
@@ -139,7 +139,13 @@ struct CountryInfoView_Previews: PreviewProvider {
         NavigationView {
             CountryInfoView().environmentObject(viewModel)
                 .onAppear {
-                    viewModel.fetchData {}
+                    Task {
+                        do {
+                            try await viewModel.fetchData()
+                        } catch let error {
+                            
+                        }
+                    }
                 }
         }
     }

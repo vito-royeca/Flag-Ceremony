@@ -36,75 +36,79 @@ class AccountViewModel: NSObject, ObservableObject {
         }
     }
     
-    func fetchUserData(completion: (() -> Void)? = nil) {
+    @MainActor
+    func fetchUserData() async throws {
         guard isLoggedIn else {
-            completion?()
             return
         }
-
-        FirebaseManager.sharedInstance.fetchUser(completion: { [weak self] account in
-            self?.account = account
-            
-            if account == nil {
-                completion?()
-                return
-            }
-
-            FirebaseManager.sharedInstance.monitorUserActivity(completion: { [weak self] activity in
-                self?.activity = activity
+        
+        Task {
+            do {
+                account = try await FirebaseManager.sharedInstance.fetchUser()
+                if account == nil {
+                    return
+                }
+                
+                activity = try await FirebaseManager.sharedInstance.monitorUserActivity()
                 
                 if let views = activity?.views {
                     let keys = Array(views.keys)
-                    FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                        self?.viewedCountries.removeAll()
-                        
-                        for var country in countries {
-                            if let key = country.key {
-                                country.userViews = views[key] ?? 0
-                                self?.viewedCountries.append(country)
-                            }
-                        }
-                    })
+                    let countries = try await FirebaseManager.sharedInstance.findCountries(keys: keys)
                     
+                    viewedCountries.removeAll()
+                    for var country in countries {
+                        if let key = country.key {
+                            country.userViews = views[key] ?? 0
+                            viewedCountries.append(country)
+                        }
+                    }
                 }
                 
                 if let plays = activity?.plays {
                     let keys = Array(plays.keys)
-                    FirebaseManager.sharedInstance.findCountries(keys: keys, completion: { countries in
-                        self?.playedCountries.removeAll()
+                    let countries = try await FirebaseManager.sharedInstance.findCountries(keys: keys)
                         
-                        for var country in countries {
-                            if let key = country.key {
-                                country.userPlays = plays[key] ?? 0
-                                self?.playedCountries.append(country)
-                            }
+                    playedCountries.removeAll()
+                    for var country in countries {
+                        if let key = country.key {
+                            country.userPlays = plays[key] ?? 0
+                            playedCountries.append(country)
                         }
-                    })
-                    
+                    }
                 }
                 
                 if let favorites = activity?.favorites {
-                    FirebaseManager.sharedInstance.findCountries(keys: favorites, completion: { countries in
-                        self?.favoriteCountries = countries
-                    })
+                    favoriteCountries = try await FirebaseManager.sharedInstance.findCountries(keys: favorites)
                 } else {
-                    self?.favoriteCountries.removeAll()
+                    favoriteCountries.removeAll()
                 }
-                
-                completion?()
-            })
-        })
-    }
-    
-    func toggleFavorite(key: String) {
-        FirebaseManager.sharedInstance.toggleFavorite(key) { [weak self] result in
-            self?.fetchUserData()
+            } catch let error {
+                throw error
+            }
         }
     }
     
+    @MainActor
+    func toggleFavorite(key: String) {
+        Task {
+            do {
+                try await FirebaseManager.sharedInstance.toggleFavorite(key)
+                try await fetchUserData()
+            } catch let error {
+                
+            }
+        }
+    }
+    
+    @MainActor
     func update(photoURL: URL?, photoDirty: Bool, displayName: String?) {
-        FirebaseManager.sharedInstance.updateUser(photoURL: photoURL, photoDirty: photoDirty, displayName: displayName) { [weak self] _ in
-            self?.fetchUserData()
+        Task {
+            do {
+                try await FirebaseManager.sharedInstance.updateUser(photoURL: photoURL, photoDirty: photoDirty, displayName: displayName)
+                try await fetchUserData()
+            } catch let error {
+                
+            }
         }
     }
 

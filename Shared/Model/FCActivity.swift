@@ -2,8 +2,7 @@
 //  FCActivity.swift
 //  Flag Ceremony
 //
-//  Created by Jovito Royeca on 19/12/2016.
-//  Copyright © 2016 Jovit Royeca. All rights reserved.
+//  Created by Vito Royeca on 19/12/2016.
 //
 
 import Foundation

@@ -25,9 +25,15 @@ struct TabNavigationView: View {
             .environmentObject(mapViewModel)
             .environmentObject(accountViewModel)
             .onAppear {
-                accountViewModel.fetchUserData()
                 mapViewModel.fetchAllCountries()
                 mapViewModel.requestLocation()
+                Task {
+                    do {
+                        try await accountViewModel.fetchUserData()
+                    } catch let error {
+                        
+                    }
+                }
             }
     }
     
