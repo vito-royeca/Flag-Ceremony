@@ -138,13 +138,11 @@ struct CountryInfoView_Previews: PreviewProvider {
         
         NavigationView {
             CountryInfoView().environmentObject(viewModel)
-                .onAppear {
-                    Task {
-                        do {
-                            try await viewModel.fetchData()
-                        } catch let error {
-                            
-                        }
+                .task {
+                    do {
+                        try await viewModel.fetchData()
+                    } catch let error {
+                        
                     }
                 }
         }

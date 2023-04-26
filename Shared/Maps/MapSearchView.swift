@@ -55,11 +55,10 @@ struct MapSearchView: View {
                             }
                         }
                     }
-                    
                 }
             }
         }
-        .navigationTitle(Text("MapSearchView_search".localized))
+            .navigationTitle(Text("MapSearchView_search".localized))
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {

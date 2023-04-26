@@ -39,16 +39,14 @@ struct CountryView: View {
                 mainView
             }
         }
-            .onAppear {
-                Task {
-                    do {
-                        try await viewModel.fetchData()
-                        #if !targetEnvironment(simulator)
-                        viewModel.incrementViews()
-                        #endif
-                    } catch let error {
-                        
-                    }
+            .task {
+                do {
+                    try await viewModel.fetchData()
+                    #if !targetEnvironment(simulator)
+                    viewModel.incrementViews()
+                    #endif
+                } catch let error {
+                    
                 }
             }
     }

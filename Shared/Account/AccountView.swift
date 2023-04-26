@@ -75,25 +75,24 @@ struct AccountView: View {
                         .environmentObject(viewModel)
                 }
             })
-            .onAppear {
-                Task {
-                    do {
-                        try await viewModel.fetchUserData()
+            .task {
+                do {
+                    try await viewModel.fetchUserData()
 
-                        guard let account = viewModel.account else {
-                            isShowingEdit = true
-                            return
-                        }
-                        
-                        if let name = account.displayName {
-                            isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
-                        } else {
-                            isShowingEdit = true
-                        }
-                    } catch let error {
-                        
+                    guard let account = viewModel.account else {
+                        isShowingEdit = true
+                        return
                     }
+                    
+                    if let name = account.displayName {
+                        isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
+                    } else {
+                        isShowingEdit = true
+                    }
+                } catch let error {
+                    
                 }
+                
             }
     }
 
@@ -194,13 +193,11 @@ struct AccountView_Previews: PreviewProvider {
 
         AccountView()
             .environmentObject(viewModel)
-            .onAppear {
-                Task {
-                    do {
-                        try await viewModel.fetchUserData()
-                    } catch let error {
-                        
-                    }
+            .task {
+                do {
+                    try await viewModel.fetchUserData()
+                } catch let error {
+                    
                 }
             }
     }

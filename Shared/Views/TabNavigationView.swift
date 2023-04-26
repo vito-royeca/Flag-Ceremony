@@ -27,12 +27,12 @@ struct TabNavigationView: View {
             .onAppear {
                 mapViewModel.fetchAllCountries()
                 mapViewModel.requestLocation()
-                Task {
-                    do {
-                        try await accountViewModel.fetchUserData()
-                    } catch let error {
-                        
-                    }
+            }
+            .task {
+                do {
+                    try await accountViewModel.fetchUserData()
+                } catch let error {
+                    
                 }
             }
     }
