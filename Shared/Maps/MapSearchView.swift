@@ -17,7 +17,7 @@ struct MapSearchView: View {
 
     var body: some View {
         VStack {
-            let dictionary = searchResults()
+            let dictionary = viewModel.searchResults(searchText: searchText)
             let keys = dictionary.keys.sorted()
             
             ScrollViewReader { scrollProxy in
@@ -68,45 +68,20 @@ struct MapSearchView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "MapSearchView_country_or_capital".localized)
-            .onAppear {
+            .searchable(text: $searchText,
+                        prompt: "MapSearchView_country_or_capital".localized)
+            .task {
                 viewModel.fetchAllCountries()
             }
     }
     
-    func searchResults() -> [String: [FCCountry]] {
-        var results = [String: [FCCountry]]()
-        let countries = searchText.isEmpty ? viewModel.countries :
-            viewModel.countries.filter { country in
-                let text = searchText.lowercased()
-                let name = (country.name ?? "").lowercased()
-                let capital = (country.capital?[FCCountry.Keys.CapitalName] as? String ?? "").lowercased()
-                
-                if text.count == 1 {
-                    return name.starts(with: text) || capital.starts(with: text)
-                } else {
-                    return name.contains(text) || capital.contains(text)
-                }
-            }
-        
-        for country in countries {
-            if let name = country.name,
-               !name.isEmpty {
-                let key = String(name.prefix(1))
-                
-                var array = results[key] ?? [FCCountry]()
-                array.append(country)
-                results[key] = array
-            }
-        }
-
-        return results
-    }
+    
     
     func select(country: FCCountry) {
         let radians = country.getGeoRadians()
         
-        viewModel.location = MaplyCoordinateMake(Float(radians[0]), Float(radians[1]))
+        viewModel.latitude = Float(radians[1])
+        viewModel.longitude = Float(radians[0])
         highlightedCountry = country
         presentationMode.wrappedValue.dismiss()
     }

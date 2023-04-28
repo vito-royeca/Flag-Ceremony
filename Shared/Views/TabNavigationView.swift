@@ -16,7 +16,7 @@ struct TabNavigationView: View {
         case account
     }
     
-    @StateObject var mapViewModel = MapViewModel()
+    @EnvironmentObject var mapViewModel: MapViewModel
     @StateObject var accountViewModel = AccountViewModel()
     @State private var selection: TabItem = .map
     

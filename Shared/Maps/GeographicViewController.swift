@@ -25,7 +25,6 @@ class GeographicViewController: UIViewController {
                                             kMaplyTextColor: UIColor.black]
 
     var mbTilesFetcher: MaplyMBTileFetcher?
-    
     var globe: WhirlyGlobeViewController?
     var map: MaplyViewController?
     var imageLoader : MaplyQuadImageLoader?
@@ -36,9 +35,9 @@ class GeographicViewController: UIViewController {
     var highlightedObject: MaplyComponentObject?
     var type: GeographicViewControllerType = .map
 
-    convenience init(mbTilesFetcher: MaplyMBTileFetcher?, type: GeographicViewControllerType) {
+    convenience init(type: GeographicViewControllerType) {
         self.init()
-        self.mbTilesFetcher = mbTilesFetcher
+        self.mbTilesFetcher = MaplyMBTileFetcher(mbTiles: "geography-class_medres")
         self.type = type
         
         switch type {
@@ -97,7 +96,8 @@ class GeographicViewController: UIViewController {
         imageLoader!.baseDrawPriority = kMaplyImageLayerDrawPriorityDefault
     }
     
-    func relocate(to position: MaplyCoordinate) {
+    func relocateTo(latitude: Float, longitude: Float) {
+        let position = MaplyCoordinate(x: longitude, y: latitude)
         var cPosition = MaplyCoordinate(x: 0, y: 0)
         var cHeight = Float(0)
         

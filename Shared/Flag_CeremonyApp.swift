@@ -22,17 +22,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
         return GIDSignIn.sharedInstance.handle(url)
     }
-
 }
 
 @main
 struct Flag_CeremonyApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    
+    @StateObject var mapViewModel = MapViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            TabNavigationView()
+            ContentView()
+                .environmentObject(mapViewModel)
         }
     }
 }

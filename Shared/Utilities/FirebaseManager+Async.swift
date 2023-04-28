@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseAuthCombineSwift
+import FirebaseDatabase
+import FirebaseStorage
+import FirebaseStorageCombineSwift
 
 // MARK: - User methods
 

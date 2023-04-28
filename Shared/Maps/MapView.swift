@@ -12,14 +12,16 @@ struct MapViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
     @State var highlightedCountry: FCCountry? = nil
-    @State var location = MapViewModel.defaultLocation
+    @State var latitude = DefaultLocationLatitude
+    @State var longitude = DefaultLocationLongitude
     @State private var isShowingSearch = false
 
     var body: some View {
         MapView(selectedCountry: $selectedCountry,
                 highlightedCountry: $highlightedCountry,
-                location: $location)
-        .navigationTitle("MapViewVC_map".localized)
+                latitude: $latitude,
+                longitude: $longitude)
+            .navigationTitle("MapViewVC_map".localized)
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
                     #if targetEnvironment(simulator)
@@ -45,7 +47,8 @@ struct MapViewVC: View {
                 }
             }
             .onAppear {
-                location = viewModel.location
+                latitude = viewModel.latitude
+                longitude = viewModel.longitude
                 highlightedCountry = viewModel.highlightedCountry
                 
                 // This is used for screenshots
@@ -59,7 +62,8 @@ struct MapViewVC: View {
                 #endif
             }
             .onDisappear {
-                viewModel.location = location
+                viewModel.latitude = latitude
+                viewModel.longitude = longitude
                 viewModel.highlightedCountry = highlightedCountry
             }
     }
@@ -71,17 +75,19 @@ struct MapView: UIViewControllerRepresentable {
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
     @Binding var highlightedCountry: FCCountry?
-    @Binding var location: MaplyCoordinate
+    @Binding var latitude: Float
+    @Binding var longitude: Float
 
     func makeUIViewController(context: Context) -> GeographicViewController {
-        let mapVC = GeographicViewController(mbTilesFetcher: viewModel.mbTilesFetcher, type: .map)
+        let mapVC = GeographicViewController(type: .map)
         mapVC.map?.delegate = context.coordinator
         
         return mapVC
     }
 
     func updateUIViewController(_ uiViewController: GeographicViewController, context: Context) {
-        uiViewController.relocate(to: viewModel.location)
+        uiViewController.relocateTo(latitude: viewModel.latitude,
+                                    longitude: viewModel.longitude)
         uiViewController.add(countries: viewModel.countries.filter({ $0.id != highlightedCountry?.id }),
                              highlighted: highlightedCountry)
     }
@@ -97,7 +103,8 @@ struct MapView_Previews: PreviewProvider {
 
         MapView(selectedCountry: .constant(country),
                 highlightedCountry: .constant(nil),
-                location: .constant(MapViewModel.defaultLocation))
+                latitude: .constant(DefaultLocationLatitude),
+                longitude: .constant(DefaultLocationLongitude))
            .environmentObject(MapViewModel())
     }
 }
@@ -124,7 +131,8 @@ extension MapView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.location = position
+            parent.latitude = position.y
+            parent.longitude = position.x
         }
     }
 }

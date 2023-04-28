@@ -10,6 +10,8 @@ import SwiftUIX
 import Introspect
 
 struct CountryView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -135,10 +137,11 @@ struct CountryView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .border(.black)
+                    .border(colorScheme == .dark ? .clear : .black)
             },
             placeholder: {
-                EmptyView()
+                Text(viewModel.country?.emojiFlag ?? "")
+                    .font(.largeTitle)
             }
         )
     }

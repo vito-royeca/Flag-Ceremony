@@ -5,9 +5,11 @@
 //  Created by Vito Royeca on 23/11/2016.
 //
 
+import UIKit
 import Combine
 import Firebase
 import FirebaseAuthCombineSwift
+import FirebaseDatabase
 import FirebaseStorage
 import FirebaseStorageCombineSwift
 

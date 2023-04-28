@@ -12,13 +12,15 @@ struct GlobeViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
     @State var selectedCountry: FCCountry? = nil
     @State var highlightedCountry: FCCountry? = nil
-    @State var location = MapViewModel.defaultLocation
+    @State var latitude = DefaultLocationLatitude
+    @State var longitude = DefaultLocationLongitude
     @State private var isShowingSearch = false
 
     var body: some View {
         GlobeView(selectedCountry: $selectedCountry,
                   highlightedCountry: $highlightedCountry,
-                  location: $location)
+                  latitude: $latitude,
+                  longitude: $longitude)
         .navigationTitle("GlobeViewVC_globe".localized)
             .sheet(item: $selectedCountry) { selectedCountry in
                 NavigationView {
@@ -45,11 +47,13 @@ struct GlobeViewVC: View {
                 }
             }
             .onAppear {
-                location = viewModel.location
+                latitude = viewModel.latitude
+                longitude = viewModel.longitude
                 highlightedCountry = viewModel.highlightedCountry
             }
             .onDisappear {
-                viewModel.location = location
+                viewModel.latitude = latitude
+                viewModel.longitude = longitude
                 viewModel.highlightedCountry = highlightedCountry
             }
     }
@@ -61,17 +65,19 @@ struct GlobeView: UIViewControllerRepresentable {
     @EnvironmentObject var viewModel: MapViewModel
     @Binding var selectedCountry: FCCountry?
     @Binding var highlightedCountry: FCCountry?
-    @Binding var location: MaplyCoordinate
+    @Binding var latitude: Float
+    @Binding var longitude: Float
 
     func makeUIViewController(context: Context) -> GeographicViewController {
-        let globeVC = GeographicViewController(mbTilesFetcher: viewModel.mbTilesFetcher, type: .globe)
+        let globeVC = GeographicViewController(type: .globe)
         globeVC.globe?.delegate = context.coordinator
         
         return globeVC
     }
 
     func updateUIViewController(_ uiViewController: GeographicViewController, context: Context) {
-        uiViewController.relocate(to: viewModel.location)
+        uiViewController.relocateTo(latitude: viewModel.latitude,
+                                    longitude: viewModel.longitude)
         uiViewController.add(countries: viewModel.countries.filter({ $0.id != highlightedCountry?.id }),
                              highlighted: highlightedCountry)
     }
@@ -88,7 +94,8 @@ struct GlobeView_Previews: PreviewProvider {
 
         GlobeView(selectedCountry: .constant(country),
                   highlightedCountry: .constant(nil),
-                  location: .constant(MapViewModel.defaultLocation))
+                  latitude: .constant(DefaultLocationLatitude),
+                  longitude: .constant(DefaultLocationLongitude))
            .environmentObject(MapViewModel())
     }
 }
@@ -115,7 +122,8 @@ extension GlobeView {
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.location = position
+            parent.latitude = position.y
+            parent.longitude = position.x
         }
     }
 }

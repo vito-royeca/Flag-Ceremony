@@ -20,11 +20,18 @@ struct MediaPlayerView: View {
 
     var url: URL?
     var isAutoPlay: Bool
+    var showVolume: Bool
     
-    init(url: URL?, autoPlay: Bool, currentTime: Binding<Double>, durationTime: Binding<Double>, isFinished: Binding<Bool>) {
+    init(url: URL?,
+         autoPlay: Bool,
+         showVolume: Bool = true,
+         currentTime: Binding<Double>,
+         durationTime: Binding<Double>,
+         isFinished: Binding<Bool>) {
         self.url = url
 
         self.isAutoPlay = autoPlay
+        self.showVolume = showVolume
         _sound = StateObject(wrappedValue: MediaPlayer(url: url))
         _currentTime = currentTime
         _durationTime = durationTime
@@ -35,11 +42,12 @@ struct MediaPlayerView: View {
         VStack {
             durationView
             playView
-            volumeView
+            if showVolume {
+                volumeView
+            }
 //            actionsView
 //                .padding()
         }
-            .background(Color(uiColor: kBlueColor))
             .onAppear {
                 if isAutoPlay {
                     sound.playOrPause()
