@@ -96,11 +96,11 @@ class GeographicViewController: UIViewController {
         imageLoader!.baseDrawPriority = kMaplyImageLayerDrawPriorityDefault
     }
     
-    func relocateTo(latitude: Float, longitude: Float) {
+    func relocateTo(longitude: Float, latitude: Float) {
         let position = MaplyCoordinate(x: longitude, y: latitude)
         var cPosition = MaplyCoordinate(x: 0, y: 0)
         var cHeight = Float(0)
-        
+
         switch type {
         case .map:
             guard let map = map else {

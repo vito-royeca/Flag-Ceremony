@@ -14,14 +14,16 @@ class MapViewModel: NSObject, ObservableObject {
     static let defaultCountryID = "PH"
 
     @Published var countries = [FCCountry]()
-    @Published var latitude = DefaultLocationLatitude
+    @Published var selectedCountry: FCCountry? = nil
+    @Published var highlightedCountry: FCCountry? = nil
     @Published var longitude = DefaultLocationLongitude
-    @Published var highlightedCountry: FCCountry?
-
+    @Published var latitude = DefaultLocationLatitude
+    
     private let locationManager = CLLocationManager()
 
     override init() {
         super.init()
+
         #if !targetEnvironment(simulator)
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -43,10 +45,7 @@ class MapViewModel: NSObject, ObservableObject {
     }
     
     func requestLocation() {
-        #if targetEnvironment(simulator)
-        latitude = DefaultLocationLatitude
-        longitude = DefaultLocationLongitude
-        #else
+        #if !targetEnvironment(simulator)
         locationManager.startUpdatingLocation()
         #endif
     }
@@ -86,9 +85,10 @@ extension MapViewModel: CLLocationManagerDelegate {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else {
             return
         }
-        
-        latitude = Float(locValue.latitude)
-        longitude = Float(locValue.longitude)
+
+        // Convert to radians
+        longitude = Float((locValue.longitude * Double.pi)/180)
+        latitude = Float((locValue.latitude * Double.pi)/180)
         locationManager.stopUpdatingLocation()
     }
     

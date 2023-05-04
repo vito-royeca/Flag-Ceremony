@@ -10,19 +10,12 @@ import WhirlyGlobe
 
 struct GlobeViewVC: View {
     @EnvironmentObject var viewModel: MapViewModel
-    @State var selectedCountry: FCCountry? = nil
-    @State var highlightedCountry: FCCountry? = nil
-    @State var latitude = DefaultLocationLatitude
-    @State var longitude = DefaultLocationLongitude
     @State private var isShowingSearch = false
 
     var body: some View {
-        GlobeView(selectedCountry: $selectedCountry,
-                  highlightedCountry: $highlightedCountry,
-                  latitude: $latitude,
-                  longitude: $longitude)
-        .navigationTitle("GlobeViewVC_globe".localized)
-            .sheet(item: $selectedCountry) { selectedCountry in
+        GlobeView()
+            .navigationTitle("GlobeViewVC_globe".localized)
+            .sheet(item: $viewModel.selectedCountry) { selectedCountry in
                 NavigationView {
                     #if targetEnvironment(simulator)
                     CountryView(id: selectedCountry.id, isAutoPlay: false)
@@ -33,7 +26,7 @@ struct GlobeViewVC: View {
             }
             .sheet(isPresented: $isShowingSearch, content: {
                 NavigationView {
-                    MapSearchView(highlightedCountry: $highlightedCountry)
+                    MapSearchView()
                         .environmentObject(viewModel)
                 }
             })
@@ -46,16 +39,6 @@ struct GlobeViewVC: View {
                     }
                 }
             }
-            .onAppear {
-                latitude = viewModel.latitude
-                longitude = viewModel.longitude
-                highlightedCountry = viewModel.highlightedCountry
-            }
-            .onDisappear {
-                viewModel.latitude = latitude
-                viewModel.longitude = longitude
-                viewModel.highlightedCountry = highlightedCountry
-            }
     }
 }
 
@@ -63,23 +46,18 @@ struct GlobeView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = GeographicViewController
 
     @EnvironmentObject var viewModel: MapViewModel
-    @Binding var selectedCountry: FCCountry?
-    @Binding var highlightedCountry: FCCountry?
-    @Binding var latitude: Float
-    @Binding var longitude: Float
 
     func makeUIViewController(context: Context) -> GeographicViewController {
         let globeVC = GeographicViewController(type: .globe)
         globeVC.globe?.delegate = context.coordinator
-        
         return globeVC
     }
 
     func updateUIViewController(_ uiViewController: GeographicViewController, context: Context) {
-        uiViewController.relocateTo(latitude: viewModel.latitude,
-                                    longitude: viewModel.longitude)
-        uiViewController.add(countries: viewModel.countries.filter({ $0.id != highlightedCountry?.id }),
-                             highlighted: highlightedCountry)
+        uiViewController.relocateTo(longitude: viewModel.longitude,
+                                    latitude: viewModel.latitude)
+        uiViewController.add(countries: viewModel.countries.filter({ $0.id != viewModel.highlightedCountry?.id }),
+                             highlighted: viewModel.highlightedCountry)
     }
     
     func makeCoordinator() -> GlobeView.Coordinator {
@@ -90,12 +68,7 @@ struct GlobeView: UIViewControllerRepresentable {
 
 struct GlobeView_Previews: PreviewProvider {
     static var previews: some View {
-        let country = FCCountry(key: MapViewModel.defaultCountryID, dict: [:])
-
-        GlobeView(selectedCountry: .constant(country),
-                  highlightedCountry: .constant(nil),
-                  latitude: .constant(DefaultLocationLatitude),
-                  longitude: .constant(DefaultLocationLongitude))
+        GlobeView()
            .environmentObject(MapViewModel())
     }
 }
@@ -111,19 +84,23 @@ extension GlobeView {
         func globeViewController(_ viewC: WhirlyGlobeViewController, didSelect selectedObj: NSObject) {
             if let selectedObject = selectedObj as? MaplyScreenLabel {
                 let country = selectedObject.userObject as? FCCountry
-                parent.selectedCountry = country
+                parent.viewModel.selectedCountry = country
             }
         }
 
         func globeViewController(_ viewC: WhirlyGlobeViewController,
                                  didStopMoving corners: UnsafeMutablePointer<MaplyCoordinate>,
                                  userMotion: Bool) {
+            guard userMotion else {
+                return
+            }
+
             var position = MaplyCoordinate(x: 0, y: 0)
             var height = Float(0)
 
             viewC.getPosition(&position, height: &height)
-            parent.latitude = position.y
-            parent.longitude = position.x
+            parent.viewModel.longitude = position.x
+            parent.viewModel.latitude = position.y
         }
     }
 }

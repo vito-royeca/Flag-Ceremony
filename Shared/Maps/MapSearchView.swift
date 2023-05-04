@@ -13,7 +13,7 @@ struct MapSearchView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: MapViewModel
     @State private var searchText = ""
-    @Binding var highlightedCountry: FCCountry?
+//    @Binding var highlightedCountry: FCCountry?
 
     var body: some View {
         VStack {
@@ -80,9 +80,9 @@ struct MapSearchView: View {
     func select(country: FCCountry) {
         let radians = country.getGeoRadians()
         
-        viewModel.latitude = Float(radians[1])
         viewModel.longitude = Float(radians[0])
-        highlightedCountry = country
+        viewModel.latitude = Float(radians[1])
+        viewModel.highlightedCountry = country
         presentationMode.wrappedValue.dismiss()
     }
 }
@@ -92,7 +92,7 @@ struct MapSearchView: View {
 struct MapSearchView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MapSearchView(highlightedCountry: .constant(nil))
+            MapSearchView()
                 .environmentObject(MapViewModel())
         }
     }
