@@ -42,42 +42,42 @@ struct TabNavigationView: View {
             NavigationView {
                 MapViewVC()
             }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "map")
-                    Text("TabNavigationView_map".localized)
-                }
-                .tag(TabItem.map)
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "map")
+                Text("TabNavigationView_map".localized)
+            }
+            .tag(TabItem.map)
             
             NavigationView {
                 GlobeViewVC()
             }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "globe")
-                    Text("TabNavigationView_globe".localized)
-                }
-                .tag(TabItem.globe)
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "globe")
+                Text("TabNavigationView_globe".localized)
+            }
+            .tag(TabItem.globe)
             
             NavigationView {
                 ChartsView()
             }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "chart.bar.doc.horizontal")
-                    Text("TabNavigationView_charts".localized)
-                }
-                .tag(TabItem.charts)
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "chart.bar.doc.horizontal")
+                Text("TabNavigationView_charts".localized)
+            }
+            .tag(TabItem.charts)
             
             NavigationView {
                 AccountView()
             }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("TabNavigationView_account".localized)
-                }
-                .tag(TabItem.account)
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "person.circle")
+                Text("TabNavigationView_account".localized)
+            }
+            .tag(TabItem.account)
         }
     }
 }

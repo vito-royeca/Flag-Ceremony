@@ -23,8 +23,8 @@ struct AuthenticateView: View {
                 .padding()
             Spacer()
         }
-            .padding()
-            .background(Color(uiColor: kBlueColor))
+        .padding()
+        .background(Color(uiColor: kBlueColor))
     }
     
     var buttons: some View {
@@ -41,8 +41,8 @@ struct AuthenticateView: View {
                     Spacer()
                 }
             }
-                .buttonStyle(.borderedProminent)
-                .tint(.white)
+            .buttonStyle(.borderedProminent)
+            .tint(.white)
             
             // Apple
             Button(action: {
@@ -56,8 +56,8 @@ struct AuthenticateView: View {
                     Spacer()
                 }
             }
-                .buttonStyle(.borderedProminent)
-                .tint(.white)
+            .buttonStyle(.borderedProminent)
+            .tint(.white)
         }
             .padding()
     }

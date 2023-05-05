@@ -48,19 +48,19 @@ struct MediaPlayerView: View {
 //            actionsView
 //                .padding()
         }
-            .onAppear {
-                if isAutoPlay {
-                    sound.playOrPause()
-                }
+        .onAppear {
+            if isAutoPlay {
+                sound.playOrPause()
             }
-            .onDisappear {
-                sound.stop()
-            }
-            .onReceive(sound.updatePublisher) {
-                currentTime = sound.currentTime
-                durationTime = sound.durationTime
-                isFinished = sound.isFinished
-            }
+        }
+        .onDisappear {
+            sound.stop()
+        }
+        .onReceive(sound.updatePublisher) {
+            currentTime = sound.currentTime
+            durationTime = sound.durationTime
+            isFinished = sound.isFinished
+        }
     }
     
     var durationView: some View {
@@ -108,8 +108,8 @@ struct MediaPlayerView: View {
                     Image(systemName: sound.volume <= 0 ? "speaker.slash" : "speaker.wave.1")
                         .imageScale(.medium)
                 }
-                    .disabled(sound.volume <= 0)
-                    .foregroundColor(.white)
+                .disabled(sound.volume <= 0)
+                .foregroundColor(.white)
                 
                 GeometryReader { gr in
                     Capsule()
@@ -120,7 +120,7 @@ struct MediaPlayerView: View {
                                 .frame(width: gr.size.width * sound.volume,
                                        height: 8), alignment: .leading)
                 }
-                    .frame( height: 8)
+                .frame( height: 8)
                 
                 Button(action: {
                     sound.volumeUp()
@@ -129,7 +129,7 @@ struct MediaPlayerView: View {
                         .imageScale(.medium)
                         .foregroundColor(.white)
                 }
-                    .disabled(sound.volume >= 1)
+                .disabled(sound.volume >= 1)
             }
         }
     }
@@ -137,6 +137,7 @@ struct MediaPlayerView: View {
     var actionsView: some View {
         HStack {
             Spacer()
+
             Button(action: {
                 sound.volumeUp()
             }) {
@@ -144,7 +145,9 @@ struct MediaPlayerView: View {
                     .imageScale(.medium)
                     .foregroundColor(.white)
             }
+
             Spacer()
+
             Button(action: {
                 sound.volumeUp()
             }) {
@@ -152,6 +155,7 @@ struct MediaPlayerView: View {
                     .imageScale(.medium)
                     .foregroundColor(.white)
             }
+
             Spacer()
         }
     }

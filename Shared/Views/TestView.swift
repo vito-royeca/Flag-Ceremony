@@ -14,7 +14,8 @@ struct TestView: View {
       var body: some View {
         NavigationView {
           SearchableView()
-        }.searchable(text: .constant("Search"))
+        }
+        .searchable(text: .constant("Search"))
       }
 }
 

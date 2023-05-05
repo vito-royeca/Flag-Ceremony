@@ -36,7 +36,7 @@ class FirebaseManager : NSObject {
     
     private var queries = [String: DatabaseQuery]()
     private var online = false
-    private let databaseReference = Database.database().reference()//(withPath: ".info/connected")
+    private let databaseReference = Database.database().reference()
     private let storageReference = Storage.storage().reference()
     private var cancelables = Set<AnyCancellable>()
     

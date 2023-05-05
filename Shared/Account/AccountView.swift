@@ -62,38 +62,38 @@ struct AccountView: View {
                     favorites
                 }
             }
-                .listStyle(.plain)
+            .listStyle(.plain)
         }
-            .toolbar {
-                AccountViewToolbar(presentationMode: presentationMode,
-                                   isShowingEdit: $isShowingEdit,
-                                   isAuthenticated: $authenticated)
+        .toolbar {
+            AccountViewToolbar(presentationMode: presentationMode,
+                               isShowingEdit: $isShowingEdit,
+                               isAuthenticated: $authenticated)
+        }
+        .sheet(isPresented: $isShowingEdit, content: {
+            NavigationView {
+                EditAccountView()
+                    .environmentObject(viewModel)
             }
-            .sheet(isPresented: $isShowingEdit, content: {
-                NavigationView {
-                    EditAccountView()
-                        .environmentObject(viewModel)
-                }
-            })
-            .task {
-                do {
-                    try await viewModel.fetchUserData()
+        })
+        .task {
+            do {
+                try await viewModel.fetchUserData()
 
-                    guard let account = viewModel.account else {
-                        isShowingEdit = true
-                        return
-                    }
-                    
-                    if let name = account.displayName {
-                        isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
-                    } else {
-                        isShowingEdit = true
-                    }
-                } catch let error {
-                    
+                guard let account = viewModel.account else {
+                    isShowingEdit = true
+                    return
                 }
                 
+                if let name = account.displayName {
+                    isShowingEdit = name.trimmingCharacters(in: .whitespaces).isEmpty
+                } else {
+                    isShowingEdit = true
+                }
+            } catch let error {
+                
             }
+            
+        }
     }
 
     var headerView: some View {
@@ -127,8 +127,8 @@ struct AccountView: View {
                 }
             }
         }
-            .frame(maxWidth: .infinity)
-            .listRowSeparator(.hidden)
+        .frame(maxWidth: .infinity)
+        .listRowSeparator(.hidden)
     }
 
     var tabView: some View {
@@ -138,8 +138,8 @@ struct AccountView: View {
                     .tag(index)
             }
         }
-            .pickerStyle(.segmented)
-            .listRowSeparator(.hidden)
+        .pickerStyle(.segmented)
+        .listRowSeparator(.hidden)
     }
 
     var viewed: some View {
@@ -173,7 +173,7 @@ struct AccountView: View {
                 Spacer()
             }
         }
-            .onDelete(perform: removeFavorites)
+        .onDelete(perform: removeFavorites)
     }
     
     func removeFavorites(at offsets: IndexSet) {

@@ -32,11 +32,11 @@ struct CountryListView: View {
                     }
                 }
             }
-                .navigationTitle("Flag Ceremony")
+            .navigationTitle("Flag Ceremony")
         }
-            .task {
-                viewModel.fetchAllCountries()
-            }
+        .task {
+            viewModel.fetchAllCountries()
+        }
     }
 }
 

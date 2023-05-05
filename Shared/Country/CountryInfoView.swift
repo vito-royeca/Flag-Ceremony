@@ -42,15 +42,15 @@ struct CountryInfoView: View {
                 countryView
             }
         }
-            .navigationTitle(viewModel.country?.displayName ?? "")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }
+        .navigationTitle(viewModel.country?.displayName ?? "")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "xmark")
                 }
+            }
         }
     }
     
@@ -61,8 +61,8 @@ struct CountryInfoView: View {
                     .tag(index)
             }
         }
-            .pickerStyle(.segmented)
-            .listRowSeparator(.hidden)
+        .pickerStyle(.segmented)
+        .listRowSeparator(.hidden)
     }
 
     var anthemView: some View {
@@ -71,7 +71,7 @@ struct CountryInfoView: View {
             Text(viewModel.formatLong(text: viewModel.anthem?.info ?? ""))
                 .listRowSeparator(.hidden)
         }
-            .listStyle(.plain)
+        .listStyle(.plain)
     }
 
     var flagView: some View {
@@ -80,7 +80,7 @@ struct CountryInfoView: View {
             Text(viewModel.formatLong(text: viewModel.anthem?.flagInfo ?? ""))
                 .listRowSeparator(.hidden)
         }
-            .listStyle(.plain)
+        .listStyle(.plain)
     }
     
     var countryView: some View {
@@ -128,7 +128,7 @@ struct CountryInfoView: View {
             Text(viewModel.formatLong(text: viewModel.anthem?.background ?? ""))
                 .listRowSeparator(.hidden)
         }
-            .listStyle(.plain)
+        .listStyle(.plain)
     }
 }
 
@@ -138,13 +138,9 @@ struct CountryInfoView_Previews: PreviewProvider {
         
         NavigationView {
             CountryInfoView().environmentObject(viewModel)
-                .task {
-                    do {
-                        try await viewModel.fetchData()
-                    } catch let error {
-                        
-                    }
-                }
+            .task {
+                await viewModel.fetchData()
+            }
         }
     }
 }

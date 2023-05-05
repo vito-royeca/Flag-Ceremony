@@ -33,24 +33,23 @@ struct CountryView: View {
     
     var body: some View {
         Group {
-            if viewModel.isBusy {
-                ProgressView()
-            } else if viewModel.isFailed {
+            if let error = viewModel.error {
                 Text("An error has occured")
             } else {
-                mainView
-            }
-        }
-            .task {
-                do {
-                    try await viewModel.fetchData()
-                    #if !targetEnvironment(simulator)
-                    viewModel.incrementViews()
-                    #endif
-                } catch let error {
-                    
+                if viewModel.isBusy {
+                    ProgressView()
+                } else {
+                    mainView
                 }
             }
+            
+        }
+        .task {
+            await viewModel.fetchData()
+            #if !targetEnvironment(simulator)
+            await viewModel.incrementViews()
+            #endif
+        }
     }
     
     var mainView: some View {
@@ -66,9 +65,9 @@ struct CountryView: View {
                             Spacer()
                             lyricsView
                             Spacer(minLength: 200)
-                        }.padding()
+                        }
+                        .padding()
                     }
-                    
                     .introspectScrollView(customize: { scrollView in
                         autoScroll(scrollView: scrollView, reader: reader)
                     })
@@ -88,19 +87,19 @@ struct CountryView: View {
                 }
             }
         }
-            .navigationBarTitle(Text(viewModel.country?.displayName ?? ""))
-            .toolbar {
-                CountryToolbar(presentationMode: presentationMode,
-                               isShowingShareSheet: $isShowingShareSheet)
+        .navigationBarTitle(Text(viewModel.country?.displayName ?? ""))
+        .toolbar {
+            CountryToolbar(presentationMode: presentationMode,
+                           isShowingShareSheet: $isShowingShareSheet)
+        }
+        .sheet(isPresented: $isShowingShareSheet, content: {
+            activityView
+        })
+        .sheet(isPresented: $isShowingCountryInfo, content: {
+            NavigationView {
+                CountryInfoView().environmentObject(viewModel)
             }
-            .sheet(isPresented: $isShowingShareSheet, content: {
-                activityView
-            })
-            .sheet(isPresented: $isShowingCountryInfo, content: {
-                NavigationView {
-                    CountryInfoView().environmentObject(viewModel)
-                }
-            })
+        })
     }
     
     func autoScroll(scrollView: UIScrollView, reader: GeometryProxy) {
@@ -123,8 +122,11 @@ struct CountryView: View {
             let topOffset = CGPoint(x: 0, y: -(reader.safeAreaInsets.top))
             
             scrollView.setContentOffset(topOffset, animated: true)
+
             #if !targetEnvironment(simulator)
-            viewModel.incrementPlays()
+            Task {
+                await viewModel.incrementPlays()
+            }
             #endif
             isFinished = false
         }
@@ -182,7 +184,7 @@ struct CountryView: View {
                     EmptyView()
                 }
             }
-                .disabled(!accountViewModel.isLoggedIn)
+            .disabled(!accountViewModel.isLoggedIn)
             
             Button(action: {
                 isShowingCountryInfo.toggle()
@@ -229,13 +231,11 @@ struct CountryView: View {
                     .font(.footnote)
             }
         }
-            .frame(
-                  minWidth: 0,
-                  maxWidth: .infinity,
-                  minHeight: 0,
-                  maxHeight: .infinity,
-                  alignment: .topLeading
-                )
+        .frame(minWidth: 0,
+               maxWidth: .infinity,
+               minHeight: 0,
+               maxHeight: .infinity,
+               alignment: .topLeading)
     }
 
     var lyricsView: some View {
@@ -253,13 +253,11 @@ struct CountryView: View {
                 }
             }
         }
-            .frame(
-                  minWidth: 0,
-                  maxWidth: .infinity,
-                  minHeight: 0,
-                  maxHeight: .infinity,
-                  alignment: .top
-                )
+        .frame(minWidth: 0,
+               maxWidth: .infinity,
+               minHeight: 0,
+               maxHeight: .infinity,
+               alignment: .top)
     }
         
     var activityView: some View {
@@ -268,13 +266,14 @@ struct CountryView: View {
         if let country = viewModel.country {
             itemSources.append(CountryViewItemSource(country: country))
         }
-
-        return AppActivityView(activityItems: itemSources)
+        let appActivityView = AppActivityView(activityItems: itemSources)
             .excludeActivityTypes([])
             .onCancel { }
             .onComplete { result in
                 return
             }
+
+        return appActivityView
     }
 }
 

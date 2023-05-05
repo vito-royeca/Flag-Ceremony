@@ -14,7 +14,7 @@ class CountryViewModel: NSObject, ObservableObject {
     @Published var country: FCCountry?
     @Published var anthem: FCAnthem?
     @Published var isBusy = false
-    @Published var isFailed = false
+    @Published var error: Error?
     
     var id: String
     
@@ -27,44 +27,44 @@ class CountryViewModel: NSObject, ObservableObject {
     // MARK: - Methods
     
     @MainActor
-    func fetchData() async throws {
+    func fetchData() async  {
         guard !isBusy else {
             return
         }
 
-        let id = id
         isBusy.toggle()
-        isFailed = false
+        error = nil
 
+        let id = id
         Task {
             do {
                 country = try await FirebaseManager.sharedInstance.findCountry(id)
                 anthem = try await FirebaseManager.sharedInstance.findAnthem(id)
                 isBusy.toggle()
             } catch let error {
-                throw error
+                self.error = error
             }
         }
     }
     
     @MainActor
-    func incrementViews() {
+    func incrementViews() async {
         Task {
             do {
                 country = try await FirebaseManager.sharedInstance.incrementCountryViews(id)
             } catch let error {
-                
+                self.error = error
             }
         }
     }
     
     @MainActor
-    func incrementPlays() {
+    func incrementPlays() async {
         Task {
             do {
                 country = try await FirebaseManager.sharedInstance.incrementCountryPlays(id)
             } catch let error {
-                
+                self.error = error
             }
         }
     }

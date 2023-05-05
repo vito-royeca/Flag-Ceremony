@@ -80,7 +80,8 @@ class AuthenticateViewModel: NSObject, ObservableObject {
         let hashedData = SHA256.hash(data: inputData)
         let hashString = hashedData.compactMap {
             String(format: "%02x", $0)
-        }.joined()
+        }
+        .joined()
 
         return hashString
     }

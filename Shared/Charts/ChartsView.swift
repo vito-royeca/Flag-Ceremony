@@ -49,7 +49,7 @@ struct ChartsView: View {
                     topPlayers
                 }
             }
-                .listStyle(.plain)
+            .listStyle(.plain)
         }
         .navigationTitle("ChartsView_charts".localized)
             .onAppear() {
@@ -82,11 +82,11 @@ struct ChartsView: View {
                     .tag(index)
             }
         }
-            .onChange(of: tab) { _ in
-                fetchData()
-            }
-            .pickerStyle(.segmented)
-            .listRowSeparator(.hidden)
+        .onChange(of: tab) { _ in
+            fetchData()
+        }
+        .pickerStyle(.segmented)
+        .listRowSeparator(.hidden)
     }
 
     var topViewed: some View {

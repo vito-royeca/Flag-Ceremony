@@ -24,8 +24,8 @@ struct ParentalGateView: View {
             buttonView
             Spacer()
         }
-            .padding()
-            .background(Color(uiColor: kBlueColor))
+        .padding()
+        .background(Color(uiColor: kBlueColor))
     }
     
     var buttonView: some View {
@@ -41,21 +41,21 @@ struct ParentalGateView: View {
                     Spacer()
                 }
             }
-                .buttonStyle(.borderedProminent)
-                .tint(.white)
-                .alert("ParentalGateView_parental_gate".localized, isPresented: $showChallenge, actions: {
-                    TextField("ParentalGateView_answer".localized, text: $answer)
-                        .keyboardType(.numberPad)
-                    Button("ParentalGateView_submit".localized, action: checkAnswer)
-                    Button("ParentalGateView_cancel".localized, role: .cancel) {}
-                }, message: {
-                    Text("ParentalGateView_question".localized(randomNumber.toRomanNumeral()))
-                })
-                .alert("ParentalGateView_incorrect".localized, isPresented: $showFailure) {
-                    Button("ParentalGateView_ok".localized, role: .cancel) {}
-                }
+            .buttonStyle(.borderedProminent)
+            .tint(.white)
+            .alert("ParentalGateView_parental_gate".localized, isPresented: $showChallenge, actions: {
+                TextField("ParentalGateView_answer".localized, text: $answer)
+                    .keyboardType(.numberPad)
+                Button("ParentalGateView_submit".localized, action: checkAnswer)
+                Button("ParentalGateView_cancel".localized, role: .cancel) { }
+            }, message: {
+                Text("ParentalGateView_question".localized(randomNumber.toRomanNumeral()))
+            })
+            .alert("ParentalGateView_incorrect".localized, isPresented: $showFailure) {
+                Button("ParentalGateView_ok".localized, role: .cancel) { }
+            }
         }
-            .padding()
+        .padding()
     }
 
     func checkAnswer() {

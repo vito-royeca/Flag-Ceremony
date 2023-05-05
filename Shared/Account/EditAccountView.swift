@@ -32,7 +32,8 @@ struct EditAccountView: View {
                             .font(Font.largeTitle)
                             .imageScale(.large)
                     }
-                        .buttonStyle(.borderless)
+                    .buttonStyle(.borderless)
+                    
                     Button(action: {
                         sourceType = .camera
                         isShowingImagePicker.toggle()
@@ -41,7 +42,8 @@ struct EditAccountView: View {
                             .font(Font.largeTitle)
                             .imageScale(.large)
                     }
-                        .buttonStyle(.borderless)
+                    .buttonStyle(.borderless)
+                    
                     Button(action: {
                         photoURL = nil
                         photoDirty = true
@@ -50,8 +52,8 @@ struct EditAccountView: View {
                             .font(Font.largeTitle)
                             .imageScale(.large)
                     }
-                        .buttonStyle(.borderless)
-                        .disabled(photoURL == nil)
+                    .buttonStyle(.borderless)
+                    .disabled(photoURL == nil)
                 }
             }
 
@@ -59,22 +61,22 @@ struct EditAccountView: View {
                 TextField("Enter your Display Name", text: $displayName)
             }
         }
-            .navigationTitle(Text("Edit Account"))
-            .toolbar {
-                EditAccountToolbar(presentationMode: presentationMode,
-                                   photoURL: $photoURL,
-                                   photoDirty: $photoDirty,
-                                   displayName: $displayName)
-            }
-            .onAppear {
-                photoURL = URL(string: accountViewModel.account?.photoURL ?? "")
-                displayName = accountViewModel.account?.displayName
-            }
-            .sheet(isPresented: $isShowingImagePicker) {
-                ImagePickerView(sourceType: sourceType,
-                                selectedImageURL: $photoURL,
-                                photoDirty: $photoDirty)
-            }
+        .navigationTitle(Text("Edit Account"))
+        .toolbar {
+            EditAccountToolbar(presentationMode: presentationMode,
+                               photoURL: $photoURL,
+                               photoDirty: $photoDirty,
+                               displayName: $displayName)
+        }
+        .onAppear {
+            photoURL = URL(string: accountViewModel.account?.photoURL ?? "")
+            displayName = accountViewModel.account?.displayName
+        }
+        .sheet(isPresented: $isShowingImagePicker) {
+            ImagePickerView(sourceType: sourceType,
+                            selectedImageURL: $photoURL,
+                            photoDirty: $photoDirty)
+        }
     }
 }
 
@@ -112,12 +114,13 @@ struct EditAccountToolbar: ToolbarContent {
                 $presentationMode.wrappedValue.dismiss()
             }
         }
+
         ToolbarItemGroup(placement: .navigationBarTrailing) {
             Button("Save") {
                 viewModel.update(photoURL: photoURL, photoDirty: photoDirty, displayName: displayName)
                 $presentationMode.wrappedValue.dismiss()
             }
-                .disabled(validateForm)
+            .disabled(validateForm)
         }
     }
     

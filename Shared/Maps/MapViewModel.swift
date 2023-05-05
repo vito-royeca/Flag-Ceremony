@@ -18,7 +18,9 @@ class MapViewModel: NSObject, ObservableObject {
     @Published var highlightedCountry: FCCountry? = nil
     @Published var longitude = DefaultLocationLongitude
     @Published var latitude = DefaultLocationLatitude
-    
+    @Published var isBusy = false
+    @Published var error: Error?
+
     private let locationManager = CLLocationManager()
 
     override init() {
@@ -39,7 +41,7 @@ class MapViewModel: NSObject, ObservableObject {
                     countries = try await FirebaseManager.sharedInstance.fetchAllCountries().filter({ $0.getFlagURL() != nil })
                 }
             } catch let error {
-                print(error)
+                self.error = error
             }
         }
     }
@@ -93,6 +95,6 @@ extension MapViewModel: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        self.error = error
     }
 }

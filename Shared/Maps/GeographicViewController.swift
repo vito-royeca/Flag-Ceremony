@@ -221,6 +221,7 @@ class GeographicViewController: UIViewController {
             }
             self.countries.append(country)
         }
+
         switch type {
         case .map:
             guard let map = map else {

@@ -13,7 +13,6 @@ struct MapSearchView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: MapViewModel
     @State private var searchText = ""
-//    @Binding var highlightedCountry: FCCountry?
 
     var body: some View {
         VStack {
@@ -37,7 +36,7 @@ struct MapSearchView: View {
                             }
                         }
                     }
-                        .listStyle(.plain)
+                    .listStyle(.plain)
 
                     VStack {
                         ForEach(keys, id: \.self) { letter in
@@ -58,21 +57,21 @@ struct MapSearchView: View {
                 }
             }
         }
-            .navigationTitle(Text("MapSearchView_search".localized))
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                    }
+        .navigationTitle(Text("MapSearchView_search".localized))
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "xmark")
                 }
             }
-            .searchable(text: $searchText,
-                        prompt: "MapSearchView_country_or_capital".localized)
-            .task {
-                viewModel.fetchAllCountries()
-            }
+        }
+        .searchable(text: $searchText,
+                    prompt: "MapSearchView_country_or_capital".localized)
+        .task {
+            viewModel.fetchAllCountries()
+        }
     }
     
     

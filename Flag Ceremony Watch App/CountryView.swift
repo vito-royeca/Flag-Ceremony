@@ -31,16 +31,16 @@ struct CountryView: View {
                 mainView
             }
         }
-            .task {
-                do {
-                    try await viewModel.fetchData()
-                    #if !targetEnvironment(simulator)
-                    viewModel.incrementViews()
-                    #endif
-                } catch let error {
-                    
-                }
+        .task {
+            do {
+                try await viewModel.fetchData()
+                #if !targetEnvironment(simulator)
+                viewModel.incrementViews()
+                #endif
+            } catch let error {
+                
             }
+        }
     }
     
     var mainView: some View {
