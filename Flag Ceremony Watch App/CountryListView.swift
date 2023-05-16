@@ -11,7 +11,7 @@ struct CountryListView: View {
     @EnvironmentObject var viewModel: MapViewModel
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             let dictionary = viewModel.searchResults(searchText: "")
             let keys = dictionary.keys.sorted()
             
@@ -19,13 +19,7 @@ struct CountryListView: View {
                 ForEach(keys, id:\.self) { key in
                     Section(header: Text(key)) {
                         ForEach(dictionary[key] ?? [], id: \.self) { country in
-                            NavigationLink {
-                                #if targetEnvironment(simulator)
-                                CountryView(id: country.id, isAutoPlay: false)
-                                #else
-                                CountryView(id: country.id, isAutoPlay: true)
-                                #endif
-                            } label: {
+                            NavigationLink(value: country) {
                                 Text(country.displayName)
                             }
                         }
@@ -33,6 +27,13 @@ struct CountryListView: View {
                 }
             }
             .navigationTitle("Flag Ceremony")
+            .navigationDestination(for: FCCountry.self) { country in
+                #if targetEnvironment(simulator)
+                CountryView(id: country.id, isAutoPlay: false)
+                #else
+                CountryView(id: country.id, isAutoPlay: true)
+                #endif
+            }
         }
         .task {
             viewModel.fetchAllCountries()

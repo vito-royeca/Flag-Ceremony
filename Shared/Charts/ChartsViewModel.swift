@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+import Combine
 
 class ChartsViewModel: NSObject, ObservableObject {
     
@@ -17,11 +19,36 @@ class ChartsViewModel: NSObject, ObservableObject {
     @Published var topPlayers = [FCActivity]()
     @Published var users = [FCUser]()
     
+//    private var cancelables = Set<AnyCancellable>()
+//    private let db: DatabaseReference
+//
+//    public override init() {
+//        db = Database.database().reference()
+//    }
+    
     @MainActor
     func fetchTopViewedCountries() {
         Task {
             topViewedCountries = await FirebaseManager.sharedInstance.monitorTopViewed()
         }
+        
+//        let ref = Database.database().reference()
+//        db.child("countries").queryOrdered(byChild: FCCountry.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
+//            .toAnyPublisher()
+//            .sink { [weak self] (snapshot: DataSnapshot?) in
+//                if let snapshot, let self {
+//                    self.topViewedCountries = snapshot.children.compactMap({ FCCountry(snapshot: $0 as! DataSnapshot)})
+//                }
+//            }
+//            .store(in: &cancelables)
+        
+        // CombineFirebase
+//        ref.child("countries").queryOrdered(byChild: FCCountry.Keys.Views).queryStarting(atValue: 1).queryLimited(toLast: 20)
+//            .observeSingleEvent(.value)
+//            .receive(on: RunLoop.main)
+//            .sink { snapshot in
+//                print("Value:\(snapshot.value)")
+//            }.store(in: &cancelables)
     }
     
     @MainActor

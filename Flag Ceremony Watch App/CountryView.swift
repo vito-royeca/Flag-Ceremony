@@ -23,23 +23,21 @@ struct CountryView: View {
 
     var body: some View {
         Group {
-            if viewModel.isBusy {
-                ProgressView()
-            } else if viewModel.isFailed {
+            if let error = viewModel.error {
                 Text("An error has occured")
             } else {
-                mainView
+                if viewModel.isBusy {
+                    ProgressView()
+                } else {
+                    mainView
+                }
             }
         }
         .task {
-            do {
-                try await viewModel.fetchData()
-                #if !targetEnvironment(simulator)
-                viewModel.incrementViews()
-                #endif
-            } catch let error {
-                
-            }
+            await viewModel.fetchData()
+            #if !targetEnvironment(simulator)
+            viewModel.incrementViews()
+            #endif
         }
     }
     

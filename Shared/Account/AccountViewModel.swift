@@ -44,13 +44,19 @@ class AccountViewModel: NSObject, ObservableObject {
         
         Task {
             do {
-                account = try await FirebaseManager.sharedInstance.fetchUser()
-                if account == nil {
-                    return
+                for try await user in try await FirebaseManager.sharedInstance.fetchUser() {
+                    self.account = user
                 }
                 
-                activity = try await FirebaseManager.sharedInstance.monitorUserActivity()
-                
+                guard account != nil else {
+                    return
+                }
+
+//                activity = try await FirebaseManager.sharedInstance.monitorUserActivity()
+                for try await act in try await FirebaseManager.sharedInstance.monitorUserActivity() {
+                    self.activity = act
+                }
+
                 if let views = activity?.views {
                     let keys = Array(views.keys)
                     let countries = try await FirebaseManager.sharedInstance.findCountries(keys: keys)

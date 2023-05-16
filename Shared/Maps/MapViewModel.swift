@@ -16,8 +16,8 @@ class MapViewModel: NSObject, ObservableObject {
     @Published var countries = [FCCountry]()
     @Published var selectedCountry: FCCountry? = nil
     @Published var highlightedCountry: FCCountry? = nil
-    @Published var longitude = DefaultLocationLongitude
-    @Published var latitude = DefaultLocationLatitude
+    @Published var longitude = Float(0)
+    @Published var latitude = Float(0)
     @Published var isBusy = false
     @Published var error: Error?
 
@@ -26,7 +26,10 @@ class MapViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
 
-        #if !targetEnvironment(simulator)
+        #if targetEnvironment(simulator)
+        longitude = Float((DefaultLocationLongitude * Float.pi)/180)
+        latitude = Float((DefaultLocationLatitude * Float.pi)/180)
+        #else
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()

@@ -843,6 +843,15 @@
 		8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
 		8B337E0529CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
 		8B337E0629CB8C1000F844B9 /* AirPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B337E0229CB8C1000F844B9 /* AirPlayView.swift */; };
+		8B39463F2A0499C500C078F1 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39463E2A0499C500C078F1 /* BaseModel.swift */; };
+		8B3946402A0499C500C078F1 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39463E2A0499C500C078F1 /* BaseModel.swift */; };
+		8B3946412A0499C500C078F1 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39463E2A0499C500C078F1 /* BaseModel.swift */; };
+		8B3946422A0499C500C078F1 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39463E2A0499C500C078F1 /* BaseModel.swift */; };
+		8B3D2C472A11EBE400EF0A4D /* CombineFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3D2C462A11EBE400EF0A4D /* CombineFirebase */; };
+		8B3D2C492A11EBE400EF0A4D /* CombineFirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3D2C482A11EBE400EF0A4D /* CombineFirebaseAuth */; };
+		8B3D2C4B2A11EBE400EF0A4D /* CombineFirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3D2C4A2A11EBE400EF0A4D /* CombineFirebaseDatabase */; };
+		8B3D2C4D2A11EBE400EF0A4D /* CombineFirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3D2C4C2A11EBE400EF0A4D /* CombineFirebaseFunctions */; };
+		8B3D2C4F2A11EBE400EF0A4D /* CombineFirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8B3D2C4E2A11EBE400EF0A4D /* CombineFirebaseStorage */; };
 		8B4A2C8F29C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9029C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
 		8B4A2C9129C7821500B87840 /* RomanNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4A2C8E29C7821500B87840 /* RomanNumber.swift */; };
@@ -2360,14 +2369,14 @@
 		};
 		8B6342E929FB43E7006218D5 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
 				8B6342E529FB43E7006218D5 /* Flag Ceremony Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -2594,6 +2603,7 @@
 		8B335B1F29C2EE9D003D1F01 /* CountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryView.swift; sourceTree = "<group>"; };
 		8B337E0229CB8C1000F844B9 /* AirPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayView.swift; sourceTree = "<group>"; };
 		8B36954D2844425100D1F544 /* Flag-Ceremony--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Flag-Ceremony--iOS--Info.plist"; sourceTree = "<group>"; };
+		8B39463E2A0499C500C078F1 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		8B4A2C8E29C7821500B87840 /* RomanNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanNumber.swift; sourceTree = "<group>"; };
 		8B4A2C9329C7917B00B87840 /* AuthenticateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateViewModel.swift; sourceTree = "<group>"; };
 		8B53301129CFB4A70011476D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -2863,11 +2873,15 @@
 				8BC7BD4029DFA3C300C34A74 /* Collections in Frameworks */,
 				8B1A0BB529C365CF0012B2A8 /* SwiftUIX in Frameworks */,
 				8BABAF3129E1C92C006CF08B /* FirebaseAnalytics in Frameworks */,
+				8B3D2C492A11EBE400EF0A4D /* CombineFirebaseAuth in Frameworks */,
 				8BC7BD4229DFA3C300C34A74 /* DequeModule in Frameworks */,
+				8B3D2C472A11EBE400EF0A4D /* CombineFirebase in Frameworks */,
+				8B3D2C4B2A11EBE400EF0A4D /* CombineFirebaseDatabase in Frameworks */,
 				8BABAF3529E1C92C006CF08B /* FirebaseAuthCombine-Community in Frameworks */,
 				8BABAF3F29E1C92C006CF08B /* FirebaseStorageCombine-Community in Frameworks */,
 				8BABAF3929E1C92C006CF08B /* FirebaseDatabase in Frameworks */,
 				8BC7BD4429DFA3C300C34A74 /* OrderedCollections in Frameworks */,
+				8B3D2C4D2A11EBE400EF0A4D /* CombineFirebaseFunctions in Frameworks */,
 				8B4A2C9C29C7B0A600B87840 /* GoogleSignInSwift in Frameworks */,
 				8BABAF3D29E1C92C006CF08B /* FirebaseStorage in Frameworks */,
 				8BA723A829C4419500FF4859 /* Introspect in Frameworks */,
@@ -2875,6 +2889,7 @@
 				8BABAF3729E1C92C006CF08B /* FirebaseCrashlytics in Frameworks */,
 				8BABAF3B29E1C92C006CF08B /* FirebaseDatabaseSwift in Frameworks */,
 				8B337DFF29CB794C00F844B9 /* WhirlyGlobe.framework in Frameworks */,
+				8B3D2C4F2A11EBE400EF0A4D /* CombineFirebaseStorage in Frameworks */,
 				8B4A2C9A29C7B0A600B87840 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3201,6 +3216,7 @@
 				8B9A327829C2DCFD0034EBC5 /* Views */,
 				8B2096432842797D00B62A45 /* Assets.xcassets */,
 				8B9A327929C2DEE90034EBC5 /* Constants.swift */,
+				8B39463E2A0499C500C078F1 /* BaseModel.swift */,
 				8B556BA029C2B49800101D46 /* Flag_CeremonyApp.swift */,
 				8BF69F6C29C6589F00E0C00B /* Localizable.strings */,
 			);
@@ -3280,11 +3296,11 @@
 		8B53305329D009850011476D /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */,
 				8B20969E284400C200B62A45 /* GlobeView.swift */,
 				8B1E282429D1F7BF00E606E5 /* MapSearchView.swift */,
 				8B2096A2284400C200B62A45 /* MapView.swift */,
 				8B556B2429C2420100101D46 /* MapViewModel.swift */,
-				8BC7BD3B29DF873400C34A74 /* GeographicViewController.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -3661,6 +3677,11 @@
 				8BABAF3A29E1C92C006CF08B /* FirebaseDatabaseSwift */,
 				8BABAF3C29E1C92C006CF08B /* FirebaseStorage */,
 				8BABAF3E29E1C92C006CF08B /* FirebaseStorageCombine-Community */,
+				8B3D2C462A11EBE400EF0A4D /* CombineFirebase */,
+				8B3D2C482A11EBE400EF0A4D /* CombineFirebaseAuth */,
+				8B3D2C4A2A11EBE400EF0A4D /* CombineFirebaseDatabase */,
+				8B3D2C4C2A11EBE400EF0A4D /* CombineFirebaseFunctions */,
+				8B3D2C4E2A11EBE400EF0A4D /* CombineFirebaseStorage */,
 			);
 			productName = "Flag Ceremony (iOS)";
 			productReference = 8B2096482842797D00B62A45 /* Flag Ceremony.app */;
@@ -3849,6 +3870,7 @@
 				8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				8BC7BD3E29DFA3C300C34A74 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				8BABAF2F29E1C92C006CF08B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */,
 			);
 			productRefGroup = 8B2096492842797D00B62A45 /* Products */;
 			projectDirPath = "";
@@ -6030,6 +6052,7 @@
 				8BF8E27729C4D9A200929089 /* CountryViewItemSource.swift in Sources */,
 				8B2E1C9629CA6E84009B0E89 /* String+subscript.swift in Sources */,
 				8BABAF4229E1CAFF006CF08B /* AuthenticateViewModel+Google.swift in Sources */,
+				8B39463F2A0499C500C078F1 /* BaseModel.swift in Sources */,
 				8B556B9029C2AF8600101D46 /* FCCountry.swift in Sources */,
 				8BABAF4C29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
 				8BC7BD3C29DF873400C34A74 /* GeographicViewController.swift in Sources */,
@@ -6070,6 +6093,7 @@
 				8B337E0429CB8C1000F844B9 /* AirPlayView.swift in Sources */,
 				8B2096A4284400C200B62A45 /* GlobeView.swift in Sources */,
 				8B20969C2843FF7B00B62A45 /* TabNavigationView.swift in Sources */,
+				8B3946402A0499C500C078F1 /* BaseModel.swift in Sources */,
 				8BC7BD3D29DF873400C34A74 /* GeographicViewController.swift in Sources */,
 				8B53305029CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8BF69F7429C65C0900E0C00B /* AuthenticateView.swift in Sources */,
@@ -6132,6 +6156,7 @@
 				8B556B8A29C2AF8600101D46 /* FCAnthem.swift in Sources */,
 				8BCE3B0A29E317F700E69F99 /* MapView.swift in Sources */,
 				8B20965A2842797D00B62A45 /* Tests_iOS.swift in Sources */,
+				8B3946412A0499C500C078F1 /* BaseModel.swift in Sources */,
 				8B0FF8FF29C38842007F548A /* MediaPlayerView.swift in Sources */,
 				8B2E1C8E29CA1076009B0E89 /* CountryInfoView.swift in Sources */,
 				8BD64DA929CE98FE001E8657 /* EditAccountView.swift in Sources */,
@@ -6171,6 +6196,7 @@
 				8BCE3B1129E3184400E69F99 /* CountryViewItemSource.swift in Sources */,
 				8B2096682842797D00B62A45 /* Tests_macOSLaunchTests.swift in Sources */,
 				8BD64DAA29CE98FE001E8657 /* EditAccountView.swift in Sources */,
+				8B3946422A0499C500C078F1 /* BaseModel.swift in Sources */,
 				8B53305229CFE25B0011476D /* UIImage+Resize.swift in Sources */,
 				8BABAF4F29E26FB3006CF08B /* AuthenticateViewModel+Email.swift in Sources */,
 				8B556B8B29C2AF8600101D46 /* FCAnthem.swift in Sources */,
@@ -6385,9 +6411,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 200;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
@@ -6426,9 +6452,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Flag Ceremony (iOS).entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 200;
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/\"";
@@ -6614,10 +6640,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flag Ceremony Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
@@ -6647,10 +6673,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flag Ceremony Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 43CD66539H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Flag Ceremony";
@@ -6856,6 +6882,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/urban-health-labs/CombineFirebase.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.3;
+			};
+		};
 		8B4A2C9829C7B0A600B87840 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
@@ -6895,6 +6929,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B1A0BB329C365CF0012B2A8 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
+		};
+		8B3D2C462A11EBE400EF0A4D /* CombineFirebase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */;
+			productName = CombineFirebase;
+		};
+		8B3D2C482A11EBE400EF0A4D /* CombineFirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */;
+			productName = CombineFirebaseAuth;
+		};
+		8B3D2C4A2A11EBE400EF0A4D /* CombineFirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */;
+			productName = CombineFirebaseDatabase;
+		};
+		8B3D2C4C2A11EBE400EF0A4D /* CombineFirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */;
+			productName = CombineFirebaseFunctions;
+		};
+		8B3D2C4E2A11EBE400EF0A4D /* CombineFirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B3D2C452A11EBE400EF0A4D /* XCRemoteSwiftPackageReference "CombineFirebase" */;
+			productName = CombineFirebaseStorage;
 		};
 		8B4A2C9929C7B0A600B87840 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

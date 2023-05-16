@@ -42,13 +42,12 @@ struct CountryView: View {
                     mainView
                 }
             }
-            
         }
         .task {
             await viewModel.fetchData()
-            #if !targetEnvironment(simulator)
+//            #if !targetEnvironment(simulator)
             await viewModel.incrementViews()
-            #endif
+//            #endif
         }
     }
     

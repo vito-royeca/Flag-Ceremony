@@ -42,7 +42,6 @@ class FirebaseManager : NSObject {
     
     // MARK: - User methods
 
-    
     @available(*, renamed: "fetchUser()")
     func fetchUser(completion: @escaping (Result<FCUser?,Error>) -> Void) {
         guard let user = Auth.auth().currentUser else {
@@ -676,5 +675,33 @@ class FirebaseManager : NSObject {
             query.removeAllObservers()
             queries.removeValue(forKey: kQueryUserData)
         }
+    }
+}
+
+// MARK: - DatabaseReference
+
+extension DatabaseQuery {
+//    func toAnyPublisher<T>() -> AnyPublisher<T?, Never> {
+//        let subject = CurrentValueSubject<T?, Never>(nil)
+//
+//        let handle = observe(.value, with: { snapshot in
+//            subject.send(snapshot.value as? T)
+//        })
+//
+//        return subject.handleEvents(receiveCancel: {[weak self] in
+//            self?.removeObserver(withHandle: handle)
+//        }).eraseToAnyPublisher()
+//    }
+    
+    func toAnyPublisher<DataSnapshot>() -> AnyPublisher<DataSnapshot?, Never> {
+        let subject = CurrentValueSubject<DataSnapshot?, Never>(nil)
+
+        let handle = observe(.value, with: { snapshot in
+            subject.send(snapshot as? DataSnapshot)
+        })
+
+        return subject.handleEvents(receiveCancel: {[weak self] in
+            self?.removeObserver(withHandle: handle)
+        }).eraseToAnyPublisher()
     }
 }

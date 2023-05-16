@@ -15,10 +15,15 @@ import FirebaseStorageCombineSwift
 // MARK: - User methods
 
 extension FirebaseManager {
-    func fetchUser() async throws -> FCUser? {
-        return try await withCheckedThrowingContinuation { continuation in
+    func fetchUser() async throws -> AsyncThrowingStream<FCUser?, Error> {
+//        return try await withCheckedThrowingContinuation { continuation in
+//            fetchUser() { result in
+//                continuation.resume(with: result)
+//            }
+//        }
+        AsyncThrowingStream { continuation in
             fetchUser() { result in
-                continuation.resume(with: result)
+                continuation.yield(with: result)
             }
         }
     }
@@ -158,10 +163,15 @@ extension FirebaseManager {
         }
     }
     
-    func monitorUserActivity() async throws -> FCActivity? {
-        return try await withCheckedThrowingContinuation { continuation in
+    func monitorUserActivity() async throws -> AsyncThrowingStream<FCActivity?, Error> {
+//        return try await withCheckedThrowingContinuation { continuation in
+//            monitorUserActivity() { result in
+//                continuation.resume(with: result)
+//            }
+//        }
+        AsyncThrowingStream { continuation in
             monitorUserActivity() { result in
-                continuation.resume(with: result)
+                continuation.yield(with: result)
             }
         }
     }
